@@ -1,0 +1,34 @@
+{
+  "name": "bpmn-js-token-simulation",
+  "version": "0.0.1",
+  "description": "bpmn-js token simulation extension",
+  "main": "index.js",
+  "scripts": {
+    "dev": "grunt auto-build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedesen/bpmn-js-token-simulation.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pedesen/bpmn-js-token-simulation/issues"
+  },
+  "homepage": "https://github.com/pedesen/bpmn-js-token-simulation#readme",
+  "devDependencies": {
+    "bpmn-js": "^0.21.0",
+    "brfs": "^1.4.3",
+    "grunt": "^1.0.1",
+    "grunt-browserify": "^5.1.0",
+    "grunt-contrib-connect": "^1.0.2",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "load-grunt-tasks": "^3.5.2",
+    "lodash": "^4.17.4",
+    "min-dom": "^0.2.0"
+  },
+  "dependencies": {
+    "svg.js": "^2.6.3"
+  }
+}

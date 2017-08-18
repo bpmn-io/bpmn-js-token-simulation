@@ -1,0 +1,354 @@
+@import 'font-awesome.min.css';
+
+html, body, #canvas {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Arial", sans-serif;
+}
+
+.bjs-container {
+  border: solid 4px transparent;
+  box-sizing: border-box;
+}
+
+.bjs-container.simulation {
+  border-color: #52b415;
+}
+
+.bjs-container.simulation.paused {
+  border-color: #999;
+}
+
+.bjs-container.simulation.warning {
+  border-color: #cc0000 !important;
+}
+
+#logo {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  margin: 0;
+  padding: 8px;
+  font-size: 16px;
+  color: #000;
+}
+
+.context-menu {
+  cursor: pointer;
+  background-color: #52b415;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  margin: 0;
+  padding: 4px 0;
+  font-size: 16px;
+  color: #fff;
+  transition: all 0.1s ease-in-out;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.context-menu:hover {
+  width: 40px;
+}
+
+.context-menu.disabled {
+  background-color: #FAFAFA;
+  color: #999;
+  pointer-events: none;
+}
+
+.context-menu.preview {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+.global-reset {
+  position: absolute;
+  top: 95px;
+  left: 20px;
+  cursor: pointer;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  margin: 0;
+  padding: 6px 0;
+  font-size: 16px;
+  color: #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  box-sizing: border-box;
+  transition: all 0.1s ease;
+}
+
+.global-reset.active {
+  color: #000;
+}
+
+.global-reset.active:hover {
+  width: 40px;
+}
+
+.token {
+  fill: #52b415;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.token-display {
+  background-color: #FAFAFA;
+  border-radius: 100%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 4px 8px;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+}
+
+.token-display.waiting {
+  background-color: #52b415;
+  color: white;
+}
+
+.notifications {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.notifications .notification {
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 4px 8px;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+  margin-top: 4px;
+  min-width: 300px;
+}
+
+.notifications .notification.info {
+  background-color: #FAFAFA;
+  color: #000;
+}
+
+.notifications .notification.success {
+  background-color: #52b415;
+  color: #fff;
+}
+
+.notifications .notification.warning {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+.notifications .notification .fa {
+  padding: 0 8px;
+}
+
+.token-graphics {
+  cursor: pointer;
+  position: absolute;
+  top: 91px;
+  right: 20px;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 5px 0;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease-in-out;
+  width: 30px;
+  box-sizing: border-box;
+}
+
+.token-graphics.active {
+  background-color: #52b415;
+}
+
+.token-graphics img {
+  width: 16px;
+}
+
+.token-graphics:hover {
+  width: 40px;
+}
+
+.play-pause {
+  cursor: pointer;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 6px;
+  font-size: 16px;
+  color: #999;
+  user-select: none;
+  width: 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s ease;
+}
+
+.play-pause.active {
+  color: #fff;
+  background-color: #52b415;
+}
+
+.play-pause.active:hover {
+  width: 40px;
+}
+
+.bjs-container.paused .play-pause.active {
+  color: #000;
+  background-color: #FAFAFA;
+}
+
+.token-simulation-log {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1000px;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  z-index: 10000;
+}
+
+.token-simulation-log .head {
+  background-color: #52b415;
+  padding: 10px;
+  color: #fff;
+}
+
+.token-simulation-log .head .close {
+  float: right;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.token-simulation-log .content {
+  overflow-y: auto;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 400px;
+}
+
+.token-simulation-log .content .log-entry {
+  padding-bottom: 10px;
+  border-bottom: solid 1px #ddd;
+}
+
+.token-simulation-log .content .log-entry:last-child {
+  padding-bottom: 0;
+  border: none;
+}
+
+.token-simulation-log .content .fa {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.token-simulation-log.hidden {
+  display: none;
+}
+
+.open-log {
+  cursor: pointer;
+  position: absolute;
+  top: 130px;
+  left: 20px;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 6px 0;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  box-sizing: border-box;
+  transition: all 0.1s ease;
+}
+
+.open-log:hover {
+  width: 40px;
+}
+
+.tint {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.3);
+  z-index: 9999;
+}
+
+.tint.hidden {
+  display: none;
+}
+
+.element-support-warning {
+  background-color: #cc0000;
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 4px;
+}
+
+.switch-mode {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 6px;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+}
+
+.bjs-container.simulation .switch-mode,
+.switch-mode:hover {
+  background-color: #52b415;
+  color: #fff;
+}
+
+.djs-palette {
+  border: none;
+  top: 60px;
+}
+
+.bjs-container.simulation .djs-palette {
+  display: none;
+}
+
+.simulation-button.hidden {
+  display: none;
+}
