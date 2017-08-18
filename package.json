@@ -24,6 +24,7 @@
     "grunt-contrib-connect": "^1.0.2",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-release": "^0.14.0",
     "load-grunt-tasks": "^3.5.2",
     "lodash": "^4.17.4",
     "min-dom": "^0.2.0"
