@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pedesen/bpmn-js-token-simulation.git"
+    "url": "git+https://github.com/bpmn-io/bpmn-js-token-simulation.git"
   },
   "author": "",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pedesen/bpmn-js-token-simulation/issues"
+    "url": "https://github.com/bpmn-io/bpmn-js-token-simulation/issues"
   },
-  "homepage": "https://github.com/pedesen/bpmn-js-token-simulation#readme",
+  "homepage": "https://github.com/bpmn-io/bpmn-js-token-simulation#readme",
   "devDependencies": {
     "bpmn-js": "^0.21.0",
     "brfs": "^1.4.3",
