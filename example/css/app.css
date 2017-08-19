@@ -224,10 +224,10 @@ html, body, #canvas {
 
 .token-simulation-log {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 1000px;
+  top: 20px; 
+  bottom: 20px; 
+  left: 20px; 
+  right: 20px;
   background-color: #FAFAFA;
   border-radius: 2px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
@@ -238,6 +238,8 @@ html, body, #canvas {
   background-color: #52b415;
   padding: 10px;
   color: #fff;
+  height: 40px;
+  box-sizing: border-box;
 }
 
 .token-simulation-log .head .close {
@@ -249,10 +251,14 @@ html, body, #canvas {
 }
 
 .token-simulation-log .content {
+  position: absolute;
   overflow-y: auto;
-  padding: 10px;
   box-sizing: border-box;
-  height: 400px;
+  top: 40px; 
+  bottom: 0; 
+  left: 0; 
+  right: 0;
+  padding: 10px;
 }
 
 .token-simulation-log .content .log-entry {
