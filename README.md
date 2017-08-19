@@ -1,10 +1,19 @@
-# bpmn-js-token-simulation
-bpmn-js token simulation extension
+# bpmn-js Token Simulation
 
-## install
+A bpmn-js extension for token simulation.
 
+> Looking for the Camunda Modeler Plugin? Get it [here](https://github.com/philippfromme/bpmn-js-token-simulation-plugin)!
+
+![Screencast](docs/screencast.gif)
+
+## Installation
+
+```bash
 npm install
+```
 
-## run example
+## Example
 
+```bash
 npm run dev
+```
