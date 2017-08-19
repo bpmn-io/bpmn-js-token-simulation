@@ -358,3 +358,9 @@ html, body, #canvas {
 .simulation-button.hidden {
   display: none;
 }
+
+.bjs-container.simulation .djs-outline,
+.bjs-container.simulation .djs-bendpoint,
+.bjs-container.simulation .djs-segment-dragger {
+  display: none !important;
+}
