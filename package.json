@@ -10,7 +10,20 @@
     "type": "git",
     "url": "git+https://github.com/bpmn-io/bpmn-js-token-simulation.git"
   },
-  "author": "",
+  "contributors": [
+    {
+      "name": "Patrick Dehn",
+      "url": "https://github.com/pedesen"
+    },
+    {
+      "name": "Philipp Fromme",
+      "url": "https://github.com/philippfromme"
+    },
+    {
+      "name": "Sebastian Warnke",
+      "url": "https://github.com/sebwarnke"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bpmn-io/bpmn-js-token-simulation/issues"
