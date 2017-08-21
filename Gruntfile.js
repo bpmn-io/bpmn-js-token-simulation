@@ -19,7 +19,8 @@ module.exports = function(grunt) {
 
     config: {
       sources: 'example',
-      dist: 'dist'
+      dist: 'dist',
+      assets: 'assets'
     },
 
     browserify: {
@@ -70,6 +71,12 @@ module.exports = function(grunt) {
           {
             src: resolvePath('diagram-js', 'assets/diagram-js.css'),
             dest: '<%= config.dist %>/css/diagram-js.css'
+          },
+          {
+            expand: true,
+            cwd: '<%= config.assets %>/',
+            src: ['**/*.*'],
+            dest: '<%= config.dist %>'
           }
         ]
       }
