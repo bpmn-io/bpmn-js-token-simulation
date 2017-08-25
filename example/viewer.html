@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/diagram-js.css" />
+  <link rel="stylesheet" href="vendor/bpmn-font/css/bpmn-embedded.css" />
+  <link rel="stylesheet" href="css/bpmn-js-token-simulation.css" />
+
+  <title>Viewer</title>
+
+  <style>
+    #modeler-link {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #000;
+      display: block;
+      padding: 6px;
+      font-size: 16px;
+      border-radius: 2px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      background-color: #FAFAFA;
+      text-decoration: none;
+    }
+
+    #modeler-link:hover {
+      color: #FFF;
+      background-color: #52B415;
+    }
+  </style>
+</head>
+<body>
+  <div id="canvas"></div>
+
+  <a id="modeler-link" href="./modeler.html">Modeler <i class="fa fa-sign-out"></i></a>
+
+  <script src="./viewer.js"></script>
+</body>
+</html>

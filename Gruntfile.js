@@ -44,12 +44,14 @@ module.exports = function(grunt) {
           watch: true
         },
         files: {
-          '<%= config.dist %>/app.js': [ '<%= config.sources %>/**/*.js' ]
+          '<%= config.dist %>/viewer.js': [ '<%= config.sources %>/viewer.js' ],
+          '<%= config.dist %>/modeler.js': [ '<%= config.sources %>/modeler.js' ]
         }
       },
       app: {
         files: {
-          '<%= config.dist %>/app.js': [ '<%= config.sources %>/**/*.js' ]
+          '<%= config.dist %>/viewer.js': [ '<%= config.sources %>/viewer.js' ],
+          '<%= config.dist %>/modeler.js': [ '<%= config.sources %>/modeler.js' ]
         }
       }
     },
@@ -86,7 +88,10 @@ module.exports = function(grunt) {
         livereload: true
       },
       samples: {
-        files: [ '<%= config.sources %>/**/*.*' ],
+        files: [ 
+          '<%= config.sources %>/**/*.*',
+          '<%= config.assets %>/**/*.*'
+        ],
         tasks: [ 'copy:app' ]
       },
     },

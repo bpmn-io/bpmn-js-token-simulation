@@ -1,0 +1,336 @@
+@import 'font-awesome.min.css';
+
+html, body, #canvas {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  font-family: "Arial", sans-serif;
+}
+
+.bjs-container {
+  border: solid 4px transparent;
+  box-sizing: border-box;
+}
+
+.bjs-container.simulation {
+  border-color: #52b415;
+}
+
+.bjs-container.simulation.paused {
+  border-color: #999;
+}
+
+.bjs-container.simulation.warning {
+  border-color: #cc0000 !important;
+}
+
+.context-pad {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  margin: 0;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.3);
+  transition: all 0.1s ease-in-out;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.context-pad:not(.disabled):hover {
+  width: 40px;
+  background-color: #52b415;
+  color: #fff;
+}
+
+.context-pad.disabled {
+  background-color: #FAFAFA;
+  color: #999;
+  pointer-events: none;
+}
+
+.context-pad.hidden {
+  display: none;
+}
+
+.context-pad [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
+  margin: 0;
+}
+
+.token {
+  fill: #52b415;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.token-count {
+  background-color: #FAFAFA;
+  border-radius: 100%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 4px 8px;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+}
+
+.token-count.waiting {
+  background-color: #52b415;
+  color: white;
+}
+
+.notifications {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.notifications .notification {
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 4px 8px;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+  margin-top: 4px;
+  min-width: 300px;
+}
+
+.notifications .notification.info {
+  background-color: #FAFAFA;
+  color: #000;
+}
+
+.notifications .notification.success {
+  background-color: #52b415;
+  color: #fff;
+}
+
+.notifications .notification.warning {
+  background-color: #cc0000;
+  color: #fff;
+}
+
+.notifications .notification .icon {
+  padding: 0 8px 0 0;
+}
+
+.bjs-container.paused .play-pause.active {
+  color: #000;
+  background-color: #FAFAFA;
+}
+
+.element-notification {
+  background-color: #FAFAFA;
+  color: #000;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  height: 30px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 6px 0 6px;
+  user-select: none;
+}
+
+.element-notification .fa,
+.element-notification .text {
+  margin: 0 3px 0 3px;
+}
+
+.element-notification .text {
+  white-space: nowrap;
+}
+
+.element-notification.success {
+  background-color: #52B415;
+  color: #FFF;
+}
+
+.element-notification.warning {
+  background-color: #cc0000;
+  color: #FFF;
+}
+
+.toggle-mode {
+  cursor: pointer;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 6px;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+}
+
+.bjs-container.simulation .toggle-mode,
+.toggle-mode:hover {
+  background-color: #52b415;
+  color: #fff;
+}
+
+.djs-palette {
+  border: none;
+  top: 60px;
+}
+
+.bjs-container.simulation .djs-palette {
+  display: none;
+}
+
+.bjs-container.simulation .djs-outline,
+.bjs-container.simulation .djs-bendpoint,
+.bjs-container.simulation .djs-segment-dragger,
+.bjs-container.simulation .djs-resizer {
+  display: none !important;
+}
+
+.token-simulation-palette {
+  position: absolute;
+  top: 60px;
+  left: 20px;
+}
+
+.token-simulation-palette.hidden {
+  display: none;
+}
+
+.token-simulation-palette .entry {
+  cursor: pointer;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  padding: 6px 0;
+  margin-bottom: 6px;
+  font-size: 16px;
+  color: #000;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  box-sizing: border-box;
+  transition: all 0.1s ease;
+}
+
+.token-simulation-palette .entry:last-child {
+  margin-bottom: 0;
+}
+
+.token-simulation-palette .entry:not(.disabled):hover {
+  width: 40px;
+  color: #FFF;
+  background-color: #52B415;
+}
+
+.token-simulation-palette .entry.active {
+  color: #FFF;
+  background-color: #52B415;
+}
+
+.token-simulation-palette .entry.disabled {
+  pointer-events: none;
+  color: #999;
+}
+
+.token-simulation-log {
+  position: absolute;
+  top: 128px; 
+  bottom: 20px; 
+  left: 20px; 
+  right: 20px;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  z-index: 10000;
+  overflow: hidden;
+}
+
+
+.token-simulation-log.hidden {
+  display: none;
+}
+
+
+.token-simulation-log .header {
+  background-color: #52b415;
+  padding: 6px 8px;
+  color: #fff;
+  height: 30px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.token-simulation-log .header .close {
+  float: right;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #fff;
+}
+
+.token-simulation-log .header .fa-align-left {
+  cursor: pointer;
+}
+
+.token-simulation-log .content {
+  position: absolute;
+  overflow-y: auto;
+  box-sizing: border-box;
+  top: 30px; 
+  bottom: 0; 
+  left: 0; 
+  right: 0;
+  padding: 10px;
+}
+
+.token-simulation-log .content .entry {
+  font-size: 16px;
+  margin: 0 0 6px 0;
+  padding: 6px;
+  background: #FFF;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  border-radius: 2px;
+}
+
+.token-simulation-log .content .entry.success {
+  background-color: #52b415;
+  color: #FFF;
+}
+
+.token-simulation-log .content .entry.success .date,
+.token-simulation-log .content .entry.warning .date {
+ color: #FAFAFA;
+}
+
+.token-simulation-log .content .entry.warning {
+  background-color: #cc0000;
+  color: #FFF;
+}
+
+.token-simulation-log .content .entry:last-child {
+  margin: 0;
+}
+
+.token-simulation-log .content .entry .date {
+  display: inline-block;
+  margin-right: 6px;
+  min-width: 120px;
+  color: #999;
+}
+
+.token-simulation-log .content .entry .icon {
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.token-simulation-log .content .entry.placeholder.hidden {
+  display: none;
+}
