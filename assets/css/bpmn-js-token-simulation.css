@@ -115,7 +115,14 @@ html, body, #canvas {
 }
 
 .notifications .notification .icon {
-  padding: 0 8px 0 0;
+  display: inline-flex;
+  justify-content: center;
+  margin-right: 8px;
+  min-width: 20px;
+}
+
+.notifications .notification .icon [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
+  margin: 0;
 }
 
 .bjs-container.paused .play-pause.active {
@@ -329,6 +336,8 @@ html, body, #canvas {
 .token-simulation-log .content .entry .icon {
   display: inline-block;
   margin-right: 6px;
+  min-width: 20px;
+  text-align: center;
 }
 
 .token-simulation-log .content .entry.placeholder.hidden {
