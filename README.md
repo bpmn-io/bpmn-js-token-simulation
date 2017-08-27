@@ -16,11 +16,27 @@ npm install bpmn-js-token-simulation
 
 Add as additional module to [bpmn-js]().
 
+### Modeler
+
 ```javascript
 var BpmnModeler = require('bpmn-js/lib/Modeler');
 var tokenSimulation = require('bpmn-js-token-simulation');
 
 var modeler = new BpmnModeler({
+  container: '#canvas',
+  additionalModules: [
+    tokenSimulation
+  ]
+});
+```
+
+### Viewer
+
+```javascript
+var BpmnViewer = require('bpmn-js/lib/NavigatedViewer');
+var tokenSimulation = require('bpmn-js-token-simulation/lib/viewer');
+
+var viewer = new BpmnViewer({
   container: '#canvas',
   additionalModules: [
     tokenSimulation
@@ -46,8 +62,9 @@ Check out `localhost:9013`.
 
 ## Supported Elements
 
-* Normal Start Event
+* Start Event
 * Intermediate Catch Event
+* Intermediate Throw Event
 * End Event
 * Exclusive Gateway
 * Inklusive Gateway
