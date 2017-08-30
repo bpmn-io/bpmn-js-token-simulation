@@ -66,10 +66,13 @@ Check out `localhost:9013`.
 * Intermediate Catch Event
 * Intermediate Throw Event
 * End Event
+* Terminate End Event
 * Exclusive Gateway
 * Inklusive Gateway
 * Parallel Gateway
+* Event-based Gateway
 * Task
+* Subprocess
 
 ## Licence
 
