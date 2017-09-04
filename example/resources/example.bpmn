@@ -64,7 +64,7 @@
       <bpmn:outgoing>SequenceFlow_1vsv7r8</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0jd8d0i</bpmn:outgoing>
     </bpmn:eventBasedGateway>
-    <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_09tc0wh" name="New Withdrawal Requested">
+    <bpmn:intermediateCatchEvent id="IntermediateCatchEvent_09tc0wh" name="New Interaction Requested">
       <bpmn:incoming>SequenceFlow_0ftjyrx</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0rkllvh</bpmn:outgoing>
       <bpmn:messageEventDefinition />
@@ -290,7 +290,7 @@
       <bpmndi:BPMNShape id="IntermediateCatchEvent_09tc0wh_di" bpmnElement="IntermediateCatchEvent_09tc0wh">
         <dc:Bounds x="1554.1135265700484" y="250.14492753623188" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1532" y="289" width="80" height="25" />
+          <dc:Bounds x="1534" y="289" width="77" height="25" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0ftjyrx_di" bpmnElement="SequenceFlow_0ftjyrx">
