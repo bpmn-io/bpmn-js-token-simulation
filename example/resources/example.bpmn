@@ -113,7 +113,7 @@
     <bpmn:subProcess id="Task_1ept7kl" name="Account Balance Information">
       <bpmn:incoming>SequenceFlow_091wldx</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0zjbpms</bpmn:outgoing>
-      <bpmn:startEvent id="StartEvent_13lmuqn" name="Acount Balance Requested">
+      <bpmn:startEvent id="StartEvent_13lmuqn" name="Account Balance Requested">
         <bpmn:outgoing>SequenceFlow_17nxcr4</bpmn:outgoing>
       </bpmn:startEvent>
       <bpmn:task id="Task_180wh31" name="Display Balance">
@@ -127,7 +127,7 @@
         <bpmn:outgoing>SequenceFlow_0z16g3i</bpmn:outgoing>
         <bpmn:conditionalEventDefinition />
       </bpmn:intermediateCatchEvent>
-      <bpmn:endEvent id="EndEvent_1qnlj46" name="Acount Balance displayed">
+      <bpmn:endEvent id="EndEvent_1qnlj46" name="Account Balance displayed">
         <bpmn:incoming>SequenceFlow_0z16g3i</bpmn:incoming>
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="SequenceFlow_0z16g3i" sourceRef="IntermediateThrowEvent_10vhtou" targetRef="EndEvent_1qnlj46" />
@@ -417,7 +417,7 @@
       <bpmndi:BPMNShape id="StartEvent_13lmuqn_di" bpmnElement="StartEvent_13lmuqn">
         <dc:Bounds x="750.4489795918366" y="-137.17551020408166" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="730" y="-98" width="78" height="25" />
+          <dc:Bounds x="728" y="-98" width="83" height="25" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Task_180wh31_di" bpmnElement="Task_180wh31">
@@ -446,7 +446,7 @@
       <bpmndi:BPMNShape id="EndEvent_1qnlj46_di" bpmnElement="EndEvent_1qnlj46">
         <dc:Bounds x="1057.2726543704891" y="-137" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1037" y="-98" width="78" height="25" />
+          <dc:Bounds x="1035" y="-98" width="83" height="25" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0z16g3i_di" bpmnElement="SequenceFlow_0z16g3i">
