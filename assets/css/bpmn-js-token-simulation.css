@@ -61,24 +61,34 @@ html, body, #canvas {
   margin: 0;
 }
 
-.token {
-  fill: #52b415;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+.token .text {
+  fill: #FFF;
+  font-family: 'Arial', sans-serif;
 }
 
 .token-count {
   background-color: #FAFAFA;
   border-radius: 100%;
   box-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  padding: 4px 8px;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  text-align: center;
   font-size: 16px;
   color: #000;
   user-select: none;
+  animation: jump 1s infinite;
+  animation-timing-function: ease;
+  position: relative;
+  top: 0;
 }
 
 .token-count.waiting {
-  background-color: #52b415;
-  color: white;
+  background-color: #FAFAFA;
+}
+
+@keyframes jump {
+  50% { top: 5px; }
 }
 
 .notifications {
@@ -183,7 +193,7 @@ html, body, #canvas {
   color: #fff;
 }
 
-.djs-palette {
+.bjs-container .djs-palette {
   border: none;
   top: 60px;
 }
@@ -342,4 +352,84 @@ html, body, #canvas {
 
 .token-simulation-log .content .entry.placeholder.hidden {
   display: none;
+}
+
+.process-instances {
+  position: absolute;
+  top: 20px;
+  left: 190px;
+  display: flex;
+  flex-direction: row;
+}
+
+.process-instances.hidden {
+  display: none;
+}
+
+.process-instances .process-instance {
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  background-color: #FAFAFA;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.process-instances .process-instance.active {
+  background-color: #52B415;
+  color: #FFF;
+}
+
+.djs-container.highlight {
+  background-color: #ecfbe3;
+}
+
+.set-animation-speed {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  font-size: 16px;
+  text-align: center;
+  background-color: #FAFAFA;
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 6px;
+  overflow: hidden;
+}
+
+.set-animation-speed .fa-tachometer {
+  margin-bottom: 2px;
+}
+
+.set-animation-speed.hidden {
+  display: none;
+}
+
+.set-animation-speed .animation-speed-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.set-animation-speed .animation-speed-buttons {
+  margin-left: 6px;
+}
+
+.set-animation-speed .animation-speed-buttons .animation-speed-button {
+  padding: 6px;
+  width: 30px;
+}
+
+.set-animation-speed .animation-speed-buttons .animation-speed-button.active,
+.set-animation-speed .animation-speed-buttons .animation-speed-button:hover {
+  background-color: #52b415;
+  color: #fff;
 }

@@ -68,7 +68,6 @@ Check out `localhost:9013`.
 * End Event
 * Terminate End Event
 * Exclusive Gateway
-* Inklusive Gateway
 * Parallel Gateway
 * Event-based Gateway
 * Task
