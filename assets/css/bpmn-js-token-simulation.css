@@ -61,9 +61,13 @@ html, body, #canvas {
   margin: 0;
 }
 
-.token .text {
+.token:not(.candle) .text {
   fill: #FFF;
   font-family: 'Arial', sans-serif;
+}
+
+.token.candle .text {
+  font-size: 24px;
 }
 
 .token-count {
