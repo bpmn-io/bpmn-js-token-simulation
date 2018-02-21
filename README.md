@@ -72,6 +72,7 @@ Check out `localhost:9013`.
 * Event-based Gateway
 * Task
 * Subprocess
+* BoundaryEvents attached to Subprocess
 
 ## Licence
 
