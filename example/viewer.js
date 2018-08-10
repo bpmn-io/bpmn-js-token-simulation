@@ -2,7 +2,7 @@
 
 var tokenSimulation = require('../lib/viewer');
 
-var BpmnViewer = require('bpmn-js/lib/NavigatedViewer');
+var BpmnViewer = require('bpmn-js/lib/NavigatedViewer').default;
 
 import exampleXML from './resources/example.bpmn';
 

@@ -2,7 +2,7 @@
 
 var tokenSimulation = require('../lib/modeler');
 
-var BpmnModeler = require('bpmn-js/lib/Modeler');
+var BpmnModeler = require('bpmn-js/lib/Modeler').default;
 
 import exampleXML from './resources/example.bpmn';
 
