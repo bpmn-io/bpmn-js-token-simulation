@@ -1,10 +1,10 @@
 'use strict';
 
-var fs = require('fs');
 var tokenSimulation = require('../lib/modeler');
 
-var exampleXML = fs.readFileSync(__dirname + '/resources/example.bpmn', 'utf-8');
 var BpmnModeler = require('bpmn-js/lib/Modeler');
+
+import exampleXML from './resources/example.bpmn';
 
 var modeler = new BpmnModeler({
   container: '#canvas',

@@ -1,10 +1,10 @@
 'use strict';
 
-var fs = require('fs');
 var tokenSimulation = require('../lib/viewer');
 
-var exampleXML = fs.readFileSync(__dirname + '/resources/example.bpmn', 'utf-8');
 var BpmnViewer = require('bpmn-js/lib/NavigatedViewer');
+
+import exampleXML from './resources/example.bpmn';
 
 var viewer = new BpmnViewer({
   container: '#canvas',
