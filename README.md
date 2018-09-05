@@ -67,6 +67,7 @@ Check out `localhost:9013`.
 * Intermediate Throw Event
 * End Event
 * Terminate End Event
+* Boundary Event (attached to Subprocess)
 * Exclusive Gateway
 * Parallel Gateway
 * Event-based Gateway
