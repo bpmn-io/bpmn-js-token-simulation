@@ -4,7 +4,7 @@
   "description": "bpmn-js token simulation extension",
   "main": "index.js",
   "scripts": {
-    "all": "run-s bundle dev",
+    "all": "run-s bundle",
     "bundle": "webpack",
     "bundle:watch": "webpack -w",
     "dev": "webpack-serve --content ./example --open-path ./index.html"
