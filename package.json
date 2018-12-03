@@ -63,6 +63,7 @@
     "webpack-serve": "^2.0.2"
   },
   "dependencies": {
+    "inherits": "^2.0.3",
     "min-dash": "^3.2.0",
     "min-dom": "^0.2.0",
     "svg.js": "^2.6.3"
