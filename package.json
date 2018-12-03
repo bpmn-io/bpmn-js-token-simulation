@@ -62,7 +62,7 @@
     "webpack-serve": "^2.0.2"
   },
   "dependencies": {
-    "lodash": "^4.17.4",
+    "min-dash": "^3.2.0",
     "min-dom": "^0.2.0",
     "svg.js": "^2.6.3"
   }
