@@ -2,6 +2,8 @@
 
 # bpmn-js Token Simulation
 
+[![Build Status](https://travis-ci.com/bpmn-io/bpmn-js-token-simulation.svg?branch=master)](https://travis-ci.com/bpmn-io/bpmn-js-token-simulation)
+
 A bpmn-js extension for token simulation.
 
 ![Screencast](docs/screencast.gif)
