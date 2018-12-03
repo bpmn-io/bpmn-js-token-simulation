@@ -57,7 +57,7 @@ npm install
 Run example.
 
 ```bash
-npm run dev
+npm start
 ```
 
 Check out `localhost:9013`.
