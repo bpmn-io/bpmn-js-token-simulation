@@ -16,7 +16,7 @@ Install via [npm](http://npmjs.com/).
 npm install bpmn-js-token-simulation
 ```
 
-Add as additional module to [bpmn-js]().
+Add as additional module to [bpmn-js](https://github.com/bpmn-io/bpmn-js).
 
 ### Modeler
 
