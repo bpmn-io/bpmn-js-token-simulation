@@ -60,7 +60,7 @@ Run example.
 npm start
 ```
 
-Check out `localhost:9013`.
+Check out `localhost:8080`.
 
 ## Supported Elements
 
