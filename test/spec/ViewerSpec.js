@@ -21,7 +21,7 @@ describe('token-simulation - viewer', function() {
   }));
 
 
-  it.only('should toggle mode', inject(function(toggleMode) {
+  it('should toggle mode', inject(function(toggleMode) {
 
     // YEA!
     toggleMode.toggleMode();
