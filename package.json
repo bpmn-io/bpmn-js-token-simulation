@@ -1,6 +1,6 @@
 {
   "name": "bpmn-js-token-simulation",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "bpmn-js token simulation extension",
   "main": "index.js",
   "scripts": {
