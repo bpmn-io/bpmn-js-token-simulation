@@ -64,16 +64,17 @@ Check out `localhost:8080`.
 
 ## Supported Elements
 
-* Start Event
+* Boundary Event (attached to Subprocess)
+* Call Activity
+* End Event
+* Event-based Gateway
+* Exclusive Gateway
 * Intermediate Catch Event
 * Intermediate Throw Event
-* End Event
-* Terminate End Event
-* Boundary Event (attached to Subprocess)
-* Exclusive Gateway
 * Parallel Gateway
-* Event-based Gateway
+* Start Event
 * Task
+* Terminate End Event
 * Subprocess
 
 ## Licence
