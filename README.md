@@ -75,6 +75,7 @@ Check out `localhost:8080`.
 * Event-based Gateway
 * Task
 * Subprocess
+* Call Activity
 
 ## Licence
 

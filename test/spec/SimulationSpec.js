@@ -154,9 +154,54 @@ describe('token simulation', function() {
         });
       })();
     });
-
   });
 
+  describe('call-activity', function() {
+
+    const diagram = require('./call-activity.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        Animation
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode) {
+      startEvent = elementRegistry.get('StartEvent_1');
+
+      toggleMode.toggleMode();
+    }));
+
+    it('should finish simulation at EndEvent_1', function(done) {
+      inject(function(eventBus) {
+
+        // given
+        const log = new Log(eventBus);
+        log.start();
+
+        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, ifProcessInstance(1, function() {
+
+          // then
+          expectHistory(log, [
+            'StartEvent_1',
+            'Task_1',
+            'CallActivity_1',
+            'EndEvent_1'
+          ]);
+
+          done();
+        }));
+
+        // when
+        eventBus.fire(GENERATE_TOKEN_EVENT, {
+          element: startEvent
+        });
+      })();
+    });
+  });
 
   describe('subprocess', function() {
 
