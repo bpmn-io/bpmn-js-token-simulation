@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.10.0
+
+* `CHORE`: update colors
+* `CHORE`: update to `bpmn-js@7`
+
 ## 0.9.1
 
 * `FIX`: fix simulation state ([#51](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/51))
