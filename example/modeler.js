@@ -16,12 +16,16 @@ var modeler = new BpmnModeler({
   }
 });
 
-modeler.importXML(exampleXML, function(err) {
-  if (!err) {
-    modeler.get('canvas').zoom('fit-viewport');
-  } else {
-    console.log('something went wrong:', err);
-  }
-});
+modeler.importXML(exampleXML)
+  .then(({ warnings }) => {
+    if (warnings.length) {
+      console.warn(warnings);
+    }
 
-window.modeler = modeler;
+    modeler.get('canvas').zoom('fit-viewport');
+
+    window.modeler = modeler;
+  })
+  .catch(err => {
+    console.err(err);
+  });
