@@ -6,7 +6,7 @@
 
 A bpmn-js extension for token simulation.
 
-![Screencast](docs/screencast.gif)
+![Screencast](docs/screenshot.png)
 
 ## Installation
 
