@@ -1,5 +1,16 @@
 @import 'font-awesome.min.css';
 
+:root {
+  --token-simulation-green-base-44: #10D070;
+  --token-simulation-grey-base-40: #666666;
+  --token-simulation-grey-darken-30: #212121;
+  --token-simulation-grey-lighten-56: #909090;
+  --token-simulation-red-base-62: #FF3D3D;
+  --token-simulation-silver-base-97: #F8F8F8;
+
+  --token-simulation-white: #FFFFFF;
+}
+
 html, body, #canvas {
   margin: 0;
   width: 100%;
@@ -13,25 +24,25 @@ html, body, #canvas {
 }
 
 .bjs-container.simulation {
-  border-color: #52b415;
+  border-color: var(--token-simulation-green-base-44, #10D070);
 }
 
 .bjs-container.simulation.paused {
-  border-color: #999;
+  border-color: var(--token-simulation-grey-base-40, #666666);
 }
 
 .bjs-container.simulation.warning {
-  border-color: #cc0000 !important;
+  border-color: var(--token-simulation-red-base-62, #FF3D3D) !important;
 }
 
 .context-pad {
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--token-simulation-grey-lighten-56, #909090);
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   margin: 0;
   font-size: 16px;
-  color: rgba(0, 0, 0, 0.3);
+  color: var(--token-simulation-grey-darken-30, #212121);
+  opacity: 0.5;
   transition: all 0.1s ease-in-out;
   width: 30px;
   height: 30px;
@@ -43,13 +54,14 @@ html, body, #canvas {
 
 .context-pad:not(.disabled):hover {
   width: 40px;
-  background-color: #52b415;
-  color: #fff;
+  background-color: var(--token-simulation-green-base-44, #10D070);
+  opacity: 1;
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .context-pad.disabled {
-  background-color: #FAFAFA;
-  color: #999;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  color: var(--token-simulation-grey-base-40, #666666);
   pointer-events: none;
 }
 
@@ -62,20 +74,19 @@ html, body, #canvas {
 }
 
 .token .text {
-  fill: #FFF;
+  fill: var(--token-simulation-white, #FFFFFF);
   font-family: 'Arial', sans-serif;
 }
 
 .token-count {
   background-color: #FAFAFA;
   border-radius: 100%;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   width: 25px;
   height: 25px;
   line-height: 25px;
   text-align: center;
   font-size: 16px;
-  color: #000;
+  color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
   animation: jump 1s infinite;
   animation-timing-function: ease;
@@ -84,7 +95,9 @@ html, body, #canvas {
 }
 
 .token-count.waiting {
-  background-color: #FAFAFA;
+  color: var(--token-simulation-white, #FFFFFF);
+  font-family: 'Arial', sans-serif;
+  background-color: var(--token-simulation-green-base-44, #10D070);
 }
 
 @keyframes jump {
@@ -98,30 +111,29 @@ html, body, #canvas {
 }
 
 .notifications .notification {
-  background-color: #FAFAFA;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   padding: 4px 8px;
   font-size: 16px;
-  color: #000;
+  color: var(--token-simulation-silver-base-97, #F8F8F8);
   user-select: none;
   margin-top: 4px;
   min-width: 300px;
 }
 
 .notifications .notification.info {
-  background-color: #FAFAFA;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
   color: #000;
 }
 
 .notifications .notification.success {
-  background-color: #52b415;
-  color: #fff;
+  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .notifications .notification.warning {
-  background-color: #cc0000;
-  color: #fff;
+  background-color: var(--token-simulation-red-base-62, #FF3D3D);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .notifications .notification .icon {
@@ -136,15 +148,14 @@ html, body, #canvas {
 }
 
 .bjs-container.paused .play-pause.active {
-  color: #000;
-  background-color: #FAFAFA;
+  color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
 }
 
 .element-notification {
-  background-color: #FAFAFA;
-  color: #000;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  color: var(--token-simulation-silver-base-97, #F8F8F8);
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   height: 30px;
   box-sizing: border-box;
   display: flex;
@@ -164,13 +175,13 @@ html, body, #canvas {
 }
 
 .element-notification.success {
-  background-color: #52B415;
-  color: #FFF;
+  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .element-notification.warning {
-  background-color: #cc0000;
-  color: #FFF;
+  background-color: var(--token-simulation-red-base-62, #FF3D3D);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .toggle-mode {
@@ -178,19 +189,18 @@ html, body, #canvas {
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: #FAFAFA;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   padding: 6px;
   font-size: 16px;
-  color: #000;
+  color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
 }
 
 .bjs-container.simulation .toggle-mode,
 .toggle-mode:hover {
-  background-color: #52b415;
-  color: #fff;
+  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .bjs-container .djs-palette {
@@ -221,13 +231,12 @@ html, body, #canvas {
 
 .token-simulation-palette .entry {
   cursor: pointer;
-  background-color: #FAFAFA;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   padding: 6px 0;
   margin-bottom: 6px;
   font-size: 16px;
-  color: #000;
+  color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
   display: flex;
   justify-content: center;
@@ -243,18 +252,18 @@ html, body, #canvas {
 
 .token-simulation-palette .entry:not(.disabled):hover {
   width: 40px;
-  color: #FFF;
-  background-color: #52B415;
+  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-green-base-44, #10D070);
 }
 
 .token-simulation-palette .entry.active {
-  color: #FFF;
-  background-color: #52B415;
+  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-green-base-44, #10D070);
 }
 
 .token-simulation-palette .entry.disabled {
   pointer-events: none;
-  color: #999;
+  color: var(--token-simulation-grey-base-40, #666666);
 }
 
 .token-simulation-log {
@@ -263,9 +272,8 @@ html, body, #canvas {
   bottom: 20px; 
   left: 20px; 
   right: 20px;
-  background-color: #FAFAFA;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   z-index: 10000;
   overflow: hidden;
 }
@@ -277,9 +285,9 @@ html, body, #canvas {
 
 
 .token-simulation-log .header {
-  background-color: #52b415;
+  background-color: var(--token-simulation-green-base-44, #10D070);
   padding: 6px 8px;
-  color: #fff;
+  color: var(--token-simulation-white, #FFFFFF);
   height: 30px;
   box-sizing: border-box;
   font-size: 16px;
@@ -290,7 +298,7 @@ html, body, #canvas {
   background: none;
   border: none;
   cursor: pointer;
-  color: #fff;
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .token-simulation-log .header .fa-align-left {
@@ -312,24 +320,23 @@ html, body, #canvas {
   font-size: 16px;
   margin: 0 0 6px 0;
   padding: 6px;
-  background: #FFF;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background: var(--token-simulation-white, #FFFFFF);
   border-radius: 2px;
 }
 
 .token-simulation-log .content .entry.success {
-  background-color: #52b415;
-  color: #FFF;
+  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .token-simulation-log .content .entry.success .date,
 .token-simulation-log .content .entry.warning .date {
- color: #FAFAFA;
+ color: var(--token-simulation-silver-base-97, #F8F8F8);
 }
 
 .token-simulation-log .content .entry.warning {
-  background-color: #cc0000;
-  color: #FFF;
+  background-color: var(--token-simulation-red-base-62, #FF3D3D);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .token-simulation-log .content .entry:last-child {
@@ -340,7 +347,7 @@ html, body, #canvas {
   display: inline-block;
   margin-right: 6px;
   min-width: 120px;
-  color: #999;
+  color: var(--token-simulation-grey-base-40, #666666);
 }
 
 .token-simulation-log .content .entry .icon {
@@ -373,19 +380,18 @@ html, body, #canvas {
   font-size: 16px;
   line-height: 30px;
   text-align: center;
-  background-color: #FAFAFA;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
   margin-right: 10px;
   cursor: pointer;
 }
 
 .process-instances .process-instance.active {
-  background-color: #52B415;
-  color: #FFF;
+  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-white, #FFFFFF);
 }
 
 .djs-container.highlight {
-  background-color: #ecfbe3;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
 }
 
 .set-animation-speed {
@@ -395,9 +401,8 @@ html, body, #canvas {
   transform: translate(-50%, 0);
   font-size: 16px;
   text-align: center;
-  background-color: #FAFAFA;
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
   border-radius: 2px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
   cursor: pointer;
   display: flex;
   flex-direction: row;
@@ -430,6 +435,6 @@ html, body, #canvas {
 
 .set-animation-speed .animation-speed-buttons .animation-speed-button.active,
 .set-animation-speed .animation-speed-buttons .animation-speed-button:hover {
-  background-color: #52b415;
-  color: #fff;
+  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-white, #FFFFFF);
 }
