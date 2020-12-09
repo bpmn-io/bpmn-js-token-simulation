@@ -217,6 +217,58 @@ describe('token simulation', function() {
 
   });
 
+
+  describe('intermediate-events', function() {
+
+    const diagram = require('./intermediate-events.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        Animation
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode) {
+      startEvent = elementRegistry.get('StartEvent_1');
+
+      toggleMode.toggleMode();
+    }));
+
+
+    it('should start and end simulation when IntermediateEvent is present', function(done) {
+      inject(function(eventBus) {
+
+        // given
+        const log = new Log(eventBus);
+
+        log.start();
+
+        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+
+          // then
+          expectHistory(log, [
+            'StartEvent_1',
+            'Task_1',
+            'IntermediateEvent',
+            'EndEvent_1'
+          ]);
+
+          done();
+        });
+
+        // when
+        eventBus.fire(GENERATE_TOKEN_EVENT, {
+          element: startEvent
+        });
+      })();
+    });
+
+  });
+
+
   describe('message-flow', function() {
 
     const diagram = require('./message-flow.bpmn');
