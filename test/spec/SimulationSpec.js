@@ -217,6 +217,53 @@ describe('token simulation', function() {
 
   });
 
+  describe('message-flow', function() {
+
+    const diagram = require('./message-flow.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        Animation
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode) {
+      startEvent = elementRegistry.get('StartEvent_1');
+      toggleMode.toggleMode();
+    }));
+
+
+    it('should run and finish simulation when messageFlow elements present', function(done) {
+      inject(function(eventBus) {
+
+        // given
+        const log = new Log(eventBus);
+
+        log.start();
+
+        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+
+          // then
+          expectHistory(log, [
+            'StartEvent_1',
+            'Task_1',
+            'EndEvent_1'
+          ]);
+
+          done();
+        });
+
+        // when
+        eventBus.fire(GENERATE_TOKEN_EVENT, {
+          element: startEvent
+        });
+      })();
+    });
+  });
+
 });
 
 // helpers //////////
