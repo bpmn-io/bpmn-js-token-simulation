@@ -1,5 +1,4 @@
 node_modules
 coverage
-example/css
-example/fonts
+example/assets
 example/*.bundle.js
