@@ -4,15 +4,15 @@ import Animation from 'test/mocks/Animation';
 
 import {
   bootstrapModeler,
-  inject
+  inject,
+  getBpmnJS
 } from 'test/TestHelper';
 
 import EventHelper, {
   CONSUME_TOKEN_EVENT,
   GENERATE_TOKEN_EVENT,
   PROCESS_INSTANCE_CREATED_EVENT,
-  PROCESS_INSTANCE_FINISHED_EVENT,
-  UPDATE_ELEMENT_EVENT
+  PROCESS_INSTANCE_FINISHED_EVENT
 } from 'lib/util/EventHelper';
 
 import { is } from 'lib/util/ElementHelper';
@@ -139,15 +139,7 @@ describe('token simulation', function() {
         });
 
         // assume user clicks to generate token
-        eventBus.on(CONSUME_TOKEN_EVENT, ifElement('IntermediateCatchEvent_1', function(event) {
-          var element = event.element,
-              processInstanceId = event.processInstanceId;
-
-          eventBus.fire(GENERATE_TOKEN_EVENT, {
-            element: element,
-            processInstanceId: processInstanceId
-          });
-        }));
+        eventBus.on(CONSUME_TOKEN_EVENT, ifElement('IntermediateCatchEvent_1', continueFlow));
 
         // when
         eventBus.fire(GENERATE_TOKEN_EVENT, {
@@ -318,23 +310,7 @@ describe('token simulation', function() {
         });
 
         // trigger catch event behavior
-        eventBus.on(UPDATE_ELEMENT_EVENT, function(context) {
-
-          const {
-            element,
-            processInstanceId
-          } = context;
-
-          if (element.id === 'CatchEvent') {
-            setTimeout(function() {
-
-              // TODO(nikku): make this IntermediateCatchEventHandler a scriptable API
-              element.tokenCount[processInstanceId]--;
-
-              eventBus.fire(GENERATE_TOKEN_EVENT, context);
-            }, 300);
-          }
-        });
+        eventBus.on(CONSUME_TOKEN_EVENT, ifElement('CatchEvent', continueFlow));
 
         // when
         // start process instance
@@ -509,6 +485,30 @@ function ifElement(id, fn) {
       fn(event);
     }
   };
+}
+
+function continueFlow(context) {
+
+  // TODO(nikku): make this IntermediateCatchEventHandler a scriptable API
+
+  getBpmnJS().invoke(function(eventBus) {
+
+    const {
+      element,
+      processInstanceId
+    } = context;
+
+    setTimeout(function() {
+
+      element.tokenCount[processInstanceId]--;
+
+      eventBus.fire(GENERATE_TOKEN_EVENT, {
+        element: element,
+        processInstanceId: processInstanceId
+      });
+    }, 150);
+  });
+
 }
 
 function ifProcessInstance(id, fn) {
