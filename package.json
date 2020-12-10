@@ -36,7 +36,6 @@
   },
   "homepage": "https://github.com/bpmn-io/bpmn-js-token-simulation#readme",
   "devDependencies": {
-    "bpmn-font": "^0.8.0",
     "bpmn-js": "^7.2.0",
     "chai": "^4.2.0",
     "copy-webpack-plugin": "^4.5.2",
