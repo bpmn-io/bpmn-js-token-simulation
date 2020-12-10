@@ -56,7 +56,7 @@ describe('token simulation', function() {
 
         log.start();
 
-        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+        eventBus.once(PROCESS_INSTANCE_FINISHED_EVENT, function() {
 
           // then
           expectHistory(log, [
@@ -89,7 +89,7 @@ describe('token simulation', function() {
         // assume user clicks to select next sequence flow
         exclusiveGatewaySettings.setSequenceFlow(gateway);
 
-        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+        eventBus.once(PROCESS_INSTANCE_FINISHED_EVENT, function() {
 
           // then
           expectHistory(log, [
@@ -123,7 +123,7 @@ describe('token simulation', function() {
         exclusiveGatewaySettings.setSequenceFlow(gateway);
         exclusiveGatewaySettings.setSequenceFlow(gateway);
 
-        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+        eventBus.once(PROCESS_INSTANCE_FINISHED_EVENT, function() {
 
           // then
           expectHistory(log, [
@@ -246,7 +246,7 @@ describe('token simulation', function() {
 
         log.start();
 
-        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+        eventBus.once(PROCESS_INSTANCE_FINISHED_EVENT, function() {
 
           // then
           expectHistory(log, [
@@ -296,7 +296,7 @@ describe('token simulation', function() {
 
         log.start();
 
-        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+        eventBus.once(PROCESS_INSTANCE_FINISHED_EVENT, function() {
 
           // then
           expectHistory(log, [
