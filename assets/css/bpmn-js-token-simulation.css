@@ -1,4 +1,4 @@
-@import 'font-awesome.min.css';
+@import '../font-awesome/css/font-awesome.min.css';
 
 :root {
   --token-simulation-green-base-44: #10D070;
