@@ -25,7 +25,7 @@ module.exports = function(karma) {
     ],
 
     files: [
-      { pattern: 'assets/fonts/*', included: false, served: true },
+      { pattern: 'assets/**/*', included: false, served: true },
       suite
     ],
 
