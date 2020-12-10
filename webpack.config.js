@@ -21,9 +21,11 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([
-      { from: './node_modules/bpmn-js/dist/assets/**/*', to: '.' },
-      { from: './assets/**/*', to: '.' }
-    ])
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: './node_modules/bpmn-js/dist/assets/**/*', to: '.' },
+        { from: './assets/**/*', to: '.' }
+      ]
+    })
   ]
 };
