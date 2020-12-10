@@ -7,6 +7,7 @@
   --token-simulation-grey-lighten-56: #909090;
   --token-simulation-red-base-62: #FF3D3D;
   --token-simulation-silver-base-97: #F8F8F8;
+  --token-simulation-silver-darken-94: #EFEFEF;
 
   --token-simulation-white: #FFFFFF;
 }
@@ -60,7 +61,7 @@ html, body, #canvas {
 }
 
 .context-pad.disabled {
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   color: var(--token-simulation-grey-base-40, #666666);
   pointer-events: none;
 }
@@ -111,18 +112,18 @@ html, body, #canvas {
 }
 
 .notifications .notification {
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   padding: 4px 8px;
   font-size: 16px;
-  color: var(--token-simulation-silver-base-97, #F8F8F8);
+  color: var(--token-simulation-silver-darken-94, #EFEFEF);
   user-select: none;
   margin-top: 4px;
   min-width: 300px;
 }
 
 .notifications .notification.info {
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   color: #000;
 }
 
@@ -148,13 +149,13 @@ html, body, #canvas {
 }
 
 .bjs-container.paused .play-pause.active {
-  color: var(--token-simulation-silver-base-97, #F8F8F8);
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
 }
 
 .element-notification {
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
-  color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   height: 30px;
   box-sizing: border-box;
@@ -189,7 +190,7 @@ html, body, #canvas {
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   padding: 6px;
   font-size: 16px;
@@ -231,7 +232,7 @@ html, body, #canvas {
 
 .token-simulation-palette .entry {
   cursor: pointer;
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   padding: 6px 0;
   margin-bottom: 6px;
@@ -268,11 +269,11 @@ html, body, #canvas {
 
 .token-simulation-log {
   position: absolute;
-  top: 128px; 
-  bottom: 20px; 
-  left: 20px; 
+  top: 128px;
+  bottom: 20px;
+  left: 20px;
   right: 20px;
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   z-index: 10000;
   overflow: hidden;
@@ -309,9 +310,9 @@ html, body, #canvas {
   position: absolute;
   overflow-y: auto;
   box-sizing: border-box;
-  top: 30px; 
-  bottom: 0; 
-  left: 0; 
+  top: 30px;
+  bottom: 0;
+  left: 0;
   right: 0;
   padding: 10px;
 }
@@ -331,7 +332,7 @@ html, body, #canvas {
 
 .token-simulation-log .content .entry.success .date,
 .token-simulation-log .content .entry.warning .date {
- color: var(--token-simulation-silver-base-97, #F8F8F8);
+ color: var(--token-simulation-silver-darken-94, #EFEFEF);
 }
 
 .token-simulation-log .content .entry.warning {
@@ -380,7 +381,7 @@ html, body, #canvas {
   font-size: 16px;
   line-height: 30px;
   text-align: center;
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   margin-right: 10px;
   cursor: pointer;
 }
@@ -391,7 +392,7 @@ html, body, #canvas {
 }
 
 .djs-container.highlight {
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
 }
 
 .set-animation-speed {
@@ -401,7 +402,7 @@ html, body, #canvas {
   transform: translate(-50%, 0);
   font-size: 16px;
   text-align: center;
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   cursor: pointer;
   display: flex;
