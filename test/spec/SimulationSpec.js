@@ -316,6 +316,70 @@ describe('token simulation', function() {
     });
   });
 
+
+  describe('boundary-events', function() {
+
+    const diagram = require('./boundary-event.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        Animation
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode) {
+      startEvent = elementRegistry.get('StartEvent');
+
+      toggleMode.toggleMode();
+    }));
+
+
+    it('should start and end simulation with boundary events', function(done) {
+      inject(function(eventBus, contextPads) {
+
+        // given
+        const log = new Log(eventBus);
+
+        log.start();
+
+        let expectScopes = 2;
+
+        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+
+          expectScopes--;
+
+          // we are still in the sub-process scope
+          if (expectScopes) {
+            return;
+          }
+
+          // then
+          expectHistory(log, [
+            'StartEvent',
+            'SubProcess',
+            'StartSubEvent',
+            'UserTask',
+            'FinishedSubEvent',
+            'FinishedEvent'
+          ]);
+
+          expect(contextPads.get('SubBoundary')).not.to.exist;
+
+          done();
+        });
+
+        // when
+        eventBus.fire(GENERATE_TOKEN_EVENT, {
+          element: startEvent
+        });
+      })();
+    });
+
+  });
+
 });
 
 // helpers //////////
