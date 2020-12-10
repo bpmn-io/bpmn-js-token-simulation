@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="7.5.0">
+  <process id="Process_1" isExecutable="false">
+    <subProcess id="SubProcess">
+      <incoming>Flow_1ax9gy4</incoming>
+      <outgoing>Flow_1dcftoq</outgoing>
+      <startEvent id="StartSubEvent">
+        <outgoing>Flow_1tjzxrp</outgoing>
+      </startEvent>
+      <sequenceFlow id="Flow_1tjzxrp" sourceRef="StartSubEvent" targetRef="UserTask" />
+      <endEvent id="FinishedSubEvent" name="FINISHED&#10;SUB">
+        <incoming>Flow_18873qn</incoming>
+      </endEvent>
+      <sequenceFlow id="Flow_18873qn" sourceRef="UserTask" targetRef="FinishedSubEvent" />
+      <userTask id="UserTask">
+        <incoming>Flow_1tjzxrp</incoming>
+        <outgoing>Flow_18873qn</outgoing>
+      </userTask>
+      <boundaryEvent id="TaskBoundary" attachedToRef="UserTask">
+        <outgoing>Flow_1190my9</outgoing>
+      </boundaryEvent>
+      <endEvent id="TimedOutSubEvent" name="TIMED OUT&#10;SUB">
+        <incoming>Flow_1190my9</incoming>
+      </endEvent>
+      <sequenceFlow id="Flow_1190my9" sourceRef="TaskBoundary" targetRef="TimedOutSubEvent" />
+    </subProcess>
+    <startEvent id="StartEvent">
+      <outgoing>Flow_1ax9gy4</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_1ax9gy4" sourceRef="StartEvent" targetRef="SubProcess" />
+    <endEvent id="FinishedEvent" name="FINISHED">
+      <incoming>Flow_1dcftoq</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1dcftoq" sourceRef="SubProcess" targetRef="FinishedEvent" />
+    <boundaryEvent id="SubBoundary" attachedToRef="SubProcess">
+      <outgoing>Flow_04cla91</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_13yln04" />
+    </boundaryEvent>
+    <endEvent id="TimedOutEvent" name="TIMED OUT">
+      <incoming>Flow_04cla91</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_04cla91" sourceRef="SubBoundary" targetRef="TimedOutEvent" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1ax9gy4_di" bpmnElement="Flow_1ax9gy4">
+        <omgdi:waypoint x="228" y="190" />
+        <omgdi:waypoint x="350" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1dcftoq_di" bpmnElement="Flow_1dcftoq">
+        <omgdi:waypoint x="720" y="190" />
+        <omgdi:waypoint x="822" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04cla91_di" bpmnElement="Flow_04cla91">
+        <omgdi:waypoint x="610" y="388" />
+        <omgdi:waypoint x="610" y="440" />
+        <omgdi:waypoint x="840" y="440" />
+        <omgdi:waypoint x="840" y="388" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_di" bpmnElement="StartEvent">
+        <omgdc:Bounds x="192" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FinishedEvent_di" bpmnElement="FinishedEvent">
+        <omgdc:Bounds x="822" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="814" y="215" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TimedOutEvent_di" bpmnElement="TimedOutEvent">
+        <omgdc:Bounds x="822" y="352" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="809" y="328" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SubProcess_di" bpmnElement="SubProcess" isExpanded="true">
+        <omgdc:Bounds x="350" y="90" width="370" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1tjzxrp_di" bpmnElement="Flow_1tjzxrp">
+        <omgdi:waypoint x="426" y="190" />
+        <omgdi:waypoint x="480" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_18873qn_di" bpmnElement="Flow_18873qn">
+        <omgdi:waypoint x="580" y="190" />
+        <omgdi:waypoint x="642" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1190my9_di" bpmnElement="Flow_1190my9">
+        <omgdi:waypoint x="540" y="248" />
+        <omgdi:waypoint x="540" y="280" />
+        <omgdi:waypoint x="642" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartSubEvent_di" bpmnElement="StartSubEvent">
+        <omgdc:Bounds x="390" y="172" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FinishedSubEvent_di" bpmnElement="FinishedSubEvent">
+        <omgdc:Bounds x="642" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="634" y="215" width="52" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02o9ofd_di" bpmnElement="UserTask">
+        <omgdc:Bounds x="480" y="150" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TimedOutSubEvent_di" bpmnElement="TimedOutSubEvent">
+        <omgdc:Bounds x="642" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="630" y="305" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1megti2_di" bpmnElement="TaskBoundary">
+        <omgdc:Bounds x="522" y="212" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1k7jdun_di" bpmnElement="SubBoundary">
+        <omgdc:Bounds x="592" y="352" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
