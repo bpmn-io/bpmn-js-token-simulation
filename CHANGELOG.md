@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.11.0
+
+* `FEAT`: ignore message flows during simulation ([#52](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/52))
+* `FIX`: make intermediate throw events work, again ([#53](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/53))
+
 ## 0.10.0
 
 * `CHORE`: update colors
