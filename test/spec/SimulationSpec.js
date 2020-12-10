@@ -11,7 +11,8 @@ import EventHelper, {
   CONSUME_TOKEN_EVENT,
   GENERATE_TOKEN_EVENT,
   PROCESS_INSTANCE_CREATED_EVENT,
-  PROCESS_INSTANCE_FINISHED_EVENT
+  PROCESS_INSTANCE_FINISHED_EVENT,
+  UPDATE_ELEMENT_EVENT
 } from 'lib/util/EventHelper';
 
 import { is } from 'lib/util/ElementHelper';
@@ -263,6 +264,84 @@ describe('token simulation', function() {
         eventBus.fire(GENERATE_TOKEN_EVENT, {
           element: startEvent
         });
+      })();
+    });
+
+  });
+
+
+  describe('multiple tokens', function() {
+
+    const diagram = require('./completion.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        Animation
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode) {
+      startEvent = elementRegistry.get('StartEvent');
+      toggleMode.toggleMode();
+    }));
+
+
+    it('should complete with single tokens', function(done) {
+      inject(function(eventBus, simulationState) {
+
+        // given
+        const log = new Log(eventBus);
+
+        log.start();
+
+        eventBus.on(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+
+          // then
+          expectHistory(log, [
+            'StartEvent',
+            'Task_A',
+            'ParallelGateway',
+            'CatchEvent',
+            'Task_C',
+            'ExclusiveGateway',
+            'Task_D',
+            'EndEvent',
+            'ExclusiveGateway',
+            'Task_D',
+            'EndEvent'
+          ]);
+
+          done();
+        });
+
+        // trigger catch event behavior
+        eventBus.on(UPDATE_ELEMENT_EVENT, function(context) {
+
+          const {
+            element,
+            processInstanceId
+          } = context;
+
+          if (element.id === 'CatchEvent') {
+            setTimeout(function() {
+
+              // TODO(nikku): make this IntermediateCatchEventHandler a scriptable API
+              element.tokenCount[processInstanceId]--;
+
+              eventBus.fire(GENERATE_TOKEN_EVENT, context);
+            }, 300);
+          }
+        });
+
+        // when
+        // start process instance
+        eventBus.fire(GENERATE_TOKEN_EVENT, {
+          element: startEvent
+        });
+
       })();
     });
 
