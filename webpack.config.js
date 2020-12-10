@@ -22,10 +22,8 @@ module.exports = {
   },
   plugins: [
     new CopyWebpackPlugin([
-      { from: './node_modules/diagram-js/assets/diagram-js.css', to: './css' },
-      { from: './node_modules/bpmn-font/dist/css/bpmn-embedded.css', to: './css' },
-      { from: './assets/fonts/*', to: './fonts', flatten: true },
-      { from: './assets/css/*', to: './css', flatten: true }
+      { from: './node_modules/bpmn-js/dist/assets/**/*', to: '.' },
+      { from: './assets/**/*', to: '.' }
     ])
   ]
 };
