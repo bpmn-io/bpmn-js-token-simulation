@@ -262,6 +262,60 @@ describe('token simulation', function() {
   });
 
 
+  describe('send/receive tasks', function() {
+
+    const diagram = require('./send-receive.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        Animation
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode) {
+      startEvent = elementRegistry.get('START');
+
+      toggleMode.toggleMode();
+    }));
+
+
+    it('should complete', function(done) {
+      inject(function(eventBus) {
+
+        // given
+        const log = new Log(eventBus);
+
+        log.start();
+
+        eventBus.once(PROCESS_INSTANCE_FINISHED_EVENT, function() {
+
+          // then
+          expectHistory(log, [
+            'START',
+            'SEND',
+            'RECEIVE',
+            'END'
+          ]);
+
+          done();
+        });
+
+        // trigger catch event behavior
+        eventBus.on(CONSUME_TOKEN_EVENT, ifElement('RECEIVE', continueFlow));
+
+        // when
+        eventBus.fire(GENERATE_TOKEN_EVENT, {
+          element: startEvent
+        });
+      })();
+    });
+
+  });
+
+
   describe('multiple tokens', function() {
 
     const diagram = require('./completion.bpmn');
