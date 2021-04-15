@@ -2,7 +2,7 @@
 
 # bpmn-js Token Simulation
 
-[![Build Status](https://travis-ci.com/bpmn-io/bpmn-js-token-simulation.svg?branch=master)](https://travis-ci.com/bpmn-io/bpmn-js-token-simulation)
+[![CI](https://github.com/bpmn-io/bpmn-js-token-simulation/workflows/CI/badge.svg)](https://github.com/bpmn-io/bpmn-js-token-simulation/actions?query=workflow%3ACI)
 
 A bpmn-js extension for token simulation.
 
