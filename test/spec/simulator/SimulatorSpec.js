@@ -338,7 +338,7 @@ describe('simulator', function() {
 });
 
 
-function verify(name, test) {
+function verify(name, test, iit=it) {
 
   const diagram = require(`./Simulator.${name}.bpmn`);
 
@@ -361,9 +361,14 @@ function verify(name, test) {
     }));
 
 
-    it('should simulate', test);
+    iit('should simulate', test);
 
   });
+}
+
+// eslint-disable-next-line
+function verifyOnly(name, test) {
+  return verify(name, test, it.only);
 }
 
 function signal(...args) {
