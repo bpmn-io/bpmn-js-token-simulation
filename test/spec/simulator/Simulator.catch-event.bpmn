@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.3.1">
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="START" name="START">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <intermediateCatchEvent id="CATCH" name="CATCH">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_2</outgoing>
+      <conditionalEventDefinition id="ConditionalEventDefinition_0sz129j">
+        <condition xsi:type="tFormalExpression" />
+      </conditionalEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="CATCH" />
+    <endEvent id="END" name="END">
+      <incoming>Flow_2</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_2" sourceRef="CATCH" targetRef="END" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="148" y="100" />
+        <omgdi:waypoint x="234" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="270" y="100" />
+        <omgdi:waypoint x="364" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="112" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="112" y="125" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <omgdc:Bounds x="364" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="370" y="125" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CATCH_di" bpmnElement="CATCH">
+        <omgdc:Bounds x="234" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="233" y="125" width="38" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
