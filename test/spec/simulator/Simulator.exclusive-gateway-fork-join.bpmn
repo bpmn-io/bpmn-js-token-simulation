@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.3.1">
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="START" name="START">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="G_A" />
+    <endEvent id="END" name="END">
+      <incoming>Flow_4</incoming>
+    </endEvent>
+    <exclusiveGateway id="G_A" name="G_A">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_2</outgoing>
+      <outgoing>Flow_3</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_2" sourceRef="G_A" targetRef="G_B" />
+    <sequenceFlow id="Flow_3" sourceRef="G_A" targetRef="G_B" />
+    <exclusiveGateway id="G_B" name="G_B">
+      <incoming>Flow_2</incoming>
+      <incoming>Flow_3</incoming>
+      <outgoing>Flow_4</outgoing>
+    </exclusiveGateway>
+    <sequenceFlow id="Flow_4" sourceRef="G_B" targetRef="END" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <omgdi:waypoint x="575" y="190" />
+        <omgdi:waypoint x="642" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <omgdi:waypoint x="290" y="215" />
+        <omgdi:waypoint x="290" y="290" />
+        <omgdi:waypoint x="550" y="290" />
+        <omgdi:waypoint x="550" y="215" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="290" y="165" />
+        <omgdi:waypoint x="290" y="90" />
+        <omgdi:waypoint x="550" y="90" />
+        <omgdi:waypoint x="550" y="165" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="208" y="190" />
+        <omgdi:waypoint x="265" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="172" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="172" y="148" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <omgdc:Bounds x="642" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="648" y="215" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_A_di" bpmnElement="G_A" isMarkerVisible="true">
+        <omgdc:Bounds x="265" y="165" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="324.5" y="183" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="G_B_di" bpmnElement="G_B" isMarkerVisible="true">
+        <omgdc:Bounds x="525" y="165" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="493" y="183" width="22" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
