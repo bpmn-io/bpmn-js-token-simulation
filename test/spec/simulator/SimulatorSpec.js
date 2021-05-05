@@ -162,6 +162,33 @@ describe('simulator', function() {
   });
 
 
+  verify('end-event-terminate-nested-scopes', () => {
+
+    // when
+    signal({
+      element: element('START')
+    });
+
+    // then
+    expectTrace([
+      'createScope:Process_1:null',
+      'signal:START:A',
+      'exit:START:A',
+      'enter:Flow_4:A',
+      'enter:Flow_6:A',
+      'exit:Flow_4:A',
+      'exit:Flow_6:A',
+      'enter:SUB:A',
+      'createScope:SUB:A',
+      'enter:END_TERM:A',
+      'signal:START_SUB:B',
+      'exit:END_TERM:A',
+      'destroyScope:SUB:B',
+      'destroyScope:Process_1:A'
+    ]);
+  });
+
+
   verify('task-join', () => {
 
     // when
