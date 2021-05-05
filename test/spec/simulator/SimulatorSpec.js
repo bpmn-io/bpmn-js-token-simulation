@@ -215,6 +215,43 @@ describe('simulator', function() {
 
   });
 
+  verify('sub-process', () => {
+
+    // when
+    signal({
+      element: element('START')
+    });
+
+    // then
+    expectTrace([
+      'createScope:Process_1:null',
+      'signal:START:A',
+      'exit:START:A',
+      'enter:Flow_2:A',
+      'exit:Flow_2:A',
+      'enter:SUB:A',
+      'createScope:SUB:A',
+      'signal:START_SUB:B',
+      'exit:START_SUB:B',
+      'enter:Flow_4:B',
+      'exit:Flow_4:B',
+      'enter:TASK_SUB:B',
+      'exit:TASK_SUB:B',
+      'enter:Flow_1:B',
+      'exit:Flow_1:B',
+      'enter:END_SUB:B',
+      'exit:END_SUB:B',
+      'destroyScope:SUB:B',
+      'exit:SUB:A',
+      'enter:Flow_3:A',
+      'exit:Flow_3:A',
+      'enter:END:A',
+      'exit:END:A',
+      'destroyScope:Process_1:A'
+    ]);
+
+  });
+
 });
 
 
