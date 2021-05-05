@@ -215,6 +215,7 @@ describe('simulator', function() {
 
   });
 
+
   verify('sub-process', () => {
 
     // when
@@ -248,6 +249,88 @@ describe('simulator', function() {
       'enter:END:A',
       'exit:END:A',
       'destroyScope:Process_1:A'
+    ]);
+
+  });
+
+
+  verify('boundary-interrupting-sub-process', () => {
+
+    // given
+    signal({
+      element: element('START')
+    });
+
+    // when
+    const interruptingBoundary = element('B_RUPTING');
+
+    signal({
+      element: interruptingBoundary,
+      scope: findScope({ element: interruptingBoundary.parent })
+    });
+
+    // then
+    expectTrace([
+      'createScope:Process_1:null',
+      'signal:START:A',
+      'exit:START:A',
+      'enter:Flow_4:A',
+      'exit:Flow_4:A',
+      'enter:SUB:A',
+      'createScope:SUB:A',
+      'signal:START_SUB:B',
+      'exit:START_SUB:B',
+      'enter:Flow_3:B',
+      'exit:Flow_3:B',
+      'enter:CATCH_SUB:B',
+      'signal:B_RUPTING:A',
+      'destroyScope:SUB:B',
+      'exit:B_RUPTING:A',
+      'enter:Flow_6:A',
+      'exit:Flow_6:A',
+      'enter:END_B:A',
+      'exit:END_B:A',
+      'destroyScope:Process_1:A'
+    ]);
+
+  });
+
+
+  verify('boundary-non-interrupting-sub-process', () => {
+
+    // given
+    signal({
+      element: element('START')
+    });
+
+    // when
+    const nonInterruptingBoundary = element('B_NRUPTING');
+
+    signal({
+      element: nonInterruptingBoundary,
+      scope: findScope({ element: nonInterruptingBoundary.parent })
+    });
+
+    // then
+    expectTrace([
+      'createScope:Process_1:null',
+      'signal:START:A',
+      'exit:START:A',
+      'enter:Flow_4:A',
+      'exit:Flow_4:A',
+      'enter:SUB:A',
+      'createScope:SUB:A',
+      'signal:START_SUB:B',
+      'exit:START_SUB:B',
+      'enter:Flow_3:B',
+      'exit:Flow_3:B',
+      'enter:CATCH_SUB:B',
+      'signal:B_NRUPTING:A',
+      'exit:B_NRUPTING:A',
+      'enter:Flow_6:A',
+      'exit:Flow_6:A',
+      'enter:END_B:A',
+      'exit:END_B:A'
     ]);
 
   });
@@ -304,6 +387,12 @@ function element(id) {
     }
 
     return e;
+  });
+}
+
+function findScope(filter) {
+  return getBpmnJS().invoke(function(simulator) {
+    return simulator.findScope(filter);
   });
 }
 

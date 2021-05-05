@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.3.1">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <process id="Process_1" isExecutable="false">
     <subProcess id="SUB" name="SUB">
       <incoming>Flow_4</incoming>
@@ -31,55 +31,37 @@
     <endEvent id="END_B" name="END_B">
       <incoming>Flow_6</incoming>
     </endEvent>
-    <sequenceFlow id="Flow_6" sourceRef="B_RUPTING" targetRef="END_B" />
-    <boundaryEvent id="B_RUPTING" name="B_RUPTING" attachedToRef="SUB">
+    <sequenceFlow id="Flow_6" sourceRef="B_NRUPTING" targetRef="END_B" />
+    <boundaryEvent id="B_NRUPTING" name="B_NRUPTING" cancelActivity="false" attachedToRef="SUB">
       <outgoing>Flow_6</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_0wtsvyy" />
+      <messageEventDefinition id="MessageEventDefinition_0gf7o6a" />
     </boundaryEvent>
   </process>
   <bpmndi:BPMNDiagram id="BpmnDiagram_1">
     <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
-        <omgdi:waypoint x="188" y="180" />
-        <omgdi:waypoint x="260" y="180" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
-        <omgdi:waypoint x="630" y="180" />
-        <omgdi:waypoint x="702" y="180" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
         <omgdi:waypoint x="530" y="298" />
         <omgdi:waypoint x="530" y="380" />
         <omgdi:waypoint x="702" y="380" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
-        <omgdc:Bounds x="152" y="162" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="152" y="205" width="36" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="END_A_di" bpmnElement="END_A">
-        <omgdc:Bounds x="702" y="162" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="702" y="205" width="37" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="END_B_di" bpmnElement="END_B">
-        <omgdc:Bounds x="702" y="362" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="702" y="405" width="37" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="630" y="180" />
+        <omgdi:waypoint x="702" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <omgdi:waypoint x="188" y="180" />
+        <omgdi:waypoint x="260" y="180" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="SUB_di" bpmnElement="SUB" isExpanded="true">
         <omgdc:Bounds x="260" y="80" width="370" height="200" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
-        <omgdi:waypoint x="336" y="180" />
-        <omgdi:waypoint x="422" y="180" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
         <omgdi:waypoint x="458" y="180" />
         <omgdi:waypoint x="552" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <omgdi:waypoint x="336" y="180" />
+        <omgdi:waypoint x="422" y="180" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="START_SUB_di" bpmnElement="START_SUB">
         <omgdc:Bounds x="300" y="162" width="36" height="36" />
@@ -99,10 +81,28 @@
           <omgdc:Bounds x="407" y="205" width="66" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_1vck2fa_di" bpmnElement="B_RUPTING">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="152" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="152" y="205" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_A_di" bpmnElement="END_A">
+        <omgdc:Bounds x="702" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="702" y="205" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_B_di" bpmnElement="END_B">
+        <omgdc:Bounds x="702" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="702" y="405" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_NRUPTING_di" bpmnElement="B_NRUPTING">
         <omgdc:Bounds x="512" y="262" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="448" y="293" width="63" height="14" />
+          <omgdc:Bounds x="448" y="293" width="64" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
