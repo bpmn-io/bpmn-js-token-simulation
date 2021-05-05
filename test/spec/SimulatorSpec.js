@@ -1,3 +1,4 @@
+import { expect } from 'chai';
 import SimulatorModule from 'lib/features/simulator';
 
 import {
@@ -21,8 +22,6 @@ describe.only('simulator', function() {
 
   beforeEach(inject(function(simulator) {
     simulator.on('trace', function(event) {
-      console.debug(event.id);
-
       trace.push(event.id);
     });
   }));
@@ -71,11 +70,21 @@ function e(id) {
 }
 
 
-function expectTrace(trace, expected) {
+function expectTrace(trace, expectedTrace) {
+  expect(trace.length).to.equal(expectedTrace.length);
 
-  const traceSplit = trace.map(e => e.split(':'));
+  const scopes = {};
 
-  const expectedSplit = expected.map(e => e.split(':'));
+  expectedTrace.forEach((event, index) => {
+    const split = event.split(':'),
+          scope = split[ 2 ];
 
-  // TODO(nikku): real trace IDs should be mapped to virtual ones
+    if (!scopes[ scope ]) {
+      scopes[ scope ] = trace[ index ].split(':')[ 2 ];
+    }
+
+    event = [ split[ 0 ], split[ 1 ], scopes[ scope ] ].join(':');
+
+    expect(event).to.equal(trace[ index ]);
+  });
 }
