@@ -148,7 +148,7 @@ describe('simulator', function() {
     });
 
 
-    verify('catch-event', () => {
+    verify('link-event', () => {
 
       // when
       signal({
@@ -158,11 +158,19 @@ describe('simulator', function() {
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:ezerv23lf2oglpn9dgvn7ky0d',
-        'exit:START:ezerv23lf2oglpn9dgvn7ky0d',
-        'enter:Flow_1:ezerv23lf2oglpn9dgvn7ky0d',
-        'exit:Flow_1:ezerv23lf2oglpn9dgvn7ky0d',
-        'enter:CATCH:ezerv23lf2oglpn9dgvn7ky0d'
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:THROW:A',
+        'exit:THROW:A',
+        'enter:CATCH:A',
+        'exit:CATCH:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:END:A',
+        'exit:END:A',
+        'destroyScope:Process_1:A'
       ]);
 
     });
@@ -642,6 +650,8 @@ function expectTrace(expectedTrace) {
 }
 
 function verifyTrace(trace, expectedTrace) {
+  console.log(trace);
+
   const scopes = {};
 
   const adjustedExpectedTrace = [];
