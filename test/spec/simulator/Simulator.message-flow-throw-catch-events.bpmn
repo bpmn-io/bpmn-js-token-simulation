@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.3.1">
+  <collaboration id="COLLAB">
+    <participant id="PART_A" processRef="Process_1" />
+    <participant id="PART_B" processRef="Process_2" />
+    <messageFlow id="M_FLOW_A" name="M_FLOW_A" sourceRef="THROW_M" targetRef="START_B" />
+    <messageFlow id="M_FLOW_B" name="M_FLOW_B" sourceRef="END_B" targetRef="CATCH_M" />
+  </collaboration>
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="START" name="START">
+      <outgoing>Flow_2</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_2" sourceRef="START" targetRef="THROW_M" />
+    <endEvent id="END" name="END">
+      <incoming>Flow_4</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_4" sourceRef="CATCH_M" targetRef="END" />
+    <intermediateCatchEvent id="CATCH_M" name="CATCH_M">
+      <incoming>Flow_7</incoming>
+      <outgoing>Flow_4</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_1ut9a59" />
+    </intermediateCatchEvent>
+    <sequenceFlow id="Flow_7" sourceRef="THROW_M" targetRef="CATCH_M" />
+    <intermediateThrowEvent id="THROW_M" name="THROW_M">
+      <incoming>Flow_2</incoming>
+      <outgoing>Flow_7</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_0n5cvw3" />
+    </intermediateThrowEvent>
+  </process>
+  <process id="Process_2">
+    <startEvent id="START_B" name="START_B">
+      <outgoing>Flow_3</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_3" sourceRef="START_B" targetRef="END_B" />
+    <endEvent id="END_B" name="END_B">
+      <incoming>Flow_3</incoming>
+    </endEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="COLLAB">
+      <bpmndi:BPMNShape id="PART_A_di" bpmnElement="PART_A" isHorizontal="true">
+        <omgdc:Bounds x="140" y="110" width="600" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <omgdi:waypoint x="538" y="190" />
+        <omgdi:waypoint x="632" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="258" y="190" />
+        <omgdi:waypoint x="342" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <omgdi:waypoint x="378" y="190" />
+        <omgdi:waypoint x="502" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="222" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="222" y="213" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <omgdc:Bounds x="632" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="638" y="215" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1i3jy01_di" bpmnElement="CATCH_M">
+        <omgdc:Bounds x="502" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="493" y="153" width="53" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0owu6h4_di" bpmnElement="THROW_M">
+        <omgdc:Bounds x="342" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="332" y="153" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="PART_B_di" bpmnElement="PART_B" isHorizontal="true">
+        <omgdc:Bounds x="260" y="470" width="390" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <omgdi:waypoint x="378" y="530" />
+        <omgdi:waypoint x="502" y="530" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_B_di" bpmnElement="START_B">
+        <omgdc:Bounds x="342" y="512" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="336" y="555" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_B_di" bpmnElement="END_B">
+        <omgdc:Bounds x="502" y="512" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="502" y="555" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="M_FLOW_A_di" bpmnElement="M_FLOW_A">
+        <omgdi:waypoint x="360" y="208" />
+        <omgdi:waypoint x="360" y="512" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="369" y="357" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="M_FLOW_B_di" bpmnElement="M_FLOW_B">
+        <omgdi:waypoint x="520" y="512" />
+        <omgdi:waypoint x="520" y="208" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="529" y="357" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
