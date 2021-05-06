@@ -607,6 +607,52 @@ describe('simulator', function() {
     });
 
 
+    verify('message-flow-throw-catch-events', () => {
+
+      // when
+      signal({
+        element: element('START')
+      });
+
+      // then
+      expectTrace([
+        'createScope:PART_A:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:THROW_M:A',
+        'exit:THROW_M:A',
+        'createScope:COLLAB:null',
+        'enter:Flow_7:A',
+        'signal:M_FLOW_A:B',
+        'exit:Flow_7:A',
+        'exit:M_FLOW_A:B',
+        'createScope:PART_B:null',
+        'destroyScope:COLLAB:B',
+        'enter:CATCH_M:A',
+        'signal:START_B:C',
+        'exit:START_B:C',
+        'enter:Flow_3:C',
+        'exit:Flow_3:C',
+        'enter:END_B:C',
+        'createScope:COLLAB:null',
+        'signal:M_FLOW_B:D',
+        'exit:END_B:C',
+        'destroyScope:PART_B:C',
+        'exit:M_FLOW_B:D',
+        'destroyScope:COLLAB:D',
+        'signal:CATCH_M:A',
+        'exit:CATCH_M:A',
+        'enter:Flow_4:A',
+        'exit:Flow_4:A',
+        'enter:END:A',
+        'exit:END:A',
+        'destroyScope:PART_A:A'
+      ]);
+    });
+
+
     verify('message-flow-dependent-processes', () => {
 
       // when
