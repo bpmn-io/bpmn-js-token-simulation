@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.3.1">
+  <collaboration id="COLLAB">
+    <participant id="PART_EXP" processRef="Process_1" />
+    <participant id="PART_COLLAB" />
+    <messageFlow id="M_FLOW" name="M_FLOW" sourceRef="PART_COLLAB" targetRef="START" />
+  </collaboration>
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="START" name="START">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <endEvent id="END" name="END">
+      <incoming>Flow_1</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="END" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="COLLAB">
+      <bpmndi:BPMNShape id="PART_EXP_di" bpmnElement="PART_EXP" isHorizontal="true">
+        <omgdc:Bounds x="140" y="110" width="600" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="258" y="190" />
+        <omgdi:waypoint x="312" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="222" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="222" y="153" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <omgdc:Bounds x="312" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="318" y="215" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_0zvkpbr_di" bpmnElement="PART_COLLAB" isHorizontal="true">
+        <omgdc:Bounds x="140" y="390" width="600" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="M_FLOW_di" bpmnElement="M_FLOW">
+        <omgdi:waypoint x="240" y="390" />
+        <omgdi:waypoint x="240" y="208" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="256" y="353" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
