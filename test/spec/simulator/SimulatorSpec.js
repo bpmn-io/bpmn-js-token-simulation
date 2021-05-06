@@ -95,25 +95,6 @@ describe('simulator', function() {
     });
 
 
-    verify('parallel-gateway-stuck', () => {
-
-      // when
-      signal({
-        element: element('START')
-      });
-
-      // then
-      expectTrace([
-        'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:GATE:A'
-      ]);
-    });
-
-
     verify('task-join', () => {
 
       // when
@@ -259,6 +240,64 @@ describe('simulator', function() {
         'enter:END:A',
         'exit:END:A',
         'destroyScope:Process_1:A'
+      ]);
+    });
+
+  });
+
+
+  describe('parallel gateways', function() {
+
+    verify('parallel-gateway', () => {
+
+      // when
+      signal({
+        element: element('START_S')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START_S:A',
+        'exit:START_S:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:F_GATE:A',
+        'exit:F_GATE:A',
+        'enter:Flow_3:A',
+        'enter:Flow_4:A',
+        'enter:Flow_5:A',
+        'exit:Flow_3:A',
+        'exit:Flow_4:A',
+        'exit:Flow_5:A',
+        'enter:J_GATE:A',
+        'enter:J_GATE:A',
+        'enter:J_GATE:A',
+        'exit:J_GATE:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:END_S:A',
+        'exit:END_S:A',
+        'destroyScope:Process_1:A'
+      ]);
+    });
+
+
+    verify('parallel-gateway-stuck', () => {
+
+      // when
+      signal({
+        element: element('START')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:GATE:A'
       ]);
     });
 
