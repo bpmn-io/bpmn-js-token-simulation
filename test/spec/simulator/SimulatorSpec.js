@@ -178,6 +178,53 @@ describe('simulator', function() {
   });
 
 
+  describe('explicit waitAtElement', function() {
+
+    verify('simple', () => {
+
+      // given
+      const task = element('TASK');
+
+      waitAtElement(task);
+
+      // when
+      signal({
+        element: element('START')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:TASK:A'
+      ]);
+
+      // but when
+      signal({
+        element: task,
+        scope: findScope({
+          waitsOnElement: task
+        })
+      });
+
+      // then
+      expectTrace([
+        'signal:TASK:A',
+        'exit:TASK:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:END:A',
+        'exit:END:A',
+        'destroyScope:Process_1:A'
+      ]);
+    });
+
+  });
+
+
   describe('end events', function() {
 
     verify('end-event', () => {
@@ -636,6 +683,12 @@ function element(id) {
   });
 }
 
+function waitAtElement(element) {
+  return getBpmnJS().invoke(function(simulator) {
+    return simulator.waitAtElement(element);
+  });
+}
+
 function findScope(filter) {
   return getBpmnJS().invoke(function(simulator) {
     return simulator.findScope(filter);
@@ -645,13 +698,15 @@ function findScope(filter) {
 function expectTrace(expectedTrace) {
 
   return getBpmnJS().invoke(function(simulationTrace) {
-    verifyTrace(simulationTrace, expectedTrace);
+    try {
+      verifyTrace(simulationTrace.slice(), expectedTrace);
+    } finally {
+      simulationTrace.length = 0;
+    }
   });
 }
 
 function verifyTrace(trace, expectedTrace) {
-  console.log(trace);
-
   const scopes = {};
 
   const adjustedExpectedTrace = [];
