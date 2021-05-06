@@ -148,6 +148,46 @@ describe('simulator', function() {
     });
 
 
+    verify('catch-event', () => {
+
+      // when
+      signal({
+        element: element('START')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:CATCH:A'
+      ]);
+
+      // but when
+      const catchEvent = element('CATCH');
+
+      signal({
+        element: catchEvent,
+        scope: findScope({
+          waitsOnElement: catchEvent
+        })
+      });
+
+      // then
+      expectTrace([
+        'signal:CATCH:A',
+        'exit:CATCH:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:END:A',
+        'exit:END:A',
+        'destroyScope:Process_1:A'
+      ]);
+    });
+
+
     verify('link-event', () => {
 
       // when
@@ -634,6 +674,7 @@ function verify(name, test, iit=it) {
               });
             }
           ],
+          simulationScopes: [ 'value', {} ],
           simulationTrace: [ 'value', [] ]
         }
       ]
@@ -697,18 +738,17 @@ function findScope(filter) {
 
 function expectTrace(expectedTrace) {
 
-  return getBpmnJS().invoke(function(simulationTrace) {
+  return getBpmnJS().invoke(function(simulationTrace, simulationScopes) {
+
     try {
-      verifyTrace(simulationTrace.slice(), expectedTrace);
+      verifyTrace(simulationTrace.slice(), expectedTrace, simulationScopes);
     } finally {
       simulationTrace.length = 0;
     }
   });
 }
 
-function verifyTrace(trace, expectedTrace) {
-  const scopes = {};
-
+function verifyTrace(trace, expectedTrace, scopes) {
   const adjustedExpectedTrace = [];
 
   expectedTrace.forEach((event, index) => {
