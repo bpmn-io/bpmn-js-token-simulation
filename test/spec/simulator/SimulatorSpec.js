@@ -369,9 +369,9 @@ function verify(name, test, iit=it) {
 
   const diagram = require(`./Simulator.${name}.bpmn`);
 
-  describe(name, function() {
+  iit(name, async function() {
 
-    beforeEach(bootstrapModeler(diagram, {
+    let { err, warnings } = await bootstrapModeler(diagram, {
       additionalModules: [
         SimulatorModule,
         {
@@ -385,11 +385,20 @@ function verify(name, test, iit=it) {
           simulationTrace: [ 'value', [] ]
         }
       ]
-    }));
+    }).call(this);
 
+    if (err) {
+      return Promise.reject(err);
+    }
 
-    iit('should simulate', test);
+    if (warnings.length) {
+      err = new Error(
+        `found ${warnings.length} import warnings: \n\n${warnings.join('\n----\n')}`);
 
+      return Promise.reject(err);
+    }
+
+    test();
   });
 }
 
