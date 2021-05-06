@@ -469,7 +469,7 @@ function verifyTrace(trace, expectedTrace) {
           scope = split[ 2 ];
 
     if (!scopes[ scope ]) {
-      scopes[ scope ] = trace[ index ].split(':')[ 2 ];
+      scopes[ scope ] = trace[ index ] ? trace[ index ].split(':')[ 2 ] : scope;
     }
 
     adjustedExpectedTrace.push(
