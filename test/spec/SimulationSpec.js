@@ -25,7 +25,7 @@ import {
 var VERY_HIGH_PRIORITY = 100000;
 
 
-describe('token simulation', function() {
+describe.skip('token simulation', function() {
 
   describe('simple', function() {
 
