@@ -9,6 +9,66 @@ import {
 
 describe('simulator', function() {
 
+  describe('scopes', function() {
+
+    verify('sub-process', (simulator) => {
+
+      // given
+      const rootElement = element('Process_1');
+      const subProcess = element('SUB');
+
+      // when
+      const rootScope_A = simulator.createScope(rootElement);
+      const rootScope_B = simulator.createScope(rootElement);
+
+      const childScope_A1 = simulator.createScope(subProcess, rootScope_A);
+      const childScope_A2 = simulator.createScope(subProcess, rootScope_A);
+
+      // then
+      expect(
+        simulator.findScope({ element: subProcess })
+      ).to.equal(childScope_A1);
+
+      expect(
+        simulator.findScope({ parent: rootScope_A })
+      ).to.equal(childScope_A1);
+
+      expect(
+        simulator.findScope({ parent: rootScope_B })
+      ).not.to.exist;
+
+      expect(
+        simulator.findScope({ waitsOnElement: rootScope_A })
+      ).not.to.exist;
+
+      expect(
+        simulator.findScope({ destroyed: true })
+      ).not.to.exist;
+
+      expect(
+        simulator.findScope({ destroyed: false })
+      ).to.equal(rootScope_A);
+
+      // but when
+      simulator.destroyScope(childScope_A1);
+
+      // then
+      expect(
+        simulator.findScope({ destroyed: true })
+      ).to.equal(childScope_A1);
+
+      expect(
+        simulator.findScope({ element: subProcess })
+      ).to.equal(childScope_A2);
+
+      expect(
+        simulator.findScope({ parent: rootScope_A })
+      ).to.equal(childScope_A2);
+    });
+
+  });
+
+
   describe('basic scenarios', function() {
 
     verify('simple', () => {
