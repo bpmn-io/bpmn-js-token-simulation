@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import SimulatorModule from 'lib/features/simulator';
+import SimulatorModule from 'lib/simulator';
 
 import {
   bootstrapModeler,
