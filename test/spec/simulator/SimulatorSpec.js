@@ -776,7 +776,7 @@ function verify(name, test, iit=it) {
       return Promise.reject(err);
     }
 
-    test();
+    getBpmnJS().invoke(test);
   });
 }
 
