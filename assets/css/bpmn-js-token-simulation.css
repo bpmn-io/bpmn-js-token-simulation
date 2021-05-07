@@ -79,6 +79,10 @@ html, body, #canvas {
   font-family: 'Arial', sans-serif;
 }
 
+.token-count-parent {
+  white-space: nowrap;
+}
+
 .token-count {
   background-color: #FAFAFA;
   border-radius: 100%;
@@ -93,6 +97,11 @@ html, body, #canvas {
   animation-timing-function: ease;
   position: relative;
   top: 0;
+  display: inline-block;
+}
+
+.token-count + .token-count {
+  margin-left: -5px;
 }
 
 .token-count.waiting {
