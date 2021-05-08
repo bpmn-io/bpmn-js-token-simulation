@@ -75,7 +75,6 @@ html, body, #canvas {
 }
 
 .token .text {
-  fill: var(--token-simulation-white, #FFFFFF);
   font-family: 'Arial', sans-serif;
 }
 
