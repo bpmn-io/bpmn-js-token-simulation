@@ -9,15 +9,13 @@ import {
 
 describe('token-simulation - viewer', function() {
 
-  const diagram = require('example/resources/example.bpmn');
+  const diagram = require('./simple.bpmn');
 
   beforeEach(bootstrapViewer(diagram, {
-    additionalModules: [].concat(NavigatedViewer.prototype._modules).concat([
+    additionalModules: [
+      ...(NavigatedViewer.prototype._modules),
       TokenSimulationViewerModules
-    ]),
-    keyboard: {
-      bindTo: document
-    }
+    ]
   }));
 
 

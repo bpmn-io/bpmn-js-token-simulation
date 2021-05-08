@@ -9,15 +9,13 @@ import {
 
 describe('token-simulation - modeler', function() {
 
-  const diagram = require('example/resources/example.bpmn');
+  const diagram = require('./simple.bpmn');
 
   beforeEach(bootstrapModeler(diagram, {
-    additionalModules: [].concat(Modeler.prototype._modules).concat([
+    additionalModules: [
+      ...Modeler.prototype._modules,
       TokenSimulationModelerModules
-    ]),
-    keyboard: {
-      bindTo: document
-    }
+    ]
   }));
 
 
