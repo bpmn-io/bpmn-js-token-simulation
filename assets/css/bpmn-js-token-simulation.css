@@ -99,6 +99,10 @@ html, body, #canvas {
   display: inline-block;
 }
 
+.token-count.inactive {
+  display: none;
+}
+
 .token-count + .token-count {
   margin-left: -8px;
 }
@@ -149,7 +153,7 @@ html, body, #canvas {
 }
 
 .notifications .notification > * {
-  flex: 0;
+  flex: initial;
 }
 
 .notifications .notification > :not(:last-child) {
@@ -170,6 +174,7 @@ html, body, #canvas {
   font-size: .8em;
   padding: 2px 3px;
   border-radius: 3px;
+  cursor: default;
 }
 
 .notifications .notification > .icon [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
@@ -306,11 +311,9 @@ html, body, #canvas {
   overflow: hidden;
 }
 
-
 .token-simulation-log.hidden {
   display: none;
 }
-
 
 .token-simulation-log .header {
   background-color: var(--token-simulation-green-base-44, #10D070);
@@ -355,6 +358,10 @@ html, body, #canvas {
   justify-content: center;
 }
 
+.token-simulation-log .entry.inactive {
+  opacity: .5;
+}
+
 .token-simulation-log .entry.success {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
@@ -375,7 +382,7 @@ html, body, #canvas {
 }
 
 .token-simulation-log .entry > * {
-  flex: 0;
+  flex: initial;
 }
 
 .token-simulation-log .entry > :not(:last-child) {
@@ -397,6 +404,7 @@ html, body, #canvas {
   font-size: .8em;
   padding: 2px 3px;
   border-radius: 3px;
+  cursor: default;
 }
 
 .token-simulation-log .entry > .text {
@@ -431,9 +439,12 @@ html, body, #canvas {
   cursor: pointer;
 }
 
-.token-simulation-scopes .scope.active {
-  background-color: var(--token-simulation-green-base-44, #10D070);
-  color: var(--token-simulation-white, #FFFFFF);
+.token-simulation-scopes .scope.inactive:hover {
+  opacity: 1
+}
+
+.token-simulation-scopes .scope.inactive {
+  opacity: .25;
 }
 
 .djs-container.highlight {
