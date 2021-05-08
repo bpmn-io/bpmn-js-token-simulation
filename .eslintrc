@@ -3,5 +3,13 @@
   "env": {
     "browser": true,
     "es6": true
+  },
+  "rules": {
+    "indent": [ 2, 2, {
+      "VariableDeclarator": { "var": 2, "let": 2, "const": 3 },
+      "FunctionDeclaration": { "body": 1, "parameters": 2 },
+      "FunctionExpression": { "body": 1, "parameters": 2 },
+      "ignoredNodes": [ "TemplateLiteral > *" ]
+    } ],
   }
 }
