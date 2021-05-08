@@ -122,12 +122,15 @@ html, body, #canvas {
 .notifications .notification {
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
-  padding: 4px 8px;
+  padding: 5px 8px;
   font-size: 16px;
   color: var(--token-simulation-silver-darken-94, #EFEFEF);
   user-select: none;
   margin-top: 4px;
   min-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .notifications .notification.info {
@@ -145,14 +148,31 @@ html, body, #canvas {
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.notifications .notification .icon {
-  display: inline-flex;
-  justify-content: center;
-  margin-right: 8px;
-  min-width: 20px;
+.notifications .notification > * {
+  flex: 0;
 }
 
-.notifications .notification .icon [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
+.notifications .notification > :not(:last-child) {
+  margin-right: 6px;
+}
+
+.notifications .notification > .icon {
+  min-width: 20px;
+  text-align: center;
+}
+
+.notifications .notification > .text {
+  flex: 1;
+}
+
+.notifications .notification > .scope {
+  font-family: monospace;
+  font-size: .8em;
+  padding: 2px 3px;
+  border-radius: 3px;
+}
+
+.notifications .notification > .icon [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
   margin: 0;
 }
 
@@ -324,48 +344,66 @@ html, body, #canvas {
   padding: 10px;
 }
 
-.token-simulation-log .content .entry {
+.token-simulation-log .entry {
   font-size: 16px;
   margin: 0 0 6px 0;
   padding: 6px;
   background: var(--token-simulation-white, #FFFFFF);
   border-radius: 2px;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
 }
 
-.token-simulation-log .content .entry.success {
+.token-simulation-log .entry.success {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.token-simulation-log .content .entry.success .date,
-.token-simulation-log .content .entry.warning .date {
+.token-simulation-log .entry.success .date,
+.token-simulation-log .entry.warning .date {
  color: var(--token-simulation-silver-darken-94, #EFEFEF);
 }
 
-.token-simulation-log .content .entry.warning {
+.token-simulation-log .entry.warning {
   background-color: var(--token-simulation-red-base-62, #FF3D3D);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.token-simulation-log .content .entry:last-child {
+.token-simulation-log .entry:last-child {
   margin: 0;
 }
 
-.token-simulation-log .content .entry .date {
-  display: inline-block;
+.token-simulation-log .entry > * {
+  flex: 0;
+}
+
+.token-simulation-log .entry > :not(:last-child) {
   margin-right: 6px;
+}
+
+.token-simulation-log .entry > .date {
   min-width: 120px;
   color: var(--token-simulation-grey-base-40, #666666);
 }
 
-.token-simulation-log .content .entry .icon {
-  display: inline-block;
-  margin-right: 6px;
+.token-simulation-log .entry > .icon {
   min-width: 20px;
   text-align: center;
 }
 
-.token-simulation-log .content .entry.placeholder.hidden {
+.token-simulation-log .entry > .scope {
+  font-family: monospace;
+  font-size: .8em;
+  padding: 2px 3px;
+  border-radius: 3px;
+}
+
+.token-simulation-log .entry > .text {
+  flex: 1;
+}
+
+.token-simulation-log .entry.placeholder.hidden {
   display: none;
 }
 
