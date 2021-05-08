@@ -407,31 +407,31 @@ html, body, #canvas {
   display: none;
 }
 
-.process-instances {
+.token-simulation-scopes {
   position: absolute;
-  top: 20px;
+  top: 22px;
   left: 190px;
   display: flex;
   flex-direction: row;
 }
 
-.process-instances.hidden {
+.token-simulation-scopes.hidden {
   display: none;
 }
 
-.process-instances .process-instance {
+.token-simulation-scopes .scope {
   border-radius: 100%;
-  width: 30px;
-  height: 30px;
-  font-size: 16px;
-  line-height: 30px;
+  width: 25px;
+  height: 25px;
+  font-size: 14px;
+  line-height: 25px;
   text-align: center;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   margin-right: 10px;
   cursor: pointer;
 }
 
-.process-instances .process-instance.active {
+.token-simulation-scopes .scope.active {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
 }
