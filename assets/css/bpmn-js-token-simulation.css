@@ -90,7 +90,7 @@ html, body, #canvas {
   height: 25px;
   line-height: 25px;
   text-align: center;
-  font-size: 16px;
+  font-size: 14px;
   color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
   animation: jump 1s infinite;
