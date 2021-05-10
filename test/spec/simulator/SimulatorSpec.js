@@ -815,7 +815,7 @@ function verify(name, test, iit=it) {
           __init__: [
             function(simulator, simulationTrace) {
               simulator.on('trace', function(event) {
-                simulationTrace.push(event.id);
+                simulationTrace.push(event);
               });
             }
           ],
@@ -886,7 +886,15 @@ function expectTrace(expectedTrace) {
   return getBpmnJS().invoke(function(simulationTrace, simulationScopes) {
 
     try {
-      verifyTrace(simulationTrace.slice(), expectedTrace, simulationScopes);
+      const trace = simulationTrace.slice().map(
+        t => [
+          t.action,
+          t.element && t.element.id || 'null',
+          t.scope && t.scope.id || 'null'
+        ].join(':')
+      );
+
+      verifyTrace(trace, expectedTrace, simulationScopes);
     } finally {
       simulationTrace.length = 0;
     }
