@@ -23,6 +23,9 @@ describe('token-simulation - viewer', function() {
 
     // YEA!
     toggleMode.toggleMode();
+
+    // and do it again!
+    toggleMode.toggleMode();
   }));
 
 });
