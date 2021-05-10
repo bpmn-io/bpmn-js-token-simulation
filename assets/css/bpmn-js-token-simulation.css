@@ -448,7 +448,7 @@ html, body, #canvas {
 }
 
 .djs-container.highlight {
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
 }
 
 .set-animation-speed {
