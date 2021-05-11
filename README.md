@@ -48,23 +48,24 @@ const viewer = new BpmnViewer({
 ```
 
 
-## Development
+## Build and Run
 
-Install dependencies:
+Prepare the project by installing all dependencies:
 
-```bash
+```sh
 npm install
 ```
 
-Run example:
+Then, depending on your use-case you may run any of the following commands:
 
-```bash
+```sh
+# build the library and run all tests
+npm run all
+
+# spin up the example
 npm start
-```
 
-Run test suite in watch mode: 
-
-```bash
+# run the full development setup
 npm run dev
 ```
 
