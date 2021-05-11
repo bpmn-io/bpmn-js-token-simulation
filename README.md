@@ -8,6 +8,7 @@ A bpmn-js extension for token simulation.
 
 ![Screencast](docs/screenshot.png)
 
+
 ## Installation
 
 Install via [npm](http://npmjs.com/).
@@ -21,13 +22,13 @@ Add as additional module to [bpmn-js](https://github.com/bpmn-io/bpmn-js).
 ### Modeler
 
 ```javascript
-var BpmnModeler = require('bpmn-js/lib/Modeler');
-var tokenSimulation = require('bpmn-js-token-simulation');
+import BpmnModeler from 'bpmn-js/lib/Modeler';
+import TokenSimulationModule from 'bpmn-js-token-simulation';
 
-var modeler = new BpmnModeler({
+const modeler = new BpmnModeler({
   container: '#canvas',
   additionalModules: [
-    tokenSimulation
+    TokenSimulationModule
   ]
 });
 ```
@@ -35,47 +36,38 @@ var modeler = new BpmnModeler({
 ### Viewer
 
 ```javascript
-var BpmnViewer = require('bpmn-js/lib/NavigatedViewer');
-var tokenSimulation = require('bpmn-js-token-simulation/lib/viewer');
+import BpmnViewer from 'bpmn-js/lib/NavigatedViewer';
+import TokenSimulationModule from 'bpmn-js-token-simulation/lib/viewer';
 
-var viewer = new BpmnViewer({
+const viewer = new BpmnViewer({
   container: '#canvas',
   additionalModules: [
-    tokenSimulation
+    TokenSimulationModule
   ]
 });
 ```
 
-## Example
 
-Install dependencies.
+## Development
+
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-Run example.
+Run example:
 
 ```bash
 npm start
 ```
 
-Check out `localhost:8080`.
+Run test suite in watch mode: 
 
-## Supported Elements
+```bash
+npm run dev
+```
 
-* Boundary Event (attached to Subprocess)
-* Call Activity
-* End Event
-* Event-based Gateway
-* Exclusive Gateway
-* Intermediate Catch Event
-* Intermediate Throw Event
-* Parallel Gateway
-* Start Event
-* Task
-* Terminate End Event
-* Subprocess
 
 ## Licence
 
