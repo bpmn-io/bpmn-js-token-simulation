@@ -7,8 +7,8 @@ module.exports = {
     modeler: './example/modeler.js'
   },
   output: {
-    filename: '[name].bundle.js',
-    path: __dirname + '/example'
+    filename: '[name].js',
+    path: __dirname + '/example/dist'
   },
   module: {
     rules: [
@@ -23,8 +23,8 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        { from: './node_modules/bpmn-js/dist/assets/**/*', to: '.' },
-        { from: './assets/**/*', to: '.' }
+        { from: './node_modules/bpmn-js/dist/assets', to: 'vendor/bpmn-js/assets' },
+        { from: './assets', to: 'vendor/bpmn-js-token-simulation/assets' }
       ]
     })
   ]
