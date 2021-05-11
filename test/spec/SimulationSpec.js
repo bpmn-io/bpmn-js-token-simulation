@@ -36,7 +36,7 @@ const TestModule = {
       });
     }
   ],
-  log: [ 'type', Log ]
+  trace: [ 'type', Log ]
 };
 
 
@@ -56,13 +56,13 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(elementRegistry, toggleMode, log) {
+    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
       startEvent = elementRegistry.get('StartEvent_1');
       gateway = elementRegistry.get('ExclusiveGateway_1');
 
       toggleMode.toggleMode();
 
-      log.start();
+      trace.start();
     }));
 
 
@@ -220,12 +220,12 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(elementRegistry, toggleMode, log) {
+    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
       startEvent = elementRegistry.get('START');
 
       toggleMode.toggleMode();
 
-      log.start();
+      trace.start();
     }));
 
 
@@ -422,8 +422,8 @@ function elementEnter(id=null) {
 
 function expectHistory(history) {
 
-  return getBpmnJS().invoke(function(log) {
-    const events = log.getAll()
+  return getBpmnJS().invoke(function(trace) {
+    const events = trace.getAll()
       .filter(function(event) {
         return (
           (event.action === 'exit' && is(event.element, 'bpmn:StartEvent')) ||
