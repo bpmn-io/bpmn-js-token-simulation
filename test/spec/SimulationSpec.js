@@ -2,7 +2,6 @@ import ModelerModule from 'lib/modeler';
 
 import {
   bootstrapModeler,
-  inject,
   getBpmnJS
 } from 'test/TestHelper';
 
@@ -43,165 +42,272 @@ const TestModule = {
 
 describe('simulation', function() {
 
-  const diagram = require('./simple.bpmn');
+  describe('basic', function() {
 
-  let startEvent,
-      gateway;
+    const diagram = require('./simple.bpmn');
 
-  beforeEach(bootstrapModeler(diagram, {
-    additionalModules: [
-      ModelerModule,
-      TestModule
-    ]
-  }));
+    let startEvent,
+        gateway;
 
-  beforeEach(inject(function(elementRegistry, toggleMode, log) {
-    startEvent = elementRegistry.get('StartEvent_1');
-    gateway = elementRegistry.get('ExclusiveGateway_1');
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
 
-    toggleMode.toggleMode();
+    beforeEach(inject(function(elementRegistry, toggleMode, log) {
+      startEvent = elementRegistry.get('StartEvent_1');
+      gateway = elementRegistry.get('ExclusiveGateway_1');
 
-    log.start();
-  }));
+      toggleMode.toggleMode();
 
-
-  it('should execute happy path', inject(
-    async function(eventBus, simulator) {
-
-      // when
-      simulator.signal({
-        element: startEvent
-      });
-
-      await scopeDestroyed();
-
-      // then
-      expectHistory([
-        'StartEvent_1',
-        'SequenceFlow_1',
-        'Task_1',
-        'SequenceFlow_1wm1e59',
-        'ExclusiveGateway_1',
-        'SequenceFlow_2',
-        'Task_2',
-        'SequenceFlow_3',
-        'EndEvent_1'
-      ]);
-    }
-  ));
+      log.start();
+    }));
 
 
-  it('should choose secondary flow', inject(
-    async function(eventBus, simulator, exclusiveGatewaySettings) {
+    it('should execute happy path', inject(
+      async function(eventBus, simulator) {
 
-      // given
-      exclusiveGatewaySettings.setSequenceFlow(gateway);
+        // when
+        simulator.signal({
+          element: startEvent
+        });
 
-      // when
-      simulator.signal({
-        element: startEvent
-      });
+        await scopeDestroyed();
 
-      await scopeDestroyed();
-
-      // then
-      expectHistory([
-        'StartEvent_1',
-        'SequenceFlow_1',
-        'Task_1',
-        'SequenceFlow_1wm1e59',
-        'ExclusiveGateway_1',
-        'SequenceFlow_4',
-        'Task_3',
-        'SequenceFlow_5',
-        'EndEvent_2'
-      ]);
-    }
-  ));
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1',
+          'SequenceFlow_1wm1e59',
+          'ExclusiveGateway_1',
+          'SequenceFlow_2',
+          'Task_2',
+          'SequenceFlow_3',
+          'EndEvent_1'
+        ]);
+      }
+    ));
 
 
-  it('should continue flow', inject(
-    async function(eventBus, simulator, exclusiveGatewaySettings) {
+    it('should choose secondary flow', inject(
+      async function(eventBus, simulator, exclusiveGatewaySettings) {
 
-      // given
-      exclusiveGatewaySettings.setSequenceFlow(gateway);
+        // given
+        exclusiveGatewaySettings.setSequenceFlow(gateway);
 
-      // when
-      exclusiveGatewaySettings.setSequenceFlow(gateway);
+        // when
+        simulator.signal({
+          element: startEvent
+        });
 
-      // when
-      simulator.signal({
-        element: startEvent
-      });
+        await scopeDestroyed();
 
-      const context = await elementEnter('IntermediateCatchEvent_1');
-
-      continueFlow(context);
-
-      await scopeDestroyed();
-
-      // then
-      expectHistory([
-        'StartEvent_1',
-        'SequenceFlow_1',
-        'Task_1',
-        'SequenceFlow_1wm1e59',
-        'ExclusiveGateway_1',
-        'SequenceFlow_6',
-        'IntermediateCatchEvent_1',
-        'SequenceFlow_1ijnj3k',
-        'EndEvent_3'
-      ]);
-    }
-  ));
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1',
+          'SequenceFlow_1wm1e59',
+          'ExclusiveGateway_1',
+          'SequenceFlow_4',
+          'Task_3',
+          'SequenceFlow_5',
+          'EndEvent_2'
+        ]);
+      }
+    ));
 
 
-  it('should select scope', inject(
-    async function(eventBus, simulator, exclusiveGatewaySettings, scopeFilter) {
+    it('should continue flow', inject(
+      async function(eventBus, simulator, exclusiveGatewaySettings) {
 
-      // given
-      exclusiveGatewaySettings.setSequenceFlow(gateway);
-      exclusiveGatewaySettings.setSequenceFlow(gateway);
+        // given
+        exclusiveGatewaySettings.setSequenceFlow(gateway);
 
-      simulator.signal({
-        element: startEvent
-      });
+        // when
+        exclusiveGatewaySettings.setSequenceFlow(gateway);
 
-      simulator.signal({
-        element: startEvent
-      });
+        // when
+        simulator.signal({
+          element: startEvent
+        });
 
-      const {
-        scope
-      } = await elementEnter('IntermediateCatchEvent_1');
+        const context = await elementEnter('IntermediateCatchEvent_1');
 
-      const {
-        scope: otherScope
-      } = await elementEnter('IntermediateCatchEvent_1');
+        continueFlow(context);
 
-      // when
-      scopeFilter.toggle(scope);
+        await scopeDestroyed();
 
-      // then
-      expect(scopeFilter.isShown(scope)).to.be.true;
-      expect(scopeFilter.isShown(otherScope)).to.be.false;
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1',
+          'SequenceFlow_1wm1e59',
+          'ExclusiveGateway_1',
+          'SequenceFlow_6',
+          'IntermediateCatchEvent_1',
+          'SequenceFlow_1ijnj3k',
+          'EndEvent_3'
+        ]);
+      }
+    ));
 
-      // but when
-      scopeFilter.toggle(scope);
 
-      // then
-      expect(scopeFilter.isShown(scope)).to.be.true;
-      expect(scopeFilter.isShown(otherScope)).to.be.true;
+    it('should select scope', inject(
+      async function(eventBus, simulator, exclusiveGatewaySettings, scopeFilter) {
 
-      // but when
-      scopeFilter.toggle(scope);
-      scopeFilter.toggle(otherScope);
+        // given
+        exclusiveGatewaySettings.setSequenceFlow(gateway);
+        exclusiveGatewaySettings.setSequenceFlow(gateway);
 
-      // then
-      expect(scopeFilter.isShown(scope)).to.be.false;
-      expect(scopeFilter.isShown(otherScope)).to.be.true;
-    }
-  ));
+        simulator.signal({
+          element: startEvent
+        });
+
+        simulator.signal({
+          element: startEvent
+        });
+
+        const {
+          scope
+        } = await elementEnter('IntermediateCatchEvent_1');
+
+        const {
+          scope: otherScope
+        } = await elementEnter('IntermediateCatchEvent_1');
+
+        // when
+        scopeFilter.toggle(scope);
+
+        // then
+        expect(scopeFilter.isShown(scope)).to.be.true;
+        expect(scopeFilter.isShown(otherScope)).to.be.false;
+
+        // but when
+        scopeFilter.toggle(scope);
+
+        // then
+        expect(scopeFilter.isShown(scope)).to.be.true;
+        expect(scopeFilter.isShown(otherScope)).to.be.true;
+
+        // but when
+        scopeFilter.toggle(scope);
+        scopeFilter.toggle(otherScope);
+
+        // then
+        expect(scopeFilter.isShown(scope)).to.be.false;
+        expect(scopeFilter.isShown(otherScope)).to.be.true;
+      }
+    ));
+
+  });
+
+
+  describe('sub-process', function() {
+
+    const diagram = require('./boundary-event.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode, log) {
+      startEvent = elementRegistry.get('START');
+
+      toggleMode.toggleMode();
+
+      log.start();
+    }));
+
+
+    it('should execute happy path', inject(
+      async function(eventBus, simulator) {
+
+        // when
+        simulator.signal({
+          element: startEvent
+        });
+
+        const {
+          scope
+        } = await elementEnter('SUB');
+
+        await scopeDestroyed(scope);
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_1',
+          'SUB',
+          'START_SUB',
+          'Flow_2',
+          'UserTask',
+          'Flow_4',
+          'END_SUB',
+          'Flow_3',
+          'END'
+        ]);
+      }
+    ));
+
+
+
+    it('should trigger interrupting boundary', inject(
+      async function(eventBus, simulator, elementRegistry) {
+
+        // given
+        simulator.signal({
+          element: startEvent
+        });
+
+        const [
+          { scope },
+          { scope: subScope }
+        ] = await Promise.all([
+          elementEnter('SUB'),
+          elementEnter('Flow_2')
+        ]);
+
+        // when
+        // trigger boundary
+        continueFlow({
+          scope,
+          element: elementRegistry.get('TIMER_BOUNDARY')
+        });
+
+        await Promise.all([
+          scopeDestroyed(scope),
+          scopeDestroyed(subScope)
+        ]);
+
+        // then
+        expect(subScope).to.have.property('destroyed', true);
+
+        expectHistory([
+          'START',
+          'Flow_1',
+          'SUB',
+          'START_SUB',
+          'Flow_2',
+          'UserTask',
+          'Flow_4',
+          'END_SUB',
+          'Flow_3',
+          'END'
+        ]);
+      }
+    ));
+  });
+
 });
 
 
@@ -331,4 +437,20 @@ function expectHistory(history) {
     expect(events).to.eql(history);
   });
 
+}
+
+function inject(fn) {
+  return function() {
+
+    const bpmnJS = getBpmnJS();
+
+    if (!bpmnJS) {
+      throw new Error(
+        'no bootstraped bpmn-js instance, ' +
+        'ensure you created it via #boostrap(Modeler|Viewer)'
+      );
+    }
+
+    return bpmnJS.invoke(fn);
+  };
 }
