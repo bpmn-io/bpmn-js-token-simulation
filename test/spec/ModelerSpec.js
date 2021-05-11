@@ -7,7 +7,7 @@ import {
 } from 'test/TestHelper';
 
 
-describe('token-simulation - modeler', function() {
+describe('modeler extension', function() {
 
   describe('basic', function() {
 
