@@ -36,11 +36,12 @@ const TestModule = {
         }
       });
     }
-  ]
+  ],
+  log: [ 'type', Log ]
 };
 
 
-describe('token simulation', function() {
+describe('simulation', function() {
 
   const diagram = require('./simple.bpmn');
 
@@ -54,126 +55,155 @@ describe('token simulation', function() {
     ]
   }));
 
-  beforeEach(inject(function(elementRegistry, toggleMode) {
+  beforeEach(inject(function(elementRegistry, toggleMode, log) {
     startEvent = elementRegistry.get('StartEvent_1');
     gateway = elementRegistry.get('ExclusiveGateway_1');
 
     toggleMode.toggleMode();
+
+    log.start();
   }));
 
 
-  it('should finish simulation at EndEvent_1', function(done) {
-    inject(function(eventBus, simulator) {
-
-      // given
-      const log = new Log(eventBus);
-
-      log.start();
-
-      eventBus.once(SCOPE_DESTROYED_EVENT, function() {
-
-        // then
-        expectHistory(log, [
-          'StartEvent_1',
-          'SequenceFlow_1',
-          'Task_1',
-          'SequenceFlow_1wm1e59',
-          'ExclusiveGateway_1',
-          'SequenceFlow_2',
-          'Task_2',
-          'SequenceFlow_3',
-          'EndEvent_1'
-        ]);
-
-        done();
-      });
+  it('should execute happy path', inject(
+    async function(eventBus, simulator) {
 
       // when
       simulator.signal({
         element: startEvent
       });
-    })();
-  });
+
+      await scopeDestroyed();
+
+      // then
+      expectHistory([
+        'StartEvent_1',
+        'SequenceFlow_1',
+        'Task_1',
+        'SequenceFlow_1wm1e59',
+        'ExclusiveGateway_1',
+        'SequenceFlow_2',
+        'Task_2',
+        'SequenceFlow_3',
+        'EndEvent_1'
+      ]);
+    }
+  ));
 
 
-  it('should finish simulation at EndEvent_2', function(done) {
-    inject(function(eventBus, simulator, exclusiveGatewaySettings) {
+  it('should choose secondary flow', inject(
+    async function(eventBus, simulator, exclusiveGatewaySettings) {
 
       // given
-      const log = new Log(eventBus);
-
-      log.start();
-
-      // assume user clicks to select next sequence flow
       exclusiveGatewaySettings.setSequenceFlow(gateway);
-
-      eventBus.once(SCOPE_DESTROYED_EVENT, function() {
-
-        // then
-        expectHistory(log, [
-          'StartEvent_1',
-          'SequenceFlow_1',
-          'Task_1',
-          'SequenceFlow_1wm1e59',
-          'ExclusiveGateway_1',
-          'SequenceFlow_4',
-          'Task_3',
-          'SequenceFlow_5',
-          'EndEvent_2'
-        ]);
-
-        done();
-      });
 
       // when
       simulator.signal({
         element: startEvent
       });
-    })();
-  });
+
+      await scopeDestroyed();
+
+      // then
+      expectHistory([
+        'StartEvent_1',
+        'SequenceFlow_1',
+        'Task_1',
+        'SequenceFlow_1wm1e59',
+        'ExclusiveGateway_1',
+        'SequenceFlow_4',
+        'Task_3',
+        'SequenceFlow_5',
+        'EndEvent_2'
+      ]);
+    }
+  ));
 
 
-  it('should finish simulation at EndEvent_3', function(done) {
-    inject(function(eventBus, simulator, exclusiveGatewaySettings) {
+  it('should continue flow', inject(
+    async function(eventBus, simulator, exclusiveGatewaySettings) {
 
       // given
-      const log = new Log(eventBus);
-
-      log.start();
-
-      // assume user clicks to select next sequence flow twice
-      exclusiveGatewaySettings.setSequenceFlow(gateway);
       exclusiveGatewaySettings.setSequenceFlow(gateway);
 
-      eventBus.once(SCOPE_DESTROYED_EVENT, function() {
-
-        // then
-        expectHistory(log, [
-          'StartEvent_1',
-          'SequenceFlow_1',
-          'Task_1',
-          'SequenceFlow_1wm1e59',
-          'ExclusiveGateway_1',
-          'SequenceFlow_6',
-          'IntermediateCatchEvent_1',
-          'SequenceFlow_1ijnj3k',
-          'EndEvent_3'
-        ]);
-
-        done();
-      });
-
-      // assume user clicks to generate token
-      eventBus.on(ENTER_EVENT, ifElement('IntermediateCatchEvent_1', continueFlow));
+      // when
+      exclusiveGatewaySettings.setSequenceFlow(gateway);
 
       // when
       simulator.signal({
         element: startEvent
       });
-    })();
-  });
 
+      const context = await elementEnter('IntermediateCatchEvent_1');
+
+      continueFlow(context);
+
+      await scopeDestroyed();
+
+      // then
+      expectHistory([
+        'StartEvent_1',
+        'SequenceFlow_1',
+        'Task_1',
+        'SequenceFlow_1wm1e59',
+        'ExclusiveGateway_1',
+        'SequenceFlow_6',
+        'IntermediateCatchEvent_1',
+        'SequenceFlow_1ijnj3k',
+        'EndEvent_3'
+      ]);
+    }
+  ));
+
+
+  it('should select scope', inject(
+    async function(eventBus, simulator, exclusiveGatewaySettings, scopeFilter) {
+
+      // given
+      exclusiveGatewaySettings.setSequenceFlow(gateway);
+      exclusiveGatewaySettings.setSequenceFlow(gateway);
+
+      simulator.signal({
+        element: startEvent
+      });
+
+      simulator.signal({
+        element: startEvent
+      });
+
+      const {
+        scope
+      } = await elementEnter('IntermediateCatchEvent_1');
+
+      const {
+        scope: otherScope
+      } = await elementEnter('IntermediateCatchEvent_1');
+
+      // when
+      scopeFilter.toggle(scope);
+
+      // then
+      expect(scopeFilter.isShown(scope)).to.be.true;
+      expect(scopeFilter.isShown(otherScope)).to.be.false;
+
+      // but when
+      scopeFilter.toggle(scope);
+
+      // then
+      expect(scopeFilter.isShown(scope)).to.be.true;
+      expect(scopeFilter.isShown(otherScope)).to.be.true;
+
+      // but when
+      scopeFilter.toggle(scope);
+      scopeFilter.toggle(otherScope);
+
+      // then
+      expect(scopeFilter.isShown(scope)).to.be.false;
+      expect(scopeFilter.isShown(otherScope)).to.be.true;
+    }
+  ));
 });
+
 
 // helpers //////////
 
@@ -225,7 +255,7 @@ function continueFlow(context) {
 
   // TODO(nikku): make this IntermediateCatchEventHandler a scriptable API
 
-  getBpmnJS().invoke(function(simulator) {
+  return getBpmnJS().invoke(function(simulator) {
 
     const {
       element,
@@ -243,17 +273,62 @@ function continueFlow(context) {
 
 }
 
-function expectHistory(log, history) {
-  const events = log.getAll()
-    .filter(function(event) {
-      return (
-        (event.action === 'exit' && is(event.element, 'bpmn:StartEvent')) ||
-        (event.action === 'enter')
-      );
-    })
-    .map(function(event) {
-      return event.element.id;
-    });
+function scopeDestroyed(scope=null) {
 
-  expect(events).to.eql(history);
+  return new Promise(resolve => {
+
+    return getBpmnJS().invoke(function(eventBus) {
+
+      const listener = function(event) {
+
+        if (scope && event.scope !== scope) {
+          return;
+        }
+
+        eventBus.off(SCOPE_DESTROYED_EVENT, listener);
+
+        return resolve(event);
+      };
+
+      eventBus.on(SCOPE_DESTROYED_EVENT, listener);
+    });
+  });
+}
+
+function elementEnter(id=null) {
+
+  return new Promise(resolve => {
+
+    return getBpmnJS().invoke(function(eventBus) {
+
+      const wrap = id ? (fn) => ifElement(id, fn) : fn => fn;
+
+      const listener = wrap(function(event) {
+        eventBus.off(ENTER_EVENT, listener);
+
+        return resolve(event);
+      });
+
+      eventBus.on(ENTER_EVENT, listener);
+    });
+  });
+}
+
+function expectHistory(history) {
+
+  return getBpmnJS().invoke(function(log) {
+    const events = log.getAll()
+      .filter(function(event) {
+        return (
+          (event.action === 'exit' && is(event.element, 'bpmn:StartEvent')) ||
+          (event.action === 'enter')
+        );
+      })
+      .map(function(event) {
+        return event.element.id;
+      });
+
+    expect(events).to.eql(history);
+  });
+
 }
