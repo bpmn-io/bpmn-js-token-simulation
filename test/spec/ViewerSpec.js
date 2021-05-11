@@ -9,23 +9,53 @@ import {
 
 describe('token-simulation - viewer', function() {
 
-  const diagram = require('./simple.bpmn');
+  describe('basic', function() {
 
-  beforeEach(bootstrapViewer(diagram, {
-    additionalModules: [
-      ...(NavigatedViewer.prototype._modules),
-      TokenSimulationViewerModules
-    ]
-  }));
+    const diagram = require('./simple.bpmn');
+
+    beforeEach(bootstrapViewer(diagram, {
+      additionalModules: [
+        ...(NavigatedViewer.prototype._modules),
+        TokenSimulationViewerModules
+      ]
+    }));
 
 
-  it('should toggle mode', inject(function(toggleMode) {
+    it('should toggle mode', inject(function(toggleMode) {
 
-    // YEA!
-    toggleMode.toggleMode();
+      // YEA!
+      toggleMode.toggleMode();
 
-    // and do it again!
-    toggleMode.toggleMode();
-  }));
+      // and do it again!
+      toggleMode.toggleMode();
+    }));
+
+  });
+
+
+  describe('all-elements', function() {
+
+    const diagram = require('./all-elements.bpmn');
+
+    beforeEach(bootstrapViewer(diagram, {
+      additionalModules: [
+        ...NavigatedViewer.prototype._modules,
+        TokenSimulationViewerModules
+      ]
+    }));
+
+
+    it('should mark unsupported', inject(function(toggleMode, elementSupport) {
+
+      // given
+      toggleMode.toggleMode();
+
+      // then
+      expect(
+        elementSupport.getUnsupportedElements()
+      ).to.have.length(3);
+    }));
+
+  });
 
 });
