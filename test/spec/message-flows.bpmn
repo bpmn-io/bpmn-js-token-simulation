@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_19vl35g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <bpmn:collaboration id="Process">
+    <bpmn:participant id="Participant_0bbn3ql" name="External system" />
+    <bpmn:participant id="Participant_1lgxr3w" name="Our Process" processRef="Process_1" />
+    <bpmn:messageFlow id="MFLOW_OUT" sourceRef="Task_1" targetRef="Participant_0bbn3ql" />
+    <bpmn:messageFlow id="MFLOW_IN" sourceRef="Participant_0bbn3ql" targetRef="CATCH_M" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="Task_1" targetRef="CATCH_M" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="START" targetRef="Task_1" />
+    <bpmn:serviceTask id="Task_1" name="Send and receive">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="CATCH_M" targetRef="END" />
+    <bpmn:intermediateCatchEvent id="CATCH_M" name="CATCH_M">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_17c0mh1" />
+    </bpmn:intermediateCatchEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process">
+      <bpmndi:BPMNShape id="Participant_04imef1_di" bpmnElement="Participant_0bbn3ql" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="600" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_1lgxr3w_di" bpmnElement="Participant_1lgxr3w" isHorizontal="true">
+        <dc:Bounds x="160" y="211" width="600" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="578" y="336" />
+        <di:waypoint x="642" y="336" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="336" y="336" />
+        <di:waypoint x="386" y="336" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="486" y="336" />
+        <di:waypoint x="542" y="336" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_2" bpmnElement="START">
+        <dc:Bounds x="300" y="318" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="300" y="361" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_1_di" bpmnElement="Task_1">
+        <dc:Bounds x="386" y="296" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="642" y="318" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="648" y="361" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CATCH_M_di" bpmnElement="CATCH_M">
+        <dc:Bounds x="542" y="318" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="534" y="361" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MFLOW_OUT_di" bpmnElement="MFLOW_OUT">
+        <di:waypoint x="436" y="296" />
+        <di:waypoint x="436" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MFLOW_IN_di" bpmnElement="MFLOW_IN">
+        <di:waypoint x="560" y="140" />
+        <di:waypoint x="560" y="318" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

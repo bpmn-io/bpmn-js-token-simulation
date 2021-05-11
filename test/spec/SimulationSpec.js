@@ -260,7 +260,6 @@ describe('simulation', function() {
     ));
 
 
-
     it('should trigger interrupting boundary', inject(
       async function(eventBus, simulator, elementRegistry) {
 
@@ -306,6 +305,64 @@ describe('simulation', function() {
         ]);
       }
     ));
+  });
+
+
+  describe('message flows', function() {
+
+    const diagram = require('./message-flows.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
+      startEvent = elementRegistry.get('START');
+
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should execute happy path', inject(
+      async function(eventBus, simulator) {
+
+        // when
+        simulator.signal({
+          element: startEvent
+        });
+
+        const {
+          element,
+          scope
+        } = await elementEnter('CATCH_M');
+
+        continueFlow({
+          element,
+          scope
+        });
+
+        await scopeDestroyed(scope);
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_2',
+          'Task_1',
+          'Flow_1',
+          'CATCH_M',
+          'Flow_3',
+          'END'
+        ]);
+      }
+    ));
+
   });
 
 });
