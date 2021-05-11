@@ -256,6 +256,36 @@ describe('simulator', function() {
 
     });
 
+
+
+    verify('data-objects', () => {
+
+      // when
+      signal({
+        element: element('START')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:TASK_A:A',
+        'exit:TASK_A:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:TASK_B:A',
+        'exit:TASK_B:A',
+        'enter:Flow_3:A',
+        'exit:Flow_3:A',
+        'enter:END:A',
+        'exit:END:A',
+        'destroyScope:Process_1:A'
+      ]);
+
+    });
   });
 
 
