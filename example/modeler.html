@@ -7,33 +7,21 @@
   <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/diagram-js.css" />
   <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" />
   <link rel="stylesheet" href="./dist/vendor/bpmn-js-token-simulation/assets/css/bpmn-js-token-simulation.css" />
+  <link rel="stylesheet" href="./style.css" />
 
   <title>Modeler</title>
 
   <style>
-    #viewer-link {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      color: var(--token-simulation-grey-darken-30, #212121);
-      display: block;
-      padding: 6px;
-      font-size: 16px;
-      border-radius: 2px;
-      background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-      text-decoration: none;
-    }
-
-    #viewer-link:hover {
-      color: var(--token-simulation-white, #FFFFFF);
-      background-color: var(--token-simulation-green-base-44, #10D070);
-    }
   </style>
 </head>
 <body>
   <div id="canvas"></div>
 
-  <a id="viewer-link" href="./viewer.html">Viewer <i class="fa fa-sign-out"></i></a>
+  <div class="links">
+    <a href="https://github.com/bpmn-io/bpmn-js-token-simulation" class="link" target="_blank" rel="noopener">View on <i class="fa fa-github"></i></a>
+
+    <a href="./viewer.html" class="link">Viewer <i class="fa fa-sign-out"></i></a>
+  </div>
 
   <script src="./dist/modeler.js"></script>
 </body>

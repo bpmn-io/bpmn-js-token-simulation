@@ -1,0 +1,59 @@
+/** link styles */
+
+.links {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.link {
+  color: var(--token-simulation-grey-darken-30, #212121);
+  display: inline-block;
+  padding: 6px;
+  font-size: 16px;
+  border-radius: 2px;
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-green-base-44, #10D070);
+}
+
+.links .link + .link {
+  margin-left: 20px;
+}
+
+/** file-drops */
+
+.drop-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  padding: 50px;
+
+  background: rgba(255, 255, 255, .9);
+
+  z-index: 1000;
+}
+
+.drop-overlay .box {
+  text-align: center;
+  border: dashed 4px #CCC;
+  height: 100%;
+  width: 100%;
+  display: table;
+}
+
+.drop-overlay .label {
+  font-size: 26px;
+  color: #888;
+  margin: auto;
+
+  display: table-cell;
+  vertical-align: middle;
+}

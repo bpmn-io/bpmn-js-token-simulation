@@ -5,6 +5,8 @@
 
   <title>Token Simulation</title>
 
+  <link rel="stylesheet" href="./style.css" />
+
   <style>
     html,
     body {
@@ -14,30 +16,31 @@
 
     body {
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       font-family: 'Arial', sans-serif;
     }
 
-    a {
-      color: var(--token-simulation-grey-darken-30, #212121);
-      display: block;
-      padding: 6px;
-      margin: 12px;
-      border-radius: 2px;
-      background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-      text-decoration: none;
+    body {
+      color: #555;
     }
 
-    a:hover {
-      color: var(--token-simulation-white, #FFFFFF);
-      background-color: var(--token-simulation-green-base-44, #10D070);
+    .link {
+      display: inline-block;
+      margin: 10px;
     }
   </style>
 </head>
 <body>
-  <a href="viewer.html">Viewer</a>
-  or
-  <a href="modeler.html">Modeler</a>
+  <h1>bpmn-js-token-simulation</h1>
+
+  <p>
+    A token simulation extension for <a href="https://github.com/bpmn-io/bpmn-js">bpmn-js</a>. Check out the project <a href="https://github.com/bpmn-io/bpmn-js-token-simulation">on GitHub</a>.
+  </p>
+
+  <p style="margin-top: 3em">
+    <a class="link" href="viewer.html">Open Viewer</a> or <a class="link" href="modeler.html">Open Modeler</a>
+  </p>
 </body>
 </html>
