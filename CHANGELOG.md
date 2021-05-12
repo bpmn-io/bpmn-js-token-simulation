@@ -6,10 +6,19 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.14.0
+
+* `FEAT`: add support for event sub-process ([#71](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/71))
+* `FEAT`: add support for event-based gateway ([#72](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/72))
+* `FEAT`: support boundary events on tasks
+* `FEAT`: rework context pads open/close handling
+* `FEAT`: batch simulator element changed events
+* `FIX`: correct scope filter integration with context pads
+
 ## 0.13.0
 
 * `FEAT`: allow to toggle explicit mode
-* `FEAT`: handle diagram import during simulation 
+* `FEAT`: handle diagram import during simulation
 * `FIX`: do not re-add toggle mode UI on diagram re-import
 
 ### Breaking Changes
