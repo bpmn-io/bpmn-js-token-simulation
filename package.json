@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "all": "run-s lint test bundle",
-    "bundle": "webpack",
+    "bundle": "webpack --mode production",
     "bundle:watch": "webpack -w",
     "start": "webpack serve --content-base ./example --open",
     "lint": "eslint .",
