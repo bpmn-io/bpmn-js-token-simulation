@@ -257,7 +257,6 @@ describe('simulator', function() {
     });
 
 
-
     verify('data-objects', () => {
 
       // when
@@ -286,6 +285,42 @@ describe('simulator', function() {
       ]);
 
     });
+
+
+    verify('event-based-gateway', () => {
+
+      // given
+      signal({
+        element: element('START')
+      });
+
+      // when
+      signal({
+        element: element('M_CATCH'),
+        relatedElement: element('G_EVENT'),
+        scope: findScope({
+          waitsOnElement: element('G_EVENT')
+        })
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:G_EVENT:A',
+        'signal:M_CATCH:A',
+        'exit:M_CATCH:A',
+        'enter:Flow_4:A',
+        'exit:Flow_4:A',
+        'enter:END_A:A',
+        'exit:END_A:A',
+        'destroyScope:Process_1:A',
+      ]);
+    });
+
   });
 
 
