@@ -52,7 +52,7 @@ describe('modeler extension', function() {
       // then
       expect(
         elementSupport.getUnsupportedElements()
-      ).to.have.length(3);
+      ).to.have.length(2);
     }));
 
   });

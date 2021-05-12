@@ -308,6 +308,62 @@ describe('simulation', function() {
   });
 
 
+  describe('event-based gateway', function() {
+
+    const diagram = require('./event-based-gateway.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
+      startEvent = elementRegistry.get('START');
+
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should signal catch event', inject(
+      async function(simulator, elementRegistry) {
+
+        // when
+        simulator.signal({
+          element: startEvent
+        });
+
+        const {
+          scope
+        } = await elementEnter('G_EVENT');
+
+        simulator.signal({
+          scope,
+          relatedElement: elementRegistry.get('G_EVENT'),
+          element: elementRegistry.get('S_CATCH')
+        });
+
+        await scopeDestroyed(scope);
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_1',
+          'G_EVENT',
+          'Flow_5',
+          'END_B'
+        ]);
+      }
+    ));
+
+  });
+
+
   describe('event sub process', function() {
 
     const diagram = require('./event-sub-process.bpmn');
