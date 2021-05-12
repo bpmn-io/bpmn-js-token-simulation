@@ -67,7 +67,7 @@ describe('simulation', function() {
 
 
     it('should execute happy path', inject(
-      async function(eventBus, simulator) {
+      async function(simulator) {
 
         // when
         simulator.signal({
@@ -93,7 +93,7 @@ describe('simulation', function() {
 
 
     it('should choose secondary flow', inject(
-      async function(eventBus, simulator, exclusiveGatewaySettings) {
+      async function(simulator, exclusiveGatewaySettings) {
 
         // given
         exclusiveGatewaySettings.setSequenceFlow(gateway);
@@ -122,7 +122,7 @@ describe('simulation', function() {
 
 
     it('should continue flow', inject(
-      async function(eventBus, simulator, exclusiveGatewaySettings) {
+      async function(simulator, exclusiveGatewaySettings) {
 
         // given
         exclusiveGatewaySettings.setSequenceFlow(gateway);
@@ -158,7 +158,7 @@ describe('simulation', function() {
 
 
     it('should select scope', inject(
-      async function(eventBus, simulator, exclusiveGatewaySettings, scopeFilter) {
+      async function(simulator, exclusiveGatewaySettings, scopeFilter) {
 
         // given
         exclusiveGatewaySettings.setSequenceFlow(gateway);
@@ -230,7 +230,7 @@ describe('simulation', function() {
 
 
     it('should execute happy path', inject(
-      async function(eventBus, simulator) {
+      async function(simulator) {
 
         // when
         simulator.signal({
@@ -261,7 +261,7 @@ describe('simulation', function() {
 
 
     it('should trigger interrupting boundary', inject(
-      async function(eventBus, simulator, elementRegistry) {
+      async function(simulator, elementRegistry) {
 
         // given
         simulator.signal({
@@ -308,6 +308,66 @@ describe('simulation', function() {
   });
 
 
+  describe('event sub process', function() {
+
+    const diagram = require('./event-sub-process.bpmn');
+
+    let startEvent;
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
+      startEvent = elementRegistry.get('START');
+
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should cancel scope', inject(
+      async function(simulator, elementRegistry) {
+
+        // when
+        simulator.signal({
+          element: startEvent
+        });
+
+        const {
+          scope
+        } = await elementEnter('S');
+
+        simulator.signal({
+          parentScope: scope,
+          element: elementRegistry.get('START_SUB')
+        });
+
+        await elementEnter('END_SUB');
+
+        // then
+        expect(scope.destroyed).to.be.true;
+
+        expectHistory([
+          'START',
+          'Flow_5',
+          'S',
+          'START_S',
+          'Flow_6',
+          'START_SUB',
+          'Flow_3',
+          'END_SUB'
+        ]);
+      }
+    ));
+
+  });
+
+
   describe('message flows', function() {
 
     const diagram = require('./message-flows.bpmn');
@@ -331,7 +391,7 @@ describe('simulation', function() {
 
 
     it('should execute happy path', inject(
-      async function(eventBus, simulator) {
+      async function(simulator) {
 
         // when
         simulator.signal({
