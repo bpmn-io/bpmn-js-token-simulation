@@ -1,4 +1,6 @@
 .github
+tasks
+tmp
 test
 example
 .eslintrc

@@ -1,0 +1,40 @@
+#!/bin/bash
+
+# publish bpmn-js-token-simulation example to <gh-pages>
+
+set -e
+
+WORK_DIR="$(pwd)"
+TEMP_DIR="$WORK_DIR/tmp"
+GH_PAGES_DIR="$TEMP_DIR/gh-pages"
+
+echo "Publishing example to <gh-pages>"
+
+# create work dir
+mkdir -p "$TEMP_DIR"
+
+# setup gh-pages branch
+git clone --depth=1 "https://$GITHUB_ACTOR:$GITHUB_TOKEN@github.com/bpmn-io/bpmn-js-token-simulation.git" "$GH_PAGES_DIR"
+
+cd "$GH_PAGES_DIR"
+git checkout --orphan gh-pages
+git reset --hard
+
+(cd "$WORK_DIR" && cp -r example/* $GH_PAGES_DIR)
+
+
+if [[ "x$SKIP_COMMIT" = "x" ]]; then
+
+  git config --local user.email "$GIT_USER_EMAIL"
+  git config --local user.name "$GIT_USER_NAME"
+  git config push.default simple
+
+  # add all resources
+  git add -A
+  git commit -m "chore: update example"
+  git push -qf -u origin gh-pages &2>/dev/null
+else
+  echo "Skipping commit (SKIP_COMMIT=$SKIP_COMMIT)"
+fi
+
+cd "$WORK_DIR"

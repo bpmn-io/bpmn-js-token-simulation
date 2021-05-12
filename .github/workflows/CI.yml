@@ -33,3 +33,10 @@ jobs:
       run: npm run all
     - name: Upload Coverage
       run: npx codecov
+    - name: Update Example
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      env:
+        GIT_USER_NAME: ${{secrets.BPMN_IO_USER_NAME}}
+        GIT_USER_EMAIL: ${{secrets.BPMN_IO_EMAIL}}
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+      run: tasks/update-example
