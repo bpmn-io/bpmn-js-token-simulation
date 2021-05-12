@@ -6,6 +6,16 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.13.0
+
+* `FEAT`: allow to toggle explicit mode
+* `FEAT`: handle diagram import during simulation 
+* `FIX`: do not re-add toggle mode UI on diagram re-import
+
+### Breaking Changes
+
+* `tokenSimulation.toggleMode` event active flag renamed from `simulationModeActive` to `active`
+
 ## 0.12.0
 
 _A complete rewrite of the simulator, vastly improving stability._
