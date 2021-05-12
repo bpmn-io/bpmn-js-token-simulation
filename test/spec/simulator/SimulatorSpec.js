@@ -336,7 +336,7 @@ describe('simulator', function() {
   });
 
 
-  describe('parallel gateways', function() {
+  describe('parallel gateway', function() {
 
     verify('parallel-gateway', () => {
 
@@ -394,7 +394,7 @@ describe('simulator', function() {
   });
 
 
-  describe('end events', function() {
+  describe('end event', function() {
 
     verify('end-event', () => {
 
@@ -475,7 +475,7 @@ describe('simulator', function() {
   });
 
 
-  describe('sub processes', function() {
+  describe('sub-process', function() {
 
     verify('sub-process', () => {
 
@@ -510,6 +510,94 @@ describe('simulator', function() {
         'enter:END:A',
         'exit:END:A',
         'destroyScope:Process_1:A'
+      ]);
+
+    });
+
+  });
+
+
+  describe('event sub-process', function() {
+
+    verify('event-sub-process-interrupting', () => {
+
+      // given
+      signal({
+        element: element('START')
+      });
+
+      // when
+      const startSub = element('START_SUB');
+
+      signal({
+        element: startSub,
+        parentScope: findScope({
+          element: startSub.parent.parent
+        })
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_5:A',
+        'exit:Flow_5:A',
+        'enter:S:A',
+        'createScope:S:A',
+        'signal:START_S:B',
+        'exit:START_S:B',
+        'enter:Flow_6:B',
+        'exit:Flow_6:B',
+        'enter:RECEIVE:B',
+        'createScope:EVENT_SUB:A',
+        'signal:START_SUB:C',
+        'destroyScope:S:B',
+        'destroyScope:Process_1:A',
+        'exit:START_SUB:C',
+        'enter:Flow_3:C',
+        'exit:Flow_3:C',
+        'enter:END_SUB:C',
+        'exit:END_SUB:C',
+        'destroyScope:EVENT_SUB:C'
+      ]);
+
+    });
+
+
+    verify('event-sub-process-non-interrupting', () => {
+
+      // given
+      signal({
+        element: element('START')
+      });
+
+      // when
+      const startSub = element('START_SUB');
+
+      signal({
+        element: startSub,
+        parentScope: findScope({
+          element: startSub.parent.parent
+        })
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:RECEIVE:A',
+        'createScope:EVENT_SUB:A',
+        'signal:START_SUB:B',
+        'exit:START_SUB:B',
+        'enter:Flow_3:B',
+        'exit:Flow_3:B',
+        'enter:END_SUB:B',
+        'exit:END_SUB:B',
+        'destroyScope:EVENT_SUB:B'
       ]);
 
     });
