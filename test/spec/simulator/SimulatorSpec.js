@@ -688,6 +688,74 @@ describe('simulator', function() {
 
     });
 
+
+    verify('boundary-interrupting-task', () => {
+
+      // given
+      signal({
+        element: element('START')
+      });
+
+      // when
+      const interruptingBoundary = element('B_RUPTING');
+
+      signal({
+        element: interruptingBoundary,
+        scope: findScope({ element: interruptingBoundary.parent })
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:RECEIVE:A',
+        'signal:B_RUPTING:A',
+        'exit:B_RUPTING:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:END_B:A',
+        'exit:END_B:A',
+        'destroyScope:Process_1:A'
+      ]);
+
+    });
+
+
+    verify('boundary-non-interrupting-task', () => {
+
+      // given
+      signal({
+        element: element('START')
+      });
+
+      // when
+      const nonInterruptingBoundary = element('B_NRUPTING');
+
+      signal({
+        element: nonInterruptingBoundary,
+        scope: findScope({ element: nonInterruptingBoundary.parent })
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:START:A',
+        'exit:START:A',
+        'enter:Flow_1:A',
+        'exit:Flow_1:A',
+        'enter:RECEIVE:A',
+        'signal:B_NRUPTING:A',
+        'exit:B_NRUPTING:A',
+        'enter:Flow_2:A',
+        'exit:Flow_2:A',
+        'enter:END_B:A',
+        'exit:END_B:A',
+      ]);
+
+    });
   });
 
 
