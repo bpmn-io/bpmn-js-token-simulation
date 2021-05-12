@@ -1,10 +1,10 @@
 'use strict';
 
-const tokenSimulationModule = require('../lib/viewer');
+const tokenSimulationModule = require('../../lib/viewer');
 
 const BpmnViewer = require('bpmn-js/lib/NavigatedViewer').default;
 
-import exampleXML from './resources/example.bpmn';
+import exampleXML from '../resources/example.bpmn';
 
 const viewer = new BpmnViewer({
   container: '#canvas',

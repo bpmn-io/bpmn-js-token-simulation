@@ -1,10 +1,10 @@
 'use strict';
 
-const tokenSimulationModule = require('../lib/modeler');
+const tokenSimulationModule = require('../../lib/modeler');
 
 const BpmnModeler = require('bpmn-js/lib/Modeler').default;
 
-import exampleXML from './resources/example.bpmn';
+import exampleXML from '../resources/example.bpmn';
 
 const persistent = new URL(window.location.href).searchParams.has('p');
 

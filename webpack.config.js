@@ -3,8 +3,8 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    viewer: './example/viewer.js',
-    modeler: './example/modeler.js'
+    viewer: './example/src/viewer.js',
+    modeler: './example/src/modeler.js'
   },
   output: {
     filename: '[name].js',
