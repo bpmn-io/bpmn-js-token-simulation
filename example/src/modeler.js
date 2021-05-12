@@ -1,10 +1,11 @@
-'use strict';
+import TokenSimulationModule from '../../lib/modeler';
 
-const tokenSimulationModule = require('../../lib/modeler');
+import BpmnModeler from 'bpmn-js/lib/Modeler';
 
-const BpmnModeler = require('bpmn-js/lib/Modeler').default;
+import fileDrop from 'file-drops';
 
 import exampleXML from '../resources/example.bpmn';
+
 
 const persistent = new URL(window.location.href).searchParams.has('p');
 
@@ -31,7 +32,7 @@ const persistModule = persistent ? {
 const modeler = new BpmnModeler({
   container: '#canvas',
   additionalModules: [
-    tokenSimulationModule,
+    TokenSimulationModule,
     persistModule
   ],
   keyboard: {
@@ -51,4 +52,22 @@ modeler.importXML(diagram())
     console.error(err);
   });
 
-window.modeler = modeler;
+document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', function(files) {
+
+  // files = [ { name, contents }, ... ]
+
+  const file = files[0];
+
+  file && modeler.importXML(file.contents)
+    .then(({ warnings }) => {
+      if (warnings.length) {
+        console.warn(warnings);
+      }
+
+      modeler.get('canvas').zoom('fit-viewport');
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+}), false);

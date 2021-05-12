@@ -1,15 +1,16 @@
-'use strict';
+import TokenSimulationModule from '../../lib/viewer';
 
-const tokenSimulationModule = require('../../lib/viewer');
+import BpmnViewer from 'bpmn-js/lib/NavigatedViewer';
 
-const BpmnViewer = require('bpmn-js/lib/NavigatedViewer').default;
+import fileDrop from 'file-drops';
 
 import exampleXML from '../resources/example.bpmn';
+
 
 const viewer = new BpmnViewer({
   container: '#canvas',
   additionalModules: [
-    tokenSimulationModule
+    TokenSimulationModule
   ],
   keyboard: {
     bindTo: document
@@ -28,4 +29,23 @@ viewer.importXML(exampleXML)
     console.error(err);
   });
 
-window.viewer = viewer;
+
+document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', function(files) {
+
+  // files = [ { name, contents }, ... ]
+
+  const file = files[0];
+
+  file && viewer.importXML(file.contents)
+    .then(({ warnings }) => {
+      if (warnings.length) {
+        console.warn(warnings);
+      }
+
+      viewer.get('canvas').zoom('fit-viewport');
+    })
+    .catch(err => {
+      console.error(err);
+    });
+
+}), false);
