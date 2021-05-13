@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.16.0
+
+* `FEAT`: hide context pads if no action available in selected scope
+* `CHORE`: migrate most components to ES6
+
 ## 0.15.1
 
 * `FIX`: prevent signal of activities with active child scopes
