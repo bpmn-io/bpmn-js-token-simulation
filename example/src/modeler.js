@@ -70,6 +70,8 @@ modeler.openDiagram = function(diagram) {
         console.warn(warnings);
       }
 
+      localStorage['diagram-xml'] = diagram;
+
       this.get('canvas').zoom('fit-viewport');
     })
     .catch(err => {
