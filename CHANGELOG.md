@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.17.0
+
+* `FEAT`: improve scope filter behavior on scope creation and destruction
+* `FIX`: correct trigger activity context pad activation
+
 ## 0.16.0
 
 * `FEAT`: hide context pads if no action available in selected scope
