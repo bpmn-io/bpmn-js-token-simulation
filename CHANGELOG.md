@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.15.0
+
+* `FEAT`: allow to signal all waiting activities
+* `FEAT`: various example improvements
+
 ## 0.14.0
 
 * `FEAT`: add support for event sub-process ([#71](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/71))
