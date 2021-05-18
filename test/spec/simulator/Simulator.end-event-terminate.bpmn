@@ -6,10 +6,10 @@
       <outgoing>Flow_2</outgoing>
     </startEvent>
     <sequenceFlow id="Flow_1" sourceRef="START" targetRef="TASK" />
-    <task id="TASK" name="TASK">
+    <receiveTask id="TASK" name="TASK">
       <incoming>Flow_1</incoming>
       <outgoing>Flow_3</outgoing>
-    </task>
+    </receiveTask>
     <endEvent id="END" name="END">
       <incoming>Flow_3</incoming>
     </endEvent>

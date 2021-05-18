@@ -75,23 +75,35 @@ describe('simulator', function() {
 
       // given
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:TASK:A',
-        'exit:TASK:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:1h9nnt7',
+        'createScope:START:1h9nnt7',
+        'signal:START:1g0b67t',
+        'exit:START:1g0b67t',
+        'createScope:Flow_2:1h9nnt7',
+        'destroyScope:START:1g0b67t',
+        'enter:Flow_2:1h9nnt7',
+        'exit:Flow_2:0fcfa3x',
+        'createScope:TASK:1h9nnt7',
+        'destroyScope:Flow_2:0fcfa3x',
+        'enter:TASK:1h9nnt7',
+        'exit:TASK:1652tfj',
+        'createScope:Flow_1:1h9nnt7',
+        'destroyScope:TASK:1652tfj',
+        'enter:Flow_1:1h9nnt7',
+        'exit:Flow_1:1vu5u2u',
+        'createScope:END:1h9nnt7',
+        'destroyScope:Flow_1:1vu5u2u',
+        'enter:END:1h9nnt7',
+        'exit:END:13swzq0',
+        'destroyScope:END:13swzq0',
+        'exit:Process_1:1h9nnt7',
+        'destroyScope:Process_1:1h9nnt7'
       ]);
     });
 
@@ -105,27 +117,44 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1'),
+        startEvent: element('START')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:G_A:A',
-        'exit:G_A:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:G_B:A',
-        'exit:G_B:A',
-        'enter:Flow_4:A',
-        'exit:Flow_4:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:1w3kmjk',
+        'createScope:START:1w3kmjk',
+        'signal:START:1hxahns',
+        'exit:START:1hxahns',
+        'createScope:Flow_1:1w3kmjk',
+        'destroyScope:START:1hxahns',
+        'enter:Flow_1:1w3kmjk',
+        'exit:Flow_1:1tp37tz',
+        'createScope:G_A:1w3kmjk',
+        'destroyScope:Flow_1:1tp37tz',
+        'enter:G_A:1w3kmjk',
+        'exit:G_A:01tuc5y',
+        'createScope:Flow_2:1w3kmjk',
+        'destroyScope:G_A:01tuc5y',
+        'enter:Flow_2:1w3kmjk',
+        'exit:Flow_2:1vmoduu',
+        'createScope:G_B:1w3kmjk',
+        'destroyScope:Flow_2:1vmoduu',
+        'enter:G_B:1w3kmjk',
+        'exit:G_B:0xfgmi1',
+        'createScope:Flow_4:1w3kmjk',
+        'destroyScope:G_B:0xfgmi1',
+        'enter:Flow_4:1w3kmjk',
+        'exit:Flow_4:19jddme',
+        'createScope:END:1w3kmjk',
+        'destroyScope:Flow_4:19jddme',
+        'enter:END:1w3kmjk',
+        'exit:END:0ui1s69',
+        'destroyScope:END:0ui1s69',
+        'exit:Process_1:1w3kmjk',
+        'destroyScope:Process_1:1w3kmjk'
       ]);
     });
 
@@ -134,23 +163,36 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1'),
+        startEvent: element('START')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:GATE:A',
-        'exit:GATE:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0i7boji',
+        'createScope:START:0i7boji',
+        'signal:START:0hc8yzk',
+        'exit:START:0hc8yzk',
+        'createScope:Flow_2:0i7boji',
+        'destroyScope:START:0hc8yzk',
+        'enter:Flow_2:0i7boji',
+        'exit:Flow_2:0107cam',
+        'createScope:GATE:0i7boji',
+        'destroyScope:Flow_2:0107cam',
+        'enter:GATE:0i7boji',
+        'exit:GATE:0v7hr6a',
+        'createScope:Flow_1:0i7boji',
+        'destroyScope:GATE:0v7hr6a',
+        'enter:Flow_1:0i7boji',
+        'exit:Flow_1:0ra8bk2',
+        'createScope:END:0i7boji',
+        'destroyScope:Flow_1:0ra8bk2',
+        'enter:END:0i7boji',
+        'exit:END:0rzjj3p',
+        'destroyScope:END:0rzjj3p',
+        'exit:Process_1:0i7boji',
+        'destroyScope:Process_1:0i7boji'
       ]);
     });
 
@@ -159,33 +201,53 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1'),
+        startEvent: element('START')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'enter:Flow_4:A',
-        'exit:Flow_2:A',
-        'exit:Flow_4:A',
-        'enter:TASK:A',
-        'enter:TASK:A',
-        'exit:TASK:A',
-        'exit:TASK:A',
-        'enter:Flow_3:A',
-        'enter:Flow_3:A',
-        'exit:Flow_3:A',
-        'exit:Flow_3:A',
-        'enter:END:A',
-        'enter:END:A',
-        'exit:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0ei7bnu',
+        'createScope:START:0ei7bnu',
+        'signal:START:1y4cd9g',
+        'exit:START:1y4cd9g',
+        'createScope:Flow_2:0ei7bnu',
+        'createScope:Flow_4:0ei7bnu',
+        'destroyScope:START:1y4cd9g',
+        'enter:Flow_2:0ei7bnu',
+        'enter:Flow_4:0ei7bnu',
+        'exit:Flow_2:0j1kklc',
+        'createScope:TASK:0ei7bnu',
+        'destroyScope:Flow_2:0j1kklc',
+        'exit:Flow_4:1pzh4kz',
+        'createScope:TASK:0ei7bnu',
+        'destroyScope:Flow_4:1pzh4kz',
+        'enter:TASK:0ei7bnu',
+        'enter:TASK:0ei7bnu',
+        'exit:TASK:18b9idm',
+        'createScope:Flow_3:0ei7bnu',
+        'destroyScope:TASK:18b9idm',
+        'exit:TASK:067njez',
+        'createScope:Flow_3:0ei7bnu',
+        'destroyScope:TASK:067njez',
+        'enter:Flow_3:0ei7bnu',
+        'enter:Flow_3:0ei7bnu',
+        'exit:Flow_3:1h87iys',
+        'createScope:END:0ei7bnu',
+        'destroyScope:Flow_3:1h87iys',
+        'exit:Flow_3:0jido76',
+        'createScope:END:0ei7bnu',
+        'destroyScope:Flow_3:0jido76',
+        'enter:END:0ei7bnu',
+        'enter:END:0ei7bnu',
+        'exit:END:1fb2rqv',
+        'destroyScope:END:1fb2rqv',
+        'exit:END:1ih86mo',
+        'destroyScope:END:1ih86mo',
+        'exit:Process_1:0ei7bnu',
+        'destroyScope:Process_1:0ei7bnu'
       ]);
-
     });
 
 
@@ -193,17 +255,24 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1'),
+        startEvent: element('START')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:CATCH:A'
+        'signal:Process_1:0pgqzcd',
+        'createScope:START:0pgqzcd',
+        'signal:START:02qoaab',
+        'exit:START:02qoaab',
+        'createScope:Flow_1:0pgqzcd',
+        'destroyScope:START:02qoaab',
+        'enter:Flow_1:0pgqzcd',
+        'exit:Flow_1:1mtm8jo',
+        'createScope:CATCH:0pgqzcd',
+        'destroyScope:Flow_1:1mtm8jo',
+        'enter:CATCH:0pgqzcd'
       ]);
 
       // but when
@@ -212,19 +281,25 @@ describe('simulator', function() {
       signal({
         element: catchEvent,
         scope: findScope({
-          waitsOnElement: catchEvent
+          element: catchEvent
         })
       });
 
       // then
       expectTrace([
-        'signal:CATCH:A',
-        'exit:CATCH:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:CATCH:1n9colu',
+        'exit:CATCH:1n9colu',
+        'createScope:Flow_2:0pgqzcd',
+        'destroyScope:CATCH:1n9colu',
+        'enter:Flow_2:0pgqzcd',
+        'exit:Flow_2:18o9s7k',
+        'createScope:END:0pgqzcd',
+        'destroyScope:Flow_2:18o9s7k',
+        'enter:END:0pgqzcd',
+        'exit:END:1aa23s7',
+        'destroyScope:END:1aa23s7',
+        'exit:Process_1:0pgqzcd',
+        'destroyScope:Process_1:0pgqzcd'
       ]);
     });
 
@@ -233,25 +308,40 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1'),
+        startEvent: element('START')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:LINK_T:A',
-        'exit:LINK_T:A',
-        'enter:LINK_C:A',
-        'exit:LINK_C:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0okaali',
+        'createScope:START:0okaali',
+        'signal:START:0p9ukwk',
+        'exit:START:0p9ukwk',
+        'createScope:Flow_1:0okaali',
+        'destroyScope:START:0p9ukwk',
+        'enter:Flow_1:0okaali',
+        'exit:Flow_1:0pohwmn',
+        'createScope:LINK_T:0okaali',
+        'destroyScope:Flow_1:0pohwmn',
+        'enter:LINK_T:0okaali',
+        'createScope:LINK_C:0okaali',
+        'enter:LINK_C:0okaali',
+        'exit:LINK_T:05u8fo1',
+        'destroyScope:LINK_T:05u8fo1',
+        'exit:LINK_C:0zp9xr7',
+        'createScope:Flow_2:0okaali',
+        'destroyScope:LINK_C:0zp9xr7',
+        'enter:Flow_2:0okaali',
+        'exit:Flow_2:0w5r4bl',
+        'createScope:END:0okaali',
+        'destroyScope:Flow_2:0w5r4bl',
+        'enter:END:0okaali',
+        'exit:END:16w744i',
+        'destroyScope:END:16w744i',
+        'exit:Process_1:0okaali',
+        'destroyScope:Process_1:0okaali'
       ]);
 
     });
@@ -261,29 +351,44 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:TASK_A:A',
-        'exit:TASK_A:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:TASK_B:A',
-        'exit:TASK_B:A',
-        'enter:Flow_3:A',
-        'exit:Flow_3:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:15qsuro',
+        'createScope:START:15qsuro',
+        'signal:START:113bdv2',
+        'exit:START:113bdv2',
+        'createScope:Flow_1:15qsuro',
+        'destroyScope:START:113bdv2',
+        'enter:Flow_1:15qsuro',
+        'exit:Flow_1:0cuhdzv',
+        'createScope:TASK_A:15qsuro',
+        'destroyScope:Flow_1:0cuhdzv',
+        'enter:TASK_A:15qsuro',
+        'exit:TASK_A:1xf8rr5',
+        'createScope:Flow_2:15qsuro',
+        'destroyScope:TASK_A:1xf8rr5',
+        'enter:Flow_2:15qsuro',
+        'exit:Flow_2:1wz5wbo',
+        'createScope:TASK_B:15qsuro',
+        'destroyScope:Flow_2:1wz5wbo',
+        'enter:TASK_B:15qsuro',
+        'exit:TASK_B:17ofnq5',
+        'createScope:Flow_3:15qsuro',
+        'destroyScope:TASK_B:17ofnq5',
+        'enter:Flow_3:15qsuro',
+        'exit:Flow_3:0sfb77v',
+        'createScope:END:15qsuro',
+        'destroyScope:Flow_3:0sfb77v',
+        'enter:END:15qsuro',
+        'exit:END:0k5k6py',
+        'destroyScope:END:0k5k6py',
+        'exit:Process_1:15qsuro',
+        'destroyScope:Process_1:15qsuro'
       ]);
-
     });
 
 
@@ -291,33 +396,44 @@ describe('simulator', function() {
 
       // given
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // when
       signal({
         element: element('M_CATCH'),
-        relatedElement: element('G_EVENT'),
         scope: findScope({
-          waitsOnElement: element('G_EVENT')
+          element: element('G_EVENT')
         })
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:G_EVENT:A',
-        'signal:M_CATCH:A',
-        'exit:M_CATCH:A',
-        'enter:Flow_4:A',
-        'exit:Flow_4:A',
-        'enter:END_A:A',
-        'exit:END_A:A',
-        'destroyScope:Process_1:A',
+        'signal:Process_1:10e86bk',
+        'createScope:START:10e86bk',
+        'signal:START:1k6c4wo',
+        'exit:START:1k6c4wo',
+        'createScope:Flow_1:10e86bk',
+        'destroyScope:START:1k6c4wo',
+        'enter:Flow_1:10e86bk',
+        'exit:Flow_1:09e71v5',
+        'createScope:G_EVENT:10e86bk',
+        'destroyScope:Flow_1:09e71v5',
+        'enter:G_EVENT:10e86bk',
+        'signal:M_CATCH:1vtrr9g',
+        'exit:M_CATCH:1vtrr9g',
+        'createScope:Flow_4:10e86bk',
+        'destroyScope:G_EVENT:1vtrr9g',
+        'enter:Flow_4:10e86bk',
+        'exit:Flow_4:0p36nzn',
+        'createScope:END_A:10e86bk',
+        'destroyScope:Flow_4:0p36nzn',
+        'enter:END_A:10e86bk',
+        'exit:END_A:11av813',
+        'destroyScope:END_A:11av813',
+        'exit:Process_1:10e86bk',
+        'destroyScope:Process_1:10e86bk'
       ]);
     });
 
@@ -335,36 +451,48 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:TASK:A'
+        'signal:Process_1:0w70imz',
+        'createScope:START:0w70imz',
+        'signal:START:1mo8ftr',
+        'exit:START:1mo8ftr',
+        'createScope:Flow_2:0w70imz',
+        'destroyScope:START:1mo8ftr',
+        'enter:Flow_2:0w70imz',
+        'exit:Flow_2:02ff4ym',
+        'createScope:TASK:0w70imz',
+        'destroyScope:Flow_2:02ff4ym',
+        'enter:TASK:0w70imz'
       ]);
 
       // but when
       signal({
         element: task,
         scope: findScope({
-          waitsOnElement: task
+          element: task
         })
       });
 
       // then
       expectTrace([
-        'signal:TASK:A',
-        'exit:TASK:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:TASK:07uy7vw',
+        'exit:TASK:07uy7vw',
+        'createScope:Flow_1:1h9ifl8',
+        'destroyScope:TASK:07uy7vw',
+        'enter:Flow_1:1h9ifl8',
+        'exit:Flow_1:00vrnkn',
+        'createScope:END:1h9ifl8',
+        'destroyScope:Flow_1:00vrnkn',
+        'enter:END:1h9ifl8',
+        'exit:END:0ekvc6i',
+        'destroyScope:END:0ekvc6i',
+        'exit:Process_1:1h9ifl8',
+        'destroyScope:Process_1:1h9ifl8'
       ]);
     });
 
@@ -377,33 +505,55 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START_S')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START_S:A',
-        'exit:START_S:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:F_GATE:A',
-        'exit:F_GATE:A',
-        'enter:Flow_3:A',
-        'enter:Flow_4:A',
-        'enter:Flow_5:A',
-        'exit:Flow_3:A',
-        'exit:Flow_4:A',
-        'exit:Flow_5:A',
-        'enter:J_GATE:A',
-        'enter:J_GATE:A',
-        'enter:J_GATE:A',
-        'exit:J_GATE:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:END_S:A',
-        'exit:END_S:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:1863y4x',
+        'createScope:START_S:1863y4x',
+        'signal:START_S:06kgqgb',
+        'exit:START_S:06kgqgb',
+        'createScope:Flow_2:1863y4x',
+        'destroyScope:START_S:06kgqgb',
+        'enter:Flow_2:1863y4x',
+        'exit:Flow_2:14gac13',
+        'createScope:F_GATE:1863y4x',
+        'destroyScope:Flow_2:14gac13',
+        'enter:F_GATE:1863y4x',
+        'exit:F_GATE:0g64u6n',
+        'createScope:Flow_3:1863y4x',
+        'createScope:Flow_4:1863y4x',
+        'createScope:Flow_5:1863y4x',
+        'destroyScope:F_GATE:0g64u6n',
+        'enter:Flow_3:1863y4x',
+        'enter:Flow_4:1863y4x',
+        'enter:Flow_5:1863y4x',
+        'exit:Flow_3:1a2feby',
+        'createScope:J_GATE:1863y4x',
+        'destroyScope:Flow_3:1a2feby',
+        'exit:Flow_4:18o1dd2',
+        'createScope:J_GATE:1863y4x',
+        'destroyScope:Flow_4:18o1dd2',
+        'exit:Flow_5:1iikp0l',
+        'createScope:J_GATE:1863y4x',
+        'destroyScope:Flow_5:1iikp0l',
+        'enter:J_GATE:1863y4x',
+        'destroyScope:J_GATE:0r98p50',
+        'destroyScope:J_GATE:161dmoi',
+        'exit:J_GATE:0mc6bsm',
+        'createScope:Flow_1:1863y4x',
+        'destroyScope:J_GATE:0mc6bsm',
+        'enter:Flow_1:1863y4x',
+        'exit:Flow_1:0g4tjxq',
+        'createScope:END_S:1863y4x',
+        'destroyScope:Flow_1:0g4tjxq',
+        'enter:END_S:1863y4x',
+        'exit:END_S:0j4xzj4',
+        'destroyScope:END_S:0j4xzj4',
+        'exit:Process_1:1863y4x',
+        'destroyScope:Process_1:1863y4x'
       ]);
     });
 
@@ -412,17 +562,23 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:GATE:A'
+        'signal:Process_1:1g3ti83',
+        'createScope:START:1g3ti83',
+        'signal:START:1qopt3k',
+        'exit:START:1qopt3k',
+        'createScope:Flow_2:1g3ti83',
+        'destroyScope:START:1qopt3k',
+        'enter:Flow_2:1g3ti83',
+        'exit:Flow_2:0m7s1dn',
+        'createScope:GATE:1g3ti83',
+        'destroyScope:Flow_2:0m7s1dn',
+        'enter:GATE:1g3ti83'
       ]);
     });
 
@@ -435,23 +591,35 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'enter:Flow_2:A',
-        'exit:Flow_1:A',
-        'exit:Flow_2:A',
-        'enter:END:A',
-        'enter:END:A',
-        'exit:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0x7vlx9',
+        'createScope:START:0x7vlx9',
+        'signal:START:09t9ax8',
+        'exit:START:09t9ax8',
+        'createScope:Flow_1:0x7vlx9',
+        'createScope:Flow_2:0x7vlx9',
+        'destroyScope:START:09t9ax8',
+        'enter:Flow_1:0x7vlx9',
+        'enter:Flow_2:0x7vlx9',
+        'exit:Flow_1:06zq377',
+        'createScope:END:0x7vlx9',
+        'destroyScope:Flow_1:06zq377',
+        'exit:Flow_2:0s15kci',
+        'createScope:END:0x7vlx9',
+        'destroyScope:Flow_2:0s15kci',
+        'enter:END:0x7vlx9',
+        'enter:END:0x7vlx9',
+        'exit:END:1cywlji',
+        'destroyScope:END:1cywlji',
+        'exit:END:1iwe8sc',
+        'destroyScope:END:1iwe8sc',
+        'exit:Process_1:0x7vlx9',
+        'destroyScope:Process_1:0x7vlx9'
       ]);
     });
 
@@ -460,23 +628,34 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'enter:Flow_2:A',
-        'exit:Flow_1:A',
-        'exit:Flow_2:A',
-        'enter:TASK:A',
-        'enter:T_END:A',
-        'exit:TASK:A',
-        'exit:T_END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0mnewbw',
+        'createScope:START:0mnewbw',
+        'signal:START:0ewz8qx',
+        'exit:START:0ewz8qx',
+        'createScope:Flow_1:0mnewbw',
+        'createScope:Flow_2:0mnewbw',
+        'destroyScope:START:0ewz8qx',
+        'enter:Flow_1:0mnewbw',
+        'enter:Flow_2:0mnewbw',
+        'exit:Flow_1:08j79m9',
+        'createScope:TASK:0mnewbw',
+        'destroyScope:Flow_1:08j79m9',
+        'exit:Flow_2:1o8p443',
+        'createScope:T_END:0mnewbw',
+        'destroyScope:Flow_2:1o8p443',
+        'enter:TASK:0mnewbw',
+        'enter:T_END:0mnewbw',
+        'exit:T_END:1x6vhvt',
+        'destroyScope:T_END:1x6vhvt',
+        'exit:Process_1:0mnewbw',
+        'destroyScope:TASK:0lyuevu',
+        'destroyScope:Process_1:0mnewbw'
       ]);
     });
 
@@ -485,25 +664,40 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_4:A',
-        'enter:Flow_6:A',
-        'exit:Flow_4:A',
-        'exit:Flow_6:A',
-        'enter:SUB:A',
-        'createScope:SUB:A',
-        'enter:END_TERM:A',
-        'signal:START_SUB:B',
-        'exit:END_TERM:A',
-        'destroyScope:SUB:B',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:01wsf6r',
+        'createScope:START:01wsf6r',
+        'signal:START:0piid6i',
+        'exit:START:0piid6i',
+        'createScope:Flow_4:01wsf6r',
+        'createScope:Flow_6:01wsf6r',
+        'destroyScope:START:0piid6i',
+        'enter:Flow_4:01wsf6r',
+        'enter:Flow_6:01wsf6r',
+        'exit:Flow_4:0p0uqng',
+        'createScope:SUB:01wsf6r',
+        'destroyScope:Flow_4:0p0uqng',
+        'exit:Flow_6:17hikvi',
+        'createScope:END_TERM:01wsf6r',
+        'destroyScope:Flow_6:17hikvi',
+        'enter:SUB:01wsf6r',
+        'createScope:START_SUB:1vnft8u',
+        'enter:END_TERM:01wsf6r',
+        'signal:START_SUB:0a84qwx',
+        'exit:END_TERM:0n7h7ps',
+        'destroyScope:END_TERM:0n7h7ps',
+        'exit:START_SUB:0a84qwx',
+        'createScope:Flow_3:1vnft8u',
+        'destroyScope:START_SUB:0a84qwx',
+        'exit:Process_1:01wsf6r',
+        'destroyScope:Flow_3:198x63g',
+        'destroyScope:SUB:1vnft8u',
+        'destroyScope:Process_1:01wsf6r'
       ]);
     });
 
@@ -516,35 +710,55 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:SUB:A',
-        'createScope:SUB:A',
-        'signal:START_SUB:B',
-        'exit:START_SUB:B',
-        'enter:Flow_4:B',
-        'exit:Flow_4:B',
-        'enter:TASK_SUB:B',
-        'exit:TASK_SUB:B',
-        'enter:Flow_1:B',
-        'exit:Flow_1:B',
-        'enter:END_SUB:B',
-        'exit:END_SUB:B',
-        'destroyScope:SUB:B',
-        'exit:SUB:A',
-        'enter:Flow_3:A',
-        'exit:Flow_3:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0hvyhts',
+        'createScope:START:0hvyhts',
+        'signal:START:1k80fd1',
+        'exit:START:1k80fd1',
+        'createScope:Flow_2:0hvyhts',
+        'destroyScope:START:1k80fd1',
+        'enter:Flow_2:0hvyhts',
+        'exit:Flow_2:1xt9ux4',
+        'createScope:SUB:0hvyhts',
+        'destroyScope:Flow_2:1xt9ux4',
+        'enter:SUB:0hvyhts',
+        'createScope:START_SUB:0volx4b',
+        'signal:START_SUB:1mcxzu5',
+        'exit:START_SUB:1mcxzu5',
+        'createScope:Flow_4:0volx4b',
+        'destroyScope:START_SUB:1mcxzu5',
+        'enter:Flow_4:0volx4b',
+        'exit:Flow_4:1fcdi6e',
+        'createScope:TASK_SUB:0volx4b',
+        'destroyScope:Flow_4:1fcdi6e',
+        'enter:TASK_SUB:0volx4b',
+        'exit:TASK_SUB:02p1o6a',
+        'createScope:Flow_1:0volx4b',
+        'destroyScope:TASK_SUB:02p1o6a',
+        'enter:Flow_1:0volx4b',
+        'exit:Flow_1:19bhhxr',
+        'createScope:END_SUB:0volx4b',
+        'destroyScope:Flow_1:19bhhxr',
+        'enter:END_SUB:0volx4b',
+        'exit:END_SUB:03d2yc3',
+        'destroyScope:END_SUB:03d2yc3',
+        'exit:SUB:0volx4b',
+        'createScope:Flow_3:0hvyhts',
+        'destroyScope:SUB:0volx4b',
+        'enter:Flow_3:0hvyhts',
+        'exit:Flow_3:0mz1k64',
+        'createScope:END:0hvyhts',
+        'destroyScope:Flow_3:0mz1k64',
+        'enter:END:0hvyhts',
+        'exit:END:182oiye',
+        'destroyScope:END:182oiye',
+        'exit:Process_1:0hvyhts',
+        'destroyScope:Process_1:0hvyhts'
       ]);
 
     });
@@ -557,44 +771,66 @@ describe('simulator', function() {
     verify('event-sub-process-interrupting', () => {
 
       // given
+      const processElement = element('Process_1');
+
       signal({
-        element: element('START')
+        element: processElement
       });
 
       // when
-      const startSub = element('START_SUB');
+      const eventSub = element('EVENT_SUB');
 
       signal({
-        element: startSub,
+        element: eventSub,
         parentScope: findScope({
-          element: startSub.parent.parent
+          element: processElement
         })
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_5:A',
-        'exit:Flow_5:A',
-        'enter:S:A',
-        'createScope:S:A',
-        'signal:START_S:B',
-        'exit:START_S:B',
-        'enter:Flow_6:B',
-        'exit:Flow_6:B',
-        'enter:RECEIVE:B',
-        'createScope:EVENT_SUB:A',
-        'signal:START_SUB:C',
-        'destroyScope:S:B',
-        'destroyScope:Process_1:A',
-        'exit:START_SUB:C',
-        'enter:Flow_3:C',
-        'exit:Flow_3:C',
-        'enter:END_SUB:C',
-        'exit:END_SUB:C',
-        'destroyScope:EVENT_SUB:C'
+        'signal:Process_1:0iaq7m8',
+        'createScope:START:0iaq7m8',
+        'signal:START:1d2f16b',
+        'exit:START:1d2f16b',
+        'createScope:Flow_5:0iaq7m8',
+        'destroyScope:START:1d2f16b',
+        'enter:Flow_5:0iaq7m8',
+        'exit:Flow_5:1jd1q1a',
+        'createScope:S:0iaq7m8',
+        'destroyScope:Flow_5:1jd1q1a',
+        'enter:S:0iaq7m8',
+        'createScope:START_S:1j2o4uc',
+        'signal:START_S:151tyg4',
+        'exit:START_S:151tyg4',
+        'createScope:Flow_6:1j2o4uc',
+        'destroyScope:START_S:151tyg4',
+        'enter:Flow_6:1j2o4uc',
+        'exit:Flow_6:0e33jt3',
+        'createScope:RECEIVE:1j2o4uc',
+        'destroyScope:Flow_6:0e33jt3',
+        'enter:RECEIVE:1j2o4uc',
+        'createScope:EVENT_SUB:0iaq7m8',
+        'signal:EVENT_SUB:0q5sck6',
+        'createScope:START_SUB:0q5sck6',
+        'signal:START_SUB:1l6zh86',
+        'destroyScope:RECEIVE:0e9iqg6',
+        'destroyScope:S:1j2o4uc',
+        'exit:START_SUB:1l6zh86',
+        'createScope:Flow_3:0q5sck6',
+        'destroyScope:START_SUB:1l6zh86',
+        'enter:Flow_3:0q5sck6',
+        'exit:Flow_3:0335ggq',
+        'createScope:END_SUB:0q5sck6',
+        'destroyScope:Flow_3:0335ggq',
+        'enter:END_SUB:0q5sck6',
+        'exit:END_SUB:192adoz',
+        'destroyScope:END_SUB:192adoz',
+        'exit:EVENT_SUB:0q5sck6',
+        'destroyScope:EVENT_SUB:0q5sck6',
+        'exit:Process_1:0iaq7m8',
+        'destroyScope:Process_1:0iaq7m8'
       ]);
 
     });
@@ -603,36 +839,52 @@ describe('simulator', function() {
     verify('event-sub-process-non-interrupting', () => {
 
       // given
+      const processElement = element('Process_1');
+
       signal({
-        element: element('START')
+        element: processElement
       });
 
       // when
-      const startSub = element('START_SUB');
+      const eventSub = element('EVENT_SUB');
 
       signal({
-        element: startSub,
+        element: eventSub,
         parentScope: findScope({
-          element: startSub.parent.parent
+          element: processElement
         })
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:RECEIVE:A',
-        'createScope:EVENT_SUB:A',
-        'signal:START_SUB:B',
-        'exit:START_SUB:B',
-        'enter:Flow_3:B',
-        'exit:Flow_3:B',
-        'enter:END_SUB:B',
-        'exit:END_SUB:B',
-        'destroyScope:EVENT_SUB:B'
+        'signal:Process_1:150p3bn',
+        'createScope:START:150p3bn',
+        'signal:START:10b61uu',
+        'exit:START:10b61uu',
+        'createScope:Flow_1:150p3bn',
+        'destroyScope:START:10b61uu',
+        'enter:Flow_1:150p3bn',
+        'exit:Flow_1:0qk04ef',
+        'createScope:RECEIVE:150p3bn',
+        'destroyScope:Flow_1:0qk04ef',
+        'enter:RECEIVE:150p3bn',
+        'createScope:EVENT_SUB:150p3bn',
+        'signal:EVENT_SUB:081v4vo',
+        'createScope:START_SUB:081v4vo',
+        'signal:START_SUB:0gvao8e',
+        'exit:START_SUB:0gvao8e',
+        'createScope:Flow_3:081v4vo',
+        'destroyScope:START_SUB:0gvao8e',
+        'enter:Flow_3:081v4vo',
+        'exit:Flow_3:0zzkq7u',
+        'createScope:END_SUB:081v4vo',
+        'destroyScope:Flow_3:0zzkq7u',
+        'enter:END_SUB:081v4vo',
+        'exit:END_SUB:0sr0aqp',
+        'destroyScope:END_SUB:0sr0aqp',
+        'exit:EVENT_SUB:081v4vo',
+        'destroyScope:EVENT_SUB:081v4vo'
       ]);
 
     });
@@ -645,8 +897,10 @@ describe('simulator', function() {
     verify('boundary-interrupting-sub-process', () => {
 
       // given
+      const processElement = element('Process_1');
+
       signal({
-        element: element('START')
+        element: processElement
       });
 
       // when
@@ -654,41 +908,63 @@ describe('simulator', function() {
 
       signal({
         element: interruptingBoundary,
-        scope: findScope({ element: interruptingBoundary.parent })
+        parentScope: findScope({
+          element: processElement
+        })
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_4:A',
-        'exit:Flow_4:A',
-        'enter:SUB:A',
-        'createScope:SUB:A',
-        'signal:START_SUB:B',
-        'exit:START_SUB:B',
-        'enter:Flow_3:B',
-        'exit:Flow_3:B',
-        'enter:CATCH_SUB:B',
-        'signal:B_RUPTING:A',
-        'destroyScope:SUB:B',
-        'exit:B_RUPTING:A',
-        'enter:Flow_6:A',
-        'exit:Flow_6:A',
-        'enter:END_B:A',
-        'exit:END_B:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0xqzwoz',
+        'createScope:START:0xqzwoz',
+        'signal:START:1jwuzeq',
+        'exit:START:1jwuzeq',
+        'createScope:Flow_4:0xqzwoz',
+        'destroyScope:START:1jwuzeq',
+        'enter:Flow_4:0xqzwoz',
+        'exit:Flow_4:1tztt90',
+        'createScope:SUB:0xqzwoz',
+        'destroyScope:Flow_4:1tztt90',
+        'enter:SUB:0xqzwoz',
+        'createScope:START_SUB:1h9xzcr',
+        'signal:START_SUB:0g4v30m',
+        'exit:START_SUB:0g4v30m',
+        'createScope:Flow_3:1h9xzcr',
+        'destroyScope:START_SUB:0g4v30m',
+        'enter:Flow_3:1h9xzcr',
+        'exit:Flow_3:1v6ta2p',
+        'createScope:CATCH_SUB:1h9xzcr',
+        'destroyScope:Flow_3:1v6ta2p',
+        'enter:CATCH_SUB:1h9xzcr',
+        'createScope:B_RUPTING:0xqzwoz',
+        'signal:B_RUPTING:1557188',
+        'destroyScope:CATCH_SUB:05itneo',
+        'exit:SUB:1h9xzcr',
+        'destroyScope:SUB:1h9xzcr',
+        'exit:B_RUPTING:1557188',
+        'createScope:Flow_6:0xqzwoz',
+        'destroyScope:B_RUPTING:1557188',
+        'enter:Flow_6:0xqzwoz',
+        'exit:Flow_6:1r4fvxk',
+        'createScope:END_B:0xqzwoz',
+        'destroyScope:Flow_6:1r4fvxk',
+        'enter:END_B:0xqzwoz',
+        'exit:END_B:01hf7h2',
+        'destroyScope:END_B:01hf7h2',
+        'exit:Process_1:0xqzwoz',
+        'destroyScope:Process_1:0xqzwoz'
       ]);
-
     });
 
 
     verify('boundary-non-interrupting-sub-process', () => {
 
       // given
+      const processElement = element('Process_1');
+
       signal({
-        element: element('START')
+        element: processElement
       });
 
       // when
@@ -696,66 +972,99 @@ describe('simulator', function() {
 
       signal({
         element: nonInterruptingBoundary,
-        scope: findScope({ element: nonInterruptingBoundary.parent })
+        parentScope: findScope({
+          element: processElement
+        })
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_4:A',
-        'exit:Flow_4:A',
-        'enter:SUB:A',
-        'createScope:SUB:A',
-        'signal:START_SUB:B',
-        'exit:START_SUB:B',
-        'enter:Flow_3:B',
-        'exit:Flow_3:B',
-        'enter:CATCH_SUB:B',
-        'signal:B_NRUPTING:A',
-        'exit:B_NRUPTING:A',
-        'enter:Flow_6:A',
-        'exit:Flow_6:A',
-        'enter:END_B:A',
-        'exit:END_B:A'
+        'signal:Process_1:1spzl29',
+        'createScope:START:1spzl29',
+        'signal:START:0a39zp6',
+        'exit:START:0a39zp6',
+        'createScope:Flow_4:1spzl29',
+        'destroyScope:START:0a39zp6',
+        'enter:Flow_4:1spzl29',
+        'exit:Flow_4:0m9g5ux',
+        'createScope:SUB:1spzl29',
+        'destroyScope:Flow_4:0m9g5ux',
+        'enter:SUB:1spzl29',
+        'createScope:START_SUB:0lnog18',
+        'signal:START_SUB:1nrcnk4',
+        'exit:START_SUB:1nrcnk4',
+        'createScope:Flow_3:0lnog18',
+        'destroyScope:START_SUB:1nrcnk4',
+        'enter:Flow_3:0lnog18',
+        'exit:Flow_3:0l89edx',
+        'createScope:CATCH_SUB:0lnog18',
+        'destroyScope:Flow_3:0l89edx',
+        'enter:CATCH_SUB:0lnog18',
+        'createScope:B_NRUPTING:1spzl29',
+        'signal:B_NRUPTING:0zb84h5',
+        'exit:B_NRUPTING:0zb84h5',
+        'createScope:Flow_6:1spzl29',
+        'destroyScope:B_NRUPTING:0zb84h5',
+        'enter:Flow_6:1spzl29',
+        'exit:Flow_6:0e8fxgy',
+        'createScope:END_B:1spzl29',
+        'destroyScope:Flow_6:0e8fxgy',
+        'enter:END_B:1spzl29',
+        'exit:END_B:0cws1tg',
+        'destroyScope:END_B:0cws1tg'
       ]);
-
     });
 
 
     verify('boundary-interrupting-task', () => {
 
       // given
+      const processElement = element('Process_1');
+
       signal({
-        element: element('START')
+        element: processElement
       });
 
       // when
-      const interruptingBoundary = element('B_RUPTING');
-
       signal({
-        element: interruptingBoundary,
-        scope: findScope({ element: interruptingBoundary.parent })
+        element: element('B_RUPTING'),
+        parentScope: findScope({
+          element: processElement
+        })
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:RECEIVE:A',
-        'signal:B_RUPTING:A',
-        'exit:B_RUPTING:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:END_B:A',
-        'exit:END_B:A',
-        'destroyScope:Process_1:A'
+        'signal:Process_1:0a2rwuy',
+        'createScope:START:0a2rwuy',
+        'signal:START:1xou9su',
+        'exit:START:1xou9su',
+        'createScope:Flow_1:0a2rwuy',
+        'destroyScope:START:1xou9su',
+        'enter:Flow_1:0a2rwuy',
+        'exit:Flow_1:0i2fz8u',
+        'createScope:RECEIVE:0a2rwuy',
+        'destroyScope:Flow_1:0i2fz8u',
+        'enter:RECEIVE:0a2rwuy',
+        'createScope:B_RUPTING:0a2rwuy',
+        'signal:B_RUPTING:1ctyb5z',
+        'exit:RECEIVE:1v9w1b1',
+        'destroyScope:RECEIVE:1v9w1b1',
+        'exit:B_RUPTING:1ctyb5z',
+        'createScope:Flow_2:0a2rwuy',
+        'destroyScope:B_RUPTING:1ctyb5z',
+        'enter:Flow_2:0a2rwuy',
+        'exit:Flow_2:16qa7pb',
+        'createScope:END_B:0a2rwuy',
+        'destroyScope:Flow_2:16qa7pb',
+        'enter:END_B:0a2rwuy',
+        'exit:END_B:0tjmujt',
+        'destroyScope:END_B:0tjmujt',
+        'exit:Process_1:0a2rwuy',
+        'destroyScope:Process_1:0a2rwuy'
       ]);
-
     });
 
 
@@ -763,7 +1072,7 @@ describe('simulator', function() {
 
       // given
       signal({
-        element: element('START')
+        element: element('Process_1')
       });
 
       // when
@@ -771,26 +1080,40 @@ describe('simulator', function() {
 
       signal({
         element: nonInterruptingBoundary,
-        scope: findScope({ element: nonInterruptingBoundary.parent })
+        parentScope: findScope({
+          element: nonInterruptingBoundary.parent
+        })
       });
 
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:RECEIVE:A',
-        'signal:B_NRUPTING:A',
-        'exit:B_NRUPTING:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:END_B:A',
-        'exit:END_B:A',
+        'signal:Process_1:0uianl7',
+        'createScope:START:0uianl7',
+        'signal:START:1bu54qn',
+        'exit:START:1bu54qn',
+        'createScope:Flow_1:0uianl7',
+        'destroyScope:START:1bu54qn',
+        'enter:Flow_1:0uianl7',
+        'exit:Flow_1:1hzow82',
+        'createScope:RECEIVE:0uianl7',
+        'destroyScope:Flow_1:1hzow82',
+        'enter:RECEIVE:0uianl7',
+        'createScope:B_NRUPTING:0uianl7',
+        'signal:B_NRUPTING:0fu2ym5',
+        'exit:B_NRUPTING:0fu2ym5',
+        'createScope:Flow_2:0uianl7',
+        'destroyScope:B_NRUPTING:0fu2ym5',
+        'enter:Flow_2:0uianl7',
+        'exit:Flow_2:02cneh9',
+        'createScope:END_B:0uianl7',
+        'destroyScope:Flow_2:02cneh9',
+        'enter:END_B:0uianl7',
+        'exit:END_B:18wmzlx',
+        'destroyScope:END_B:18wmzlx'
       ]);
-
     });
+
   });
 
 
@@ -800,23 +1123,31 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('PART_EXP')
       });
 
       // then
       expectTrace([
         'createScope:PART_EXP:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:END:A',
-        'createScope:COLLAB:null',
-        'signal:M_FLOW:B',
-        'exit:END:A',
-        'destroyScope:PART_EXP:A',
-        'exit:M_FLOW:B',
-        'destroyScope:COLLAB:B'
+        'signal:PART_EXP:07zsrvi',
+        'createScope:START:07zsrvi',
+        'signal:START:1fhin7l',
+        'exit:START:1fhin7l',
+        'createScope:Flow_1:07zsrvi',
+        'destroyScope:START:1fhin7l',
+        'enter:Flow_1:07zsrvi',
+        'exit:Flow_1:0v5crgd',
+        'createScope:END:07zsrvi',
+        'destroyScope:Flow_1:0v5crgd',
+        'enter:END:07zsrvi',
+        'createScope:M_FLOW:null',
+        'signal:M_FLOW:0ve57yw',
+        'exit:END:19ngjeg',
+        'destroyScope:END:19ngjeg',
+        'exit:M_FLOW:0ve57yw',
+        'destroyScope:M_FLOW:0ve57yw',
+        'exit:PART_EXP:07zsrvi',
+        'destroyScope:PART_EXP:07zsrvi'
       ]);
     });
 
@@ -830,10 +1161,10 @@ describe('simulator', function() {
 
       // then
       expectTrace([
-        'createScope:COLLAB:null',
-        'signal:M_FLOW:A',
-        'exit:M_FLOW:A',
-        'destroyScope:COLLAB:A'
+        'createScope:M_FLOW:null',
+        'signal:M_FLOW:0z7uhdk',
+        'exit:M_FLOW:0z7uhdk',
+        'destroyScope:M_FLOW:0z7uhdk'
       ]);
     });
 
@@ -842,27 +1173,39 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('PART_EXP')
       });
 
       // then
       expectTrace([
         'createScope:PART_EXP:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:TASK:A',
-        'exit:TASK:A',
-        'createScope:COLLAB:null',
-        'enter:Flow_2:A',
-        'signal:M_FLOW:B',
-        'exit:Flow_2:A',
-        'exit:M_FLOW:B',
-        'destroyScope:COLLAB:B',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:PART_EXP:A'
+        'signal:PART_EXP:04du1r4',
+        'createScope:START:04du1r4',
+        'signal:START:1sisnmg',
+        'exit:START:1sisnmg',
+        'createScope:Flow_1:04du1r4',
+        'destroyScope:START:1sisnmg',
+        'enter:Flow_1:04du1r4',
+        'exit:Flow_1:1e8lk4y',
+        'createScope:TASK:04du1r4',
+        'destroyScope:Flow_1:1e8lk4y',
+        'enter:TASK:04du1r4',
+        'createScope:M_FLOW:null',
+        'signal:M_FLOW:1kfx0ye',
+        'exit:TASK:090szj2',
+        'createScope:Flow_2:04du1r4',
+        'destroyScope:TASK:090szj2',
+        'exit:M_FLOW:1kfx0ye',
+        'destroyScope:M_FLOW:1kfx0ye',
+        'enter:Flow_2:04du1r4',
+        'exit:Flow_2:1xfxds0',
+        'createScope:END:04du1r4',
+        'destroyScope:Flow_2:1xfxds0',
+        'enter:END:04du1r4',
+        'exit:END:1ou8tra',
+        'destroyScope:END:1ou8tra',
+        'exit:PART_EXP:04du1r4',
+        'destroyScope:PART_EXP:04du1r4'
       ]);
     });
 
@@ -871,7 +1214,7 @@ describe('simulator', function() {
 
       // given
       signal({
-        element: element('START')
+        element: element('PART_EXP')
       });
 
       // when
@@ -882,22 +1225,34 @@ describe('simulator', function() {
       // then
       expectTrace([
         'createScope:PART_EXP:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_1:A',
-        'exit:Flow_1:A',
-        'enter:R_TASK:A',
-        'createScope:COLLAB:null',
-        'signal:M_FLOW:B',
-        'exit:M_FLOW:B',
-        'destroyScope:COLLAB:B',
-        'signal:R_TASK:A',
-        'exit:R_TASK:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:PART_EXP:A'
+        'signal:PART_EXP:1c9w3nr',
+        'createScope:START:1c9w3nr',
+        'signal:START:04x4d82',
+        'exit:START:04x4d82',
+        'createScope:Flow_1:1c9w3nr',
+        'destroyScope:START:04x4d82',
+        'enter:Flow_1:1c9w3nr',
+        'exit:Flow_1:1cnbnud',
+        'createScope:R_TASK:1c9w3nr',
+        'destroyScope:Flow_1:1cnbnud',
+        'enter:R_TASK:1c9w3nr',
+        'createScope:M_FLOW:null',
+        'signal:M_FLOW:096d7lv',
+        'exit:M_FLOW:096d7lv',
+        'destroyScope:M_FLOW:096d7lv',
+        'signal:R_TASK:1qvav3g',
+        'exit:R_TASK:1qvav3g',
+        'createScope:Flow_2:1c9w3nr',
+        'destroyScope:R_TASK:1qvav3g',
+        'enter:Flow_2:1c9w3nr',
+        'exit:Flow_2:02d5of5',
+        'createScope:END:1c9w3nr',
+        'destroyScope:Flow_2:02d5of5',
+        'enter:END:1c9w3nr',
+        'exit:END:18huuhx',
+        'destroyScope:END:18huuhx',
+        'exit:PART_EXP:1c9w3nr',
+        'destroyScope:PART_EXP:1c9w3nr'
       ]);
     });
 
@@ -911,18 +1266,26 @@ describe('simulator', function() {
 
       // then
       expectTrace([
-        'createScope:COLLAB:null',
-        'signal:M_FLOW:A',
-        'exit:M_FLOW:A',
+        'createScope:M_FLOW:null',
+        'signal:M_FLOW:0xhsq77',
+        'exit:M_FLOW:0xhsq77',
         'createScope:PART_EXP:null',
-        'destroyScope:COLLAB:A',
-        'signal:START:B',
-        'exit:START:B',
-        'enter:Flow_1:B',
-        'exit:Flow_1:B',
-        'enter:END:B',
-        'exit:END:B',
-        'destroyScope:PART_EXP:B'
+        'destroyScope:M_FLOW:0xhsq77',
+        'signal:PART_EXP:0k46v72',
+        'createScope:START:0k46v72',
+        'signal:START:047785r',
+        'exit:START:047785r',
+        'createScope:Flow_1:0k46v72',
+        'destroyScope:START:047785r',
+        'enter:Flow_1:0k46v72',
+        'exit:Flow_1:1847vhq',
+        'createScope:END:0k46v72',
+        'destroyScope:Flow_1:1847vhq',
+        'enter:END:0k46v72',
+        'exit:END:0fxdemj',
+        'destroyScope:END:0fxdemj',
+        'exit:PART_EXP:0k46v72',
+        'destroyScope:PART_EXP:0k46v72'
       ]);
     });
 
@@ -931,44 +1294,68 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('PART_A')
       });
 
       // then
       expectTrace([
         'createScope:PART_A:null',
-        'signal:START:A',
-        'exit:START:A',
-        'enter:Flow_2:A',
-        'exit:Flow_2:A',
-        'enter:THROW_M:A',
-        'exit:THROW_M:A',
-        'createScope:COLLAB:null',
-        'enter:Flow_7:A',
-        'signal:M_FLOW_A:B',
-        'exit:Flow_7:A',
-        'exit:M_FLOW_A:B',
+        'signal:PART_A:08v5y2h',
+        'createScope:START:08v5y2h',
+        'signal:START:0ojqmfu',
+        'exit:START:0ojqmfu',
+        'createScope:Flow_2:08v5y2h',
+        'destroyScope:START:0ojqmfu',
+        'enter:Flow_2:08v5y2h',
+        'exit:Flow_2:0sqidhh',
+        'createScope:THROW_M:08v5y2h',
+        'destroyScope:Flow_2:0sqidhh',
+        'enter:THROW_M:08v5y2h',
+        'createScope:M_FLOW_A:null',
+        'signal:M_FLOW_A:0uz2498',
+        'exit:THROW_M:17m3ehw',
+        'createScope:Flow_7:08v5y2h',
+        'destroyScope:THROW_M:17m3ehw',
+        'exit:M_FLOW_A:0uz2498',
         'createScope:PART_B:null',
-        'destroyScope:COLLAB:B',
-        'enter:CATCH_M:A',
-        'signal:START_B:C',
-        'exit:START_B:C',
-        'enter:Flow_3:C',
-        'exit:Flow_3:C',
-        'enter:END_B:C',
-        'createScope:COLLAB:null',
-        'signal:M_FLOW_B:D',
-        'exit:END_B:C',
-        'destroyScope:PART_B:C',
-        'exit:M_FLOW_B:D',
-        'destroyScope:COLLAB:D',
-        'signal:CATCH_M:A',
-        'exit:CATCH_M:A',
-        'enter:Flow_4:A',
-        'exit:Flow_4:A',
-        'enter:END:A',
-        'exit:END:A',
-        'destroyScope:PART_A:A'
+        'destroyScope:M_FLOW_A:0uz2498',
+        'enter:Flow_7:08v5y2h',
+        'signal:PART_B:17w20y6',
+        'createScope:START_B:17w20y6',
+        'exit:Flow_7:03sspwq',
+        'createScope:CATCH_M:08v5y2h',
+        'destroyScope:Flow_7:03sspwq',
+        'signal:START_B:1o5r87i',
+        'enter:CATCH_M:08v5y2h',
+        'exit:START_B:1o5r87i',
+        'createScope:Flow_3:17w20y6',
+        'destroyScope:START_B:1o5r87i',
+        'enter:Flow_3:17w20y6',
+        'exit:Flow_3:01sw2v9',
+        'createScope:END_B:17w20y6',
+        'destroyScope:Flow_3:01sw2v9',
+        'enter:END_B:17w20y6',
+        'createScope:M_FLOW_B:null',
+        'signal:M_FLOW_B:1ma3b30',
+        'exit:END_B:0mwwucq',
+        'destroyScope:END_B:0mwwucq',
+        'exit:M_FLOW_B:1ma3b30',
+        'destroyScope:M_FLOW_B:1ma3b30',
+        'exit:PART_B:17w20y6',
+        'destroyScope:PART_B:17w20y6',
+        'signal:CATCH_M:02fqdk8',
+        'exit:CATCH_M:02fqdk8',
+        'createScope:Flow_4:08v5y2h',
+        'destroyScope:CATCH_M:02fqdk8',
+        'enter:Flow_4:08v5y2h',
+        'exit:Flow_4:1ep2dy6',
+        'createScope:END:08v5y2h',
+        'destroyScope:Flow_4:1ep2dy6',
+        'enter:END:08v5y2h',
+        'exit:END:1mva4zu',
+        'destroyScope:END:1mva4zu',
+        'exit:PART_A:08v5y2h',
+        'destroyScope:PART_A:08v5y2h'
       ]);
     });
 
@@ -977,44 +1364,68 @@ describe('simulator', function() {
 
       // when
       signal({
-        element: element('START')
+        element: element('PART_A')
       });
 
       // then
       expectTrace([
         'createScope:PART_A:null',
-        'signal:START:bak9lawa3lo9b772sgz0mjtma',
-        'exit:START:bak9lawa3lo9b772sgz0mjtma',
-        'enter:Flow_2:bak9lawa3lo9b772sgz0mjtma',
-        'exit:Flow_2:bak9lawa3lo9b772sgz0mjtma',
-        'enter:TASK_S:bak9lawa3lo9b772sgz0mjtma',
-        'exit:TASK_S:bak9lawa3lo9b772sgz0mjtma',
-        'createScope:COLLAB:null',
-        'enter:Flow_1:bak9lawa3lo9b772sgz0mjtma',
-        'signal:M_FLOW_A:8kmny5ko194sh3ygo6e9o2x4k',
-        'exit:Flow_1:bak9lawa3lo9b772sgz0mjtma',
-        'exit:M_FLOW_A:8kmny5ko194sh3ygo6e9o2x4k',
+        'signal:PART_A:0nv9f99',
+        'createScope:START:0nv9f99',
+        'signal:START:0tbs7pj',
+        'exit:START:0tbs7pj',
+        'createScope:Flow_2:0nv9f99',
+        'destroyScope:START:0tbs7pj',
+        'enter:Flow_2:0nv9f99',
+        'exit:Flow_2:1jjhie9',
+        'createScope:TASK_S:0nv9f99',
+        'destroyScope:Flow_2:1jjhie9',
+        'enter:TASK_S:0nv9f99',
+        'createScope:M_FLOW_A:null',
+        'signal:M_FLOW_A:14wfime',
+        'exit:TASK_S:1ia5olg',
+        'createScope:Flow_1:0nv9f99',
+        'destroyScope:TASK_S:1ia5olg',
+        'exit:M_FLOW_A:14wfime',
         'createScope:PART_B:null',
-        'destroyScope:COLLAB:8kmny5ko194sh3ygo6e9o2x4k',
-        'enter:TASK_R:bak9lawa3lo9b772sgz0mjtma',
-        'signal:START_B:d6do4a9b0vs72tmj1hjebgz59',
-        'exit:START_B:d6do4a9b0vs72tmj1hjebgz59',
-        'enter:Flow_3:d6do4a9b0vs72tmj1hjebgz59',
-        'exit:Flow_3:d6do4a9b0vs72tmj1hjebgz59',
-        'enter:END_B:d6do4a9b0vs72tmj1hjebgz59',
-        'createScope:COLLAB:null',
-        'signal:M_FLOW_B:9rmn8cw6o52rfjbfkpc3spjep',
-        'exit:END_B:d6do4a9b0vs72tmj1hjebgz59',
-        'destroyScope:PART_B:d6do4a9b0vs72tmj1hjebgz59',
-        'exit:M_FLOW_B:9rmn8cw6o52rfjbfkpc3spjep',
-        'destroyScope:COLLAB:9rmn8cw6o52rfjbfkpc3spjep',
-        'signal:TASK_R:bak9lawa3lo9b772sgz0mjtma',
-        'exit:TASK_R:bak9lawa3lo9b772sgz0mjtma',
-        'enter:Flow_4:bak9lawa3lo9b772sgz0mjtma',
-        'exit:Flow_4:bak9lawa3lo9b772sgz0mjtma',
-        'enter:END:bak9lawa3lo9b772sgz0mjtma',
-        'exit:END:bak9lawa3lo9b772sgz0mjtma',
-        'destroyScope:PART_A:bak9lawa3lo9b772sgz0mjtma'
+        'destroyScope:M_FLOW_A:14wfime',
+        'enter:Flow_1:0nv9f99',
+        'signal:PART_B:0aog30j',
+        'createScope:START_B:0aog30j',
+        'exit:Flow_1:0ix4mix',
+        'createScope:TASK_R:0nv9f99',
+        'destroyScope:Flow_1:0ix4mix',
+        'signal:START_B:0zan2hu',
+        'enter:TASK_R:0nv9f99',
+        'exit:START_B:0zan2hu',
+        'createScope:Flow_3:0aog30j',
+        'destroyScope:START_B:0zan2hu',
+        'enter:Flow_3:0aog30j',
+        'exit:Flow_3:09k6ev6',
+        'createScope:END_B:0aog30j',
+        'destroyScope:Flow_3:09k6ev6',
+        'enter:END_B:0aog30j',
+        'createScope:M_FLOW_B:null',
+        'signal:M_FLOW_B:1xv1oaj',
+        'exit:END_B:1841u6v',
+        'destroyScope:END_B:1841u6v',
+        'exit:M_FLOW_B:1xv1oaj',
+        'destroyScope:M_FLOW_B:1xv1oaj',
+        'exit:PART_B:0aog30j',
+        'destroyScope:PART_B:0aog30j',
+        'signal:TASK_R:1iamo65',
+        'exit:TASK_R:1iamo65',
+        'createScope:Flow_4:0nv9f99',
+        'destroyScope:TASK_R:1iamo65',
+        'enter:Flow_4:0nv9f99',
+        'exit:Flow_4:1dydpwz',
+        'createScope:END:0nv9f99',
+        'destroyScope:Flow_4:1dydpwz',
+        'enter:END:0nv9f99',
+        'exit:END:094oey2',
+        'destroyScope:END:094oey2',
+        'exit:PART_A:0nv9f99',
+        'destroyScope:PART_A:0nv9f99'
       ]);
     });
 
