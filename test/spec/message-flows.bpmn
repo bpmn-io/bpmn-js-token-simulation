@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_19vl35g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
-  <bpmn:collaboration id="Process">
-    <bpmn:participant id="Participant_0bbn3ql" name="External system" />
-    <bpmn:participant id="Participant_1lgxr3w" name="Our Process" processRef="Process_1" />
-    <bpmn:messageFlow id="MFLOW_OUT" sourceRef="Task_1" targetRef="Participant_0bbn3ql" />
-    <bpmn:messageFlow id="MFLOW_IN" sourceRef="Participant_0bbn3ql" targetRef="CATCH_M" />
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="Participant_1" name="External system" />
+    <bpmn:participant id="Participant_2" name="Our Process" processRef="Process_1" />
+    <bpmn:messageFlow id="MFLOW_OUT" sourceRef="Task_1" targetRef="Participant_1" />
+    <bpmn:messageFlow id="MFLOW_IN" sourceRef="Participant_1" targetRef="CATCH_M" />
   </bpmn:collaboration>
   <bpmn:process id="Process_1" isExecutable="true">
     <bpmn:startEvent id="START" name="START">
@@ -27,11 +27,11 @@
     </bpmn:intermediateCatchEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process">
-      <bpmndi:BPMNShape id="Participant_04imef1_di" bpmnElement="Participant_0bbn3ql" isHorizontal="true">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="Participant_1_di" bpmnElement="Participant_1" isHorizontal="true">
         <dc:Bounds x="160" y="80" width="600" height="60" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_1lgxr3w_di" bpmnElement="Participant_1lgxr3w" isHorizontal="true">
+      <bpmndi:BPMNShape id="Participant_2_di" bpmnElement="Participant_2" isHorizontal="true">
         <dc:Bounds x="160" y="211" width="600" height="250" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">

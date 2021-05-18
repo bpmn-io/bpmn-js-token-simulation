@@ -7,16 +7,16 @@
       <startEvent id="START_SUB">
         <outgoing>Flow_2</outgoing>
       </startEvent>
-      <sequenceFlow id="Flow_2" sourceRef="START_SUB" targetRef="UserTask" />
+      <sequenceFlow id="Flow_2" sourceRef="START_SUB" targetRef="ReceiveTask" />
       <endEvent id="END_SUB" name="END&#10;SUB">
         <incoming>Flow_4</incoming>
       </endEvent>
-      <sequenceFlow id="Flow_4" sourceRef="UserTask" targetRef="END_SUB" />
-      <userTask id="UserTask">
+      <sequenceFlow id="Flow_4" sourceRef="ReceiveTask" targetRef="END_SUB" />
+      <receiveTask id="ReceiveTask">
         <incoming>Flow_2</incoming>
         <outgoing>Flow_4</outgoing>
-      </userTask>
-      <boundaryEvent id="TaskBoundary" attachedToRef="UserTask">
+      </receiveTask>
+      <boundaryEvent id="TaskBoundary" attachedToRef="ReceiveTask">
         <outgoing>Flow_5</outgoing>
       </boundaryEvent>
       <endEvent id="TimedOutSubEvent" name="TIMED OUT&#10;SUB">
@@ -82,7 +82,7 @@
           <omgdc:Bounds x="634" y="215" width="52" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_di" bpmnElement="UserTask">
+      <bpmndi:BPMNShape id="ReceiveTask_di" bpmnElement="ReceiveTask">
         <omgdc:Bounds x="480" y="150" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TimedOutSubEvent_di" bpmnElement="TimedOutSubEvent">

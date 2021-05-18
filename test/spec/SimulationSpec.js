@@ -46,7 +46,7 @@ describe('simulation', function() {
 
     const diagram = require('./simple.bpmn');
 
-    let startEvent,
+    let processElement,
         gateway;
 
     beforeEach(bootstrapModeler(diagram, {
@@ -57,7 +57,7 @@ describe('simulation', function() {
     }));
 
     beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      startEvent = elementRegistry.get('StartEvent_1');
+      processElement = elementRegistry.get('Process_1');
       gateway = elementRegistry.get('ExclusiveGateway_1');
 
       toggleMode.toggleMode();
@@ -71,7 +71,7 @@ describe('simulation', function() {
 
         // when
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         await scopeDestroyed();
@@ -100,7 +100,7 @@ describe('simulation', function() {
 
         // when
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         await scopeDestroyed();
@@ -132,7 +132,7 @@ describe('simulation', function() {
 
         // when
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         const context = await elementEnter('IntermediateCatchEvent_1');
@@ -165,11 +165,11 @@ describe('simulation', function() {
         exclusiveGatewaySettings.setSequenceFlow(gateway);
 
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         const {
@@ -211,7 +211,7 @@ describe('simulation', function() {
 
     const diagram = require('./boundary-event.bpmn');
 
-    let startEvent;
+    let processElement;
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -221,7 +221,7 @@ describe('simulation', function() {
     }));
 
     beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      startEvent = elementRegistry.get('START');
+      processElement = elementRegistry.get('Process_1');
 
       toggleMode.toggleMode();
 
@@ -230,16 +230,25 @@ describe('simulation', function() {
 
 
     it('should execute happy path', inject(
-      async function(simulator) {
+      async function(simulator, elementRegistry) {
 
         // when
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         const {
           scope
         } = await elementEnter('SUB');
+
+        const {
+          scope: childScope
+        } = await elementEnter('ReceiveTask');
+
+        continueFlow({
+          element: elementRegistry.get('ReceiveTask'),
+          scope: childScope
+        });
 
         await scopeDestroyed(scope);
 
@@ -250,7 +259,7 @@ describe('simulation', function() {
           'SUB',
           'START_SUB',
           'Flow_2',
-          'UserTask',
+          'ReceiveTask',
           'Flow_4',
           'END_SUB',
           'Flow_3',
@@ -265,46 +274,34 @@ describe('simulation', function() {
 
         // given
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
-        const [
-          { scope },
-          { scope: subScope }
-        ] = await Promise.all([
-          elementEnter('SUB'),
-          elementEnter('Flow_2')
-        ]);
+        const { scope } = await elementEnter('SUB');
 
         // when
         // trigger boundary
         continueFlow({
-          scope,
-          element: elementRegistry.get('TIMER_BOUNDARY')
+          element: elementRegistry.get('TIMER_BOUNDARY'),
+          scope
         });
 
-        await Promise.all([
-          scopeDestroyed(scope),
-          scopeDestroyed(subScope)
-        ]);
+        await scopeDestroyed(scope);
 
         // then
-        expect(subScope).to.have.property('destroyed', true);
-
         expectHistory([
           'START',
           'Flow_1',
           'SUB',
           'START_SUB',
           'Flow_2',
-          'UserTask',
-          'Flow_4',
-          'END_SUB',
-          'Flow_3',
-          'END'
+          'ReceiveTask',
+          'Flow_6',
+          'END_TIMED_OUT'
         ]);
       }
     ));
+
   });
 
 
@@ -312,7 +309,7 @@ describe('simulation', function() {
 
     const diagram = require('./event-based-gateway.bpmn');
 
-    let startEvent;
+    let processElement;
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -322,7 +319,7 @@ describe('simulation', function() {
     }));
 
     beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      startEvent = elementRegistry.get('START');
+      processElement = elementRegistry.get('Process_1');
 
       toggleMode.toggleMode();
 
@@ -335,7 +332,7 @@ describe('simulation', function() {
 
         // when
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         const {
@@ -343,8 +340,10 @@ describe('simulation', function() {
         } = await elementEnter('G_EVENT');
 
         simulator.signal({
-          scope,
-          relatedElement: elementRegistry.get('G_EVENT'),
+          scope: simulator.findScope({
+            parent: scope,
+            element: elementRegistry.get('G_EVENT')
+          }),
           element: elementRegistry.get('S_CATCH')
         });
 
@@ -368,7 +367,7 @@ describe('simulation', function() {
 
     const diagram = require('./event-sub-process.bpmn');
 
-    let startEvent;
+    let processElement;
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -378,7 +377,7 @@ describe('simulation', function() {
     }));
 
     beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      startEvent = elementRegistry.get('START');
+      processElement = elementRegistry.get('Process_1');
 
       toggleMode.toggleMode();
 
@@ -391,7 +390,7 @@ describe('simulation', function() {
 
         // when
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         const {
@@ -400,7 +399,7 @@ describe('simulation', function() {
 
         simulator.signal({
           parentScope: scope,
-          element: elementRegistry.get('START_SUB')
+          element: elementRegistry.get('EVENT_SUB')
         });
 
         await elementEnter('END_SUB');
@@ -428,7 +427,7 @@ describe('simulation', function() {
 
     const diagram = require('./message-flows.bpmn');
 
-    let startEvent;
+    let processElement;
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -438,7 +437,7 @@ describe('simulation', function() {
     }));
 
     beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      startEvent = elementRegistry.get('START');
+      processElement = elementRegistry.get('Participant_2');
 
       toggleMode.toggleMode();
 
@@ -451,7 +450,7 @@ describe('simulation', function() {
 
         // when
         simulator.signal({
-          element: startEvent
+          element: processElement
         });
 
         const {
@@ -543,10 +542,22 @@ function continueFlow(context) {
 
     setTimeout(function() {
 
-      simulator.signal({
-        element,
-        scope
-      });
+      if (is(element, 'bpmn:BoundaryEvent')) {
+        simulator.signal({
+          element,
+          parentScope: scope
+        });
+      } else {
+
+        simulator.signal({
+          element,
+          scope: simulator.findScope({
+            element,
+            parent: scope
+          })
+        });
+      }
+
     }, 150);
   });
 
@@ -561,6 +572,16 @@ function scopeDestroyed(scope=null) {
       const listener = function(event) {
 
         if (scope && event.scope !== scope) {
+          return;
+        }
+
+        const scopeElements = [
+          'bpmn:Participant',
+          'bpmn:Process',
+          'bpmn:SubProcess'
+        ];
+
+        if (scopeElements.every(t => !is(event.scope.element, t))) {
           return;
         }
 
