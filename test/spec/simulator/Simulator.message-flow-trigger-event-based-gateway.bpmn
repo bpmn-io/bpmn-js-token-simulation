@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <collaboration id="COLLAB">
+    <participant id="PART_EXP" processRef="Process_1" />
+    <participant id="PART_COLLAPSED" />
+    <messageFlow id="M_FLOW" name="M_FLOW" sourceRef="PART_COLLAPSED" targetRef="R_TASK" />
+  </collaboration>
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="START" name="START">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="EVT_GATE" />
+    <sequenceFlow id="Flow_2" sourceRef="R_TASK" targetRef="END" />
+    <sequenceFlow id="Flow_1u1kht3" sourceRef="EVT_GATE" targetRef="R_TASK" />
+    <eventBasedGateway id="EVT_GATE" name="EVT_GATE">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_1u1kht3</outgoing>
+      <outgoing>Flow_7</outgoing>
+    </eventBasedGateway>
+    <receiveTask id="R_TASK" name="R_TASK">
+      <incoming>Flow_1u1kht3</incoming>
+      <outgoing>Flow_2</outgoing>
+    </receiveTask>
+    <endEvent id="END" name="END_B">
+      <incoming>Flow_2</incoming>
+    </endEvent>
+    <intermediateCatchEvent id="M_CATCH" name="M_CATCH">
+      <incoming>Flow_7</incoming>
+      <outgoing>Flow_8</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_172ivfq" />
+    </intermediateCatchEvent>
+    <sequenceFlow id="Flow_7" sourceRef="EVT_GATE" targetRef="M_CATCH" />
+    <endEvent id="END_A" name="END_A">
+      <incoming>Flow_8</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_8" sourceRef="M_CATCH" targetRef="END_A" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="COLLAB">
+      <bpmndi:BPMNShape id="PART_EXP_di" bpmnElement="PART_EXP" isHorizontal="true">
+        <omgdc:Bounds x="140" y="90" width="600" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="540" y="240" />
+        <omgdi:waypoint x="632" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="258" y="190" />
+        <omgdi:waypoint x="305" y="190" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1u1kht3_di" bpmnElement="Flow_1u1kht3">
+        <omgdi:waypoint x="330" y="215" />
+        <omgdi:waypoint x="330" y="240" />
+        <omgdi:waypoint x="440" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06ygvlo_di" bpmnElement="Flow_7">
+        <omgdi:waypoint x="330" y="165" />
+        <omgdi:waypoint x="330" y="140" />
+        <omgdi:waypoint x="472" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lg7zko_di" bpmnElement="Flow_8">
+        <omgdi:waypoint x="508" y="140" />
+        <omgdi:waypoint x="632" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="222" y="172" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="222" y="153" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1yf3zlt_di" bpmnElement="EVT_GATE">
+        <omgdc:Bounds x="305" y="165" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="261" y="213" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="R_TASK_di" bpmnElement="R_TASK">
+        <omgdc:Bounds x="440" y="200" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <omgdc:Bounds x="632" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="632" y="265" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rqojfy_di" bpmnElement="M_CATCH">
+        <omgdc:Bounds x="472" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="464" y="165" width="53" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0qxspiq_di" bpmnElement="END_A">
+        <omgdc:Bounds x="632" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="631" y="165" width="38" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="PART_COLLAPSED_di" bpmnElement="PART_COLLAPSED" isHorizontal="true">
+        <omgdc:Bounds x="140" y="390" width="600" height="60" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="M_FLOW_di" bpmnElement="M_FLOW">
+        <omgdi:waypoint x="490" y="390" />
+        <omgdi:waypoint x="490" y="280" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="506" y="356" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

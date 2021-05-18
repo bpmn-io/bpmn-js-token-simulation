@@ -1257,6 +1257,53 @@ describe('simulator', function() {
     });
 
 
+    verify('message-flow-trigger-event-based-gateway', () => {
+
+      // given
+      signal({
+        element: element('PART_EXP')
+      });
+
+      // when
+      signal({
+        element: element('M_FLOW')
+      });
+
+      // then
+      expectTrace([
+        'createScope:PART_EXP:null',
+        'signal:PART_EXP:1xu9426',
+        'createScope:START:1xu9426',
+        'signal:START:1spbgm3',
+        'exit:START:1spbgm3',
+        'createScope:Flow_1:1xu9426',
+        'destroyScope:START:1spbgm3',
+        'enter:Flow_1:1xu9426',
+        'exit:Flow_1:0g9oaz6',
+        'createScope:EVT_GATE:1xu9426',
+        'destroyScope:Flow_1:0g9oaz6',
+        'enter:EVT_GATE:1xu9426',
+        'createScope:M_FLOW:null',
+        'signal:M_FLOW:0ur2vxl',
+        'exit:M_FLOW:0ur2vxl',
+        'destroyScope:M_FLOW:0ur2vxl',
+        'signal:R_TASK:14vaqv1',
+        'exit:R_TASK:14vaqv1',
+        'createScope:Flow_2:1xu9426',
+        'destroyScope:EVT_GATE:14vaqv1',
+        'enter:Flow_2:1xu9426',
+        'exit:Flow_2:05tjay6',
+        'createScope:END:1xu9426',
+        'destroyScope:Flow_2:05tjay6',
+        'enter:END:1xu9426',
+        'exit:END:11myv59',
+        'destroyScope:END:11myv59',
+        'exit:PART_EXP:1xu9426',
+        'destroyScope:PART_EXP:1xu9426'
+      ]);
+    });
+
+
     verify('message-flow-trigger-start-event', () => {
 
       // when
