@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_13ia9fz" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.14.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="END" />
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_1r0a3t5" />
+    </bpmn:endEvent>
+    <bpmn:subProcess id="SUB_N_INT" name="SUB_N_INT" triggeredByEvent="true">
+      <bpmn:endEvent id="END_N_INT" name="END_N_INT">
+        <bpmn:incoming>Flow_2</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_2" sourceRef="START_N_INT" targetRef="END_N_INT" />
+      <bpmn:startEvent id="START_N_INT" name="START_N_INT" isInterrupting="false">
+        <bpmn:outgoing>Flow_2</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_1g72xjx" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="SUB_INT" name="SUB_INT" triggeredByEvent="true">
+      <bpmn:endEvent id="END_INT" name="END_INT">
+        <bpmn:incoming>Flow_3</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_3" sourceRef="START_INT" targetRef="END_INT" />
+      <bpmn:startEvent id="START_INT" name="START_INT">
+        <bpmn:outgoing>Flow_3</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_03pdj3q" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="SUB_N_INT_2" name="SUB_N_INT_2" triggeredByEvent="true">
+      <bpmn:endEvent id="END_N_INT_2" name="END_N_INT_2">
+        <bpmn:incoming>Flow_11</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:startEvent id="START_N_INT_2" name="START_N_INT_2" isInterrupting="false">
+        <bpmn:outgoing>Flow_11</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_0kv5wfa" />
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_11" sourceRef="START_N_INT_2" targetRef="END_N_INT_2" />
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="215" y="97" />
+        <di:waypoint x="372" y="97" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="179" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="180" y="122" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="372" y="79" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="379" y="122" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_INT_di" bpmnElement="SUB_INT" isExpanded="true">
+        <dc:Bounds x="440" y="190" width="220" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="516" y="260" />
+        <di:waypoint x="572" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="END_INT_di" bpmnElement="END_INT">
+        <dc:Bounds x="572" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="566" y="285" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="START_INT_di" bpmnElement="START_INT">
+        <dc:Bounds x="480" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="468" y="285" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_N_INT_di" bpmnElement="SUB_N_INT" isExpanded="true">
+        <dc:Bounds x="180" y="190" width="220" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="256" y="260" />
+        <di:waypoint x="312" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="END_N_INT_di" bpmnElement="END_N_INT">
+        <dc:Bounds x="312" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="299" y="285" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="START_N_INT_di" bpmnElement="START_N_INT">
+        <dc:Bounds x="220" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="201" y="285" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0mdk5ma_di" bpmnElement="SUB_N_INT_2" isExpanded="true">
+        <dc:Bounds x="700" y="190" width="220" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0jy01o0_di" bpmnElement="Flow_11">
+        <di:waypoint x="776" y="260" />
+        <di:waypoint x="832" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1yo3rnz_di" bpmnElement="END_N_INT_2">
+        <dc:Bounds x="832" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="813" y="285" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jzzbpz_di" bpmnElement="START_N_INT_2">
+        <dc:Bounds x="740" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="716" y="285" width="85" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
