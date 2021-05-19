@@ -6,9 +6,14 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.19.0
+
+* `FEAT`: support escalation
+* `FEAT`: signal event-based gateway on signal
+
 ## 0.18.0
 
-* `FEAT`: simulate signals
+* `FEAT`: support signals
 * `FEAT`: handle scope interruption according to BPMN 2.0 spec
 * `FEAT`: signal event-based gateway on incoming messages
 * `FEAT`: scope all activities
