@@ -20,6 +20,15 @@ const initialDiagram = (() => {
   }
 })();
 
+function hideDropMessage() {
+  const dropMessage = document.querySelector('.drop-message');
+
+  dropMessage.style.display = 'none';
+}
+
+if (persistent) {
+  hideDropMessage();
+}
 
 const ExampleModule = {
   __init__: [
@@ -87,6 +96,7 @@ document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', functio
   // files = [ { name, contents }, ... ]
 
   if (files.length) {
+    hideDropMessage();
     viewer.openDiagram(files[0].contents);
   }
 

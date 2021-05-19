@@ -27,6 +27,19 @@
 
 /** file-drops */
 
+.drop-message {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  border-radius: 2px;
+  padding: 6px 12px;
+  font-size: 16px;
+  color: var(--token-simulation-grey-darken-30, #212121);
+  user-select: none;
+}
+
 .drop-overlay {
   position: fixed;
   top: 0;
