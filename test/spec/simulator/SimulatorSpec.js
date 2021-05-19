@@ -29,6 +29,11 @@ describe('simulator', function() {
         simulator.findScope({ element: subProcess })
       ).to.equal(childScope_A1);
 
+      expect(rootScope_A.getTokensByElement(subProcess)).to.eql(2);
+
+      expect(rootScope_A.getTokens()).to.eql(2);
+      expect(rootScope_B.getTokens()).to.eql(0);
+
       expect(
         simulator.findScope({ parent: rootScope_A })
       ).to.equal(childScope_A1);
@@ -53,6 +58,9 @@ describe('simulator', function() {
       simulator.destroyScope(childScope_A1);
 
       // then
+      expect(rootScope_A.getTokensByElement(subProcess)).to.eql(1);
+      expect(rootScope_A.getTokens()).to.eql(1);
+
       expect(
         simulator.findScope({ destroyed: true })
       ).to.equal(childScope_A1);
