@@ -1,9 +1,0 @@
-.github
-tasks
-tmp
-test
-example
-.eslintrc
-.eslintignore
-karma.conf.js
-webpack.config.js

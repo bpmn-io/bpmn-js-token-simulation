@@ -35,6 +35,11 @@
     "url": "https://github.com/bpmn-io/bpmn-js-token-simulation/issues"
   },
   "homepage": "https://github.com/bpmn-io/bpmn-js-token-simulation#readme",
+  "files": [
+    "assets",
+    "lib",
+    "index.js"
+  ],
   "devDependencies": {
     "bpmn-js": "^8.5.0",
     "chai": "^4.3.4",
