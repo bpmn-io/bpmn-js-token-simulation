@@ -347,139 +347,6 @@ describe('simulator', function() {
     });
 
 
-    verify('signal-madness', () => {
-
-      // when
-      signal({
-        element: element('Process_1'),
-        startEvent: element('START')
-      });
-
-      // then
-      expectTrace([
-        'createScope:Process_1:null',
-        'signal:Process_1:1sj13n0',
-        'createScope:START:1sj13n0',
-        'signal:START:0ouw2lh',
-        'exit:START:0ouw2lh',
-        'createScope:Flow_108sk9x:1sj13n0',
-        'createScope:Flow_0z3vi5e:1sj13n0',
-        'destroyScope:START:0ouw2lh',
-        'enter:Flow_108sk9x:1sj13n0',
-        'enter:Flow_0z3vi5e:1sj13n0',
-        'exit:Flow_108sk9x:0hjhn9u',
-        'createScope:Event_1weiqmc:1sj13n0',
-        'destroyScope:Flow_108sk9x:0hjhn9u',
-        'exit:Flow_0z3vi5e:12ej0xc',
-        'createScope:REC_1:1sj13n0',
-        'destroyScope:Flow_0z3vi5e:12ej0xc',
-        'enter:Event_1weiqmc:1sj13n0',
-        'enter:REC_1:1sj13n0',
-        'exit:Event_1weiqmc:1awylhe',
-        'createScope:Flow_0kw1f6j:1sj13n0',
-        'destroyScope:Event_1weiqmc:1awylhe',
-        'enter:Flow_0kw1f6j:1sj13n0',
-        'exit:Flow_0kw1f6j:1oyxjbm',
-        'createScope:SEND_1:1sj13n0',
-        'destroyScope:Flow_0kw1f6j:1oyxjbm',
-        'enter:SEND_1:1sj13n0',
-        'createScope:Activity_1yp7ae1:1sj13n0',
-        'signal:REC_1:1tphdp7',
-        'signal:Activity_1yp7ae1:14fb01f',
-        'createScope:START_S:14fb01f',
-        'exit:SEND_1:0hksb7c',
-        'createScope:Flow_0346ss6:1sj13n0',
-        'destroyScope:SEND_1:0hksb7c',
-        'exit:REC_1:1tphdp7',
-        'createScope:Flow_1fq8297:1sj13n0',
-        'destroyScope:REC_1:1tphdp7',
-        'signal:START_S:0iiz7lx',
-        'enter:Flow_0346ss6:1sj13n0',
-        'enter:Flow_1fq8297:1sj13n0',
-        'exit:START_S:0iiz7lx',
-        'createScope:Flow_1i1q00n:14fb01f',
-        'destroyScope:START_S:0iiz7lx',
-        'exit:Flow_0346ss6:04sb5qa',
-        'createScope:REC_2:1sj13n0',
-        'destroyScope:Flow_0346ss6:04sb5qa',
-        'exit:Flow_1fq8297:0ibt6gp',
-        'createScope:REC_3:1sj13n0',
-        'destroyScope:Flow_1fq8297:0ibt6gp',
-        'enter:Flow_1i1q00n:14fb01f',
-        'enter:REC_2:1sj13n0',
-        'enter:REC_3:1sj13n0',
-        'exit:Flow_1i1q00n:0iqk4kl',
-        'createScope:END_S:14fb01f',
-        'destroyScope:Flow_1i1q00n:0iqk4kl',
-        'enter:END_S:14fb01f',
-        'signal:REC_2:109kmrc',
-        'exit:END_S:1wd54h7',
-        'destroyScope:END_S:1wd54h7',
-        'exit:REC_2:109kmrc',
-        'createScope:Flow_0z5rf4i:1sj13n0',
-        'destroyScope:REC_2:109kmrc',
-        'exit:Activity_1yp7ae1:14fb01f',
-        'destroyScope:Activity_1yp7ae1:14fb01f',
-        'enter:Flow_0z5rf4i:1sj13n0',
-        'exit:Flow_0z5rf4i:1nsdnuz',
-        'createScope:SEND_3:1sj13n0',
-        'destroyScope:Flow_0z5rf4i:1nsdnuz',
-        'enter:SEND_3:1sj13n0',
-        'signal:REC_3:0dt80i7',
-        'exit:SEND_3:0robkjq',
-        'createScope:Flow_0skcc47:1sj13n0',
-        'destroyScope:SEND_3:0robkjq',
-        'exit:REC_3:0dt80i7',
-        'createScope:Flow_0qpwtj4:1sj13n0',
-        'destroyScope:REC_3:0dt80i7',
-        'enter:Flow_0skcc47:1sj13n0',
-        'enter:Flow_0qpwtj4:1sj13n0',
-        'exit:Flow_0skcc47:1oh7lc9',
-        'createScope:A:1sj13n0',
-        'destroyScope:Flow_0skcc47:1oh7lc9',
-        'exit:Flow_0qpwtj4:1gzgcdx',
-        'createScope:B:1sj13n0',
-        'destroyScope:Flow_0qpwtj4:1gzgcdx',
-        'enter:A:1sj13n0',
-        'enter:B:1sj13n0',
-        'exit:B:11zk759',
-        'createScope:Flow_178z1zz:1sj13n0',
-        'destroyScope:B:11zk759',
-        'enter:Flow_178z1zz:1sj13n0',
-        'exit:Flow_178z1zz:1ebrswn',
-        'createScope:SEND_4:1sj13n0',
-        'destroyScope:Flow_178z1zz:1ebrswn',
-        'enter:SEND_4:1sj13n0',
-        'createScope:BOUNDARY_4:1sj13n0',
-        'signal:BOUNDARY_4:01xcasz',
-        'exit:SEND_4:1apatpp',
-        'createScope:Flow_09r2nuh:1sj13n0',
-        'destroyScope:SEND_4:1apatpp',
-        'exit:A:1pnnmhl',
-        'destroyScope:A:1pnnmhl',
-        'exit:BOUNDARY_4:01xcasz',
-        'createScope:Flow_04j6212:1sj13n0',
-        'destroyScope:BOUNDARY_4:01xcasz',
-        'enter:Flow_09r2nuh:1sj13n0',
-        'enter:Flow_04j6212:1sj13n0',
-        'exit:Flow_09r2nuh:0ll2hwb',
-        'createScope:END_B:1sj13n0',
-        'destroyScope:Flow_09r2nuh:0ll2hwb',
-        'exit:Flow_04j6212:0c7ap00',
-        'createScope:END_B:1sj13n0',
-        'destroyScope:Flow_04j6212:0c7ap00',
-        'enter:END_B:1sj13n0',
-        'enter:END_B:1sj13n0',
-        'exit:END_B:1rew2ug',
-        'destroyScope:END_B:1rew2ug',
-        'exit:END_B:1og5trc',
-        'destroyScope:END_B:1og5trc',
-        'exit:Process_1:1sj13n0',
-        'destroyScope:Process_1:1sj13n0'
-      ]);
-    });
-
-
     verify('data-objects', () => {
 
       // when
@@ -837,6 +704,394 @@ describe('simulator', function() {
   });
 
 
+  describe('signal event', function() {
+
+    verify('signal-trigger-event-based-gateway', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:1h0k46e',
+        'createScope:START:1h0k46e',
+        'signal:START:1jst4aj',
+        'exit:START:1jst4aj',
+        'createScope:Flow_1:1h0k46e',
+        'destroyScope:START:1jst4aj',
+        'enter:Flow_1:1h0k46e',
+        'exit:Flow_1:1f0ykd2',
+        'createScope:PARALLEL_GATE:1h0k46e',
+        'destroyScope:Flow_1:1f0ykd2',
+        'enter:PARALLEL_GATE:1h0k46e',
+        'exit:PARALLEL_GATE:1eo9bto',
+        'createScope:Flow_2:1h0k46e',
+        'createScope:Flow_5:1h0k46e',
+        'destroyScope:PARALLEL_GATE:1eo9bto',
+        'enter:Flow_2:1h0k46e',
+        'enter:Flow_5:1h0k46e',
+        'exit:Flow_2:0sjsj65',
+        'createScope:EVENT_BLANK:1h0k46e',
+        'destroyScope:Flow_2:0sjsj65',
+        'exit:Flow_5:134ykd5',
+        'createScope:EVT_GATE:1h0k46e',
+        'destroyScope:Flow_5:134ykd5',
+        'enter:EVENT_BLANK:1h0k46e',
+        'enter:EVT_GATE:1h0k46e',
+        'exit:EVENT_BLANK:1dbqs5t',
+        'createScope:Flow_3:1h0k46e',
+        'destroyScope:EVENT_BLANK:1dbqs5t',
+        'enter:Flow_3:1h0k46e',
+        'exit:Flow_3:1aoeu0a',
+        'createScope:Event_1ep74ai:1h0k46e',
+        'destroyScope:Flow_3:1aoeu0a',
+        'enter:Event_1ep74ai:1h0k46e',
+        'signal:Event_1xe1u5f:1toxg1z',
+        'exit:Event_1ep74ai:0g3yedz',
+        'createScope:Flow_4:1h0k46e',
+        'destroyScope:Event_1ep74ai:0g3yedz',
+        'exit:Event_1xe1u5f:1toxg1z',
+        'createScope:Flow_7:1h0k46e',
+        'destroyScope:EVT_GATE:1toxg1z',
+        'enter:Flow_4:1h0k46e',
+        'enter:Flow_7:1h0k46e',
+        'exit:Flow_4:0vi8js3',
+        'createScope:END_A:1h0k46e',
+        'destroyScope:Flow_4:0vi8js3',
+        'exit:Flow_7:1dqbft1',
+        'createScope:END_B:1h0k46e',
+        'destroyScope:Flow_7:1dqbft1',
+        'enter:END_A:1h0k46e',
+        'enter:END_B:1h0k46e',
+        'exit:END_A:0qg856c',
+        'destroyScope:END_A:0qg856c',
+        'exit:END_B:1srcfrg',
+        'destroyScope:END_B:1srcfrg',
+        'exit:Process_1:1h0k46e',
+        'destroyScope:Process_1:1h0k46e'
+      ]);
+    });
+
+
+    verify('signal-trigger-event-sub-process', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:0bxs21s',
+        'createScope:START:0bxs21s',
+        'signal:START:072ycyc',
+        'exit:START:072ycyc',
+        'createScope:Flow_04u2uoq:0bxs21s',
+        'destroyScope:START:072ycyc',
+        'enter:Flow_04u2uoq:0bxs21s',
+        'exit:Flow_04u2uoq:01pqau2',
+        'createScope:SIGNAL_A:0bxs21s',
+        'destroyScope:Flow_04u2uoq:01pqau2',
+        'enter:SIGNAL_A:0bxs21s',
+        'createScope:EVT_SUB:0bxs21s',
+        'signal:EVT_SUB:0ywqiom',
+        'createScope:START_A:0ywqiom',
+        'exit:SIGNAL_A:18j8v0i',
+        'createScope:Flow_4:0bxs21s',
+        'destroyScope:SIGNAL_A:18j8v0i',
+        'signal:START_A:0zhiyp5',
+        'enter:Flow_4:0bxs21s',
+        'exit:START_A:0zhiyp5',
+        'createScope:Flow_5:0ywqiom',
+        'destroyScope:START_A:0zhiyp5',
+        'exit:Flow_4:1qwgc8h',
+        'createScope:END_A:0bxs21s',
+        'destroyScope:Flow_4:1qwgc8h',
+        'enter:Flow_5:0ywqiom',
+        'enter:END_A:0bxs21s',
+        'exit:Flow_5:0r105ua',
+        'createScope:END_SUB:0ywqiom',
+        'destroyScope:Flow_5:0r105ua',
+        'exit:END_A:093l273',
+        'destroyScope:END_A:093l273',
+        'enter:END_SUB:0ywqiom',
+        'exit:END_SUB:03ner6n',
+        'destroyScope:END_SUB:03ner6n',
+        'exit:EVT_SUB:0ywqiom',
+        'destroyScope:EVT_SUB:0ywqiom',
+        'exit:Process_1:0bxs21s',
+        'destroyScope:Process_1:0bxs21s'
+      ]);
+    });
+
+
+    verify('signal-trigger-intermediate-catch-event', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:1qiidhp',
+        'createScope:START:1qiidhp',
+        'signal:START:1rvrd44',
+        'exit:START:1rvrd44',
+        'createScope:Flow_1:1qiidhp',
+        'destroyScope:START:1rvrd44',
+        'enter:Flow_1:1qiidhp',
+        'exit:Flow_1:1hhmqb3',
+        'createScope:PARALLEL_GATE:1qiidhp',
+        'destroyScope:Flow_1:1hhmqb3',
+        'enter:PARALLEL_GATE:1qiidhp',
+        'exit:PARALLEL_GATE:0rl19ja',
+        'createScope:Flow_2:1qiidhp',
+        'createScope:Flow_6:1qiidhp',
+        'destroyScope:PARALLEL_GATE:0rl19ja',
+        'enter:Flow_2:1qiidhp',
+        'enter:Flow_6:1qiidhp',
+        'exit:Flow_2:1ne0b31',
+        'createScope:EVENT_BLANK:1qiidhp',
+        'destroyScope:Flow_2:1ne0b31',
+        'exit:Flow_6:1i3ep1y',
+        'createScope:SIGNAL_A_CATCH:1qiidhp',
+        'destroyScope:Flow_6:1i3ep1y',
+        'enter:EVENT_BLANK:1qiidhp',
+        'enter:SIGNAL_A_CATCH:1qiidhp',
+        'exit:EVENT_BLANK:1az70mg',
+        'createScope:Flow_3:1qiidhp',
+        'destroyScope:EVENT_BLANK:1az70mg',
+        'enter:Flow_3:1qiidhp',
+        'exit:Flow_3:0mbc2um',
+        'createScope:SIGNAL_A_THROW:1qiidhp',
+        'destroyScope:Flow_3:0mbc2um',
+        'enter:SIGNAL_A_THROW:1qiidhp',
+        'signal:SIGNAL_A_CATCH:07df8vz',
+        'exit:SIGNAL_A_THROW:18gapal',
+        'createScope:Flow_4:1qiidhp',
+        'destroyScope:SIGNAL_A_THROW:18gapal',
+        'exit:SIGNAL_A_CATCH:07df8vz',
+        'createScope:Flow_7:1qiidhp',
+        'destroyScope:SIGNAL_A_CATCH:07df8vz',
+        'enter:Flow_4:1qiidhp',
+        'enter:Flow_7:1qiidhp',
+        'exit:Flow_4:02r0mh3',
+        'createScope:END_A:1qiidhp',
+        'destroyScope:Flow_4:02r0mh3',
+        'exit:Flow_7:0xg7re2',
+        'createScope:END_B:1qiidhp',
+        'destroyScope:Flow_7:0xg7re2',
+        'enter:END_A:1qiidhp',
+        'enter:END_B:1qiidhp',
+        'exit:END_A:0hw55ot',
+        'destroyScope:END_A:0hw55ot',
+        'exit:END_B:05yrvfd',
+        'destroyScope:END_B:05yrvfd',
+        'exit:Process_1:1qiidhp',
+        'destroyScope:Process_1:1qiidhp'
+      ]);
+    });
+
+
+    verify('signal-trigger-boundary-event', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:0zdq8b9',
+        'createScope:START:0zdq8b9',
+        'signal:START:18q0gel',
+        'exit:START:18q0gel',
+        'createScope:Flow_176dg60:0zdq8b9',
+        'destroyScope:START:18q0gel',
+        'enter:Flow_176dg60:0zdq8b9',
+        'exit:Flow_176dg60:0zuvplr',
+        'createScope:SUB:0zdq8b9',
+        'destroyScope:Flow_176dg60:0zuvplr',
+        'enter:SUB:0zdq8b9',
+        'createScope:START_SUB:08fwlop',
+        'signal:START_SUB:0j8fz4o',
+        'exit:START_SUB:0j8fz4o',
+        'createScope:Flow_104tc9y:08fwlop',
+        'destroyScope:START_SUB:0j8fz4o',
+        'enter:Flow_104tc9y:08fwlop',
+        'exit:Flow_104tc9y:1a1xhd0',
+        'createScope:SIGNAL_A:08fwlop',
+        'destroyScope:Flow_104tc9y:1a1xhd0',
+        'enter:SIGNAL_A:08fwlop',
+        'createScope:BOUNDARY_A:0zdq8b9',
+        'signal:BOUNDARY_A:10r5bza',
+        'destroyScope:SIGNAL_A:1n61drc',
+        'exit:SUB:08fwlop',
+        'destroyScope:SUB:08fwlop',
+        'exit:BOUNDARY_A:10r5bza',
+        'createScope:Flow_0pzj65w:0zdq8b9',
+        'destroyScope:BOUNDARY_A:10r5bza',
+        'enter:Flow_0pzj65w:0zdq8b9',
+        'exit:Flow_0pzj65w:0m6hxuh',
+        'createScope:END_A:0zdq8b9',
+        'destroyScope:Flow_0pzj65w:0m6hxuh',
+        'enter:END_A:0zdq8b9',
+        'exit:END_A:1d47fsq',
+        'destroyScope:END_A:1d47fsq',
+        'exit:Process_1:0zdq8b9',
+        'destroyScope:Process_1:0zdq8b9'
+      ]);
+    });
+
+
+    verify('signal-madness', () => {
+
+      // when
+      signal({
+        element: element('Process_1'),
+        startEvent: element('START')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:1cv4s7o',
+        'createScope:START:1cv4s7o',
+        'signal:START:0yoqhlk',
+        'exit:START:0yoqhlk',
+        'createScope:Flow_108sk9x:1cv4s7o',
+        'createScope:Flow_0z3vi5e:1cv4s7o',
+        'destroyScope:START:0yoqhlk',
+        'enter:Flow_108sk9x:1cv4s7o',
+        'enter:Flow_0z3vi5e:1cv4s7o',
+        'exit:Flow_108sk9x:1rdg15j',
+        'createScope:Event_1weiqmc:1cv4s7o',
+        'destroyScope:Flow_108sk9x:1rdg15j',
+        'exit:Flow_0z3vi5e:0okyh0v',
+        'createScope:REC_1:1cv4s7o',
+        'destroyScope:Flow_0z3vi5e:0okyh0v',
+        'enter:Event_1weiqmc:1cv4s7o',
+        'enter:REC_1:1cv4s7o',
+        'exit:Event_1weiqmc:0xegkyn',
+        'createScope:Flow_0kw1f6j:1cv4s7o',
+        'destroyScope:Event_1weiqmc:0xegkyn',
+        'enter:Flow_0kw1f6j:1cv4s7o',
+        'exit:Flow_0kw1f6j:0710yh3',
+        'createScope:SEND_1:1cv4s7o',
+        'destroyScope:Flow_0kw1f6j:0710yh3',
+        'enter:SEND_1:1cv4s7o',
+        'createScope:Activity_1yp7ae1:1cv4s7o',
+        'signal:REC_1:091ym9b',
+        'signal:Activity_1yp7ae1:0k114l8',
+        'createScope:START_S:0k114l8',
+        'exit:SEND_1:1uyrfee',
+        'createScope:Flow_0346ss6:1cv4s7o',
+        'destroyScope:SEND_1:1uyrfee',
+        'exit:REC_1:091ym9b',
+        'createScope:Flow_1fq8297:1cv4s7o',
+        'destroyScope:REC_1:091ym9b',
+        'signal:START_S:0o4zkrz',
+        'enter:Flow_0346ss6:1cv4s7o',
+        'enter:Flow_1fq8297:1cv4s7o',
+        'exit:START_S:0o4zkrz',
+        'createScope:Flow_1i1q00n:0k114l8',
+        'destroyScope:START_S:0o4zkrz',
+        'exit:Flow_0346ss6:0lybz1i',
+        'createScope:REC_2:1cv4s7o',
+        'destroyScope:Flow_0346ss6:0lybz1i',
+        'exit:Flow_1fq8297:1lifdw0',
+        'createScope:REC_3:1cv4s7o',
+        'destroyScope:Flow_1fq8297:1lifdw0',
+        'enter:Flow_1i1q00n:0k114l8',
+        'enter:REC_2:1cv4s7o',
+        'enter:REC_3:1cv4s7o',
+        'exit:Flow_1i1q00n:026hpp6',
+        'createScope:END_S:0k114l8',
+        'destroyScope:Flow_1i1q00n:026hpp6',
+        'enter:END_S:0k114l8',
+        'signal:REC_2:052og4q',
+        'exit:END_S:01dofg3',
+        'destroyScope:END_S:01dofg3',
+        'exit:REC_2:052og4q',
+        'createScope:Flow_0z5rf4i:1cv4s7o',
+        'destroyScope:REC_2:052og4q',
+        'exit:Activity_1yp7ae1:0k114l8',
+        'destroyScope:Activity_1yp7ae1:0k114l8',
+        'enter:Flow_0z5rf4i:1cv4s7o',
+        'exit:Flow_0z5rf4i:0z1clpj',
+        'createScope:SEND_3:1cv4s7o',
+        'destroyScope:Flow_0z5rf4i:0z1clpj',
+        'enter:SEND_3:1cv4s7o',
+        'signal:REC_3:11io3xt',
+        'exit:SEND_3:0ghtkmc',
+        'createScope:Flow_0skcc47:1cv4s7o',
+        'destroyScope:SEND_3:0ghtkmc',
+        'exit:REC_3:11io3xt',
+        'createScope:Flow_0qpwtj4:1cv4s7o',
+        'destroyScope:REC_3:11io3xt',
+        'enter:Flow_0skcc47:1cv4s7o',
+        'enter:Flow_0qpwtj4:1cv4s7o',
+        'exit:Flow_0skcc47:1chs6up',
+        'createScope:A:1cv4s7o',
+        'destroyScope:Flow_0skcc47:1chs6up',
+        'exit:Flow_0qpwtj4:01husb2',
+        'createScope:B:1cv4s7o',
+        'destroyScope:Flow_0qpwtj4:01husb2',
+        'enter:A:1cv4s7o',
+        'enter:B:1cv4s7o',
+        'exit:B:1jxtpt2',
+        'createScope:Flow_178z1zz:1cv4s7o',
+        'destroyScope:B:1jxtpt2',
+        'enter:Flow_178z1zz:1cv4s7o',
+        'exit:Flow_178z1zz:08oezsn',
+        'createScope:SEND_4:1cv4s7o',
+        'destroyScope:Flow_178z1zz:08oezsn',
+        'enter:SEND_4:1cv4s7o',
+        'createScope:BOUNDARY_4:1cv4s7o',
+        'signal:BOUNDARY_4:1v23po2',
+        'exit:SEND_4:0ftiqa0',
+        'createScope:Flow_09r2nuh:1cv4s7o',
+        'destroyScope:SEND_4:0ftiqa0',
+        'exit:A:1ozigxf',
+        'destroyScope:A:1ozigxf',
+        'exit:BOUNDARY_4:1v23po2',
+        'createScope:Flow_04j6212:1cv4s7o',
+        'destroyScope:BOUNDARY_4:1v23po2',
+        'enter:Flow_09r2nuh:1cv4s7o',
+        'enter:Flow_04j6212:1cv4s7o',
+        'exit:Flow_09r2nuh:05ewf0p',
+        'createScope:GATE_JOIN:1cv4s7o',
+        'destroyScope:Flow_09r2nuh:05ewf0p',
+        'exit:Flow_04j6212:11bwt7e',
+        'createScope:GATE_JOIN:1cv4s7o',
+        'destroyScope:Flow_04j6212:11bwt7e',
+        'enter:GATE_JOIN:1cv4s7o',
+        'destroyScope:GATE_JOIN:0cek806',
+        'exit:GATE_JOIN:00u8rsb',
+        'createScope:Flow_1mtc41r:1cv4s7o',
+        'destroyScope:GATE_JOIN:00u8rsb',
+        'enter:Flow_1mtc41r:1cv4s7o',
+        'exit:Flow_1mtc41r:1yn6x9m',
+        'createScope:END_B:1cv4s7o',
+        'destroyScope:Flow_1mtc41r:1yn6x9m',
+        'enter:END_B:1cv4s7o',
+        'exit:END_B:09k1fko',
+        'destroyScope:END_B:09k1fko',
+        'exit:Process_1:1cv4s7o',
+        'destroyScope:Process_1:1cv4s7o'
+      ]);
+    });
+
+  });
+
+
   describe('sub-process', function() {
 
     verify('sub-process', () => {
@@ -893,7 +1148,6 @@ describe('simulator', function() {
         'exit:Process_1:0hvyhts',
         'destroyScope:Process_1:0hvyhts'
       ]);
-
     });
 
   });

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="START" name="START">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="PARALLEL_GATE" />
+    <parallelGateway id="PARALLEL_GATE">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_2</outgoing>
+      <outgoing>Flow_6</outgoing>
+    </parallelGateway>
+    <sequenceFlow id="Flow_2" sourceRef="PARALLEL_GATE" targetRef="EVENT_BLANK" />
+    <intermediateCatchEvent id="SIGNAL_A_CATCH" name="SIGNAL_A">
+      <incoming>Flow_6</incoming>
+      <outgoing>Flow_7</outgoing>
+      <signalEventDefinition id="SignalEventDefinition_1sfxs5z" />
+    </intermediateCatchEvent>
+    <intermediateThrowEvent id="EVENT_BLANK" name="EVENT_BLANK">
+      <incoming>Flow_2</incoming>
+      <outgoing>Flow_3</outgoing>
+    </intermediateThrowEvent>
+    <sequenceFlow id="Flow_3" sourceRef="EVENT_BLANK" targetRef="SIGNAL_A_THROW" />
+    <sequenceFlow id="Flow_4" sourceRef="SIGNAL_A_THROW" targetRef="END_A" />
+    <endEvent id="END_B" name="END_B">
+      <incoming>Flow_7</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_7" sourceRef="SIGNAL_A_CATCH" targetRef="END_B" />
+    <endEvent id="END_A" name="END_A">
+      <incoming>Flow_4</incoming>
+    </endEvent>
+    <intermediateThrowEvent id="SIGNAL_A_THROW" name="SIGNAL_A">
+      <incoming>Flow_3</incoming>
+      <outgoing>Flow_4</outgoing>
+      <signalEventDefinition id="SignalEventDefinition_0skkzdc" />
+    </intermediateThrowEvent>
+    <sequenceFlow id="Flow_6" sourceRef="PARALLEL_GATE" targetRef="SIGNAL_A_CATCH" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1fwats6_di" bpmnElement="Flow_6">
+        <omgdi:waypoint x="270" y="245" />
+        <omgdi:waypoint x="270" y="300" />
+        <omgdi:waypoint x="422" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0malrz9_di" bpmnElement="Flow_7">
+        <omgdi:waypoint x="458" y="300" />
+        <omgdi:waypoint x="512" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_06wesr6_di" bpmnElement="Flow_4">
+        <omgdi:waypoint x="458" y="100" />
+        <omgdi:waypoint x="512" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0fczauq_di" bpmnElement="Flow_3">
+        <omgdi:waypoint x="368" y="100" />
+        <omgdi:waypoint x="422" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1f3h1l0_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="270" y="195" />
+        <omgdi:waypoint x="270" y="100" />
+        <omgdi:waypoint x="332" y="100" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1i8s8ww_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="188" y="220" />
+        <omgdi:waypoint x="245" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="StartEvent_1y45yut_di" bpmnElement="START">
+        <omgdc:Bounds x="152" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="153" y="245" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1lw14l6_di" bpmnElement="PARALLEL_GATE">
+        <omgdc:Bounds x="245" y="195" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SIGNAL_A_di" bpmnElement="SIGNAL_A_CATCH">
+        <omgdc:Bounds x="422" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="413" y="325" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1apoyif_di" bpmnElement="EVENT_BLANK">
+        <omgdc:Bounds x="332" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="311" y="125" width="80" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1csiwz7_di" bpmnElement="END_B">
+        <omgdc:Bounds x="512" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="512" y="325" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_A_di" bpmnElement="END_A">
+        <omgdc:Bounds x="512" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="511" y="125" width="38" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pet2t4_di" bpmnElement="SIGNAL_A_THROW">
+        <omgdc:Bounds x="422" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="413" y="125" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
