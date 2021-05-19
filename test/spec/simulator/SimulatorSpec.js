@@ -704,7 +704,7 @@ describe('simulator', function() {
   });
 
 
-  describe('signal event', function() {
+  describe('signal', function() {
 
     verify('signal-trigger-event-based-gateway', () => {
 
@@ -1086,6 +1086,179 @@ describe('simulator', function() {
         'destroyScope:END_B:09k1fko',
         'exit:Process_1:1cv4s7o',
         'destroyScope:Process_1:1cv4s7o'
+      ]);
+    });
+
+  });
+
+
+  describe('escalation', () => {
+
+    verify('escalation-trigger-boundary-event', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:1gbl8qf',
+        'createScope:START:1gbl8qf',
+        'signal:START:12iy1hq',
+        'exit:START:12iy1hq',
+        'createScope:Flow_130qbbc:1gbl8qf',
+        'destroyScope:START:12iy1hq',
+        'enter:Flow_130qbbc:1gbl8qf',
+        'exit:Flow_130qbbc:0qcq8ik',
+        'createScope:SUB:1gbl8qf',
+        'destroyScope:Flow_130qbbc:0qcq8ik',
+        'enter:SUB:1gbl8qf',
+        'createScope:START_SUB:0fhzoj8',
+        'signal:START_SUB:1okw0qv',
+        'exit:START_SUB:1okw0qv',
+        'createScope:Flow_1ovq66q:0fhzoj8',
+        'destroyScope:START_SUB:1okw0qv',
+        'enter:Flow_1ovq66q:0fhzoj8',
+        'exit:Flow_1ovq66q:0k4tdpg',
+        'createScope:TRIGGER_E:0fhzoj8',
+        'destroyScope:Flow_1ovq66q:0k4tdpg',
+        'enter:TRIGGER_E:0fhzoj8',
+        'createScope:BOUNDARY_E:1gbl8qf',
+        'signal:BOUNDARY_E:15n4khf',
+        'destroyScope:TRIGGER_E:0u0jxko',
+        'exit:SUB:0fhzoj8',
+        'destroyScope:SUB:0fhzoj8',
+        'exit:BOUNDARY_E:15n4khf',
+        'createScope:Flow_0otmxuz:1gbl8qf',
+        'destroyScope:BOUNDARY_E:15n4khf',
+        'enter:Flow_0otmxuz:1gbl8qf',
+        'exit:Flow_0otmxuz:0mrfe69',
+        'createScope:END_E:1gbl8qf',
+        'destroyScope:Flow_0otmxuz:0mrfe69',
+        'enter:END_E:1gbl8qf',
+        'exit:END_E:0wibzju',
+        'destroyScope:END_E:0wibzju',
+        'exit:Process_1:1gbl8qf',
+        'destroyScope:Process_1:1gbl8qf'
+      ]);
+    });
+
+
+    verify('escalation-trigger-event-sub-process', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:13yhb6r',
+        'createScope:START:13yhb6r',
+        'signal:START:1b3gon1',
+        'exit:START:1b3gon1',
+        'createScope:Flow_130qbbc:13yhb6r',
+        'destroyScope:START:1b3gon1',
+        'enter:Flow_130qbbc:13yhb6r',
+        'exit:Flow_130qbbc:0h6pedf',
+        'createScope:SUB:13yhb6r',
+        'destroyScope:Flow_130qbbc:0h6pedf',
+        'enter:SUB:13yhb6r',
+        'createScope:START_SUB:137rhly',
+        'signal:START_SUB:1wtr0jj',
+        'exit:START_SUB:1wtr0jj',
+        'createScope:Flow_1ovq66q:137rhly',
+        'destroyScope:START_SUB:1wtr0jj',
+        'enter:Flow_1ovq66q:137rhly',
+        'exit:Flow_1ovq66q:13kut7e',
+        'createScope:TRIGGER_E:137rhly',
+        'destroyScope:Flow_1ovq66q:13kut7e',
+        'enter:TRIGGER_E:137rhly',
+        'createScope:EVT_E:13yhb6r',
+        'signal:EVT_E:0q4xdl1',
+        'createScope:START_EVT_E:0q4xdl1',
+        'exit:TRIGGER_E:06hc8lt',
+        'createScope:Flow_04kx986:137rhly',
+        'destroyScope:TRIGGER_E:06hc8lt',
+        'signal:START_EVT_E:1lj04fq',
+        'destroyScope:Flow_04kx986:1mp37u7',
+        'destroyScope:SUB:137rhly',
+        'exit:START_EVT_E:1lj04fq',
+        'createScope:Flow_19vkjao:0q4xdl1',
+        'destroyScope:START_EVT_E:1lj04fq',
+        'enter:Flow_19vkjao:0q4xdl1',
+        'exit:Flow_19vkjao:1upxies',
+        'createScope:END_EVT_E:0q4xdl1',
+        'destroyScope:Flow_19vkjao:1upxies',
+        'enter:END_EVT_E:0q4xdl1',
+        'exit:END_EVT_E:134fjco',
+        'destroyScope:END_EVT_E:134fjco',
+        'exit:EVT_E:0q4xdl1',
+        'destroyScope:EVT_E:0q4xdl1',
+        'exit:Process_1:13yhb6r',
+        'destroyScope:Process_1:13yhb6r'
+      ]);
+    });
+
+
+    verify('escalation-boundary-event-event-sub-process-conflict', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:0k94f6n',
+        'createScope:START:0k94f6n',
+        'signal:START:0mozm2y',
+        'exit:START:0mozm2y',
+        'createScope:Flow_130qbbc:0k94f6n',
+        'destroyScope:START:0mozm2y',
+        'enter:Flow_130qbbc:0k94f6n',
+        'exit:Flow_130qbbc:0bisl4o',
+        'createScope:SUB:0k94f6n',
+        'destroyScope:Flow_130qbbc:0bisl4o',
+        'enter:SUB:0k94f6n',
+        'createScope:START_SUB:0gx86zd',
+        'signal:START_SUB:170jux9',
+        'exit:START_SUB:170jux9',
+        'createScope:Flow_1ovq66q:0gx86zd',
+        'destroyScope:START_SUB:170jux9',
+        'enter:Flow_1ovq66q:0gx86zd',
+        'exit:Flow_1ovq66q:139ppnv',
+        'createScope:TRIGGER_E:0gx86zd',
+        'destroyScope:Flow_1ovq66q:139ppnv',
+        'enter:TRIGGER_E:0gx86zd',
+        'createScope:EVT_E:0gx86zd',
+        'signal:EVT_E:1fxyprd',
+        'createScope:START_EVT_E:1fxyprd',
+        'exit:TRIGGER_E:0sbdg47',
+        'createScope:Flow_04kx986:0gx86zd',
+        'destroyScope:TRIGGER_E:0sbdg47',
+        'signal:START_EVT_E:1v1iskz',
+        'destroyScope:Flow_04kx986:134t2op',
+        'exit:START_EVT_E:1v1iskz',
+        'createScope:Flow_19vkjao:1fxyprd',
+        'destroyScope:START_EVT_E:1v1iskz',
+        'enter:Flow_19vkjao:1fxyprd',
+        'exit:Flow_19vkjao:1nmgq64',
+        'createScope:END_EVT_E:1fxyprd',
+        'destroyScope:Flow_19vkjao:1nmgq64',
+        'enter:END_EVT_E:1fxyprd',
+        'exit:END_EVT_E:1w5u4ap',
+        'destroyScope:END_EVT_E:1w5u4ap',
+        'exit:EVT_E:1fxyprd',
+        'destroyScope:EVT_E:1fxyprd',
+        'exit:SUB:0gx86zd',
+        'destroyScope:SUB:0gx86zd',
+        'exit:Process_1:0k94f6n',
+        'destroyScope:Process_1:0k94f6n'
       ]);
     });
 

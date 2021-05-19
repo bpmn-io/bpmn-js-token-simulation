@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1vxjbh9" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.14.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:subProcess id="SUB" name="SUB">
+      <bpmn:incoming>Flow_130qbbc</bpmn:incoming>
+      <bpmn:outgoing>Flow_0nzo5w8</bpmn:outgoing>
+      <bpmn:startEvent id="START_SUB" name="START_SUB">
+        <bpmn:outgoing>Flow_1ovq66q</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_1ovq66q" sourceRef="START_SUB" targetRef="TRIGGER_E" />
+      <bpmn:intermediateThrowEvent id="TRIGGER_E" name="TRIGGER_E">
+        <bpmn:incoming>Flow_1ovq66q</bpmn:incoming>
+        <bpmn:outgoing>Flow_04kx986</bpmn:outgoing>
+        <bpmn:escalationEventDefinition id="EscalationEventDefinition_1386pyv" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:endEvent id="END_SUB" name="END_SUB">
+        <bpmn:incoming>Flow_04kx986</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_04kx986" sourceRef="TRIGGER_E" targetRef="END_SUB" />
+    </bpmn:subProcess>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_0nzo5w8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0nzo5w8" sourceRef="SUB" targetRef="END" />
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_130qbbc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_130qbbc" sourceRef="START" targetRef="SUB" />
+    <bpmn:subProcess id="EVT_E" name="EVT_E" triggeredByEvent="true">
+      <bpmn:startEvent id="START_EVT_E" name="START_EVT_E">
+        <bpmn:outgoing>Flow_19vkjao</bpmn:outgoing>
+        <bpmn:escalationEventDefinition id="EscalationEventDefinition_1gs4loq" />
+      </bpmn:startEvent>
+      <bpmn:endEvent id="END_EVT_E" name="END_EVT_E">
+        <bpmn:incoming>Flow_19vkjao</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_19vkjao" sourceRef="START_EVT_E" targetRef="END_EVT_E" />
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_0nzo5w8_di" bpmnElement="Flow_0nzo5w8">
+        <di:waypoint x="570" y="120" />
+        <di:waypoint x="622" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_130qbbc_di" bpmnElement="Flow_130qbbc">
+        <di:waypoint x="148" y="120" />
+        <di:waypoint x="220" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0r3t55c_di" bpmnElement="END">
+        <dc:Bounds x="622" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="628" y="145" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_13me02p_di" bpmnElement="START">
+        <dc:Bounds x="112" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="112" y="145" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02f6oev_di" bpmnElement="SUB" isExpanded="true">
+        <dc:Bounds x="220" y="50" width="350" height="140" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1ovq66q_di" bpmnElement="Flow_1ovq66q">
+        <di:waypoint x="316" y="120" />
+        <di:waypoint x="372" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_04kx986_di" bpmnElement="Flow_04kx986">
+        <di:waypoint x="408" y="120" />
+        <di:waypoint x="472" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_05oo9h2_di" bpmnElement="START_SUB">
+        <dc:Bounds x="280" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="266" y="145" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0xl04wl_di" bpmnElement="TRIGGER_E">
+        <dc:Bounds x="372" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="358" y="145" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1rgg0nq_di" bpmnElement="END_SUB">
+        <dc:Bounds x="472" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="464" y="145" width="53" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1702ysz_di" bpmnElement="EVT_E" isExpanded="true">
+        <dc:Bounds x="220" y="320" width="260" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_19vkjao_di" bpmnElement="Flow_19vkjao">
+        <di:waypoint x="326" y="390" />
+        <di:waypoint x="382" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_185zx78_di" bpmnElement="START_EVT_E">
+        <dc:Bounds x="290" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="270" y="415" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0vcbenb_di" bpmnElement="END_EVT_E">
+        <dc:Bounds x="382" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="368" y="415" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
