@@ -2,8 +2,8 @@
 
 .links {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
 }
 
 .link {
@@ -29,7 +29,7 @@
 
 .drop-message {
   position: absolute;
-  top: 20px;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
