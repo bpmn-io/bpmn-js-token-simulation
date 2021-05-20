@@ -13,6 +13,15 @@ describe('simulator', function() {
 
     verify('sub-process', (simulator) => {
 
+      // assume
+      expect(
+        simulator.findScopes({ destroyed: true })
+      ).to.be.empty;
+
+      expect(
+        simulator.findScopes({ destroyed: false })
+      ).to.be.empty;
+
       // given
       const rootElement = element('Process_1');
       const subProcess = element('SUB');
@@ -66,12 +75,24 @@ describe('simulator', function() {
       ).to.equal(childScope_A1);
 
       expect(
+        simulator.findScopes({ destroyed: true })
+      ).to.eql([ childScope_A1 ]);
+
+      expect(
         simulator.findScope({ element: subProcess })
       ).to.equal(childScope_A2);
 
       expect(
         simulator.findScope({ parent: rootScope_A })
       ).to.equal(childScope_A2);
+
+      // but when
+      simulator.reset();
+
+      // then
+      expect(
+        simulator.findScopes({ destroyed: true })
+      ).to.be.empty;
     });
 
   });
