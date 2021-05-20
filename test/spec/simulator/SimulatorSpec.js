@@ -98,6 +98,31 @@ describe('simulator', function() {
   });
 
 
+  describe('events', function() {
+
+    describe('elementChanged', function() {
+
+      it('should emit on scope creation');
+
+      it('should emit on scope destruction');
+
+      it('should emit on reset');
+
+    });
+
+    describe('scopeChanged', function() {
+
+      it('should emit on scope creation');
+
+      it('should emit on scope destruction');
+
+      it('should emit on reset');
+
+    });
+
+  });
+
+
   describe('basic scenarios', function() {
 
     verify('simple', () => {
