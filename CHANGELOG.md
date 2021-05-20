@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.19.3
+
+* `FIX`: do not override global styles
+
 ## 0.19.2
 
 * `FIX`: emit element changed events on simulation reset
