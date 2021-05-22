@@ -42,7 +42,7 @@
   ],
   "devDependencies": {
     "bpmn-js": "^8.5.0",
-    "chai": "^4.3.4",
+    "chai": "^3.5.0",
     "copy-webpack-plugin": "^8.1.1",
     "eslint": "^7.26.0",
     "eslint-plugin-bpmn-io": "^0.12.0",
