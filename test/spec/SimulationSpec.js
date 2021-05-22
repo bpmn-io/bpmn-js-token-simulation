@@ -1,6 +1,10 @@
 import ModelerModule from 'lib/modeler';
 
 import {
+  query as domQuery
+} from 'min-dom';
+
+import {
   bootstrapModeler,
   getBpmnJS
 } from 'test/TestHelper';
@@ -46,9 +50,6 @@ describe('simulation', function() {
 
     const diagram = require('./simple.bpmn');
 
-    let processElement,
-        gateway;
-
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
         ModelerModule,
@@ -56,10 +57,7 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      processElement = elementRegistry.get('Process_1');
-      gateway = elementRegistry.get('ExclusiveGateway_1');
-
+    beforeEach(inject(function(toggleMode, trace) {
       toggleMode.toggleMode();
 
       trace.start();
@@ -70,9 +68,7 @@ describe('simulation', function() {
       async function(simulator) {
 
         // when
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('StartEvent_1');
 
         await scopeDestroyed();
 
@@ -93,15 +89,13 @@ describe('simulation', function() {
 
 
     it('should choose secondary flow', inject(
-      async function(simulator, exclusiveGatewaySettings) {
+      async function(simulator) {
 
         // given
-        exclusiveGatewaySettings.setSequenceFlow(gateway);
+        triggerElement('ExclusiveGateway_1');
 
         // when
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('StartEvent_1');
 
         await scopeDestroyed();
 
@@ -125,19 +119,17 @@ describe('simulation', function() {
       async function(simulator, exclusiveGatewaySettings) {
 
         // given
-        exclusiveGatewaySettings.setSequenceFlow(gateway);
+        triggerElement('ExclusiveGateway_1');
 
         // when
-        exclusiveGatewaySettings.setSequenceFlow(gateway);
+        triggerElement('ExclusiveGateway_1');
 
         // when
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('StartEvent_1');
 
-        const context = await elementEnter('IntermediateCatchEvent_1');
+        await elementEnter('IntermediateCatchEvent_1');
 
-        continueFlow(context);
+        triggerElement('IntermediateCatchEvent_1');
 
         await scopeDestroyed();
 
@@ -158,19 +150,14 @@ describe('simulation', function() {
 
 
     it('should select scope', inject(
-      async function(simulator, exclusiveGatewaySettings, scopeFilter) {
+      async function(simulator, scopeFilter) {
 
         // given
-        exclusiveGatewaySettings.setSequenceFlow(gateway);
-        exclusiveGatewaySettings.setSequenceFlow(gateway);
+        triggerElement('ExclusiveGateway_1');
+        triggerElement('ExclusiveGateway_1');
 
-        simulator.signal({
-          element: processElement
-        });
-
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('StartEvent_1');
+        triggerElement('StartEvent_1');
 
         const {
           scope
@@ -181,22 +168,22 @@ describe('simulation', function() {
         } = await elementEnter('IntermediateCatchEvent_1');
 
         // when
-        scopeFilter.toggle(scope);
+        triggerScope(scope);
 
         // then
         expect(scopeFilter.isShown(scope)).to.be.true;
         expect(scopeFilter.isShown(otherScope)).to.be.false;
 
         // but when
-        scopeFilter.toggle(scope);
+        triggerScope(scope);
 
         // then
         expect(scopeFilter.isShown(scope)).to.be.true;
         expect(scopeFilter.isShown(otherScope)).to.be.true;
 
         // but when
-        scopeFilter.toggle(scope);
-        scopeFilter.toggle(otherScope);
+        triggerScope(scope);
+        triggerScope(otherScope);
 
         // then
         expect(scopeFilter.isShown(scope)).to.be.false;
@@ -231,6 +218,7 @@ describe('simulation', function() {
 
     });
 
+
     describe('showScopes', function() {
 
       it('should highlight scope', inject(function(elementRegistry, showScopes) {
@@ -256,8 +244,6 @@ describe('simulation', function() {
 
     const diagram = require('./boundary-event.bpmn');
 
-    let processElement;
-
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
         ModelerModule,
@@ -265,9 +251,7 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      processElement = elementRegistry.get('Process_1');
-
+    beforeEach(inject(function(toggleMode, trace) {
       toggleMode.toggleMode();
 
       trace.start();
@@ -278,22 +262,15 @@ describe('simulation', function() {
       async function(simulator, elementRegistry) {
 
         // when
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('START');
 
         const {
           scope
         } = await elementEnter('SUB');
 
-        const {
-          scope: childScope
-        } = await elementEnter('ReceiveTask');
+        await elementEnter('ReceiveTask');
 
-        continueFlow({
-          element: elementRegistry.get('ReceiveTask'),
-          scope: childScope
-        });
+        triggerElement('ReceiveTask');
 
         await scopeDestroyed(scope);
 
@@ -318,18 +295,13 @@ describe('simulation', function() {
       async function(simulator, elementRegistry) {
 
         // given
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('START');
 
         const { scope } = await elementEnter('SUB');
 
         // when
         // trigger boundary
-        continueFlow({
-          element: elementRegistry.get('TIMER_BOUNDARY'),
-          scope
-        });
+        triggerElement('TIMER_BOUNDARY');
 
         await scopeDestroyed(scope);
 
@@ -340,7 +312,6 @@ describe('simulation', function() {
           'SUB',
           'START_SUB',
           'Flow_2',
-          'ReceiveTask',
           'Flow_6',
           'END_TIMED_OUT'
         ]);
@@ -354,8 +325,6 @@ describe('simulation', function() {
 
     const diagram = require('./event-based-gateway.bpmn');
 
-    let processElement;
-
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
         ModelerModule,
@@ -363,9 +332,7 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      processElement = elementRegistry.get('Process_1');
-
+    beforeEach(inject(function(toggleMode, trace) {
       toggleMode.toggleMode();
 
       trace.start();
@@ -376,21 +343,13 @@ describe('simulation', function() {
       async function(simulator, elementRegistry) {
 
         // when
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('START');
 
         const {
           scope
         } = await elementEnter('G_EVENT');
 
-        simulator.signal({
-          scope: simulator.findScope({
-            parent: scope,
-            element: elementRegistry.get('G_EVENT')
-          }),
-          element: elementRegistry.get('S_CATCH')
-        });
+        triggerElement('S_CATCH');
 
         await scopeDestroyed(scope);
 
@@ -412,8 +371,6 @@ describe('simulation', function() {
 
     const diagram = require('./event-sub-process.bpmn');
 
-    let processElement;
-
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
         ModelerModule,
@@ -421,9 +378,7 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      processElement = elementRegistry.get('Process_1');
-
+    beforeEach(inject(function(toggleMode, trace) {
       toggleMode.toggleMode();
 
       trace.start();
@@ -434,18 +389,13 @@ describe('simulation', function() {
       async function(simulator, elementRegistry) {
 
         // when
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('START');
 
         const {
           scope
         } = await elementEnter('S');
 
-        simulator.signal({
-          parentScope: scope,
-          element: elementRegistry.get('EVENT_SUB')
-        });
+        triggerElement('START_SUB');
 
         await elementEnter('END_SUB');
 
@@ -472,8 +422,6 @@ describe('simulation', function() {
 
     const diagram = require('./message-flows.bpmn');
 
-    let processElement;
-
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
         ModelerModule,
@@ -481,9 +429,7 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(elementRegistry, toggleMode, trace) {
-      processElement = elementRegistry.get('Participant_2');
-
+    beforeEach(inject(function(toggleMode, trace) {
       toggleMode.toggleMode();
 
       trace.start();
@@ -494,19 +440,13 @@ describe('simulation', function() {
       async function(simulator) {
 
         // when
-        simulator.signal({
-          element: processElement
-        });
+        triggerElement('START');
 
         const {
-          element,
           scope
         } = await elementEnter('CATCH_M');
 
-        continueFlow({
-          element,
-          scope
-        });
+        triggerElement('CATCH_M');
 
         await scopeDestroyed(scope);
 
@@ -574,38 +514,40 @@ function ifElement(id, fn) {
   };
 }
 
-function continueFlow(context) {
 
-  // TODO(nikku): make this IntermediateCatchEventHandler a scriptable API
+function triggerElement(id) {
 
-  return getBpmnJS().invoke(function(simulator) {
+  return getBpmnJS().invoke(function(bpmnjs) {
 
-    const {
-      element,
-      scope
-    } = context;
+    const domElement = domQuery(
+      `.djs-overlays[data-container-id="${id}"] .context-pad`,
+      bpmnjs._container
+    );
 
-    setTimeout(function() {
+    if (!domElement) {
+      throw new Error(`no context pad on on <${id}>`);
+    }
 
-      if (is(element, 'bpmn:BoundaryEvent')) {
-        simulator.signal({
-          element,
-          parentScope: scope
-        });
-      } else {
-
-        simulator.signal({
-          element,
-          scope: simulator.findScope({
-            element,
-            parent: scope
-          })
-        });
-      }
-
-    }, 150);
+    triggerClick(domElement);
   });
+}
 
+
+function triggerScope(scope) {
+
+  return getBpmnJS().invoke(function(bpmnjs) {
+
+    const domElement = domQuery(
+      `.token-simulation-scopes [data-scope-id="${scope.id}"]`,
+      bpmnjs._container
+    );
+
+    if (!domElement) {
+      throw new Error(`no scope toggle for <${scope.id}>`);
+    }
+
+    triggerClick(domElement);
+  });
 }
 
 function scopeDestroyed(scope=null) {
@@ -692,4 +634,43 @@ function inject(fn) {
 
     return bpmnJS.invoke(fn);
   };
+}
+
+function triggerClick(element, options={}) {
+
+  const defaultOptions = {
+    pointerX: 0,
+    pointerY: 0,
+    button: 0,
+    ctrlKey: false,
+    altKey: false,
+    shiftKey: false,
+    metaKey: false,
+    bubbles: true,
+    cancelable: true
+  };
+
+  options = Object.assign({}, defaultOptions, options);
+
+  const event = document.createEvent('MouseEvents');
+
+  event.initMouseEvent(
+    'click',
+    options.bubbles,
+    options.cancelable,
+    document.defaultView,
+    options.button,
+    options.pointerX,
+    options.pointerY,
+    options.pointerX,
+    options.pointerY,
+    options.ctrlKey,
+    options.altKey,
+    options.shiftKey,
+    options.metaKey,
+    options.button,
+    element
+  );
+
+  element.dispatchEvent(event);
 }
