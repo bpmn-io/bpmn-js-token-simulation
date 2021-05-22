@@ -9,6 +9,32 @@ import {
 
 describe('simulator', function() {
 
+  describe('api', function() {
+
+    verify('sub-process', (simulator) => {
+
+      // when
+      const spy = sinon.spy();
+
+      simulator.on('createScope', spy);
+
+      simulator.createScope(element('Process_1'));
+
+      // then
+      expect(spy).to.have.been.calledOnce;
+
+      // but when
+      simulator.off('createScope');
+
+      simulator.createScope();
+
+      // then
+      expect(spy).to.have.been.calledOnce;
+    });
+
+  });
+
+
   describe('scopes', function() {
 
     verify('sub-process', (simulator) => {
