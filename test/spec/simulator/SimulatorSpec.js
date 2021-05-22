@@ -2432,16 +2432,9 @@ function verify(name, test, iit=it) {
       ]
     }).call(this);
 
-    if (err) {
-      return Promise.reject(err);
-    }
+    expect(err).not.to.exist;
 
-    if (warnings.length) {
-      err = new Error(
-        `found ${warnings.length} import warnings: \n\n${warnings.join('\n----\n')}`);
-
-      return Promise.reject(err);
-    }
+    expect(warnings).to.be.empty;
 
     return getBpmnJS().invoke(test);
   });
