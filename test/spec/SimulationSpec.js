@@ -207,6 +207,51 @@ describe('simulation', function() {
   });
 
 
+  describe('components', function() {
+
+    const diagram = require('./boundary-event.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+
+    describe('pauseSimulation', function() {
+
+      it('should toggle', inject(function(pauseSimulation) {
+
+        // assume
+        pauseSimulation.toggle();
+        pauseSimulation.toggle();
+
+      }));
+
+    });
+
+    describe('showScopes', function() {
+
+      it('should highlight scope', inject(function(elementRegistry, showScopes) {
+
+        // given
+        const subProcessElement = elementRegistry.get('SUB');
+        const processElement = elementRegistry.get('Process_1');
+
+        // assume
+        showScopes.highlightScope(subProcessElement);
+
+        showScopes.highlightScope(processElement);
+
+        showScopes.unhighlightScope(processElement);
+      }));
+
+    });
+
+  });
+
+
   describe('sub-process', function() {
 
     const diagram = require('./boundary-event.bpmn');
