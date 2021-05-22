@@ -792,6 +792,59 @@ describe('simulator', function() {
 
   describe('signal', function() {
 
+    verify('signal-trigger-start-event', () => {
+
+      // when
+      signal({
+        element: element('Participant_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Participant_1:null',
+        'signal:Participant_1:052f35e',
+        'createScope:START:052f35e',
+        'signal:START:1585frr',
+        'exit:START:1585frr',
+        'createScope:Flow_1:052f35e',
+        'destroyScope:START:1585frr',
+        'enter:Flow_1:052f35e',
+        'exit:Flow_1:1jxg3wu',
+        'createScope:SIGNAL_THROW:052f35e',
+        'destroyScope:Flow_1:1jxg3wu',
+        'enter:SIGNAL_THROW:052f35e',
+        'createScope:Participant_2:null',
+        'signal:Participant_2:0qbkt4o',
+        'createScope:SIGNAL_START:0qbkt4o',
+        'exit:SIGNAL_THROW:0kno9na',
+        'createScope:Flow_2:052f35e',
+        'destroyScope:SIGNAL_THROW:0kno9na',
+        'signal:SIGNAL_START:1h5bgkg',
+        'enter:Flow_2:052f35e',
+        'exit:SIGNAL_START:1h5bgkg',
+        'createScope:Flow_4:0qbkt4o',
+        'destroyScope:SIGNAL_START:1h5bgkg',
+        'exit:Flow_2:1tl2zr4',
+        'createScope:END:052f35e',
+        'destroyScope:Flow_2:1tl2zr4',
+        'enter:Flow_4:0qbkt4o',
+        'enter:END:052f35e',
+        'exit:Flow_4:1radaj9',
+        'createScope:SIGNAL_END:0qbkt4o',
+        'destroyScope:Flow_4:1radaj9',
+        'exit:END:03amu8w',
+        'destroyScope:END:03amu8w',
+        'enter:SIGNAL_END:0qbkt4o',
+        'exit:Participant_1:052f35e',
+        'destroyScope:Participant_1:052f35e',
+        'exit:SIGNAL_END:0npk50a',
+        'destroyScope:SIGNAL_END:0npk50a',
+        'exit:Participant_2:0qbkt4o',
+        'destroyScope:Participant_2:0qbkt4o'
+      ]);
+    });
+
+
     verify('signal-trigger-event-based-gateway', () => {
 
       // when
