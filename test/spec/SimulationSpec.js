@@ -6,6 +6,7 @@ import {
 
 import {
   bootstrapModeler,
+  inject,
   getBpmnJS
 } from 'test/TestHelper';
 
@@ -620,21 +621,6 @@ function expectHistory(history) {
 
 }
 
-function inject(fn) {
-  return function() {
-
-    const bpmnJS = getBpmnJS();
-
-    if (!bpmnJS) {
-      throw new Error(
-        'no bootstraped bpmn-js instance, ' +
-        'ensure you created it via #boostrap(Modeler|Viewer)'
-      );
-    }
-
-    return bpmnJS.invoke(fn);
-  };
-}
 
 function triggerClick(element, options={}) {
 

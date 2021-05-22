@@ -2443,7 +2443,7 @@ function verify(name, test, iit=it) {
       return Promise.reject(err);
     }
 
-    getBpmnJS().invoke(test);
+    return getBpmnJS().invoke(test);
   });
 }
 
