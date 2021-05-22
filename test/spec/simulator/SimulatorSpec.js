@@ -1233,6 +1233,43 @@ describe('simulator', function() {
 
   describe('escalation', () => {
 
+    verify('escalation-no-catch', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:0jlljmq',
+        'createScope:START:0jlljmq',
+        'signal:START:0bsr9p5',
+        'exit:START:0bsr9p5',
+        'createScope:Flow_1:0jlljmq',
+        'destroyScope:START:0bsr9p5',
+        'enter:Flow_1:0jlljmq',
+        'exit:Flow_1:0uvm27p',
+        'createScope:TRIGGER_E:0jlljmq',
+        'destroyScope:Flow_1:0uvm27p',
+        'enter:TRIGGER_E:0jlljmq',
+        'exit:TRIGGER_E:0pa319e',
+        'createScope:Flow_2:0jlljmq',
+        'destroyScope:TRIGGER_E:0pa319e',
+        'enter:Flow_2:0jlljmq',
+        'exit:Flow_2:0ediw3p',
+        'createScope:END:0jlljmq',
+        'destroyScope:Flow_2:0ediw3p',
+        'enter:END:0jlljmq',
+        'exit:END:115h25m',
+        'destroyScope:END:115h25m',
+        'exit:Process_1:0jlljmq',
+        'destroyScope:Process_1:0jlljmq'
+      ]);
+    });
+
+
     verify('escalation-trigger-boundary-event', () => {
 
       // when
