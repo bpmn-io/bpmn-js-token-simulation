@@ -89,6 +89,12 @@ describe('simulator', function() {
         simulator.findScope({ destroyed: false })
       ).to.equal(rootScope_A);
 
+      expect(() => {
+        const destroyContext = { reason: 'HELLO?' };
+
+        simulator.destroyScope(childScope_A1, destroyContext);
+      }).to.throw(/no <context\.element> provided/);
+
       // but when
       simulator.destroyScope(childScope_A1);
 
