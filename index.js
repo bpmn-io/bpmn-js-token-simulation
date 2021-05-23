@@ -1,1 +1,1 @@
-module.exports = require('./lib/modeler');
+export { default } from './lib/modeler';
