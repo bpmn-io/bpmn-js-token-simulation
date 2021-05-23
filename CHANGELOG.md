@@ -6,6 +6,16 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.20.0
+
+* `FEAT`: rework animation ([#82](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/82))
+* `FEAT`: display parent scope in log and trace notifications ([`de08d9c7`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/de08d9c75822c928d88bebb0868829c944f676dc))
+* `FIX`: only signal event sub-processes if parent is running ([`5aa7b019`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/5aa7b019880140ceb9fc000ae3ef07dcedae4bfc))
+* `FIX`: do not reset token position on animation speed change
+* `FIX`: escape element names displayed in log ([`3d4ed8f0`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/3d4ed8f003323658ef148c0657476cb36794f0c9))
+* `DEPS`: remove `SVG.js` dependency
+* `DEPS`: update to `bpmn-js@8.6.0`
+
 ## 0.19.3
 
 * `FIX`: do not override global styles
