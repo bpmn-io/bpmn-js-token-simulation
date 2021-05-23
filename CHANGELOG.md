@@ -6,6 +6,15 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.21.0
+
+* `CHORE`: complete migration to ES modules
+* `CHORE`: mark package as side-effect free
+
+### Breaking Changes
+
+* We do now export a `module` rather than a `main` file.
+
 ## 0.20.0
 
 * `FEAT`: rework animation ([#82](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/82))
