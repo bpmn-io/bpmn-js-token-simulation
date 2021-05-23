@@ -40,6 +40,9 @@
     "lib",
     "index.js"
   ],
+  "sideEffects": [
+    "*.css"
+  ],
   "devDependencies": {
     "bpmn-js": "^8.6.0",
     "chai": "^3.5.0",
