@@ -1,4 +1,4 @@
-import TokenSimulationModule from '../../lib/modeler';
+import TokenSimulationModule from '../..';
 
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 
