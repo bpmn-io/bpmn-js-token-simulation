@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.21.1
+
+* `FIX`: revert `main` to `module` entry point rename
+
 ## 0.21.0
 
 * `CHORE`: complete migration to ES modules
