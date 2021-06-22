@@ -468,6 +468,117 @@ describe('simulation', function() {
 
 });
 
+describe('simulation manually triggered', function() {
+
+  describe('basic', function() {
+
+    const diagram = require('./simple.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, toggleAutomatic, trace) {
+      toggleMode.toggleMode();
+
+      toggleAutomatic.toggleAutomatic();
+
+      trace.start();
+    }));
+
+    it('should execute happy path waiting at tasks', inject(
+      async function(simulator) {
+
+        // when
+        triggerElement('StartEvent_1');
+
+        await elementEnter('Task_1');
+
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1'
+        ]);
+
+        // and when
+        triggerElement('Task_1');
+
+        await elementEnter('Task_2');
+
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1',
+          'SequenceFlow_1wm1e59',
+          'ExclusiveGateway_1',
+          'SequenceFlow_2',
+          'Task_2'
+        ]);
+
+        // and when
+        triggerElement('Task_2');
+
+        await scopeDestroyed();
+
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1',
+          'SequenceFlow_1wm1e59',
+          'ExclusiveGateway_1',
+          'SequenceFlow_2',
+          'Task_2',
+          'SequenceFlow_3',
+          'EndEvent_1'
+        ]);
+      })
+    );
+
+    it('should execute happy path continuing flow after Task_1', inject(
+      async function(simulator, toggleAutomatic) {
+
+        // when
+        triggerElement('StartEvent_1');
+
+        await elementEnter('Task_1');
+
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1'
+        ]);
+
+        // and when
+        toggleAutomatic.toggleAutomatic();
+        triggerElement('Task_1');
+
+        await scopeDestroyed();
+
+        // then
+        expectHistory([
+          'StartEvent_1',
+          'SequenceFlow_1',
+          'Task_1',
+          'SequenceFlow_1wm1e59',
+          'ExclusiveGateway_1',
+          'SequenceFlow_2',
+          'Task_2',
+          'SequenceFlow_3',
+          'EndEvent_1'
+        ]);
+      })
+    );
+
+  });
+});
+
 
 // helpers //////////
 

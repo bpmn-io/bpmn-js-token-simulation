@@ -30,6 +30,10 @@ describe('viewer extension', function() {
       toggleMode.toggleMode();
     }));
 
+    it('should toggle automatic', inject(function(toggleAutomatic) {
+
+      toggleAutomatic.toggleAutomatic();
+    }));
   });
 
 

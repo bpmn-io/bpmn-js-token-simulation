@@ -29,6 +29,11 @@ describe('modeler extension', function() {
       // and do it again!
       toggleMode.toggleMode();
     }));
+
+    it('should toggle automatic', inject(function(toggleAutomatic) {
+
+      toggleAutomatic.toggleAutomatic();
+    }));
   });
 
 
