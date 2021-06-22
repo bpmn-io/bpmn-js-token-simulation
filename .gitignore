@@ -2,3 +2,6 @@ coverage
 example/dist
 node_modules
 tmp
+
+# IntelliJ project directory
+.idea
