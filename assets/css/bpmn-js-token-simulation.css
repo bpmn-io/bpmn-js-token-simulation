@@ -2,10 +2,13 @@
 
 :root {
   --token-simulation-green-base-44: #10D070;
+  --token-simulation-green-lighten-71: #75F6C8;
   --token-simulation-grey-base-40: #666666;
   --token-simulation-grey-darken-30: #212121;
   --token-simulation-grey-lighten-56: #909090;
   --token-simulation-red-base-62: #FF3D3D;
+  --token-simulation-red-lighten-70: #FF6464;
+  --token-simulation-blue-base-67: #5DB6F9;
   --token-simulation-silver-base-97: #F8F8F8;
   --token-simulation-silver-darken-94: #EFEFEF;
 
@@ -444,10 +447,29 @@
   background-color: var(--token-simulation-silver-base-97, #F8F8F8);
 }
 
-.set-animation-speed {
+.animation-palette {
   position: absolute;
   bottom: 20px;
   left: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+.toggle-automatic {
+  cursor: pointer;
+  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  border-radius: 2px;
+  padding: 6px;
+  font-size: 16px;
+  color: var(--token-simulation-grey-darken-30, #212121);
+  user-select: none;
+}
+
+.toggle-automatic.hidden {
+  display: none;
+}
+
+.set-animation-speed {
   transform: translate(-50%, 0);
   font-size: 16px;
   text-align: center;
