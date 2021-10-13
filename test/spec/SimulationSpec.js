@@ -5,7 +5,8 @@ import SimulationSupportModule from 'lib/simulation-support';
 import {
   bootstrapModeler,
   inject,
-  getBpmnJS
+  getBpmnJS,
+  withBpmnJs
 } from 'test/TestHelper';
 
 
@@ -440,6 +441,59 @@ describe('simulation', function() {
           'TIMER_BOUNDARY',
           'Flow_6',
           'END_TIMED_OUT'
+        ]);
+      }
+    ));
+
+  });
+
+
+  describe('collapsed sub-process', function() {
+
+    const diagram = require('./collapsed-sub-process.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
+
+      simulationTrace.start();
+    }));
+
+
+    withBpmnJs('>=9')('should execute happy path', inject(
+      async function(simulator, elementRegistry) {
+
+        // when
+        triggerElement('START');
+
+        const {
+          scope
+        } = await elementEnter('SUB');
+
+        await elementEnter('ReceiveTask');
+
+        triggerElement('ReceiveTask');
+
+        await scopeDestroyed(scope);
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_1',
+          'SUB',
+          'START_SUB',
+          'Flow_2',
+          'ReceiveTask',
+          'Flow_4',
+          'END_SUB',
+          'Flow_3',
+          'END'
         ]);
       }
     ));

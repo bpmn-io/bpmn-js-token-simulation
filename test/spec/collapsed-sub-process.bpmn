@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.0.0-alpha.1">
+  <process id="Process_1" isExecutable="false">
+    <subProcess id="SUB">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_3</outgoing>
+      <startEvent id="START_SUB">
+        <outgoing>Flow_2</outgoing>
+      </startEvent>
+      <sequenceFlow id="Flow_2" sourceRef="START_SUB" targetRef="ReceiveTask" />
+      <endEvent id="END_SUB" name="END&#10;SUB">
+        <incoming>Flow_4</incoming>
+      </endEvent>
+      <sequenceFlow id="Flow_4" sourceRef="ReceiveTask" targetRef="END_SUB" />
+      <receiveTask id="ReceiveTask">
+        <incoming>Flow_2</incoming>
+        <outgoing>Flow_4</outgoing>
+      </receiveTask>
+      <boundaryEvent id="TaskBoundary" attachedToRef="ReceiveTask">
+        <outgoing>Flow_5</outgoing>
+      </boundaryEvent>
+      <endEvent id="TimedOutSubEvent" name="TIMED OUT&#10;SUB">
+        <incoming>Flow_5</incoming>
+      </endEvent>
+      <sequenceFlow id="Flow_5" sourceRef="TaskBoundary" targetRef="TimedOutSubEvent" />
+    </subProcess>
+    <startEvent id="START">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="SUB" />
+    <endEvent id="END" name="END">
+      <incoming>Flow_3</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_3" sourceRef="SUB" targetRef="END" />
+    <boundaryEvent id="TIMER_BOUNDARY" name="TIMER" attachedToRef="SUB">
+      <outgoing>Flow_6</outgoing>
+      <timerEventDefinition id="TimerEventDefinition_13yln04" />
+    </boundaryEvent>
+    <endEvent id="END_TIMED_OUT" name="TIMED OUT">
+      <incoming>Flow_6</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_6" sourceRef="TIMER_BOUNDARY" targetRef="END_TIMED_OUT" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <omgdi:waypoint x="555" y="178" />
+        <omgdi:waypoint x="555" y="300" />
+        <omgdi:waypoint x="822" y="300" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <omgdi:waypoint x="585" y="120" />
+        <omgdi:waypoint x="822" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="228" y="120" />
+        <omgdi:waypoint x="485" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="192" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <omgdc:Bounds x="822" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="828" y="145" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_TIMED_OUT_di" bpmnElement="END_TIMED_OUT">
+        <omgdc:Bounds x="822" y="282" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="809" y="258" width="61" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_di" bpmnElement="SUB" isExpanded="false">
+        <omgdc:Bounds x="485" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TIMER_BOUNDARY_di" bpmnElement="TIMER_BOUNDARY">
+        <omgdc:Bounds x="537" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="577" y="173" width="35" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1h4iyiv">
+    <bpmndi:BPMNPlane id="BPMNPlane_1tajhxn" bpmnElement="SUB">
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <omgdi:waypoint x="330" y="258" />
+        <omgdi:waypoint x="330" y="290" />
+        <omgdi:waypoint x="432" y="290" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <omgdi:waypoint x="370" y="200" />
+        <omgdi:waypoint x="432" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="216" y="200" />
+        <omgdi:waypoint x="270" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_SUB_di" bpmnElement="START_SUB">
+        <omgdc:Bounds x="180" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_SUB_di" bpmnElement="END_SUB">
+        <omgdc:Bounds x="432" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="438" y="225" width="24" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ReceiveTask_di" bpmnElement="ReceiveTask">
+        <omgdc:Bounds x="270" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TimedOutSubEvent_di" bpmnElement="TimedOutSubEvent">
+        <omgdc:Bounds x="432" y="272" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="420" y="315" width="61" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1megti2_di" bpmnElement="TaskBoundary">
+        <omgdc:Bounds x="312" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
