@@ -523,6 +523,101 @@ describe('simulator', function() {
       ]);
     });
 
+
+    verify('loop', () => {
+
+      // given
+      signal({
+        element: element('Process')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process:null',
+        'signal:Process:A',
+        'createScope:Start:A',
+        'signal:Start:B',
+        'exit:Start:B',
+        'createScope:Flow_1:A',
+        'destroyScope:Start:B',
+        'enter:Flow_1:A',
+        'exit:Flow_1:C',
+        'createScope:Join:A',
+        'destroyScope:Flow_1:C',
+        'enter:Join:A',
+        'exit:Join:D',
+        'createScope:Flow_3:A',
+        'destroyScope:Join:D',
+        'enter:Flow_3:A',
+        'exit:Flow_3:E',
+        'createScope:Split:A',
+        'destroyScope:Flow_3:E',
+        'enter:Split:A',
+        'exit:Split:F',
+        'createScope:Flow_2:A',
+        'createScope:Flow_4:A',
+        'destroyScope:Split:F',
+        'enter:Flow_2:A',
+        'enter:Flow_4:A',
+        'exit:Flow_2:G',
+        'createScope:End:A',
+        'destroyScope:Flow_2:G',
+        'exit:Flow_4:H',
+        'createScope:Wait:A',
+        'destroyScope:Flow_4:H',
+        'enter:End:A',
+        'enter:Wait:A',
+        'exit:End:I',
+        'destroyScope:End:I'
+      ]);
+
+      // but when
+      signal({
+        element: element('Wait'),
+        scope: findScope({
+          element: element('Wait')
+        })
+      });
+
+      // then
+      expectTrace([
+        'signal:Wait:J',
+        'exit:Wait:J',
+        'createScope:Flow_5:A',
+        'destroyScope:Wait:J',
+        'enter:Flow_5:A',
+        'exit:Flow_5:K',
+        'createScope:Join:A',
+        'destroyScope:Flow_5:K',
+        'enter:Join:A',
+        'exit:Join:L',
+        'createScope:Flow_3:A',
+        'destroyScope:Join:L',
+        'enter:Flow_3:A',
+        'exit:Flow_3:M',
+        'createScope:Split:A',
+        'destroyScope:Flow_3:M',
+        'enter:Split:A',
+        'exit:Split:N',
+        'createScope:Flow_2:A',
+        'createScope:Flow_4:A',
+        'destroyScope:Split:N',
+        'enter:Flow_2:A',
+        'enter:Flow_4:A',
+        'exit:Flow_2:O',
+        'createScope:End:A',
+        'destroyScope:Flow_2:O',
+        'exit:Flow_4:P',
+        'createScope:Wait:A',
+        'destroyScope:Flow_4:P',
+        'enter:End:A',
+        'enter:Wait:A',
+        'exit:End:Q',
+        'destroyScope:End:Q'
+      ]);
+
+    });
+
   });
 
 
