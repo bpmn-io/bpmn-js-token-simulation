@@ -6,6 +6,13 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.22.0
+
+* `FEAT`: implement intuitive message send and receive (in modeling direction)
+* `FEAT`: signal message receive with initiator
+* `FIX`: prevent undirected message receive from signaling participant
+* `CHORE`: detect message flow by element, not initiator
+
 ## 0.21.2
 
 * `FIX`: make parallel gateway join properly ([#89](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/89))
