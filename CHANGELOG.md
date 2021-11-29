@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.21.2
+
+* `FIX`: make parallel gateway join properly ([#89](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/89))
+* `CHORE`: make `log` optional in editor actions
+
 ## 0.21.1
 
 * `FIX`: revert `main` to `module` entry point rename
