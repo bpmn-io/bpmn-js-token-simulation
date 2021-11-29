@@ -2500,6 +2500,30 @@ describe('simulator', function() {
     });
 
 
+    verify('message-flow-send-receive', () => {
+
+      // when
+      signal({
+        element: element('Participant_A')
+      });
+
+      // then
+      expect(
+        findScope({
+          element: element('Participant_A'),
+          destroyed: true
+        })
+      ).to.exist;
+
+      expect(
+        findScope({
+          element: element('Participant_B'),
+          destroyed: true
+        })
+      ).to.exist;
+    });
+
+
     verify('message-flow-signal-active-participant', () => {
 
       // when
