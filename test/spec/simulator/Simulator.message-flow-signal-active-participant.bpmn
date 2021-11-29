@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.8.2">
+  <collaboration id="Collaboration">
+    <participant id="Participant_A" name="A" processRef="Process_A" />
+    <participant id="Participant_B" name="B" processRef="Process_B" />
+    <messageFlow id="Message_Flow_1" sourceRef="Task_A" targetRef="Start_B" />
+    <messageFlow id="Message_Flow_2" sourceRef="Task_A" targetRef="Participant_B" />
+  </collaboration>
+  <process id="Process_A" isExecutable="false">
+    <startEvent id="Start_A" name="Start_A">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <task id="Task_A" name="Task_A">
+      <incoming>Flow_1</incoming>
+      <outgoing>Flow_2</outgoing>
+    </task>
+    <sequenceFlow id="Flow_1" sourceRef="Start_A" targetRef="Task_A" />
+    <sequenceFlow id="Flow_2" sourceRef="Task_A" targetRef="End_A" />
+    <endEvent id="End_A" name="END_A">
+      <incoming>Flow_2</incoming>
+    </endEvent>
+  </process>
+  <process id="Process_B">
+    <startEvent id="Start_B" name="Start_B">
+      <outgoing>Flow_3</outgoing>
+    </startEvent>
+    <endEvent id="End_B" name="End_B">
+      <incoming>Flow_3</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_3" sourceRef="Start_B" targetRef="End_B" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Collaboration">
+      <bpmndi:BPMNShape id="Participant_A_di" bpmnElement="Participant_A" isHorizontal="true">
+        <omgdc:Bounds x="160" y="80" width="420" height="190" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="450" y="180" />
+        <omgdi:waypoint x="512" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="298" y="180" />
+        <omgdi:waypoint x="350" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Start_A_di" bpmnElement="Start_A">
+        <omgdc:Bounds x="262" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="244" y="205" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_A_di" bpmnElement="Task_A">
+        <omgdc:Bounds x="350" y="140" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_A_di" bpmnElement="End_A">
+        <omgdc:Bounds x="512" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="512" y="205" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_B_di" bpmnElement="Participant_B" isHorizontal="true">
+        <omgdc:Bounds x="250" y="480" width="330" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <omgdi:waypoint x="398" y="550" />
+        <omgdi:waypoint x="472" y="550" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Start_B_di" bpmnElement="Start_B">
+        <omgdc:Bounds x="362" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="362" y="575" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_B_di" bpmnElement="End_B">
+        <omgdc:Bounds x="472" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="474" y="575" width="33" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Message_Flow_1_di" bpmnElement="Message_Flow_1">
+        <omgdi:waypoint x="380" y="220" />
+        <omgdi:waypoint x="380" y="532" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Message_Flow_2_di" bpmnElement="Message_Flow_2">
+        <omgdi:waypoint x="420" y="220" />
+        <omgdi:waypoint x="420" y="480" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
