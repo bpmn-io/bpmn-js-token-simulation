@@ -7,7 +7,7 @@
   <bpmn:signal id="Signal_1aebsxp" name="Signal_3" />
   <bpmn:collaboration id="Collaboration_0vvgh7j">
     <bpmn:participant id="Participant_1pl9o48" name="TEST SIGNALS" processRef="Process_1" />
-    <bpmn:participant id="Participant_1slhxa2" name="TEST ALL" processRef="Process_0qnov98" />
+    <bpmn:participant id="ALL_PARTICIPANT" name="TEST ALL" processRef="ALL_PROCESS" />
     <bpmn:participant id="Participant_19m5hx1" name="TEST TERMINATION" processRef="Process_1izltlb" />
     <bpmn:participant id="Participant_13c8p56" name="TEST LINKS * BOUNDARY EVENTS" processRef="Process_0agnr3c" />
     <bpmn:participant id="Participant_144ihc8" name="TEST ESCALATION" processRef="Process_0htf941" />
@@ -117,8 +117,8 @@
     <bpmn:sequenceFlow id="Flow_0kzqww4" sourceRef="Gateway_1i5diun" targetRef="END_B" />
     <bpmn:sequenceFlow id="Flow_0j1htor" sourceRef="SEND_4" targetRef="Gateway_1i5diun" />
   </bpmn:process>
-  <bpmn:process id="Process_0qnov98" isExecutable="false">
-    <bpmn:startEvent id="Event_1axcp4z" name="TEST STARTED">
+  <bpmn:process id="ALL_PROCESS" isExecutable="false">
+    <bpmn:startEvent id="ALL_START" name="TEST STARTED">
       <bpmn:outgoing>Flow_1wr5der</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:receiveTask id="Activity_0824v5m" name="SIGNALS WORK">
@@ -147,11 +147,11 @@
     <bpmn:endEvent id="Event_15ekk1m" name="NOT OK">
       <bpmn:incoming>Flow_1e7esew</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:endEvent id="Event_0vi03di" name="OK">
+    <bpmn:endEvent id="ALL_END" name="OK">
       <bpmn:incoming>Flow_0ouuzuw</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_0ouuzuw" sourceRef="Event_10e7fjx" targetRef="Event_0vi03di" />
-    <bpmn:sequenceFlow id="Flow_1wr5der" sourceRef="Event_1axcp4z" targetRef="Activity_0b3eb5x" />
+    <bpmn:sequenceFlow id="Flow_0ouuzuw" sourceRef="Event_10e7fjx" targetRef="ALL_END" />
+    <bpmn:sequenceFlow id="Flow_1wr5der" sourceRef="ALL_START" targetRef="Activity_0b3eb5x" />
     <bpmn:sequenceFlow id="Flow_01u9q06" sourceRef="Activity_0824v5m" targetRef="Gateway_1bhbtfh" />
     <bpmn:sequenceFlow id="Flow_1iumeue" sourceRef="Activity_0b3eb5x" targetRef="Activity_0824v5m" />
     <bpmn:sequenceFlow id="Flow_10dxq91" sourceRef="Gateway_1bhbtfh" targetRef="Event_10e7fjx" />
@@ -490,7 +490,7 @@
           <dc:Bounds x="922" y="1783" width="75" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Participant_1slhxa2_di" bpmnElement="Participant_1slhxa2" isHorizontal="true">
+      <bpmndi:BPMNShape id="ALL_PARTICIPANT_di" bpmnElement="ALL_PARTICIPANT" isHorizontal="true">
         <dc:Bounds x="250" y="470" width="770" height="340" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1e7esew_di" bpmnElement="Flow_1e7esew">
@@ -522,7 +522,7 @@
         <di:waypoint x="878" y="690" />
         <di:waypoint x="922" y="690" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_1axcp4z_di" bpmnElement="Event_1axcp4z" bioc:stroke="#000" bioc:fill="#fff">
+      <bpmndi:BPMNShape id="ALL_START_di" bpmnElement="ALL_START" bioc:stroke="#000" bioc:fill="#fff">
         <dc:Bounds x="332" y="672" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="309" y="715" width="82" height="14" />
@@ -555,7 +555,7 @@
           <dc:Bounds x="919" y="575" width="43" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0vi03di_di" bpmnElement="Event_0vi03di" bioc:stroke="#000" bioc:fill="#fff">
+      <bpmndi:BPMNShape id="ALL_END_di" bpmnElement="ALL_END" bioc:stroke="#000" bioc:fill="#fff">
         <dc:Bounds x="922" y="672" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="932" y="715" width="17" height="14" />
