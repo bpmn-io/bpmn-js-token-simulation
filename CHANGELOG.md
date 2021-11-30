@@ -8,7 +8,8 @@ ___Note:__ Yet to be released changes appear here._
 
 ## 0.22.0
 
-* `FEAT`: implement intuitive message send and receive (in modeling direction)
+* `FEAT`: allow simulation of bi-directional message flows ([#77](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/77))
+* `FEAT`: execute message flows in interaction order
 * `FEAT`: signal message receive with initiator
 * `FIX`: prevent undirected message receive from signaling participant
 * `CHORE`: detect message flow by element, not initiator
