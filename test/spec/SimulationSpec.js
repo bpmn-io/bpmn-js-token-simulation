@@ -491,10 +491,11 @@ describe('simulation', function() {
     }));
 
 
-    this.timeout(10000);
-
     it('should simulate diagram', inject(
-      async function(simulator) {
+      async function(simulator, animation) {
+
+        // given
+        animation.setAnimationSpeed(200);
 
         // when
         triggerElement('ALL_START');
