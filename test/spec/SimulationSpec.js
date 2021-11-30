@@ -491,7 +491,7 @@ describe('simulation', function() {
     }));
 
 
-    this.timeout(5000);
+    this.timeout(10000);
 
     it('should simulate diagram', inject(
       async function(simulator) {
