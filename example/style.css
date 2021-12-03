@@ -7,6 +7,10 @@ html, body, #canvas {
   font-family: "Arial", sans-serif;
 }
 
+.notifications {
+  bottom: 60px;
+}
+
 .top-links {
   position: absolute;
   top: 24px;
