@@ -7,10 +7,20 @@ html, body, #canvas {
   font-family: "Arial", sans-serif;
 }
 
-.links {
+.notifications {
+  bottom: 60px;
+}
+
+.top-links {
   position: absolute;
   top: 24px;
   right: 24px;
+}
+
+.bottom-links {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
 }
 
 .link {
@@ -21,6 +31,7 @@ html, body, #canvas {
   border-radius: 2px;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   text-decoration: none;
+  border: none;
 }
 
 .link:hover {

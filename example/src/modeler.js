@@ -4,12 +4,16 @@ import BpmnModeler from 'bpmn-js/lib/Modeler';
 
 import fileDrop from 'file-drops';
 
+import download from 'downloadjs';
+
 import exampleXML from '../resources/example.bpmn';
 
 const url = new URL(window.location.href);
 
 const persistent = url.searchParams.has('p');
 const active = url.searchParams.has('e');
+
+let fileName = 'diagram.bpmn';
 
 const initialDiagram = (() => {
   try {
@@ -96,10 +100,32 @@ document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', functio
 
   if (files.length) {
     hideDropMessage();
+
+    fileName = files[0].name;
+
     modeler.openDiagram(files[0].contents);
   }
 
 }), false);
 
+function downloadDiagram() {
+  modeler.saveXML({ format: true }, function(err, xml) {
+    if (!err) {
+      download(xml, fileName, 'application/xml');
+    }
+  });
+}
+
+document.body.addEventListener('keydown', function(event) {
+  if (event.code === 'KeyS' && (event.metaKey || event.ctrlKey)) {
+    event.preventDefault();
+
+    downloadDiagram();
+  }
+});
+
+document.querySelector('#download-button').addEventListener('click', function(event) {
+  downloadDiagram();
+});
 
 modeler.openDiagram(initialDiagram);

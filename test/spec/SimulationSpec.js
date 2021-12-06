@@ -27,6 +27,7 @@ import {
 const VERY_HIGH_PRIORITY = 100000;
 
 const ENTER_EVENT = 'trace.elementEnter';
+const EXIT_EVENT = 'trace.elementExit';
 
 const TestModule = {
   __init__: [
@@ -37,6 +38,10 @@ const TestModule = {
 
         if (event.action === 'enter') {
           eventBus.fire(ENTER_EVENT, event);
+        }
+
+        if (event.action === 'exit') {
+          eventBus.fire(EXIT_EVENT, event);
         }
       });
     }
@@ -466,6 +471,42 @@ describe('simulation', function() {
 
   });
 
+
+
+  describe('all', function() {
+
+    const diagram = require('../../example/resources/all.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, trace) {
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should simulate diagram', inject(
+      async function(simulator, animation) {
+
+        // given
+        animation.setAnimationSpeed(200);
+
+        // when
+        triggerElement('ALL_START');
+
+        // then
+        await elementExit('ALL_END');
+      }
+    ));
+
+  });
+
 });
 
 describe('simulation manually triggered', function() {
@@ -709,6 +750,26 @@ function elementEnter(id=null) {
       });
 
       eventBus.on(ENTER_EVENT, listener);
+    });
+  });
+}
+
+
+function elementExit(id=null) {
+
+  return new Promise(resolve => {
+
+    return getBpmnJS().invoke(function(eventBus) {
+
+      const wrap = id ? (fn) => ifElement(id, fn) : fn => fn;
+
+      const listener = wrap(function(event) {
+        eventBus.off(EXIT_EVENT, listener);
+
+        return resolve(event);
+      });
+
+      eventBus.on(EXIT_EVENT, listener);
     });
   });
 }

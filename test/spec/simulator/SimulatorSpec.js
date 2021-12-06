@@ -2499,6 +2499,91 @@ describe('simulator', function() {
       ]);
     });
 
+
+    verify('message-flow-send-receive', () => {
+
+      // when
+      signal({
+        element: element('Participant_A')
+      });
+
+      // then
+      expect(
+        findScope({
+          element: element('Participant_A'),
+          destroyed: true
+        })
+      ).to.exist;
+
+      expect(
+        findScope({
+          element: element('Participant_B'),
+          destroyed: true
+        })
+      ).to.exist;
+    });
+
+
+    verify('message-flow-signal-active-participant', () => {
+
+      // when
+      signal({
+        element: element('Participant_A')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Participant_A:null',
+        'signal:Participant_A:A',
+        'createScope:Start_A:A',
+        'signal:Start_A:C',
+        'exit:Start_A:C',
+        'createScope:Flow_1:A',
+        'destroyScope:Start_A:C',
+        'enter:Flow_1:A',
+        'exit:Flow_1:D',
+        'createScope:Task_A:A',
+        'destroyScope:Flow_1:D',
+        'enter:Task_A:A',
+        'createScope:Message_Flow_1:null',
+        'createScope:Message_Flow_2:null',
+        'signal:Message_Flow_1:E',
+        'signal:Message_Flow_2:F',
+        'exit:Task_A:0fctkqw',
+        'createScope:Flow_2:A',
+        'destroyScope:Task_A:0fctkqw',
+        'exit:Message_Flow_1:E',
+        'createScope:Participant_B:null',
+        'destroyScope:Message_Flow_1:E',
+        'exit:Message_Flow_2:F',
+        'destroyScope:Message_Flow_2:F',
+        'enter:Flow_2:A',
+        'signal:Participant_B:B',
+        'createScope:Start_B:B',
+        'exit:Flow_2:G',
+        'createScope:End_A:A',
+        'destroyScope:Flow_2:G',
+        'signal:Start_B:H',
+        'enter:End_A:A',
+        'exit:Start_B:H',
+        'createScope:Flow_3:B',
+        'destroyScope:Start_B:H',
+        'exit:End_A:I',
+        'destroyScope:End_A:I',
+        'enter:Flow_3:B',
+        'exit:Participant_A:A',
+        'destroyScope:Participant_A:A',
+        'exit:Flow_3:J',
+        'createScope:End_B:B',
+        'destroyScope:Flow_3:J',
+        'enter:End_B:B',
+        'exit:End_B:K',
+        'destroyScope:End_B:K',
+        'exit:Participant_B:B',
+        'destroyScope:Participant_B:B'
+      ]);
+    });
+
   });
 
 });
