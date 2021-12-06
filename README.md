@@ -6,7 +6,7 @@
 
 A bpmn-js extension for token simulation. [__Try it out__](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html).
 
-[![Screencast](docs/screenshot.png)](https://bpmn-io.github.io/bpmn-js-token-simulation)
+[![Screencast](docs/screenshot.png)](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html)
 
 
 ## Installation
