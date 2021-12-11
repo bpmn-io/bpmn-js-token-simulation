@@ -26,7 +26,7 @@ describe('simulator', function() {
       // but when
       simulator.off('createScope');
 
-      simulator.createScope();
+      simulator.createScope(element('Process_1'));
 
       // then
       expect(spy).to.have.been.calledOnce;
