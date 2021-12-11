@@ -53,6 +53,12 @@
   color: var(--token-simulation-white, #FFFFFF);
 }
 
+.djs-overlays:not(.hover) .context-pad:not(:hover).show-hover,
+.context-pad:not(:hover) .show-hover,
+.context-pad:hover .hide-hover {
+  display: none;
+}
+
 .context-pad.disabled {
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   color: var(--token-simulation-grey-base-40, #666666);
