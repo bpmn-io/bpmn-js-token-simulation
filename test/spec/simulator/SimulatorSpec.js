@@ -32,6 +32,20 @@ describe('simulator', function() {
       expect(spy).to.have.been.calledOnce;
     });
 
+
+    verify('sub-process', (simulator) => {
+
+      // when
+      const spy = sinon.spy();
+
+      simulator.on('tick', spy);
+
+      simulator.waitAtElement(element('SUB'));
+
+      // then
+      expect(spy).to.have.been.calledOnce;
+    });
+
   });
 
 
@@ -141,6 +155,7 @@ describe('simulator', function() {
       it('should emit on reset');
 
     });
+
 
     describe('scopeChanged', function() {
 
