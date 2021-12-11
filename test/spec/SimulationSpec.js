@@ -121,6 +121,76 @@ describe('simulation', function() {
     ));
 
 
+    describe('pause at node', function() {
+
+      it('should add pause point', inject(
+        async function(simulator) {
+
+          // when
+          triggerElement('Task_1');
+
+          triggerElement('StartEvent_1');
+
+          await elementEnter('Task_1');
+
+          // then
+          expectHistory([
+            'StartEvent_1',
+            'SequenceFlow_1',
+            'Task_1'
+          ]);
+
+          // but when
+          triggerElement('Task_1');
+
+          await scopeDestroyed();
+
+          // then
+          expectHistory([
+            'StartEvent_1',
+            'SequenceFlow_1',
+            'Task_1',
+            'SequenceFlow_1wm1e59',
+            'ExclusiveGateway_1',
+            'SequenceFlow_2',
+            'Task_2',
+            'SequenceFlow_3',
+            'EndEvent_1'
+          ]);
+        }
+      ));
+
+
+      it('should remove pause point', inject(
+        async function(simulator) {
+
+          // given
+          triggerElement('Task_1');
+
+          // when
+          triggerElement('Task_1');
+          triggerElement('StartEvent_1');
+
+          await scopeDestroyed();
+
+          // then
+          expectHistory([
+            'StartEvent_1',
+            'SequenceFlow_1',
+            'Task_1',
+            'SequenceFlow_1wm1e59',
+            'ExclusiveGateway_1',
+            'SequenceFlow_2',
+            'Task_2',
+            'SequenceFlow_3',
+            'EndEvent_1'
+          ]);
+        }
+      ));
+
+    });
+
+
     it('should continue flow', inject(
       async function(simulator, exclusiveGatewaySettings) {
 
