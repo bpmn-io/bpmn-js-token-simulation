@@ -4,9 +4,9 @@
 
 [![CI](https://github.com/bpmn-io/bpmn-js-token-simulation/workflows/CI/badge.svg)](https://github.com/bpmn-io/bpmn-js-token-simulation/actions?query=workflow%3ACI)
 
-A bpmn-js extension for token simulation. [__Try it out__](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html).
+A BPMN 2.0 specification compliant token simulator, built as a [bpmn-js](https://github.com/bpmn-io/bpmn-js) extension. [__Try it out__](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1).
 
-[![Screencast](docs/screenshot.png)](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html)
+[![Screencast](docs/screenshot.png)](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1)
 
 
 ## Installation
