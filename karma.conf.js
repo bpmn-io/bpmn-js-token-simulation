@@ -55,11 +55,11 @@ module.exports = function(karma) {
         rules: [
           {
             test: /\.(css|bpmn)$/,
-            use: 'raw-loader'
+            type: 'asset/source'
           },
           {
             test: /\.png$/,
-            use: 'url-loader'
+            type: 'asset/inline'
           }
         ].concat(
           coverage ? {
