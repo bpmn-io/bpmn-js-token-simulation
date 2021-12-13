@@ -1,5 +1,3 @@
-@import '../font-awesome/css/font-awesome.min.css';
-
 :root {
   --token-simulation-green-base-44: #10D070;
   --token-simulation-grey-base-40: #666666;
@@ -228,6 +226,12 @@
   font-size: 16px;
   color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
+  display: inline-flex;
+}
+
+.toggle-mode .toggle {
+  margin-left: .25em;
+  display: inline-flex;
 }
 
 .bjs-container.simulation .toggle-mode,
@@ -321,17 +325,19 @@
   height: 30px;
   box-sizing: border-box;
   font-size: 16px;
+
+  display: flex;
+  justify-content: space-between;
 }
 
 .token-simulation-log .header .close {
-  float: right;
   background: none;
   border: none;
   cursor: pointer;
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.token-simulation-log .header .fa-align-left {
+.token-simulation-log .header .log-icon {
   cursor: pointer;
 }
 
@@ -459,16 +465,11 @@
   text-align: center;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
-  cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-left: 6px;
   overflow: hidden;
-}
-
-.set-animation-speed .fa-tachometer {
-  margin-bottom: 2px;
 }
 
 .set-animation-speed.hidden {
@@ -485,12 +486,25 @@
 }
 
 .set-animation-speed .animation-speed-buttons .animation-speed-button {
-  padding: 6px;
+  padding: 10px 0;
   width: 30px;
+  display: inline-flex;
+  justify-content: center;
+  border: none;
 }
 
 .set-animation-speed .animation-speed-buttons .animation-speed-button.active,
 .set-animation-speed .animation-speed-buttons .animation-speed-button:hover {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
+}
+
+.bts-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bts-icon > svg {
+  height: 1em;
 }

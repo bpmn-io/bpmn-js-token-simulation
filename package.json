@@ -4,7 +4,8 @@
   "description": "bpmn-js token simulation extension",
   "main": "index.js",
   "scripts": {
-    "all": "run-s lint test bundle",
+    "all": "run-s bundle:src lint test bundle",
+    "bundle:src": "rollup -c",
     "bundle": "webpack --mode production",
     "bundle:watch": "webpack -w",
     "start": "webpack serve --static ./example --open",
@@ -63,6 +64,8 @@
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all": "^4.1.5",
     "puppeteer": "^9.1.1",
+    "rollup": "^2.61.1",
+    "rollup-plugin-string": "^3.0.0",
     "sinon": "^10.0.0",
     "sinon-chai": "^3.6.0",
     "webpack": "^5.65.0",
