@@ -4,7 +4,9 @@ module.exports = (env, argv) => {
 
   const mode = argv.mode || 'development';
 
-  const config = {
+  const devtool = mode === 'development' ? 'eval-source-map' : 'source-map';
+
+  return {
     mode,
     entry: {
       viewer: './example/src/viewer.js',
@@ -18,9 +20,7 @@ module.exports = (env, argv) => {
       rules: [
         {
           test: /\.bpmn$/,
-          use: {
-            loader: 'raw-loader'
-          }
+          type: 'asset/source'
         }
       ]
     },
@@ -31,12 +31,8 @@ module.exports = (env, argv) => {
           { from: './assets', to: 'dist/vendor/bpmn-js-token-simulation/assets' }
         ]
       })
-    ]
+    ],
+    devtool
   };
 
-  if (mode === 'production') {
-    config.devtool = 'source-map';
-  }
-
-  return config;
 };
