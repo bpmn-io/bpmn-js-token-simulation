@@ -12,7 +12,7 @@ html, body, #canvas {
   color: var(--token-simulation-grey-darken-30, #212121);
 }
 
-.notifications {
+:not(.presentation-mode) .notifications {
   bottom: 60px;
 }
 
@@ -47,6 +47,12 @@ html, body, #canvas {
 .links .link + .link {
   margin-left: 20px;
 }
+
+.presentation-mode .drop-message,
+.presentation-mode .links {
+  display: none;
+}
+
 
 /** file-drops */
 

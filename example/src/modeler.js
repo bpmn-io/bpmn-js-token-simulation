@@ -12,6 +12,7 @@ const url = new URL(window.location.href);
 
 const persistent = url.searchParams.has('p');
 const active = url.searchParams.has('e');
+const presentationMode = url.searchParams.has('pm');
 
 let fileName = 'diagram.bpmn';
 
@@ -93,6 +94,10 @@ modeler.openDiagram = function(diagram) {
       console.error(err);
     });
 };
+
+if (presentationMode) {
+  document.body.classList.add('presentation-mode');
+}
 
 document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', function(files) {
 
