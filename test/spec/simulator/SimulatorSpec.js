@@ -648,6 +648,51 @@ describe('simulator', function() {
   });
 
 
+  describe('token-sink', function() {
+
+    verify('token-sink-task', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:A',
+        'createScope:Start:A',
+        'signal:Start:B',
+        'exit:Start:B',
+        'createScope:Flow_1:A',
+        'destroyScope:Start:B',
+        'enter:Flow_1:A',
+        'exit:Flow_1:C',
+        'createScope:EndTask:A',
+        'destroyScope:Flow_1:C',
+        'enter:EndTask:A',
+        'exit:EndTask:D',
+        'destroyScope:EndTask:D',
+        'exit:Process_1:A',
+        'destroyScope:Process_1:A'
+      ]);
+    });
+
+
+    verify('token-sink-all', () => {
+
+      // when
+      const scope = signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectDestroyed(scope);
+    });
+
+  });
+
+
   describe('explicit waitAtElement', function() {
 
     verify('simple', () => {
