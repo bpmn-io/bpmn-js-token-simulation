@@ -3,8 +3,14 @@ import Modeler from 'bpmn-js/lib/Modeler';
 
 import {
   bootstrapModeler,
-  inject
+  inject,
+  injectStyles
 } from 'test/TestHelper';
+
+
+injectStyles();
+
+var singleStart = window.__env__ && window.__env__.SINGLE_START === 'modeler';
 
 
 describe('modeler extension', function() {
@@ -21,12 +27,12 @@ describe('modeler extension', function() {
     }));
 
 
-    it('should toggle mode', inject(function(toggleMode) {
+    (singleStart ? it.only : it)('should toggle mode', inject(function(toggleMode) {
 
       // YEA!
       toggleMode.toggleMode();
 
-      // and do it again!
+      // do it again!
       toggleMode.toggleMode();
     }));
   });
