@@ -4,7 +4,8 @@ import Modeler from 'bpmn-js/lib/Modeler';
 import {
   bootstrapModeler,
   inject,
-  injectStyles
+  injectStyles,
+  getBpmnJS
 } from 'test/TestHelper';
 
 
@@ -35,6 +36,58 @@ describe('modeler extension', function() {
       // do it again!
       toggleMode.toggleMode();
     }));
+
+  });
+
+
+  describe('colors', function() {
+
+    const diagram = require('./simple.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ...Modeler.prototype._modules,
+        TokenSimulationModelerModules
+      ]
+    }));
+
+
+    function expectColors(elementId, expectedColors) {
+
+      return getBpmnJS().invoke(function(elementRegistry, elementColors) {
+        const element = elementRegistry.get(elementId);
+
+        expect(element).to.exist;
+
+        const colors = elementColors.get(element);
+
+        expect(colors).to.eql(expectedColors);
+      });
+
+    }
+
+
+    it('should set (and reset) colors', inject(
+      function(toggleMode, elementRegistry, elementColors) {
+
+        // assume
+        expectColors('SequenceFlow_2', { fill: undefined, stroke: '#1e88e5' });
+
+        // when
+        toggleMode.toggleMode();
+
+        // then
+        expectColors('SequenceFlow_2', { fill: undefined, stroke: ' #212121' });
+
+        // but when
+        // reset
+        toggleMode.toggleMode();
+
+        // then
+        expectColors('SequenceFlow_2', { fill: undefined, stroke: '#1e88e5' });
+      }
+    ));
+
   });
 
 
