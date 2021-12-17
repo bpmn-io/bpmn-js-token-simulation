@@ -4,6 +4,8 @@ import BpmnModeler from 'bpmn-js/lib/Modeler';
 
 import fileDrop from 'file-drops';
 
+import fileOpen from 'file-open';
+
 import download from 'downloadjs';
 
 import exampleXML from '../resources/example.bpmn';
@@ -99,19 +101,22 @@ if (presentationMode) {
   document.body.classList.add('presentation-mode');
 }
 
-document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', function(files) {
+function openFile(files) {
 
   // files = [ { name, contents }, ... ]
 
-  if (files.length) {
-    hideDropMessage();
-
-    fileName = files[0].name;
-
-    modeler.openDiagram(files[0].contents);
+  if (!files.length) {
+    return;
   }
 
-}), false);
+  hideDropMessage();
+
+  fileName = files[0].name;
+
+  modeler.openDiagram(files[0].contents);
+}
+
+document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', openFile), false);
 
 function downloadDiagram() {
   modeler.saveXML({ format: true }, function(err, xml) {
@@ -126,6 +131,12 @@ document.body.addEventListener('keydown', function(event) {
     event.preventDefault();
 
     downloadDiagram();
+  }
+
+  if (event.code === 'KeyO' && (event.metaKey || event.ctrlKey)) {
+    event.preventDefault();
+
+    fileOpen().then(openFile);
   }
 });
 
