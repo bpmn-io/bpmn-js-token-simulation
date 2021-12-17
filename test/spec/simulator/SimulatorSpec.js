@@ -880,6 +880,63 @@ describe('simulator', function() {
     });
 
 
+    verify('end-event-error', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:00pqkxk',
+        'createScope:Start:00pqkxk',
+        'signal:Start:1ajxbue',
+        'exit:Start:1ajxbue',
+        'createScope:Flow_1:00pqkxk',
+        'destroyScope:Start:1ajxbue',
+        'enter:Flow_1:00pqkxk',
+        'exit:Flow_1:1kig5ee',
+        'createScope:Transaction:00pqkxk',
+        'destroyScope:Flow_1:1kig5ee',
+        'enter:Transaction:00pqkxk',
+        'createScope:Transaction_Start:14la1i6',
+        'signal:Transaction_Start:1l9l08v',
+        'exit:Transaction_Start:1l9l08v',
+        'createScope:Flow_3:14la1i6',
+        'destroyScope:Transaction_Start:1l9l08v',
+        'enter:Flow_3:14la1i6',
+        'exit:Flow_3:176prv2',
+        'createScope:Transaction_End:14la1i6',
+        'destroyScope:Flow_3:176prv2',
+        'enter:Transaction_End:14la1i6',
+        'createScope:TransactionEventSub:14la1i6',
+        'signal:TransactionEventSub:1o2jgfi',
+        'createScope:EventSubStart:1o2jgfi',
+        'exit:Transaction_End:03tm8ec',
+        'destroyScope:Transaction_End:03tm8ec',
+        'signal:EventSubStart:1k9kzqm',
+        'exit:EventSubStart:1k9kzqm',
+        'createScope:Flow_7:1o2jgfi',
+        'destroyScope:EventSubStart:1k9kzqm',
+        'enter:Flow_7:1o2jgfi',
+        'exit:Flow_7:1ligdo6',
+        'createScope:EventSubEnd:1o2jgfi',
+        'destroyScope:Flow_7:1ligdo6',
+        'enter:EventSubEnd:1o2jgfi',
+        'exit:EventSubEnd:1kvkdzh',
+        'destroyScope:EventSubEnd:1kvkdzh',
+        'exit:TransactionEventSub:1o2jgfi',
+        'destroyScope:TransactionEventSub:1o2jgfi',
+        'exit:Transaction:14la1i6',
+        'destroyScope:Transaction:14la1i6',
+        'exit:Process_1:00pqkxk',
+        'destroyScope:Process_1:00pqkxk'
+      ]);
+    });
+
+
     verify('end-event-terminate', () => {
 
       // when
