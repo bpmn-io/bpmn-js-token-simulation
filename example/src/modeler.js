@@ -2,6 +2,8 @@ import TokenSimulationModule from '../..';
 
 import BpmnModeler from 'bpmn-js/lib/Modeler';
 
+import AddExporter from '@bpmn-io/add-exporter';
+
 import fileDrop from 'file-drops';
 
 import fileOpen from 'file-open';
@@ -72,8 +74,13 @@ const modeler = new BpmnModeler({
   container: '#canvas',
   additionalModules: [
     TokenSimulationModule,
+    AddExporter,
     ExampleModule
   ],
+  exporter: {
+    name: 'bpmn-js-token-simulation',
+    version: process.env.TOKEN_SIMULATION_VERSION
+  },
   keyboard: {
     bindTo: document
   }
