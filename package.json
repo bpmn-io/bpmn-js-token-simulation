@@ -46,6 +46,7 @@
     "*.css"
   ],
   "devDependencies": {
+    "@bpmn-io/add-exporter": "^0.2.0",
     "bpmn-js": "^8.8.3",
     "chai": "^3.5.0",
     "copy-webpack-plugin": "^8.1.1",
