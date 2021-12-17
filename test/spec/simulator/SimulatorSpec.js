@@ -18,9 +18,12 @@ describe('simulator', function() {
 
       simulator.on('createScope', spy);
 
-      simulator.createScope(element('Process_1'));
+      const scope = simulator.createScope(element('Process_1'));
 
       // then
+      expect(scope).to.exist;
+      expect(scope.element).to.equal(element('Process_1'));
+
       expect(spy).to.have.been.calledOnce;
 
       // but when
