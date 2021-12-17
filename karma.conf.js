@@ -4,6 +4,8 @@
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE', 'PhantomJS' ]
 var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(',');
 
+var singleStart = process.env.SINGLE_START;
+
 // use puppeteer provided Chrome for testing
 process.env.CHROME_BIN = require('puppeteer').executablePath();
 
@@ -31,14 +33,16 @@ module.exports = function(karma) {
     ],
 
     preprocessors: {
-      [suite]: [ 'webpack' ]
+      [suite]: [ 'webpack', 'env' ]
     },
 
     reporters: [ 'spec' ].concat(coverage ? 'coverage' : []),
 
-    browsers: browsers,
+    browsers: singleStart ? browsers.concat('Debug') : browsers,
 
     browserNoActivityTimeout: 30000,
+
+    envPreprocessor: singleStart ? [ 'SINGLE_START' ] : [],
 
     coverageReporter: {
       reporters: [
