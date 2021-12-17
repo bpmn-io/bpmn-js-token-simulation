@@ -42,7 +42,7 @@ describe('modeler extension', function() {
 
   describe('colors', function() {
 
-    const diagram = require('./simple.bpmn');
+    const diagram = require('./colors.bpmn');
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -72,12 +72,16 @@ describe('modeler extension', function() {
 
         // assume
         expectColors('SequenceFlow_2', { fill: undefined, stroke: '#1e88e5' });
+        expectColors('StartEvent_1', { fill: '#ffcdd2', stroke: '#e53935' });
+        expectColors('StartEvent_1_label', { stroke: '#e53935' });
 
         // when
         toggleMode.toggleMode();
 
         // then
-        expectColors('SequenceFlow_2', { fill: undefined, stroke: ' #212121' });
+        expectColors('SequenceFlow_2', { fill: undefined, stroke: '#212121' });
+        expectColors('StartEvent_1', { fill: '#fff', stroke: '#000' });
+        expectColors('StartEvent_1_label', { stroke: '#000' });
 
         // but when
         // reset
@@ -85,6 +89,9 @@ describe('modeler extension', function() {
 
         // then
         expectColors('SequenceFlow_2', { fill: undefined, stroke: '#1e88e5' });
+        expectColors('StartEvent_1', { fill: '#ffcdd2', stroke: '#e53935' });
+        expectColors('StartEvent_1_label', { stroke: '#e53935' });
+
       }
     ));
 
