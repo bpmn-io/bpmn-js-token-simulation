@@ -46,6 +46,18 @@ describe('simulator', function() {
       expect(spy).to.have.been.calledOnce;
     });
 
+
+    verify('sub-process', (simulator) => {
+
+      // when
+      const scope = simulator.signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expect(scope).to.exist;
+    });
+
   });
 
 
@@ -2674,6 +2686,10 @@ function findScope(filter) {
   return getBpmnJS().invoke(function(simulator) {
     return simulator.findScope(filter);
   });
+}
+
+function expectDestroyed(scope) {
+  expect(scope.destroyed).to.be.true;
 }
 
 function expectTrace(expectedTrace) {
