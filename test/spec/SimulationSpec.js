@@ -632,7 +632,7 @@ function triggerElement(id) {
   return getBpmnJS().invoke(function(bpmnjs) {
 
     const domElement = domQuery(
-      `.djs-overlays[data-container-id="${id}"] .context-pad:not(.hidden)`,
+      `.djs-overlays[data-container-id="${id}"] .bts-context-pad:not(.hidden)`,
       bpmnjs._container
     );
 
@@ -650,7 +650,7 @@ function triggerScope(scope) {
   return getBpmnJS().invoke(function(bpmnjs) {
 
     const domElement = domQuery(
-      `.token-simulation-scopes [data-scope-id="${scope.id}"]`,
+      `.bts-scopes [data-scope-id="${scope.id}"]`,
       bpmnjs._container
     );
 

@@ -27,7 +27,7 @@
   border-color: var(--token-simulation-red-base-62, #FF3D3D) !important;
 }
 
-.context-pad {
+.bts-context-pad {
   cursor: pointer;
   background-color: var(--token-simulation-grey-lighten-56, #909090);
   border-radius: 2px;
@@ -44,42 +44,43 @@
   box-sizing: border-box;
 }
 
-.context-pad:not(.disabled):hover {
+.bts-context-pad:not(.disabled):hover {
   width: 40px;
   background-color: var(--token-simulation-green-base-44, #10D070);
   opacity: 1;
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.djs-overlays:not(.hover) .context-pad:not(:hover).show-hover,
-.context-pad:not(:hover) .show-hover,
-.context-pad:hover .hide-hover {
+.djs-overlays:not(.hover) .bts-context-pad:not(:hover).show-hover,
+.bts-context-pad:not(:hover) .show-hover,
+.bts-context-pad:hover .hide-hover {
   display: none;
 }
 
-.context-pad.disabled {
+.bts-context-pad.disabled {
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   color: var(--token-simulation-grey-base-40, #666666);
   pointer-events: none;
 }
 
-.context-pad.hidden {
+.bts-context-pad.hidden {
   display: none;
 }
 
-.context-pad [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
+.bts-context-pad [class^="bpmn-icon-"]:before,
+.bts-context-pad [class*=" bpmn-icon-"]:before {
   margin: 0;
 }
 
-.token .text {
+.bts-token .text {
   font-family: 'Arial', sans-serif;
 }
 
-.token-count-parent {
+.bts-token-count-parent {
   white-space: nowrap;
 }
 
-.token-count {
+.bts-token-count {
   background-color: #FAFAFA;
   border-radius: 100%;
   width: 25px;
@@ -89,38 +90,38 @@
   font-size: 14px;
   color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
-  animation: jump 1s infinite;
+  animation: bts-jump 1s infinite;
   animation-timing-function: ease;
   position: relative;
   top: 0;
   display: inline-block;
 }
 
-.token-count.inactive {
+.bts-token-count.inactive {
   display: none;
 }
 
-.token-count + .token-count {
+.bts-token-count + .bts-token-count {
   margin-left: -8px;
 }
 
-.token-count.waiting {
+.bts-token-count.waiting {
   color: var(--token-simulation-white, #FFFFFF);
   font-family: 'Arial', sans-serif;
   background-color: var(--token-simulation-green-base-44, #10D070);
 }
 
-@keyframes jump {
+@keyframes bts-jump {
   50% { top: 5px; }
 }
 
-.notifications {
+.bts-notifications {
   position: absolute;
   bottom: 20px;
   left: 20px;
 }
 
-.notifications .notification {
+.bts-notifications .bts-notification {
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   padding: 5px 8px;
@@ -134,39 +135,39 @@
   align-items: stretch;
 }
 
-.notifications .notification.info {
+.bts-notifications .bts-notification.info {
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   color: #000;
 }
 
-.notifications .notification.success {
+.bts-notifications .bts-notification.success {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.notifications .notification.warning {
+.bts-notifications .bts-notification.warning {
   background-color: var(--token-simulation-red-base-62, #FF3D3D);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.notifications .notification > * {
+.bts-notifications .bts-notification > * {
   flex: initial;
 }
 
-.notifications .notification > :not(:last-child) {
+.bts-notifications .bts-notification > :not(:last-child) {
   margin-right: 6px;
 }
 
-.notifications .notification > .icon {
+.bts-notifications .bts-notification > .bts-icon {
   min-width: 20px;
   text-align: center;
 }
 
-.notifications .notification > .text {
+.bts-notifications .bts-notification > .bts-text {
   flex: 1;
 }
 
-.notifications .notification > .scope {
+.bts-notifications .bts-notification > .bts-scope {
   font-family: monospace;
   font-size: .8em;
   padding: 2px 3px;
@@ -174,16 +175,17 @@
   cursor: default;
 }
 
-.notifications .notification > .icon [class^="bpmn-icon-"]:before, [class*=" bpmn-icon-"]:before {
+.bts-notifications .bts-notification > .bts-icon [class^="bpmn-icon-"]:before,
+.bts-notifications .bts-notification > .bts-icon [class*=" bpmn-icon-"]:before {
   margin: 0;
 }
 
-.bjs-container.paused .play-pause.active {
+.bjs-container.paused .bts-play-pause.active {
   color: var(--token-simulation-silver-darken-94, #EFEFEF);
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
 }
 
-.element-notification {
+.bts-element-notification {
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
@@ -196,26 +198,25 @@
   user-select: none;
 }
 
-.element-notification .fa,
-.element-notification .text {
+.bts-element-notification .bts-text {
   margin: 0 3px 0 3px;
 }
 
-.element-notification .text {
+.bts-element-notification .bts-text {
   white-space: nowrap;
 }
 
-.element-notification.success {
+.bts-element-notification.success {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.element-notification.warning {
+.bts-element-notification.warning {
   background-color: var(--token-simulation-red-base-62, #FF3D3D);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.toggle-mode {
+.bts-toggle-mode {
   cursor: pointer;
   position: absolute;
   top: 20px;
@@ -229,13 +230,13 @@
   display: inline-flex;
 }
 
-.toggle-mode .toggle {
+.bts-toggle-mode .bts-toggle {
   margin-left: .25em;
   display: inline-flex;
 }
 
-.bjs-container.simulation .toggle-mode,
-.toggle-mode:hover {
+.bjs-container.simulation .bts-toggle-mode,
+.bts-toggle-mode:hover {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
 }
@@ -255,17 +256,17 @@
   display: none !important;
 }
 
-.token-simulation-palette {
+.bts-palette {
   position: absolute;
   top: 60px;
   left: 20px;
 }
 
-.token-simulation-palette.hidden {
+.bts-palette.hidden {
   display: none;
 }
 
-.token-simulation-palette .entry {
+.bts-palette .bts-entry {
   cursor: pointer;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
@@ -282,27 +283,27 @@
   transition: all 0.1s ease;
 }
 
-.token-simulation-palette .entry:last-child {
+.bts-palette .bts-entry:last-child {
   margin-bottom: 0;
 }
 
-.token-simulation-palette .entry:not(.disabled):hover {
+.bts-palette .bts-entry:not(.disabled):hover {
   width: 40px;
   color: var(--token-simulation-white, #FFFFFF);
   background-color: var(--token-simulation-green-base-44, #10D070);
 }
 
-.token-simulation-palette .entry.active {
+.bts-palette .bts-entry.active {
   color: var(--token-simulation-white, #FFFFFF);
   background-color: var(--token-simulation-green-base-44, #10D070);
 }
 
-.token-simulation-palette .entry.disabled {
+.bts-palette .bts-entry.disabled {
   pointer-events: none;
   color: var(--token-simulation-grey-base-40, #666666);
 }
 
-.token-simulation-log {
+.bts-log {
   position: absolute;
   top: 128px;
   bottom: 20px;
@@ -312,47 +313,45 @@
   border-radius: 2px;
   z-index: 10000;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-.token-simulation-log.hidden {
+.bts-log.hidden {
   display: none;
 }
 
-.token-simulation-log .header {
+.bts-log .bts-header {
   background-color: var(--token-simulation-green-base-44, #10D070);
   padding: 6px 8px;
   color: var(--token-simulation-white, #FFFFFF);
   height: 30px;
   box-sizing: border-box;
   font-size: 16px;
-
+  flex: 0;
   display: flex;
   justify-content: space-between;
 }
 
-.token-simulation-log .header .close {
+.bts-log .bts-close {
   background: none;
   border: none;
   cursor: pointer;
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.token-simulation-log .header .log-icon {
+.bts-log .bts-log-icon {
   cursor: pointer;
 }
 
-.token-simulation-log .content {
-  position: absolute;
+.bts-log .bts-content {
   overflow-y: auto;
   box-sizing: border-box;
-  top: 30px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  flex: 1;
   padding: 10px;
 }
 
-.token-simulation-log .entry {
+.bts-log .bts-entry {
   font-size: 16px;
   margin: 0 0 6px 0;
   padding: 6px;
@@ -363,48 +362,48 @@
   justify-content: center;
 }
 
-.token-simulation-log .entry.inactive {
+.bts-log .bts-entry.inactive {
   opacity: .5;
 }
 
-.token-simulation-log .entry.success {
+.bts-log .bts-entry.success {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.token-simulation-log .entry.success .date,
-.token-simulation-log .entry.warning .date {
+.bts-log .bts-date,
+.bts-log .bts-date {
  color: var(--token-simulation-silver-darken-94, #EFEFEF);
 }
 
-.token-simulation-log .entry.warning {
+.bts-log .bts-entry.warning {
   background-color: var(--token-simulation-red-base-62, #FF3D3D);
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.token-simulation-log .entry:last-child {
+.bts-log .bts-entry:last-child {
   margin: 0;
 }
 
-.token-simulation-log .entry > * {
+.bts-log .bts-entry > * {
   flex: initial;
 }
 
-.token-simulation-log .entry > :not(:last-child) {
+.bts-log .bts-entry > :not(:last-child) {
   margin-right: 6px;
 }
 
-.token-simulation-log .entry > .date {
+.bts-log .bts-entry > .bts-date {
   min-width: 120px;
   color: var(--token-simulation-grey-base-40, #666666);
 }
 
-.token-simulation-log .entry > .icon {
+.bts-log .bts-entry > .bts-icon {
   min-width: 20px;
   text-align: center;
 }
 
-.token-simulation-log .entry > .scope {
+.bts-log .bts-entry > .bts-scope {
   font-family: monospace;
   font-size: .8em;
   padding: 2px 3px;
@@ -412,15 +411,15 @@
   cursor: default;
 }
 
-.token-simulation-log .entry > .text {
+.bts-log .bts-entry > .bts-text {
   flex: 1;
 }
 
-.token-simulation-log .entry.placeholder.hidden {
+.bts-log .bts-entry.placeholder.hidden {
   display: none;
 }
 
-.token-simulation-scopes {
+.bts-scopes {
   position: absolute;
   top: 22px;
   left: 190px;
@@ -428,11 +427,11 @@
   flex-direction: row;
 }
 
-.token-simulation-scopes.hidden {
+.bts-scopes.hidden {
   display: none;
 }
 
-.token-simulation-scopes .scope {
+.bts-scopes .bts-scope {
   border-radius: 100%;
   width: 25px;
   height: 25px;
@@ -444,11 +443,11 @@
   cursor: pointer;
 }
 
-.token-simulation-scopes .scope.inactive:hover {
+.bts-scopes .bts-scope.inactive:hover {
   opacity: 1
 }
 
-.token-simulation-scopes .scope.inactive {
+.bts-scopes .bts-scope.inactive {
   opacity: .25;
 }
 
@@ -456,7 +455,7 @@
   background-color: var(--token-simulation-silver-base-97, #F8F8F8);
 }
 
-.set-animation-speed {
+.bts-set-animation-speed {
   position: absolute;
   bottom: 20px;
   left: 50%;
@@ -472,20 +471,18 @@
   overflow: hidden;
 }
 
-.set-animation-speed.hidden {
+.bts-set-animation-speed.hidden {
   display: none;
 }
 
-.set-animation-speed .animation-speed-buttons {
+.bts-set-animation-speed .bts-animation-speed-buttons {
   display: flex;
   flex-direction: row;
-}
 
-.set-animation-speed .animation-speed-buttons {
   margin-left: 6px;
 }
 
-.set-animation-speed .animation-speed-buttons .animation-speed-button {
+.bts-set-animation-speed .bts-animation-speed-button {
   padding: 10px 0;
   width: 30px;
   display: inline-flex;
@@ -493,8 +490,8 @@
   border: none;
 }
 
-.set-animation-speed .animation-speed-buttons .animation-speed-button.active,
-.set-animation-speed .animation-speed-buttons .animation-speed-button:hover {
+.bts-set-animation-speed .bts-animation-speed-button.active,
+.bts-set-animation-speed .bts-animation-speed-button:hover {
   background-color: var(--token-simulation-green-base-44, #10D070);
   color: var(--token-simulation-white, #FFFFFF);
 }
