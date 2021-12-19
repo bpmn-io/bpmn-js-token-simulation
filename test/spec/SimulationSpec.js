@@ -632,7 +632,7 @@ function triggerElement(id) {
   return getBpmnJS().invoke(function(bpmnjs) {
 
     const domElement = domQuery(
-      `.djs-overlays[data-container-id="${id}"] .context-pad`,
+      `.djs-overlays[data-container-id="${id}"] .context-pad:not(.hidden)`,
       bpmnjs._container
     );
 
