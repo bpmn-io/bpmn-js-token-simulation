@@ -880,63 +880,6 @@ describe('simulator', function() {
     });
 
 
-    verify('end-event-error', () => {
-
-      // when
-      signal({
-        element: element('Process_1')
-      });
-
-      // then
-      expectTrace([
-        'createScope:Process_1:null',
-        'signal:Process_1:00pqkxk',
-        'createScope:Start:00pqkxk',
-        'signal:Start:1ajxbue',
-        'exit:Start:1ajxbue',
-        'createScope:Flow_1:00pqkxk',
-        'destroyScope:Start:1ajxbue',
-        'enter:Flow_1:00pqkxk',
-        'exit:Flow_1:1kig5ee',
-        'createScope:Transaction:00pqkxk',
-        'destroyScope:Flow_1:1kig5ee',
-        'enter:Transaction:00pqkxk',
-        'createScope:Transaction_Start:14la1i6',
-        'signal:Transaction_Start:1l9l08v',
-        'exit:Transaction_Start:1l9l08v',
-        'createScope:Flow_3:14la1i6',
-        'destroyScope:Transaction_Start:1l9l08v',
-        'enter:Flow_3:14la1i6',
-        'exit:Flow_3:176prv2',
-        'createScope:Transaction_End:14la1i6',
-        'destroyScope:Flow_3:176prv2',
-        'enter:Transaction_End:14la1i6',
-        'createScope:TransactionEventSub:14la1i6',
-        'signal:TransactionEventSub:1o2jgfi',
-        'createScope:EventSubStart:1o2jgfi',
-        'exit:Transaction_End:03tm8ec',
-        'destroyScope:Transaction_End:03tm8ec',
-        'signal:EventSubStart:1k9kzqm',
-        'exit:EventSubStart:1k9kzqm',
-        'createScope:Flow_7:1o2jgfi',
-        'destroyScope:EventSubStart:1k9kzqm',
-        'enter:Flow_7:1o2jgfi',
-        'exit:Flow_7:1ligdo6',
-        'createScope:EventSubEnd:1o2jgfi',
-        'destroyScope:Flow_7:1ligdo6',
-        'enter:EventSubEnd:1o2jgfi',
-        'exit:EventSubEnd:1kvkdzh',
-        'destroyScope:EventSubEnd:1kvkdzh',
-        'exit:TransactionEventSub:1o2jgfi',
-        'destroyScope:TransactionEventSub:1o2jgfi',
-        'exit:Transaction:14la1i6',
-        'destroyScope:Transaction:14la1i6',
-        'exit:Process_1:00pqkxk',
-        'destroyScope:Process_1:00pqkxk'
-      ]);
-    });
-
-
     verify('end-event-terminate', () => {
 
       // when
@@ -1008,6 +951,136 @@ describe('simulator', function() {
         'destroyScope:END_TERM:1tcdzlu',
         'exit:Process_1:1x8atzl',
         'destroyScope:Process_1:1x8atzl'
+      ]);
+    });
+
+  });
+
+
+  describe('error', function() {
+
+    verify('error-end-event-trigger-event-sub-process', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:0h0k94w',
+        'createScope:Start:0h0k94w',
+        'signal:Start:1vuflr6',
+        'exit:Start:1vuflr6',
+        'createScope:Flow_1:0h0k94w',
+        'destroyScope:Start:1vuflr6',
+        'enter:Flow_1:0h0k94w',
+        'exit:Flow_1:1vqobj0',
+        'createScope:T:0h0k94w',
+        'destroyScope:Flow_1:1vqobj0',
+        'enter:T:0h0k94w',
+        'createScope:T_START:1fq1arf',
+        'signal:T_START:1yfco8d',
+        'exit:T_START:1yfco8d',
+        'createScope:Flow_3:1fq1arf',
+        'destroyScope:T_START:1yfco8d',
+        'enter:Flow_3:1fq1arf',
+        'exit:Flow_3:1t7wfvr',
+        'createScope:T_END:1fq1arf',
+        'destroyScope:Flow_3:1t7wfvr',
+        'enter:T_END:1fq1arf',
+        'createScope:T_ERROR_SUB:1fq1arf',
+        'signal:T_ERROR_SUB:1gufhdi',
+        'createScope:START_ERROR:1gufhdi',
+        'exit:T_END:0yaarj5',
+        'destroyScope:T_END:0yaarj5',
+        'signal:START_ERROR:1llolso',
+        'exit:START_ERROR:1llolso',
+        'createScope:Flow_7:1gufhdi',
+        'destroyScope:START_ERROR:1llolso',
+        'enter:Flow_7:1gufhdi',
+        'exit:Flow_7:1j16kjx',
+        'createScope:END_ERROR:1gufhdi',
+        'destroyScope:Flow_7:1j16kjx',
+        'enter:END_ERROR:1gufhdi',
+        'exit:END_ERROR:1rtft72',
+        'destroyScope:END_ERROR:1rtft72',
+        'exit:T_ERROR_SUB:1gufhdi',
+        'destroyScope:T_ERROR_SUB:1gufhdi',
+        'exit:T:1fq1arf',
+        'destroyScope:T:1fq1arf',
+        'exit:Process_1:0h0k94w',
+        'destroyScope:Process_1:0h0k94w'
+      ]);
+    });
+
+
+    verify('error-end-event-event-sub-trigger-boundary', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:1lvosoc',
+        'createScope:START:1lvosoc',
+        'signal:START:0y5tvso',
+        'exit:START:0y5tvso',
+        'createScope:Flow_0izjhw2:1lvosoc',
+        'destroyScope:START:0y5tvso',
+        'enter:Flow_0izjhw2:1lvosoc',
+        'exit:Flow_0izjhw2:1e0okb6',
+        'createScope:CANCEL_EVENT_SUB_INT:1lvosoc',
+        'destroyScope:Flow_0izjhw2:1e0okb6',
+        'enter:CANCEL_EVENT_SUB_INT:1lvosoc',
+        'createScope:SUB_START:1h49yfz',
+        'signal:SUB_START:0vhdz8x',
+        'exit:SUB_START:0vhdz8x',
+        'createScope:Flow_0atqqyc:1h49yfz',
+        'destroyScope:SUB_START:0vhdz8x',
+        'enter:Flow_0atqqyc:1h49yfz',
+        'exit:Flow_0atqqyc:1n5ylzp',
+        'createScope:SUB_END_ESCALATE:1h49yfz',
+        'destroyScope:Flow_0atqqyc:1n5ylzp',
+        'enter:SUB_END_ESCALATE:1h49yfz',
+        'createScope:CS_SUB:1h49yfz',
+        'signal:CS_SUB:1rwvi1l',
+        'createScope:CS_START:1rwvi1l',
+        'exit:SUB_END_ESCALATE:17uvxdw',
+        'destroyScope:SUB_END_ESCALATE:17uvxdw',
+        'signal:CS_START:14l6gjk',
+        'exit:CS_START:14l6gjk',
+        'createScope:Flow_1jqqcdq:1rwvi1l',
+        'destroyScope:CS_START:14l6gjk',
+        'enter:Flow_1jqqcdq:1rwvi1l',
+        'exit:Flow_1jqqcdq:0g5sf8w',
+        'createScope:CS_TRIGGER_ERROR:1rwvi1l',
+        'destroyScope:Flow_1jqqcdq:0g5sf8w',
+        'enter:CS_TRIGGER_ERROR:1rwvi1l',
+        'createScope:ERROR_BOUNDARY:1lvosoc',
+        'signal:ERROR_BOUNDARY:0mck30p',
+        'exit:CS_TRIGGER_ERROR:0vnb74u',
+        'destroyScope:CS_TRIGGER_ERROR:0vnb74u',
+        'exit:ERROR_BOUNDARY:0mck30p',
+        'createScope:Flow_06o1xs1:1lvosoc',
+        'destroyScope:ERROR_BOUNDARY:0mck30p',
+        'exit:CS_SUB:1rwvi1l',
+        'destroyScope:CS_SUB:1rwvi1l',
+        'enter:Flow_06o1xs1:1lvosoc',
+        'exit:CANCEL_EVENT_SUB_INT:1h49yfz',
+        'destroyScope:CANCEL_EVENT_SUB_INT:1h49yfz',
+        'exit:Flow_06o1xs1:1xgp2vc',
+        'createScope:ERROR_END:1lvosoc',
+        'destroyScope:Flow_06o1xs1:1xgp2vc',
+        'enter:ERROR_END:1lvosoc',
+        'exit:ERROR_END:0syypbb',
+        'destroyScope:ERROR_END:0syypbb',
+        'exit:Process_1:1lvosoc',
+        'destroyScope:Process_1:1lvosoc'
       ]);
     });
 
