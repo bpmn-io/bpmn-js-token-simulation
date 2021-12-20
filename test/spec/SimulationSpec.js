@@ -850,7 +850,7 @@ describe('simulation', function() {
       async function(simulator, animation) {
 
         // given
-        animation.setAnimationSpeed(200);
+        animation.setAnimationSpeed(500);
 
         // when
         triggerElement('ALL_START');
