@@ -12,7 +12,7 @@ html, body, #canvas {
   color: var(--token-simulation-grey-darken-30, #212121);
 }
 
-:not(.presentation-mode) .bts-notifications {
+body:not(.presentation-mode) .bts-notifications {
   bottom: 60px;
 }
 
