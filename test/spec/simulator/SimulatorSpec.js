@@ -122,7 +122,7 @@ describe('simulator', function() {
         const destroyContext = { reason: 'HELLO?' };
 
         simulator.destroyScope(childScope_A1, destroyContext);
-      }).to.throw(/no <context\.element> provided/);
+      }).to.throw(/no <context\.initiator> provided/);
 
       // but when
       simulator.destroyScope(childScope_A1);
