@@ -916,7 +916,7 @@ describe('simulator', function() {
     });
 
 
-    verify('end-event-terminate-nested-scopes', () => {
+    verify('terminate-nested-scopes', () => {
 
       // when
       signal({
@@ -959,7 +959,7 @@ describe('simulator', function() {
 
   describe('error', function() {
 
-    verify('error-end-event-trigger-event-sub-process', () => {
+    verify('error-no-catch', () => {
 
       // when
       signal({
@@ -969,54 +969,155 @@ describe('simulator', function() {
       // then
       expectTrace([
         'createScope:Process_1:null',
-        'signal:Process_1:0h0k94w',
-        'createScope:Start:0h0k94w',
-        'signal:Start:1vuflr6',
-        'exit:Start:1vuflr6',
-        'createScope:Flow_1:0h0k94w',
-        'destroyScope:Start:1vuflr6',
-        'enter:Flow_1:0h0k94w',
-        'exit:Flow_1:1vqobj0',
-        'createScope:T:0h0k94w',
-        'destroyScope:Flow_1:1vqobj0',
-        'enter:T:0h0k94w',
-        'createScope:T_START:1fq1arf',
-        'signal:T_START:1yfco8d',
-        'exit:T_START:1yfco8d',
-        'createScope:Flow_3:1fq1arf',
-        'destroyScope:T_START:1yfco8d',
-        'enter:Flow_3:1fq1arf',
-        'exit:Flow_3:1t7wfvr',
-        'createScope:T_END:1fq1arf',
-        'destroyScope:Flow_3:1t7wfvr',
-        'enter:T_END:1fq1arf',
-        'createScope:T_ERROR_SUB:1fq1arf',
-        'signal:T_ERROR_SUB:1gufhdi',
-        'createScope:START_ERROR:1gufhdi',
-        'exit:T_END:0yaarj5',
-        'destroyScope:T_END:0yaarj5',
-        'signal:START_ERROR:1llolso',
-        'exit:START_ERROR:1llolso',
-        'createScope:Flow_7:1gufhdi',
-        'destroyScope:START_ERROR:1llolso',
-        'enter:Flow_7:1gufhdi',
-        'exit:Flow_7:1j16kjx',
-        'createScope:END_ERROR:1gufhdi',
-        'destroyScope:Flow_7:1j16kjx',
-        'enter:END_ERROR:1gufhdi',
-        'exit:END_ERROR:1rtft72',
-        'destroyScope:END_ERROR:1rtft72',
-        'exit:T_ERROR_SUB:1gufhdi',
-        'destroyScope:T_ERROR_SUB:1gufhdi',
-        'exit:T:1fq1arf',
-        'destroyScope:T:1fq1arf',
-        'exit:Process_1:0h0k94w',
-        'destroyScope:Process_1:0h0k94w'
+        'signal:Process_1:1t61d7t',
+        'createScope:Start:1t61d7t',
+        'signal:Start:1ro9vtt',
+        'exit:Start:1ro9vtt',
+        'createScope:Flow_1:1t61d7t',
+        'destroyScope:Start:1ro9vtt',
+        'enter:Flow_1:1t61d7t',
+        'exit:Flow_1:0c0dqm2',
+        'createScope:S:1t61d7t',
+        'destroyScope:Flow_1:0c0dqm2',
+        'enter:S:1t61d7t',
+        'createScope:S_START:0n8djbc',
+        'signal:S_START:1i9gvjf',
+        'exit:S_START:1i9gvjf',
+        'createScope:Flow_3:0n8djbc',
+        'destroyScope:S_START:1i9gvjf',
+        'enter:Flow_3:0n8djbc',
+        'exit:Flow_3:1b9ypfc',
+        'createScope:S_ERROR_END:0n8djbc',
+        'destroyScope:Flow_3:1b9ypfc',
+        'enter:S_ERROR_END:0n8djbc',
+        'exit:S_ERROR_END:0vfz7oy',
+        'destroyScope:S_ERROR_END:0vfz7oy',
+        'exit:S:0n8djbc',
+        'createScope:Flow_2:1t61d7t',
+        'destroyScope:S:0n8djbc',
+        'enter:Flow_2:1t61d7t',
+        'exit:Flow_2:0t6mzpu',
+        'createScope:End:1t61d7t',
+        'destroyScope:Flow_2:0t6mzpu',
+        'enter:End:1t61d7t',
+        'exit:End:0rmj0fu',
+        'destroyScope:End:0rmj0fu',
+        'exit:Process_1:1t61d7t',
+        'destroyScope:Process_1:1t61d7t'
       ]);
     });
 
 
-    verify('error-end-event-event-sub-trigger-boundary', () => {
+    verify('error-trigger-event-sub-process', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:0b6srf7',
+        'createScope:Start:0b6srf7',
+        'signal:Start:1lg3jor',
+        'exit:Start:1lg3jor',
+        'createScope:Flow_1:0b6srf7',
+        'destroyScope:Start:1lg3jor',
+        'enter:Flow_1:0b6srf7',
+        'exit:Flow_1:0bpj965',
+        'createScope:S:0b6srf7',
+        'destroyScope:Flow_1:0bpj965',
+        'enter:S:0b6srf7',
+        'createScope:S_START:0crvpfp',
+        'signal:S_START:13tknt1',
+        'exit:S_START:13tknt1',
+        'createScope:Flow_3:0crvpfp',
+        'destroyScope:S_START:13tknt1',
+        'enter:Flow_3:0crvpfp',
+        'exit:Flow_3:0jk1g1l',
+        'createScope:S_END:0crvpfp',
+        'destroyScope:Flow_3:0jk1g1l',
+        'enter:S_END:0crvpfp',
+        'createScope:S_ERROR_SUB:0crvpfp',
+        'signal:S_ERROR_SUB:0a48t97',
+        'createScope:START_ERROR:0a48t97',
+        'exit:S_END:1qn1n24',
+        'destroyScope:S_END:1qn1n24',
+        'signal:START_ERROR:1awb7fw',
+        'exit:START_ERROR:1awb7fw',
+        'createScope:Flow_7:0a48t97',
+        'destroyScope:START_ERROR:1awb7fw',
+        'enter:Flow_7:0a48t97',
+        'exit:Flow_7:0xyz96f',
+        'createScope:END_ERROR:0a48t97',
+        'destroyScope:Flow_7:0xyz96f',
+        'enter:END_ERROR:0a48t97',
+        'exit:END_ERROR:1yjzpna',
+        'destroyScope:END_ERROR:1yjzpna',
+        'exit:S_ERROR_SUB:0a48t97',
+        'destroyScope:S_ERROR_SUB:0a48t97',
+        'exit:S:0crvpfp',
+        'destroyScope:S:0crvpfp',
+        'exit:Process_1:0b6srf7',
+        'destroyScope:Process_1:0b6srf7'
+      ]);
+    });
+
+
+    verify('error-trigger-boundary', () => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace([
+        'createScope:Process_1:null',
+        'signal:Process_1:1jhtost',
+        'createScope:Start:1jhtost',
+        'signal:Start:1hi1hnd',
+        'exit:Start:1hi1hnd',
+        'createScope:Flow_1:1jhtost',
+        'destroyScope:Start:1hi1hnd',
+        'enter:Flow_1:1jhtost',
+        'exit:Flow_1:0wy9tct',
+        'createScope:S:1jhtost',
+        'destroyScope:Flow_1:0wy9tct',
+        'enter:S:1jhtost',
+        'createScope:S_START:11izlcy',
+        'signal:S_START:1c3xvvk',
+        'exit:S_START:1c3xvvk',
+        'createScope:Flow_3:11izlcy',
+        'destroyScope:S_START:1c3xvvk',
+        'enter:Flow_3:11izlcy',
+        'exit:Flow_3:17bmd2a',
+        'createScope:S_END:11izlcy',
+        'destroyScope:Flow_3:17bmd2a',
+        'enter:S_END:11izlcy',
+        'createScope:Error_Boundary:1jhtost',
+        'signal:Error_Boundary:0msv5cb',
+        'destroyScope:S_END:0ti18ip',
+        'exit:S:11izlcy',
+        'destroyScope:S:11izlcy',
+        'exit:Error_Boundary:0msv5cb',
+        'createScope:Flow_1qizkga:1jhtost',
+        'destroyScope:Error_Boundary:0msv5cb',
+        'enter:Flow_1qizkga:1jhtost',
+        'exit:Flow_1qizkga:1640q58',
+        'createScope:Error_End:1jhtost',
+        'destroyScope:Flow_1qizkga:1640q58',
+        'enter:Error_End:1jhtost',
+        'exit:Error_End:08imwdd',
+        'destroyScope:Error_End:08imwdd',
+        'exit:Process_1:1jhtost',
+        'destroyScope:Process_1:1jhtost'
+      ]);
+    });
+
+
+    verify('error-nested-trigger-boundary', () => {
 
       // when
       signal({

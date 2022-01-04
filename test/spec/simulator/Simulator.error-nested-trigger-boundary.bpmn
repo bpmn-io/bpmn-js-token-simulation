@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.24.0">
-  <bpmn:process id="Process_1">
-    <bpmn:transaction id="CANCEL_EVENT_SUB_INT" name="CANCEL_EVENT_SUB_INT">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:boundaryEvent id="ERROR_BOUNDARY" name="ERROR_BOUNDARY" attachedToRef="CANCEL_EVENT_SUB_INT">
+      <bpmn:outgoing>Flow_06o1xs1</bpmn:outgoing>
+      <bpmn:errorEventDefinition id="ErrorEventDefinition_133jfwk" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="ERROR_END" name="ERROR_END">
+      <bpmn:incoming>Flow_06o1xs1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_06o1xs1" sourceRef="ERROR_BOUNDARY" targetRef="ERROR_END" />
+    <bpmn:endEvent id="OK_END" name="OK_END">
+      <bpmn:incoming>Flow_01r17t9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_01r17t9" sourceRef="CANCEL_EVENT_SUB_INT" targetRef="OK_END" />
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_0izjhw2</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_0izjhw2" sourceRef="START" targetRef="CANCEL_EVENT_SUB_INT" />
+    <bpmn:subProcess id="CANCEL_EVENT_SUB_INT" name="CANCEL_EVENT_SUB_INT">
       <bpmn:incoming>Flow_0izjhw2</bpmn:incoming>
       <bpmn:outgoing>Flow_01r17t9</bpmn:outgoing>
       <bpmn:subProcess id="CS_SUB" name="CS_SUB" triggeredByEvent="true">
@@ -23,23 +39,7 @@
         <bpmn:escalationEventDefinition id="EscalationEventDefinition_10j9jjj" />
       </bpmn:endEvent>
       <bpmn:sequenceFlow id="Flow_0atqqyc" sourceRef="SUB_START" targetRef="SUB_END_ESCALATE" />
-    </bpmn:transaction>
-    <bpmn:boundaryEvent id="ERROR_BOUNDARY" name="ERROR_BOUNDARY" attachedToRef="CANCEL_EVENT_SUB_INT">
-      <bpmn:outgoing>Flow_06o1xs1</bpmn:outgoing>
-      <bpmn:errorEventDefinition id="ErrorEventDefinition_133jfwk" />
-    </bpmn:boundaryEvent>
-    <bpmn:endEvent id="ERROR_END" name="ERROR_END">
-      <bpmn:incoming>Flow_06o1xs1</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_06o1xs1" sourceRef="ERROR_BOUNDARY" targetRef="ERROR_END" />
-    <bpmn:endEvent id="OK_END" name="OK_END">
-      <bpmn:incoming>Flow_01r17t9</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="Flow_01r17t9" sourceRef="CANCEL_EVENT_SUB_INT" targetRef="OK_END" />
-    <bpmn:startEvent id="START" name="START">
-      <bpmn:outgoing>Flow_0izjhw2</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0izjhw2" sourceRef="START" targetRef="CANCEL_EVENT_SUB_INT" />
+    </bpmn:subProcess>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
@@ -48,7 +48,7 @@
         <di:waypoint x="240" y="255" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_01r17t9_di" bpmnElement="Flow_01r17t9">
-        <di:waypoint x="980" y="255" />
+        <di:waypoint x="940" y="255" />
         <di:waypoint x="1072" y="255" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Flow_06o1xs1_di" bpmnElement="Flow_06o1xs1">
@@ -74,8 +74,8 @@
           <dc:Bounds x="122" y="280" width="36" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="CANCEL_EVENT_SUB_INT_di" bpmnElement="CANCEL_EVENT_SUB_INT" isExpanded="true">
-        <dc:Bounds x="240" y="120" width="740" height="270" />
+      <bpmndi:BPMNShape id="Activity_1pp3n8d_di" bpmnElement="CANCEL_EVENT_SUB_INT" isExpanded="true">
+        <dc:Bounds x="240" y="120" width="700" height="270" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0atqqyc_di" bpmnElement="Flow_0atqqyc">
         <di:waypoint x="363" y="260" />
@@ -103,7 +103,7 @@
       <bpmndi:BPMNShape id="CS_TRIGGER_ERROR_di" bpmnElement="CS_TRIGGER_ERROR">
         <dc:Bounds x="722" y="236" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="701" y="279" width="79" height="27" />
+          <dc:Bounds x="702" y="279" width="78" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0p33u7c_di" bpmnElement="CS_START">
