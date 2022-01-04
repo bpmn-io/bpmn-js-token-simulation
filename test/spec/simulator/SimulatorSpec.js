@@ -879,8 +879,12 @@ describe('simulator', function() {
       ]);
     });
 
+  });
 
-    verify('end-event-terminate', () => {
+
+  describe('termination', function() {
+
+    verify('terminate', () => {
 
       // when
       signal({
