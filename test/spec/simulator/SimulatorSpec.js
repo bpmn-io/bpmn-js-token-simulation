@@ -2892,6 +2892,29 @@ function verify(name, test, iit=it) {
               });
             }
           ],
+          scopeIds: [ 'factory', function() {
+
+            let idx = 0;
+
+            const alphabet = Array.from('ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+
+            // generate IDs in alphabetic order;
+            // when overflowing the alphabet, attach a numeric runner suffix:
+            //
+            // A B C D E ... Z A1 B1 C1 ...
+            function next() {
+              const i = idx++;
+
+              const runner = Math.trunc(i / alphabet.length);
+              const char = i % alphabet.length;
+
+              return alphabet[char] + (runner || '');
+            }
+
+            return {
+              next
+            };
+          } ],
           simulationScopes: [ 'value', {} ],
           simulationTrace: [ 'value', [] ]
         }
