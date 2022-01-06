@@ -1,0 +1,22 @@
+[
+  "createScope:PART_EXP:null",
+  "signal:PART_EXP:A",
+  "createScope:START:A",
+  "signal:START:B",
+  "exit:START:B",
+  "createScope:Flow_1:A",
+  "destroyScope:START:B",
+  "enter:Flow_1:A",
+  "exit:Flow_1:C",
+  "createScope:END:A",
+  "destroyScope:Flow_1:C",
+  "enter:END:A",
+  "createScope:M_FLOW:null",
+  "signal:M_FLOW:E",
+  "exit:END:D",
+  "destroyScope:END:D",
+  "exit:M_FLOW:E",
+  "destroyScope:M_FLOW:E",
+  "exit:PART_EXP:A",
+  "destroyScope:PART_EXP:A"
+]
