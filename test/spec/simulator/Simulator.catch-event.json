@@ -1,0 +1,15 @@
+[
+  "signal:CATCH:D",
+  "exit:CATCH:D",
+  "createScope:Flow_2:A",
+  "destroyScope:CATCH:D",
+  "enter:Flow_2:A",
+  "exit:Flow_2:E",
+  "createScope:END:A",
+  "destroyScope:Flow_2:E",
+  "enter:END:A",
+  "exit:END:F",
+  "destroyScope:END:F",
+  "exit:Process_1:A",
+  "destroyScope:Process_1:A"
+]
