@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa">
+  <process id="Process_1" isExecutable="false">
+    <startEvent id="START" name="START">
+      <outgoing>Flow_1</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="SIGNAL_END" />
+    <subProcess id="S_EVT" name="S_EVT" triggeredByEvent="true">
+      <endEvent id="S_EVT_END" name="S_EVT_END">
+        <incoming>Flow_3</incoming>
+      </endEvent>
+      <sequenceFlow id="Flow_3" sourceRef="S_EVT_START" targetRef="S_EVT_END" />
+      <startEvent id="S_EVT_START" name="S_EVT_START">
+        <outgoing>Flow_3</outgoing>
+        <signalEventDefinition id="SignalEventDefinition_0tmf9cn" />
+      </startEvent>
+    </subProcess>
+    <endEvent id="SIGNAL_END" name="SIGNAL_END">
+      <incoming>Flow_1</incoming>
+      <signalEventDefinition id="SignalEventDefinition_1sw6cgp" />
+    </endEvent>
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="188" y="120" />
+        <omgdi:waypoint x="392" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <omgdc:Bounds x="152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="153" y="145" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_EVT_END_di" bpmnElement="S_EVT" isExpanded="true">
+        <omgdc:Bounds x="115" y="220" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <omgdi:waypoint x="203" y="320" />
+        <omgdi:waypoint x="357" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="END_SUB_di" bpmnElement="S_EVT_END">
+        <omgdc:Bounds x="357" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="343" y="345" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1iarmv8_di" bpmnElement="S_EVT_START">
+        <omgdc:Bounds x="167" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="147" y="345" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SIGNAL_END_di" bpmnElement="SIGNAL_END">
+        <omgdc:Bounds x="392" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="375" y="145" width="70" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

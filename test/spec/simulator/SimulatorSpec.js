@@ -562,6 +562,30 @@ describe('simulator', function() {
     });
 
 
+    verify('signal-end-event-trigger-sub-process-non-interrupting', (fixture) => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('signal-end-event-trigger-event-sub-process-interrupting', (fixture) => {
+
+      // when
+      signal({
+        element: element('Process_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('signal-trigger-intermediate-catch-event', (fixture) => {
 
       // when
