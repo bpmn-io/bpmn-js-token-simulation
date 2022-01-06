@@ -4,6 +4,8 @@
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE', 'PhantomJS' ]
 var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(',');
 
+var fixtureReporter = require('./test/reporters/fixture-reporter');
+
 var singleStart = process.env.SINGLE_START;
 
 // use puppeteer provided Chrome for testing
@@ -19,7 +21,13 @@ var suite = coverage ? 'test/all.js' : 'test/suite.js';
 
 
 module.exports = function(karma) {
+
   karma.set({
+
+    plugins: [
+      'karma-*',
+      fixtureReporter
+    ],
 
     frameworks: [
       'mocha',
@@ -36,7 +44,7 @@ module.exports = function(karma) {
       [suite]: [ 'webpack', 'env' ]
     },
 
-    reporters: [ 'progress' ].concat(coverage ? 'coverage' : []),
+    reporters: [ 'progress', 'fixture' ].concat(coverage ? 'coverage' : []),
 
     browsers: singleStart ? browsers.concat('Debug') : browsers,
 
