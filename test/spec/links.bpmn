@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0wbuwxr" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="THROW_A" />
+    <bpmn:intermediateThrowEvent id="THROW_A" name="THROW_A">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1fxstzc" name="A" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:intermediateCatchEvent id="CATCH_A" name="CATCH_A">
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+      <bpmn:linkEventDefinition id="LinkEventDefinition_17mqatt" name="A" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="CATCH_A" targetRef="RECEIVE" />
+    <bpmn:intermediateThrowEvent id="THROW_UNNAMED" name="THROW_UNNAMED">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1rrpb44" name="" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:subProcess id="S" name="S">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      <bpmn:startEvent id="S_START" name="S_START">
+        <bpmn:outgoing>Flow_5</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_5" sourceRef="S_START" targetRef="S_THROW_A" />
+      <bpmn:intermediateThrowEvent id="S_THROW_A" name="S_THROW_A">
+        <bpmn:incoming>Flow_5</bpmn:incoming>
+        <bpmn:linkEventDefinition id="LinkEventDefinition_0pytakm" name="A" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:endEvent id="S_END" name="S_END">
+        <bpmn:incoming>Flow_7</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_7" sourceRef="S_CATCH_A" targetRef="S_END" />
+      <bpmn:intermediateCatchEvent id="S_CATCH_A" name="S_CATCH_A">
+        <bpmn:outgoing>Flow_7</bpmn:outgoing>
+        <bpmn:linkEventDefinition id="LinkEventDefinition_1blz36r" name="A" />
+      </bpmn:intermediateCatchEvent>
+    </bpmn:subProcess>
+    <bpmn:intermediateCatchEvent id="CATCH_UNNAMED" name="CATCH_UNNAMED">
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      <bpmn:linkEventDefinition id="LinkEventDefinition_1e4797t" name="" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="CATCH_UNNAMED" targetRef="S" />
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="S" targetRef="END" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="RECEIVE" targetRef="THROW_UNNAMED" />
+    <bpmn:receiveTask id="RECEIVE" name="RECEIVE">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:receiveTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="570" y="130" />
+        <di:waypoint x="642" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="760" y="350" />
+        <di:waypoint x="832" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="215" y="350" />
+        <di:waypoint x="320" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="398" y="130" />
+        <di:waypoint x="470" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="215" y="130" />
+        <di:waypoint x="272" y="130" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="179" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="179" y="155" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="THROW_A_di" bpmnElement="THROW_A">
+        <dc:Bounds x="272" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="263" y="155" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CATCH_A_di" bpmnElement="CATCH_A">
+        <dc:Bounds x="362" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="355" y="155" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="THROW_UNNAMED_di" bpmnElement="THROW_UNNAMED">
+        <dc:Bounds x="642" y="112" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="621" y="155" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_di" bpmnElement="S" isExpanded="true">
+        <dc:Bounds x="320" y="250" width="440" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="588" y="350" />
+        <di:waypoint x="642" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="396" y="350" />
+        <di:waypoint x="452" y="350" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="S_START_di" bpmnElement="S_START">
+        <dc:Bounds x="360" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="354" y="375" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_THROW_A_di" bpmnElement="S_THROW_A">
+        <dc:Bounds x="452" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="436" y="375" width="69" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_END_di" bpmnElement="S_END">
+        <dc:Bounds x="642" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="642" y="375" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_CATCH_A_di" bpmnElement="S_CATCH_A">
+        <dc:Bounds x="552" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="538" y="375" width="65" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CATCH_UNNAMED_di" bpmnElement="CATCH_UNNAMED">
+        <dc:Bounds x="179" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="155" y="375" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="832" y="332" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="838" y="375" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RECEIVE_di" bpmnElement="RECEIVE">
+        <dc:Bounds x="470" y="90" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
