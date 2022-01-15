@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0644crm" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="S" name="S">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      <bpmn:startEvent id="S_START" name="S_START">
+        <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:subProcess id="E" name="E" triggeredByEvent="true">
+        <bpmn:receiveTask id="E_RECEIVE" name="E_RECEIVE">
+          <bpmn:incoming>Flow_4</bpmn:incoming>
+          <bpmn:outgoing>Flow_5</bpmn:outgoing>
+        </bpmn:receiveTask>
+        <bpmn:sequenceFlow id="Flow_4" sourceRef="E_START" targetRef="E_RECEIVE" />
+        <bpmn:sequenceFlow id="Flow_5" sourceRef="E_RECEIVE" targetRef="E_END" />
+        <bpmn:startEvent id="E_START" name="E_START">
+          <bpmn:outgoing>Flow_4</bpmn:outgoing>
+          <bpmn:signalEventDefinition id="SignalEventDefinition_0md5vj4" />
+        </bpmn:startEvent>
+        <bpmn:endEvent id="E_END" name="E_END">
+          <bpmn:incoming>Flow_5</bpmn:incoming>
+          <bpmn:signalEventDefinition id="SignalEventDefinition_1uixuh3" />
+        </bpmn:endEvent>
+      </bpmn:subProcess>
+      <bpmn:sequenceFlow id="Flow_3" sourceRef="S_START" targetRef="S_RECEIVE" />
+      <bpmn:receiveTask id="S_RECEIVE" name="S_RECEIVE">
+        <bpmn:incoming>Flow_3</bpmn:incoming>
+        <bpmn:outgoing>Flow_6</bpmn:outgoing>
+      </bpmn:receiveTask>
+      <bpmn:sequenceFlow id="Flow_6" sourceRef="S_RECEIVE" targetRef="S_THROW" />
+      <bpmn:intermediateThrowEvent id="S_THROW" name="S_THROW">
+        <bpmn:incoming>Flow_6</bpmn:incoming>
+        <bpmn:outgoing>Flow_9</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_0yrqnid" />
+      </bpmn:intermediateThrowEvent>
+      <bpmn:endEvent id="S_END" name="S_END">
+        <bpmn:incoming>Flow_9</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_9" sourceRef="S_THROW" targetRef="S_END" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="S" />
+    <bpmn:endEvent id="END_S_ERROR" name="END_S_ERROR">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="SIGNAL_RETHROW" targetRef="END_S_ERROR" />
+    <bpmn:boundaryEvent id="TIMEOUT" name="TIMEOUT" attachedToRef="S">
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="TimerEventDefinition_0uxhp67" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="END_TIMER" name="END_TIMER">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="TIMEOUT" targetRef="END_TIMER" />
+    <bpmn:boundaryEvent id="SIGNAL_RETHROW" name="SIGNAL_RETHROW" attachedToRef="S">
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_1crphru" />
+    </bpmn:boundaryEvent>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="S" targetRef="END" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="188" y="315" />
+        <di:waypoint x="260" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+        <di:waypoint x="720" y="568" />
+        <di:waypoint x="720" y="660" />
+        <di:waypoint x="872" y="660" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="545" y="568" />
+        <di:waypoint x="545" y="760" />
+        <di:waypoint x="872" y="760" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="800" y="315" />
+        <di:waypoint x="872" y="315" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="152" y="297" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="152" y="340" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="872" y="297" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="878" y="340" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_S_ERROR_di" bpmnElement="END_S_ERROR">
+        <dc:Bounds x="872" y="642" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="849" y="685" width="83" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_TIMER_di" bpmnElement="END_TIMER">
+        <dc:Bounds x="872" y="742" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="858" y="785" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_di" bpmnElement="S" isExpanded="true">
+        <dc:Bounds x="260" y="80" width="540" height="470" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="411" y="420" />
+        <di:waypoint x="465" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="565" y="420" />
+        <di:waypoint x="607" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+        <di:waypoint x="643" y="420" />
+        <di:waypoint x="687" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="S_START_di" bpmnElement="S_START">
+        <dc:Bounds x="375" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="369" y="445" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_RECEIVE_di" bpmnElement="S_RECEIVE">
+        <dc:Bounds x="465" y="380" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_THROW_di" bpmnElement="S_THROW">
+        <dc:Bounds x="607" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="598" y="445" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_END_di" bpmnElement="S_END">
+        <dc:Bounds x="687" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="687" y="445" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_di" bpmnElement="E" isExpanded="true">
+        <dc:Bounds x="370" y="140" width="350" height="159" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="446" y="220" />
+        <di:waypoint x="490" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <di:waypoint x="590" y="220" />
+        <di:waypoint x="642" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="E_RECEIVE_di" bpmnElement="E_RECEIVE">
+        <dc:Bounds x="490" y="180" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_START_di" bpmnElement="E_START">
+        <dc:Bounds x="410" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="404" y="245" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="E_END_di" bpmnElement="E_END">
+        <dc:Bounds x="642" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="642" y="245" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SIGNAL_RETHROW_di" bpmnElement="SIGNAL_RETHROW">
+        <dc:Bounds x="702" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="621" y="568" width="77" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TIMEOUT_di" bpmnElement="TIMEOUT">
+        <dc:Bounds x="527" y="532" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="470" y="575" width="50" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

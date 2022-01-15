@@ -272,7 +272,7 @@ describe('simulation', function() {
 
   describe('components', function() {
 
-    const diagram = require('./boundary-event.bpmn');
+    const diagram = require('./sub-process.bpmn');
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -316,9 +316,66 @@ describe('simulation', function() {
   });
 
 
+  describe('links', function() {
+
+    const diagram = require('./links.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, trace) {
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should execute happy path', inject(
+      async function(simulator, elementRegistry) {
+
+        // when
+        triggerElement('START');
+
+        await elementEnter('RECEIVE');
+
+        expectNoElementTrigger('CATCH_A');
+        expectNoElementTrigger('CATCH_UNNAMED');
+
+        triggerElement('RECEIVE');
+
+        await scopeDestroyed();
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_1',
+          'THROW_A',
+          'Flow_6',
+          'RECEIVE',
+          'Flow_2',
+          'THROW_UNNAMED',
+          'Flow_3',
+          'S',
+          'S_START',
+          'Flow_5',
+          'S_THROW_A',
+          'Flow_7',
+          'S_END',
+          'Flow_4'
+        ]);
+      }
+    ));
+
+  });
+
+
   describe('sub-process', function() {
 
-    const diagram = require('./boundary-event.bpmn');
+    const diagram = require('./sub-process.bpmn');
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -388,6 +445,7 @@ describe('simulation', function() {
           'SUB',
           'START_SUB',
           'Flow_2',
+          'TIMER_BOUNDARY',
           'Flow_6',
           'END_TIMED_OUT'
         ]);
@@ -443,7 +501,7 @@ describe('simulation', function() {
   });
 
 
-  describe('event sub process', function() {
+  describe('event sub-process', function() {
 
     const diagram = require('./event-sub-process.bpmn');
 
@@ -542,6 +600,74 @@ describe('simulation', function() {
   });
 
 
+  describe('cancel-events', function() {
+
+    const diagram = require('./cancel-events.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, trace) {
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should execute happy path', inject(
+      async function(simulator) {
+
+        // when
+        triggerElement('START');
+
+        await elementEnter('S_RECEIVE');
+
+        // then
+        expectElementTrigger('E_START');
+        expectElementTrigger('TIMEOUT');
+        expectElementTrigger('SIGNAL_RETHROW');
+
+        // but when
+        triggerElement('SIGNAL_RETHROW');
+
+        await elementEnter('E_RECEIVE');
+
+        // then
+        expectNoElementTrigger('E_START');
+        expectNoElementTrigger('TIMEOUT');
+
+        expectElementTrigger('SIGNAL_RETHROW');
+        expectElementTrigger('E_RECEIVE');
+
+        // but when
+        triggerElement('SIGNAL_RETHROW');
+
+        await elementEnter('END_S_ERROR');
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_1',
+          'S',
+          'S_START',
+          'Flow_3',
+          'S_RECEIVE',
+          'E_START',
+          'Flow_4',
+          'E_RECEIVE',
+          'SIGNAL_RETHROW',
+          'Flow_7',
+          'END_S_ERROR'
+        ]);
+      }
+    ));
+
+  });
+
 
   describe('all', function() {
 
@@ -627,39 +753,60 @@ function ifElement(id, fn) {
 }
 
 
-function triggerElement(id) {
-
+function getElementTrigger(id) {
   return getBpmnJS().invoke(function(bpmnjs) {
-
-    const domElement = domQuery(
+    return domQuery(
       `.djs-overlays[data-container-id="${id}"] .bts-context-pad:not(.hidden)`,
       bpmnjs._container
     );
-
-    if (!domElement) {
-      throw new Error(`no context pad on on <${id}>`);
-    }
-
-    triggerClick(domElement);
   });
+}
+
+function getScopeTrigger(scope) {
+  return getBpmnJS().invoke(function(bpmnjs) {
+    return domQuery(
+      `.bts-scopes [data-scope-id="${scope.id}"]`,
+      bpmnjs._container
+    );
+  });
+}
+
+function expectNoElementTrigger(id) {
+
+  const domElement = getElementTrigger(id);
+
+  expect(domElement, `element trigger exist for <${id}>`).not.to.exist;
+}
+
+function expectElementTrigger(id) {
+
+  const domElement = getElementTrigger(id);
+
+  expect(domElement, `no element trigger for <${id}>`).to.exist;
+
+  return domElement;
+}
+
+function expectScopeTrigger(scope) {
+
+  const domElement = getScopeTrigger(scope);
+
+  expect(domElement, `no scope trigger for <${scope.id}>`).to.exist;
+
+  return domElement;
+}
+
+function triggerElement(id) {
+  const domElement = expectElementTrigger(id);
+
+  triggerClick(domElement);
 }
 
 
 function triggerScope(scope) {
+  const domElement = expectScopeTrigger(scope);
 
-  return getBpmnJS().invoke(function(bpmnjs) {
-
-    const domElement = domQuery(
-      `.bts-scopes [data-scope-id="${scope.id}"]`,
-      bpmnjs._container
-    );
-
-    if (!domElement) {
-      throw new Error(`no scope toggle for <${scope.id}>`);
-    }
-
-    triggerClick(domElement);
-  });
+  triggerClick(domElement);
 }
 
 function scopeDestroyed(scope=null) {
@@ -739,7 +886,10 @@ function expectHistory(history) {
     const events = trace.getAll()
       .filter(function(event) {
         return (
-          (event.action === 'exit' && is(event.element, 'bpmn:StartEvent')) ||
+          (event.action === 'exit' && (
+            is(event.element, 'bpmn:StartEvent') ||
+            is(event.element, 'bpmn:BoundaryEvent')
+          )) ||
           (event.action === 'enter')
         );
       })
