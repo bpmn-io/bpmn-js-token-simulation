@@ -316,6 +316,27 @@ describe('simulation', function() {
   });
 
 
+  describe('pause', function() {
+
+    const diagram = require('./pause.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+
+    it('should not show on receive task', inject(function() {
+
+      // then
+      expectNoElementTrigger('RECEIVE');
+    }));
+
+  });
+
+
   describe('links', function() {
 
     const diagram = require('./links.bpmn');
