@@ -682,6 +682,30 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('error-consume', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('error-rethrow', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
@@ -782,6 +806,30 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('signal-consume', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('signal-rethrow', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
@@ -812,6 +860,30 @@ describe('simulator', function() {
 
 
     verify('escalation-trigger-event-sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-consume', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-rethrow', (fixture) => {
 
       // when
       trigger({
