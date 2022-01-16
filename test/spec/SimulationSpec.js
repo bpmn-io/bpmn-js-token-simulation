@@ -574,26 +574,16 @@ describe('simulation', function() {
       async function(simulator) {
 
         // when
-        triggerElement('START');
+        triggerElement('A_START');
 
-        const {
-          scope
-        } = await elementEnter('CATCH_M');
-
-        triggerElement('CATCH_M');
-
-        await scopeDestroyed(scope);
-
-        // then
-        expectHistory([
-          'START',
-          'Flow_2',
-          'Task_1',
-          'Flow_1',
-          'CATCH_M',
-          'Flow_3',
-          'END'
+        await Promise.all([
+          elementEnter('TB'),
+          elementEnter('R_A')
         ]);
+
+        triggerElement('TB');
+
+        await elementExit('A_END');
       }
     ));
 
@@ -756,7 +746,7 @@ function ifElement(id, fn) {
 function getElementTrigger(id) {
   return getBpmnJS().invoke(function(bpmnjs) {
     return domQuery(
-      `.djs-overlays[data-container-id="${id}"] .bts-context-pad:not(.hidden)`,
+      `.djs-overlays[data-container-id='${id}'] .bts-context-pad:not(.hidden)`,
       bpmnjs._container
     );
   });
@@ -765,7 +755,7 @@ function getElementTrigger(id) {
 function getScopeTrigger(scope) {
   return getBpmnJS().invoke(function(bpmnjs) {
     return domQuery(
-      `.bts-scopes [data-scope-id="${scope.id}"]`,
+      `.bts-scopes [data-scope-id='${scope.id}']`,
       bpmnjs._container
     );
   });
