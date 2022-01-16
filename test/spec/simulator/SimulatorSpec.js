@@ -1276,6 +1276,10 @@ function verifyOnly(name, test) {
   return verify(name, test, it.only);
 }
 
+// eslint-disable-next-line
+function verifySkip(name, test) {
+  return verify(name, test, it.skip);
+}
 
 function subscription(options) {
   return getBpmnJS().invoke(function(simulator) {
