@@ -573,6 +573,48 @@ describe('simulation', function() {
   });
 
 
+  describe('compensation', function() {
+
+    const diagram = require('./compensation.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, trace) {
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should execute happy path', inject(
+      async function(simulator, elementRegistry) {
+
+        // when
+        triggerElement('START');
+
+        await scopeDestroyed();
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_0i0rqg0',
+          'A',
+          'Flow_0xla1ox',
+          'COMPENSATE',
+          'Flow_06me3st',
+          'END'
+        ]);
+      }
+    ));
+
+  });
+
+
   describe('message flows', function() {
 
     const diagram = require('./message-flows.bpmn');
