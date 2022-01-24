@@ -228,6 +228,46 @@ describe('simulator', function() {
         ).to.be.empty;
       });
 
+
+      verify('sub-process', (simulator) => {
+
+        // given
+        const subscribeSpy = sinon.spy();
+
+        const scope = simulator.createScope({
+          element: element('Process_1')
+        });
+
+        const otherScopes = [
+          simulator.createScope({
+            element: element('Process_1')
+          }),
+          simulator.createScope({
+            element: element('Process_1')
+          })
+        ];
+
+        // when
+        const event = simulator.waitForScopes(scope, otherScopes);
+
+        // then
+        expect(event).to.exist;
+
+        // but when
+        simulator.subscribe(scope, event, subscribeSpy);
+
+        simulator.destroyScope(otherScopes[0]);
+
+        // then
+        expect(subscribeSpy).not.to.have.been.called;
+
+        // but when
+        simulator.destroyScope(otherScopes[1]);
+
+        // then
+        expect(subscribeSpy).to.have.been.calledOnce;
+      });
+
     });
 
 
