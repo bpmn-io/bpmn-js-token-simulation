@@ -1010,7 +1010,7 @@ describe('simulator', function() {
     });
 
 
-    verify('transaction-cancel-from-nested-scope', (fixture) => {
+    verifySkip('transaction-cancel-from-nested-scope', (fixture) => {
 
       // when
       trigger({
