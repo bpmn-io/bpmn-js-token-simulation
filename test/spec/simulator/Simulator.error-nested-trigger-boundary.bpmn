@@ -28,17 +28,17 @@
         <bpmn:sequenceFlow id="Flow_1jqqcdq" sourceRef="CS_START" targetRef="CS_TRIGGER_ERROR" />
         <bpmn:startEvent id="CS_START" name="CS_START">
           <bpmn:outgoing>Flow_1jqqcdq</bpmn:outgoing>
-          <bpmn:escalationEventDefinition id="EscalationEventDefinition_1k9zwjr" />
+          <bpmn:errorEventDefinition id="ErrorEventDefinition_0at7h4b" />
         </bpmn:startEvent>
       </bpmn:subProcess>
       <bpmn:startEvent id="SUB_START" name="SUB_START">
         <bpmn:outgoing>Flow_0atqqyc</bpmn:outgoing>
       </bpmn:startEvent>
-      <bpmn:endEvent id="SUB_END_ESCALATE" name="SUB_END_ESCALATE">
+      <bpmn:sequenceFlow id="Flow_0atqqyc" sourceRef="SUB_START" targetRef="SUB_END_ERROR" />
+      <bpmn:endEvent id="SUB_END_ERROR" name="SUB_END_ERROR">
         <bpmn:incoming>Flow_0atqqyc</bpmn:incoming>
-        <bpmn:escalationEventDefinition id="EscalationEventDefinition_10j9jjj" />
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_1ukcv9n" />
       </bpmn:endEvent>
-      <bpmn:sequenceFlow id="Flow_0atqqyc" sourceRef="SUB_START" targetRef="SUB_END_ESCALATE" />
     </bpmn:subProcess>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -81,35 +81,35 @@
         <di:waypoint x="363" y="260" />
         <di:waypoint x="452" y="260" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="SUB_START_di" bpmnElement="SUB_START">
-        <dc:Bounds x="327" y="242" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="313" y="285" width="64" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SUB_END_ESCALATE_di" bpmnElement="SUB_END_ESCALATE">
+      <bpmndi:BPMNShape id="Event_1yzbcuq_di" bpmnElement="SUB_END_ERROR">
         <dc:Bounds x="452" y="242" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="426" y="285" width="89" height="27" />
+          <dc:Bounds x="430" y="285" width="82" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="CS_SUB_di" bpmnElement="CS_SUB" isExpanded="true">
         <dc:Bounds x="570" y="186" width="250" height="148" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1jqqcdq_di" bpmnElement="Flow_1jqqcdq">
-        <di:waypoint x="646" y="254" />
-        <di:waypoint x="722" y="254" />
+        <di:waypoint x="656" y="254" />
+        <di:waypoint x="732" y="254" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="CS_TRIGGER_ERROR_di" bpmnElement="CS_TRIGGER_ERROR">
-        <dc:Bounds x="722" y="236" width="36" height="36" />
+        <dc:Bounds x="732" y="236" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="702" y="279" width="78" height="27" />
+          <dc:Bounds x="712" y="279" width="78" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_0p33u7c_di" bpmnElement="CS_START">
-        <dc:Bounds x="610" y="236" width="36" height="36" />
+      <bpmndi:BPMNShape id="Event_089km32_di" bpmnElement="CS_START">
+        <dc:Bounds x="620" y="236" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="600" y="279" width="57" height="14" />
+          <dc:Bounds x="610" y="279" width="57" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_START_di" bpmnElement="SUB_START">
+        <dc:Bounds x="327" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="313" y="285" width="64" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ERROR_BOUNDARY_di" bpmnElement="ERROR_BOUNDARY">
