@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa">
+  <bpmn:process id="Process_1" isExecutable="false">
+    <bpmn:transaction id="T" name="T">
+      <bpmn:incoming>Flow_1446f6b</bpmn:incoming>
+      <bpmn:outgoing>Flow_0p6d7l8</bpmn:outgoing>
+      <bpmn:startEvent id="T_START" name="T_START">
+        <bpmn:outgoing>Flow_1wguwxw</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:task id="A" name="A">
+        <bpmn:incoming>Flow_1wguwxw</bpmn:incoming>
+        <bpmn:outgoing>Flow_13dftyt</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="Compensate_A" name="Compensate_A" isForCompensation="true" />
+      <bpmn:boundaryEvent id="Event_01a00ki" attachedToRef="A">
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_04vi3xr" />
+      </bpmn:boundaryEvent>
+      <bpmn:sequenceFlow id="Flow_13dftyt" sourceRef="A" targetRef="T_End" />
+      <bpmn:sequenceFlow id="Flow_1wguwxw" sourceRef="T_START" targetRef="A" />
+      <bpmn:endEvent id="T_End" name="T_CANCEL">
+        <bpmn:incoming>Flow_13dftyt</bpmn:incoming>
+        <bpmn:cancelEventDefinition id="CancelEventDefinition_0m3t7wb" />
+      </bpmn:endEvent>
+      <bpmn:association id="Association_1m1c19i" associationDirection="One" sourceRef="Event_01a00ki" targetRef="Compensate_A" />
+    </bpmn:transaction>
+    <bpmn:boundaryEvent id="CANCEL_BOUNDARY" name="CANCEL_BOUNDARY" attachedToRef="T">
+      <bpmn:outgoing>Flow_0cfhejw</bpmn:outgoing>
+      <bpmn:cancelEventDefinition id="CancelEventDefinition_0kgjwvv" />
+    </bpmn:boundaryEvent>
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1446f6b</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1446f6b" sourceRef="START" targetRef="T" />
+    <bpmn:endEvent id="CANCELED" name="CANCELED">
+      <bpmn:incoming>Flow_0cfhejw</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0cfhejw" sourceRef="CANCEL_BOUNDARY" targetRef="CANCELED" />
+    <bpmn:endEvent id="GOOD_END" name="GOOD_END">
+      <bpmn:incoming>Flow_0p6d7l8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_0p6d7l8" sourceRef="T" targetRef="GOOD_END" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_0p6d7l8_di" bpmnElement="Flow_0p6d7l8">
+        <di:waypoint x="690" y="220" />
+        <di:waypoint x="782" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cfhejw_di" bpmnElement="Flow_0cfhejw">
+        <di:waypoint x="520" y="378" />
+        <di:waypoint x="520" y="430" />
+        <di:waypoint x="622" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1446f6b_di" bpmnElement="Flow_1446f6b">
+        <di:waypoint x="188" y="220" />
+        <di:waypoint x="300" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="T_di" bpmnElement="T" isExpanded="true">
+        <dc:Bounds x="300" y="80" width="390" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1wguwxw_di" bpmnElement="Flow_1wguwxw">
+        <di:waypoint x="388" y="170" />
+        <di:waypoint x="440" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_13dftyt_di" bpmnElement="Flow_13dftyt">
+        <di:waypoint x="540" y="170" />
+        <di:waypoint x="602" y="170" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="T_START_di" bpmnElement="T_START">
+        <dc:Bounds x="352" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="346" y="195" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_A_di" bpmnElement="A">
+        <dc:Bounds x="440" y="130" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Compensate_A_di" bpmnElement="Compensate_A">
+        <dc:Bounds x="540" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1haykgz_di" bpmnElement="T_End">
+        <dc:Bounds x="602" y="152" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="591" y="195" width="58" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_01a00ki_di" bpmnElement="Event_01a00ki">
+        <dc:Bounds x="482" y="192" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1m1c19i_di" bpmnElement="Association_1m1c19i">
+        <di:waypoint x="500" y="228" />
+        <di:waypoint x="500" y="280" />
+        <di:waypoint x="540" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0ar0pg9_di" bpmnElement="START">
+        <dc:Bounds x="152" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="152" y="245" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BAD_END_di" bpmnElement="CANCELED">
+        <dc:Bounds x="622" y="412" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="610" y="455" width="60" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GOOD_END_di" bpmnElement="GOOD_END">
+        <dc:Bounds x="782" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="769" y="245" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1ww9frc_di" bpmnElement="CANCEL_BOUNDARY">
+        <dc:Bounds x="502" y="342" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="418" y="385" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

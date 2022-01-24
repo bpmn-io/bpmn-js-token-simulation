@@ -192,7 +192,7 @@ describe('simulation', function() {
 
 
     it('should continue flow', inject(
-      async function(simulator, exclusiveGatewaySettings) {
+      async function(simulator) {
 
         // given
         triggerElement('ExclusiveGateway_1');
@@ -606,8 +606,114 @@ describe('simulation', function() {
           'A',
           'Flow_0xla1ox',
           'COMPENSATE',
+          'Compensate_A',
           'Flow_06me3st',
           'END'
+        ]);
+      }
+    ));
+
+  });
+
+
+  describe('transaction', function() {
+
+    const diagram = require('./transaction.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, trace) {
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should cancel via cancel end', inject(
+      async function(simulator, animation, elementRegistry) {
+
+        // given
+        // pause at compensation
+        triggerElement('Compensate_A');
+
+        // when
+        triggerElement('START');
+
+        await elementEnter('Compensate_A');
+
+        // then
+        expectNoElementTrigger('CANCEL_BOUNDARY');
+
+        // but when
+        // resume compensation
+        triggerElement('Compensate_A');
+
+        await elementExit('CANCELED_END');
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_1',
+          'T',
+          'T_START',
+          'Flow_3',
+          'Transactional_A',
+          'Flow_4',
+          'Transactional_B',
+          'Flow_5',
+          'T_END',
+          'Compensate_B',
+          'Compensate_A',
+          'CANCEL_BOUNDARY',
+          'Flow_8',
+          'CANCELED_END'
+        ]);
+      }
+    ));
+
+
+    it('should cancel via cancel boundary', inject(
+      async function(simulator, animation, elementRegistry) {
+
+        // given
+        // pause at compensation
+        triggerElement('Compensate_A');
+
+        // pause at B
+        triggerElement('Transactional_B');
+
+        // when
+        triggerElement('START');
+
+        await elementEnter('Transactional_B');
+
+        // cancel transaction
+        triggerElement('CANCEL_BOUNDARY');
+
+        // resume compensation
+        triggerElement('Compensate_A');
+
+        await elementExit('CANCELED_END');
+
+        // then
+        expectHistory([
+          'START',
+          'Flow_1',
+          'T',
+          'T_START',
+          'Flow_3',
+          'Transactional_A',
+          'Flow_4',
+          'Transactional_B',
+          'Compensate_A',
+          'CANCEL_BOUNDARY',
+          'Flow_8',
+          'CANCELED_END'
         ]);
       }
     ));
