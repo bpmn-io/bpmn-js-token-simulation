@@ -183,13 +183,16 @@ describe('simulator', function() {
         expect(rootScope_A.getTokensByElement(subProcess)).to.eql(1);
         expect(rootScope_A.getTokens()).to.eql(1);
 
+        // destroyed scopes are not kept around
         expect(
-          simulator.findScope({ trait: ScopeTraits.DESTROYED })
-        ).to.equal(childScope_A1);
+          simulator.findScope({
+            trait: ScopeTraits.DESTROYED
+          })
+        ).not.to.exist;
 
         expect(
           simulator.findScopes({ trait: ScopeTraits.DESTROYED })
-        ).to.eql([ childScope_A1 ]);
+        ).to.be.empty;
 
         expect(
           simulator.findScope({ element: subProcess })
@@ -199,25 +202,31 @@ describe('simulator', function() {
           simulator.findScope({ parent: rootScope_A })
         ).to.equal(childScope_A2);
 
+        // destroyed scope not kept around
         expect(
           simulator.findScopes({
             trait: ScopeTraits.RUNNING | ScopeTraits.ENDING | ScopeTraits.DESTROYED
           })
-        ).to.have.length(4);
+        ).to.have.length(3);
 
         // but when
         simulator.destroyScope(rootScope_A);
 
+        // destroyed scope not kept around
         expect(
-          simulator.findScopes({ trait: ScopeTraits.DESTROYED })
-        ).to.have.length(3);
+          simulator.findScopes({
+            trait: ScopeTraits.DESTROYED
+          })
+        ).to.be.empty;
 
         // but when
         simulator.reset();
 
         // then
         expect(
-          simulator.findScopes({ trait: ScopeTraits.DESTROYED })
+          simulator.findScopes({
+            trait: ScopeTraits.DESTROYED
+          })
         ).to.be.empty;
       });
 
@@ -1180,11 +1189,8 @@ describe('simulator', function() {
       expect(scope.destroyed).to.be.true;
 
       expect(
-        findScope({
-          element: element('Participant_B'),
-          trait: ScopeTraits.DESTROYED
-        })
-      ).to.exist;
+        findScope({})
+      ).not.to.exist;
     });
 
 
