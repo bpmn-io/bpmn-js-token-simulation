@@ -905,6 +905,148 @@ describe('simulation', function() {
   });
 
 
+  describe('booking', function() {
+
+    const diagram = require('./booking.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, trace) {
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should execute happy path', inject(
+      async function(simulator, animation, elementRegistry) {
+
+        // when
+        triggerElement('Start');
+
+        await elementExit('Process_1');
+
+        // then
+        expectHistory([
+          'Start',
+          'Flow_140ayua',
+          'Gateway_3',
+          'Flow_1gfdzi2',
+          'Get_Credit_Card_Information',
+          'Flow_00gkaxo',
+          'Gateway_2',
+          'Flow_0bwttxy',
+          'Booking_Sub',
+          'Start_Booking',
+          'Flow_0bqsnls',
+          'Flow_0dmzbja',
+          'Book_Flight',
+          'Flow_0yz8f90',
+          'Book_Hotel',
+          'Flow_0wsjah5',
+          'End_Booking',
+          'End_Booking',
+          'Flow_096bgm6',
+          'Charge_Credit_Card',
+          'Flow_1o89wja',
+          'End_Booked'
+        ]);
+      }
+    ));
+
+
+    it('should fail with error', inject(
+      async function(simulator, animation, elementRegistry) {
+
+        // assume
+        // pause at node
+        triggerElement('Book_Flight');
+
+        // when
+        triggerElement('Start');
+
+        await elementEnter('Book_Flight');
+
+        // then
+        expectElementTrigger('Message_Arrived');
+        expectElementTrigger('Booking_Error_Boundary');
+        expectElementTrigger('Booking_Error_Start');
+
+        expectNoElementTrigger('Compensation_Start');
+
+        // but when
+        triggerElement('Booking_Error_Boundary');
+
+        await elementEnter('Error_Compensate_Flight');
+
+        // then
+        expectNoElementTrigger('Message_Arrived');
+        expectElementTrigger('Booking_Error_Boundary');
+
+        // but when
+        await elementEnter('Notify_Customer_Failed_Booking');
+
+        // then
+        expectNoElementTrigger('Booking_Error_Boundary');
+        expectNoElementTrigger('Booking_Error_Start');
+
+        expectNoElementTrigger('Compensation_Start');
+      }
+    ));
+
+
+    it('should compensate', inject(
+      async function(simulator, animation, elementRegistry) {
+
+        // assume
+        // pause at node
+        triggerElement('Charge_Credit_Card');
+
+        // when
+        triggerElement('Start');
+
+        await elementEnter('Charge_Credit_Card');
+
+        // then
+        expectNoElementTrigger('Message_Arrived');
+        expectNoElementTrigger('Booking_Error_Boundary');
+        expectNoElementTrigger('Booking_Error_Start');
+
+        expectElementTrigger('Compensation_Start');
+        expectElementTrigger('Book_Flight_Boundary');
+        expectElementTrigger('Book_Hotel_Boundary');
+
+        // but when
+        // wait at node
+        triggerElement('Get_Credit_Card_Information');
+
+        triggerElement('Charge_Credit_Card_Error');
+
+        await elementEnter('Compensation_Compensate_Flight');
+
+        await elementEnter('Get_Credit_Card_Information');
+
+        // then
+        expectNoElementTrigger('Message_Arrived');
+        expectNoElementTrigger('Booking_Error_Boundary');
+        expectNoElementTrigger('Booking_Error_Start');
+
+        expectNoElementTrigger('Compensation_Start');
+        expectNoElementTrigger('Book_Flight_Boundary');
+        expectNoElementTrigger('Book_Hotel_Boundary');
+
+        expectNoElementTrigger('Compensation_Start');
+      }
+    ));
+
+  });
+
+
   describe('message flows', function() {
 
     const diagram = require('./message-flows.bpmn');
