@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0avz3fy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
   <bpmn:process id="Process_1" isExecutable="true">
-    <bpmn:startEvent id="Start" name="Start">
+    <bpmn:startEvent id="START" name="START">
       <bpmn:outgoing>Flow_1</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start" targetRef="S" />
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="S" />
     <bpmn:endEvent id="End" name="End">
       <bpmn:incoming>Flow_2</bpmn:incoming>
     </bpmn:endEvent>
@@ -32,7 +32,7 @@
         <di:waypoint x="188" y="190" />
         <di:waypoint x="290" y="190" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start">
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="START">
         <dc:Bounds x="152" y="172" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="158" y="215" width="24" height="14" />

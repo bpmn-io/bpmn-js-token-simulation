@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.3.1">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa">
   <process id="Process_1" isExecutable="false">
     <startEvent id="START" name="START">
       <outgoing>Flow_1</outgoing>
@@ -19,9 +19,10 @@
     <sequenceFlow id="Flow_3" sourceRef="RECEIVE" targetRef="END_A" />
     <boundaryEvent id="B_NRUPTING" name="B_NRUPTING" cancelActivity="false" attachedToRef="RECEIVE">
       <outgoing>Flow_2</outgoing>
-      <messageEventDefinition id="MessageEventDefinition_0ax1d8i" />
+      <messageEventDefinition id="MessageEventDefinition_0ax1d8i" messageRef="Message_0owmqcb" />
     </boundaryEvent>
   </process>
+  <message id="Message_0owmqcb" name="A" />
   <bpmndi:BPMNDiagram id="BpmnDiagram_1">
     <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
       <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">

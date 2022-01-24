@@ -1,10 +1,15 @@
 import { expect } from 'chai';
+
 import SimulatorModule from 'lib/simulator';
 
 import {
   bootstrapModeler,
   getBpmnJS
 } from 'test/TestHelper';
+
+import {
+  ScopeTraits
+} from 'lib/simulator/ScopeTraits';
 
 
 describe('simulator', function() {
@@ -18,7 +23,9 @@ describe('simulator', function() {
 
       simulator.on('createScope', spy);
 
-      const scope = simulator.createScope(element('Process_1'));
+      const scope = simulator.createScope({
+        element: element('Process_1')
+      });
 
       // then
       expect(scope).to.exist;
@@ -29,7 +36,9 @@ describe('simulator', function() {
       // but when
       simulator.off('createScope');
 
-      simulator.createScope(element('Process_1'));
+      simulator.createScope({
+        element: element('Process_1')
+      });
 
       // then
       expect(spy).to.have.been.calledOnce;
@@ -52,108 +61,272 @@ describe('simulator', function() {
 
     verify('sub-process', (simulator) => {
 
-      // when
-      const scope = simulator.signal({
-        element: element('Process_1')
+      // given
+      const subscription = simulator.findSubscription({
+        event: element('START')
       });
 
-      // then
-      expect(scope).to.exist;
-    });
-
-  });
-
-
-  describe('scopes', function() {
-
-    verify('sub-process', (simulator) => {
-
       // assume
-      expect(
-        simulator.findScopes({ destroyed: true })
-      ).to.be.empty;
-
-      expect(
-        simulator.findScopes({ destroyed: false })
-      ).to.be.empty;
-
-      // given
-      const rootElement = element('Process_1');
-      const subProcess = element('SUB');
+      expect(subscription, 'no subscription').to.exist;
 
       // when
-      const rootScope_A = simulator.createScope(rootElement);
-      const rootScope_B = simulator.createScope(rootElement);
-
-      const childScope_A1 = simulator.createScope(subProcess, rootScope_A);
-      const childScope_A2 = simulator.createScope(subProcess, rootScope_A);
+      const scope = simulator.trigger(subscription);
 
       // then
-      expect(
-        simulator.findScope({ element: subProcess })
-      ).to.equal(childScope_A1);
+      expect(scope, 'no scope').to.exist;
+    });
 
-      expect(rootScope_A.getTokensByElement(subProcess)).to.eql(2);
 
-      expect(rootScope_A.getTokens()).to.eql(2);
-      expect(rootScope_B.getTokens()).to.eql(0);
+    describe('scopes', function() {
 
-      expect(
-        simulator.findScope({ parent: rootScope_A })
-      ).to.equal(childScope_A1);
+      verify('sub-process', (simulator) => {
 
-      expect(
-        simulator.findScope({ parent: rootScope_B })
-      ).not.to.exist;
+        // assume
+        expect(
+          simulator.findScopes({ trait: ScopeTraits.DESTROYED })
+        ).to.be.empty;
 
-      expect(
-        simulator.findScope({ waitsOnElement: rootScope_A })
-      ).not.to.exist;
+        expect(
+          simulator.findScopes({ })
+        ).to.be.empty;
 
-      expect(
-        simulator.findScope({ destroyed: true })
-      ).not.to.exist;
+        // given
+        const rootElement = element('Process_1');
+        const subProcess = element('SUB');
 
-      expect(
-        simulator.findScope({ destroyed: false })
-      ).to.equal(rootScope_A);
+        // when
+        const rootScope_A = simulator.createScope({
+          element: rootElement
+        });
+        const rootScope_B = simulator.createScope({
+          element: rootElement
+        });
 
-      expect(() => {
-        const destroyContext = { reason: 'HELLO?' };
+        const childScope_A1 = simulator.createScope({
+          element: subProcess,
+          parent: rootScope_A
+        });
+        const childScope_A2 = simulator.createScope({
+          element: subProcess,
+          parent: rootScope_A
+        });
 
-        simulator.destroyScope(childScope_A1, destroyContext);
-      }).to.throw(/no <context\.initiator> provided/);
+        // then
+        expect(
+          simulator.findScope({ element: subProcess })
+        ).not.to.exist;
 
-      // but when
-      simulator.destroyScope(childScope_A1);
+        expect(
+          simulator.findScope({ element: subProcess, trait: ScopeTraits.ACTIVATED })
+        ).to.equal(childScope_A1);
 
-      // then
-      expect(rootScope_A.getTokensByElement(subProcess)).to.eql(1);
-      expect(rootScope_A.getTokens()).to.eql(1);
+        // but when
+        rootScope_A.start();
+        rootScope_B.start();
 
-      expect(
-        simulator.findScope({ destroyed: true })
-      ).to.equal(childScope_A1);
+        childScope_A1.start();
+        childScope_A2.start();
 
-      expect(
-        simulator.findScopes({ destroyed: true })
-      ).to.eql([ childScope_A1 ]);
+        // then
+        expect(
+          simulator.findScope({ element: subProcess })
+        ).to.equal(childScope_A1);
 
-      expect(
-        simulator.findScope({ element: subProcess })
-      ).to.equal(childScope_A2);
+        expect(rootScope_A.getTokensByElement(subProcess)).to.eql(2);
 
-      expect(
-        simulator.findScope({ parent: rootScope_A })
-      ).to.equal(childScope_A2);
+        expect(rootScope_A.getTokens()).to.eql(2);
+        expect(rootScope_B.getTokens()).to.eql(0);
 
-      // but when
-      simulator.reset();
+        expect(
+          simulator.findScope({ parent: rootScope_A })
+        ).to.equal(childScope_A1);
 
-      // then
-      expect(
-        simulator.findScopes({ destroyed: true })
-      ).to.be.empty;
+        expect(
+          simulator.findScope({ parent: rootScope_B })
+        ).not.to.exist;
+
+        expect(
+          simulator.findScope({ waitsOnElement: rootScope_A })
+        ).not.to.exist;
+
+        expect(
+          simulator.findScope({ trait: ScopeTraits.DESTROYED })
+        ).not.to.exist;
+
+        expect(
+          simulator.findScope({ trait: ScopeTraits.ENDING })
+        ).not.to.exist;
+
+        expect(
+          simulator.findScope({ trait: ScopeTraits.ENDING | ScopeTraits.DESTROYED })
+        ).not.to.exist;
+
+        expect(
+          simulator.findScope({ trait: ScopeTraits.RUNNING })
+        ).to.equal(rootScope_A);
+
+        // but when
+        childScope_A1.complete();
+
+        expect(
+          simulator.findScope({ trait: ScopeTraits.ENDING })
+        ).to.equal(childScope_A1);
+
+        // but when
+        simulator.destroyScope(childScope_A1);
+
+        // then
+        expect(
+          simulator.findScope({ trait: ScopeTraits.ENDING })
+        ).not.to.exist;
+
+        expect(rootScope_A.getTokensByElement(subProcess)).to.eql(1);
+        expect(rootScope_A.getTokens()).to.eql(1);
+
+        expect(
+          simulator.findScope({ trait: ScopeTraits.DESTROYED })
+        ).to.equal(childScope_A1);
+
+        expect(
+          simulator.findScopes({ trait: ScopeTraits.DESTROYED })
+        ).to.eql([ childScope_A1 ]);
+
+        expect(
+          simulator.findScope({ element: subProcess })
+        ).to.equal(childScope_A2);
+
+        expect(
+          simulator.findScope({ parent: rootScope_A })
+        ).to.equal(childScope_A2);
+
+        expect(
+          simulator.findScopes({
+            trait: ScopeTraits.RUNNING | ScopeTraits.ENDING | ScopeTraits.DESTROYED
+          })
+        ).to.have.length(4);
+
+        // but when
+        simulator.destroyScope(rootScope_A);
+
+        expect(
+          simulator.findScopes({ trait: ScopeTraits.DESTROYED })
+        ).to.have.length(3);
+
+        // but when
+        simulator.reset();
+
+        // then
+        expect(
+          simulator.findScopes({ trait: ScopeTraits.DESTROYED })
+        ).to.be.empty;
+      });
+
+    });
+
+
+    describe('subscriptions', function() {
+
+      verify('sub-process', (simulator) => {
+
+        // given
+        const sub = element('SUB');
+
+        // assume
+        expect(
+          simulator.findSubscriptions({
+            element: element('START')
+          })
+        ).to.have.length(1);
+
+        // when
+        simulator.waitAtElement(sub);
+
+        // then
+        expect(
+          simulator.findSubscriptions({})
+        ).to.have.length(1);
+
+        // but when
+        trigger({
+          element: element('START')
+        });
+
+        // then
+        expect(
+          simulator.findSubscriptions({})
+        ).to.have.length(2);
+
+        expect(
+          simulator.findSubscriptions({
+            element: sub
+          })
+        ).to.have.length(1);
+
+        const continueSub = simulator.findSubscription({
+          element: sub
+        });
+
+        expect(continueSub).to.exist;
+
+        expect(
+          simulator.findSubscription({
+            element: element('START')
+          })
+        ).to.exist;
+
+        // but when
+        trigger(continueSub);
+
+        // then
+        expectTrace([
+          'createScope:Process_1:null',
+          'signal:Process_1:B',
+          'createScope:START:B',
+          'signal:START:C',
+          'exit:START:C',
+          'createScope:Flow_2:B',
+          'destroyScope:START:C',
+          'enter:Flow_2:B',
+          'exit:Flow_2:D',
+          'createScope:SUB:B',
+          'destroyScope:Flow_2:D',
+          'enter:SUB:B',
+          'signal:SUB:E',
+          'createScope:START_SUB:E',
+          'signal:START_SUB:F',
+          'exit:START_SUB:F',
+          'createScope:Flow_4:E',
+          'destroyScope:START_SUB:F',
+          'enter:Flow_4:E',
+          'exit:Flow_4:G',
+          'createScope:TASK_SUB:E',
+          'destroyScope:Flow_4:G',
+          'enter:TASK_SUB:E',
+          'exit:TASK_SUB:H',
+          'createScope:Flow_1:E',
+          'destroyScope:TASK_SUB:H',
+          'enter:Flow_1:E',
+          'exit:Flow_1:I',
+          'createScope:END_SUB:E',
+          'destroyScope:Flow_1:I',
+          'enter:END_SUB:E',
+          'exit:END_SUB:J',
+          'destroyScope:END_SUB:J',
+          'exit:SUB:E',
+          'createScope:Flow_3:B',
+          'destroyScope:SUB:E',
+          'enter:Flow_3:B',
+          'exit:Flow_3:K',
+          'createScope:END:B',
+          'destroyScope:Flow_3:K',
+          'enter:END:B',
+          'exit:END:L',
+          'destroyScope:END:L',
+          'exit:Process_1:B',
+          'destroyScope:Process_1:B'
+        ]);
+      });
+
     });
 
   });
@@ -190,8 +363,8 @@ describe('simulator', function() {
     verify('simple', (fixture) => {
 
       // given
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -207,9 +380,8 @@ describe('simulator', function() {
       });
 
       // when
-      signal({
-        element: element('Process_1'),
-        startEvent: element('START')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -220,9 +392,8 @@ describe('simulator', function() {
     verify('exclusive-gateway-join', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1'),
-        startEvent: element('START')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -233,9 +404,8 @@ describe('simulator', function() {
     verify('task-join', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1'),
-        startEvent: element('START')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -246,9 +416,8 @@ describe('simulator', function() {
     verify('catch-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1'),
-        startEvent: element('START')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -257,7 +426,7 @@ describe('simulator', function() {
       // but when
       const catchEvent = element('CATCH');
 
-      signal({
+      trigger({
         element: catchEvent,
         scope: findScope({
           element: catchEvent
@@ -272,22 +441,20 @@ describe('simulator', function() {
     verify('link-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1'),
-        startEvent: element('START')
+      trigger({
+        element: element('START')
       });
 
       // then
       expectTrace(fixture());
-
     });
 
 
     verify('data-objects', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -298,16 +465,13 @@ describe('simulator', function() {
     verify('event-based-gateway', (fixture) => {
 
       // given
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // when
-      signal({
-        element: element('M_CATCH'),
-        scope: findScope({
-          element: element('G_EVENT')
-        })
+      trigger({
+        element: element('M_CATCH')
       });
 
       // then
@@ -318,19 +482,16 @@ describe('simulator', function() {
     verify('loop', (fixture) => {
 
       // given
-      signal({
-        element: element('Process')
+      trigger({
+        element: element('START')
       });
 
       // then
       expectTrace(fixture('loop-0'));
 
       // but when
-      signal({
-        element: element('Wait'),
-        scope: findScope({
-          element: element('Wait')
-        })
+      trigger({
+        element: element('Wait')
       });
 
       // then
@@ -345,8 +506,8 @@ describe('simulator', function() {
     verify('token-sink-task', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -357,8 +518,8 @@ describe('simulator', function() {
     verify('token-sink-all', () => {
 
       // when
-      const scope = signal({
-        element: element('Process_1')
+      const [ scope ] = trigger({
+        element: element('START')
       });
 
       // then
@@ -378,15 +539,15 @@ describe('simulator', function() {
       waitAtElement(task);
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
       expectTrace(fixture('simple-0'));
 
       // but when
-      signal({
+      trigger({
         element: task,
         scope: findScope({
           element: task
@@ -405,8 +566,8 @@ describe('simulator', function() {
     verify('parallel-gateway', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -417,8 +578,8 @@ describe('simulator', function() {
     verify('parallel-gateway-stuck', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -433,8 +594,8 @@ describe('simulator', function() {
     verify('end-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -449,8 +610,8 @@ describe('simulator', function() {
     verify('terminate', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -461,8 +622,8 @@ describe('simulator', function() {
     verify('terminate-nested-scopes', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -477,8 +638,8 @@ describe('simulator', function() {
     verify('error-no-catch', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -489,8 +650,8 @@ describe('simulator', function() {
     verify('error-trigger-event-sub-process', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -501,8 +662,8 @@ describe('simulator', function() {
     verify('error-trigger-boundary', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -513,8 +674,8 @@ describe('simulator', function() {
     verify('error-nested-trigger-boundary', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -529,8 +690,8 @@ describe('simulator', function() {
     verify('signal-trigger-start-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Participant_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -541,8 +702,8 @@ describe('simulator', function() {
     verify('signal-trigger-event-based-gateway', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -553,8 +714,8 @@ describe('simulator', function() {
     verify('signal-trigger-event-sub-process', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -565,8 +726,8 @@ describe('simulator', function() {
     verify('signal-end-event-trigger-sub-process-non-interrupting', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -577,8 +738,8 @@ describe('simulator', function() {
     verify('signal-end-event-trigger-event-sub-process-interrupting', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -589,8 +750,8 @@ describe('simulator', function() {
     verify('signal-trigger-intermediate-catch-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -601,8 +762,8 @@ describe('simulator', function() {
     verify('signal-trigger-boundary-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -613,9 +774,8 @@ describe('simulator', function() {
     verify('signal-madness', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1'),
-        startEvent: element('START')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -630,8 +790,8 @@ describe('simulator', function() {
     verify('escalation-no-catch', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -642,8 +802,8 @@ describe('simulator', function() {
     verify('escalation-trigger-boundary-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -654,20 +814,8 @@ describe('simulator', function() {
     verify('escalation-trigger-event-sub-process', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
-      });
-
-      // then
-      expectTrace(fixture());
-    });
-
-
-    verify('escalation-boundary-event-event-sub-process-conflict', (fixture) => {
-
-      // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -682,8 +830,8 @@ describe('simulator', function() {
     verify('sub-process', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -698,58 +846,44 @@ describe('simulator', function() {
     verify('event-sub-process-interrupting', (fixture) => {
 
       // given
-      const processElement = element('Process_1');
-
-      signal({
-        element: processElement
+      const [ scope ] = trigger({
+        element: element('START')
       });
 
       // when
-      const eventSub = element('EVENT_SUB');
-
-      signal({
-        element: eventSub,
-        parentScope: findScope({
-          element: processElement
-        })
+      trigger({
+        element: element('START_SUB'),
+        scope
       });
 
       // then
       expectTrace(fixture());
-
     });
 
 
     verify('event-sub-process-non-interrupting', (fixture) => {
 
       // given
-      const processElement = element('Process_1');
-
-      signal({
-        element: processElement
+      const [ scope ] = trigger({
+        element: element('START')
       });
 
       // when
-      const eventSub = element('EVENT_SUB');
-
-      signal({
-        element: eventSub,
-        parentScope: findScope({
-          element: processElement
-        })
+      trigger({
+        element: element('START_SUB'),
+        scope
       });
 
       // then
       expectTrace(fixture());
-
     });
 
 
     verify('event-sub-process-cancelation', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -760,8 +894,8 @@ describe('simulator', function() {
     verify('event-sub-process-nested-cancelation', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -772,8 +906,8 @@ describe('simulator', function() {
     verify('event-sub-process-nested-cancelation-boundary-event', (fixture) => {
 
       // when
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -788,20 +922,13 @@ describe('simulator', function() {
     verify('boundary-interrupting-sub-process', (fixture) => {
 
       // given
-      const processElement = element('Process_1');
-
-      signal({
-        element: processElement
+      trigger({
+        element: element('START')
       });
 
       // when
-      const interruptingBoundary = element('B_RUPTING');
-
-      signal({
-        element: interruptingBoundary,
-        parentScope: findScope({
-          element: processElement
-        })
+      trigger({
+        element: element('B_RUPTING')
       });
 
       // then
@@ -812,20 +939,13 @@ describe('simulator', function() {
     verify('boundary-non-interrupting-sub-process', (fixture) => {
 
       // given
-      const processElement = element('Process_1');
-
-      signal({
-        element: processElement
+      trigger({
+        element: element('START')
       });
 
       // when
-      const nonInterruptingBoundary = element('B_NRUPTING');
-
-      signal({
-        element: nonInterruptingBoundary,
-        parentScope: findScope({
-          element: processElement
-        })
+      trigger({
+        element: element('B_NRUPTING'),
       });
 
       // then
@@ -836,18 +956,13 @@ describe('simulator', function() {
     verify('boundary-interrupting-task', (fixture) => {
 
       // given
-      const processElement = element('Process_1');
-
-      signal({
-        element: processElement
+      trigger({
+        element: element('START')
       });
 
       // when
-      signal({
-        element: element('B_RUPTING'),
-        parentScope: findScope({
-          element: processElement
-        })
+      trigger({
+        element: element('B_RUPTING')
       });
 
       // then
@@ -858,18 +973,13 @@ describe('simulator', function() {
     verify('boundary-non-interrupting-task', (fixture) => {
 
       // given
-      signal({
-        element: element('Process_1')
+      trigger({
+        element: element('START')
       });
 
       // when
-      const nonInterruptingBoundary = element('B_NRUPTING');
-
-      signal({
-        element: nonInterruptingBoundary,
-        parentScope: findScope({
-          element: nonInterruptingBoundary.parent
-        })
+      trigger({
+        element: element('B_NRUPTING')
       });
 
       // then
@@ -884,8 +994,8 @@ describe('simulator', function() {
     verify('message-flow-end-event-trigger-flow', (fixture) => {
 
       // when
-      signal({
-        element: element('PART_EXP')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -908,8 +1018,8 @@ describe('simulator', function() {
     verify('message-flow-task-trigger-flow', (fixture) => {
 
       // when
-      signal({
-        element: element('PART_EXP')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -920,8 +1030,8 @@ describe('simulator', function() {
     verify('message-flow-trigger-receive-task', (fixture) => {
 
       // given
-      signal({
-        element: element('PART_EXP')
+      trigger({
+        element: element('START')
       });
 
       // when
@@ -937,8 +1047,8 @@ describe('simulator', function() {
     verify('message-flow-trigger-event-based-gateway', (fixture) => {
 
       // given
-      signal({
-        element: element('PART_EXP')
+      trigger({
+        element: element('START')
       });
 
       // when
@@ -966,8 +1076,8 @@ describe('simulator', function() {
     verify('message-flow-throw-catch-events', (fixture) => {
 
       // when
-      signal({
-        element: element('PART_A')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -975,11 +1085,11 @@ describe('simulator', function() {
     });
 
 
-    verify('message-flow-dependent-processes', (fixture) => {
+    verify('message-flow-send-receive-tasks', (fixture) => {
 
       // when
-      signal({
-        element: element('PART_A')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -990,22 +1100,17 @@ describe('simulator', function() {
     verify('message-flow-send-receive', () => {
 
       // when
-      signal({
-        element: element('Participant_A')
+      const [ scope ] = trigger({
+        element: element('START')
       });
 
       // then
-      expect(
-        findScope({
-          element: element('Participant_A'),
-          destroyed: true
-        })
-      ).to.exist;
+      expect(scope.destroyed).to.be.true;
 
       expect(
         findScope({
           element: element('Participant_B'),
-          destroyed: true
+          trait: ScopeTraits.DESTROYED
         })
       ).to.exist;
     });
@@ -1014,8 +1119,8 @@ describe('simulator', function() {
     verify('message-flow-signal-active-participant', (fixture) => {
 
       // when
-      signal({
-        element: element('Participant_A')
+      trigger({
+        element: element('START')
       });
 
       // then
@@ -1049,6 +1154,11 @@ function verify(name, test, iit=it) {
             function(simulator, simulationTrace) {
               simulator.on('trace', function(event) {
                 simulationTrace.push(event);
+              });
+            },
+            function(eventBus, simulator) {
+              eventBus.once('import.done', () => {
+                simulator.reset();
               });
             }
           ],
@@ -1094,6 +1204,25 @@ function verifyOnly(name, test) {
   return verify(name, test, it.only);
 }
 
+
+function subscription(options) {
+  return getBpmnJS().invoke(function(simulator) {
+    return simulator.findSubscription(options);
+  });
+}
+
+function trigger(options) {
+
+  return getBpmnJS().invoke(function(simulator) {
+
+    const s = subscription(options);
+
+    expect(s, 'subscription does not exist').to.exist;
+
+    return simulator.trigger(s);
+  });
+}
+
 function signal(...args) {
   return getBpmnJS().invoke(function(simulator) {
     return simulator.signal(...args);
@@ -1108,7 +1237,7 @@ function setConfig(...args) {
 
 function element(id) {
   return getBpmnJS().invoke(function(elementRegistry) {
-    const e = elementRegistry.get(id);
+    const e = typeof id === 'string' ? elementRegistry.get(id) : id;
 
     if (!e) {
       throw new Error(`no element <${id}>`);

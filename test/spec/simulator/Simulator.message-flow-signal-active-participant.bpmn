@@ -7,14 +7,14 @@
     <messageFlow id="Message_Flow_2" sourceRef="Task_A" targetRef="Participant_B" />
   </collaboration>
   <process id="Process_A" isExecutable="false">
-    <startEvent id="Start_A" name="Start_A">
+    <startEvent id="START" name="START">
       <outgoing>Flow_1</outgoing>
     </startEvent>
     <task id="Task_A" name="Task_A">
       <incoming>Flow_1</incoming>
       <outgoing>Flow_2</outgoing>
     </task>
-    <sequenceFlow id="Flow_1" sourceRef="Start_A" targetRef="Task_A" />
+    <sequenceFlow id="Flow_1" sourceRef="START" targetRef="Task_A" />
     <sequenceFlow id="Flow_2" sourceRef="Task_A" targetRef="End_A" />
     <endEvent id="End_A" name="END_A">
       <incoming>Flow_2</incoming>
@@ -42,7 +42,7 @@
         <omgdi:waypoint x="298" y="180" />
         <omgdi:waypoint x="350" y="180" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Start_A_di" bpmnElement="Start_A">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
         <omgdc:Bounds x="262" y="162" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="244" y="205" width="73" height="14" />

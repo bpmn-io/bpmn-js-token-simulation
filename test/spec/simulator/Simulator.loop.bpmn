@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.8.2">
   <bpmn:process id="Process" isExecutable="true">
-    <bpmn:startEvent id="Start" name="START">
+    <bpmn:startEvent id="START" name="START">
       <bpmn:outgoing>Flow_1</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_1" sourceRef="Start" targetRef="Join" />
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="Join" />
     <bpmn:sequenceFlow id="Flow_2" sourceRef="Split" targetRef="End" />
     <bpmn:endEvent id="End" name="END">
       <bpmn:incoming>Flow_2</bpmn:incoming>
@@ -52,7 +52,7 @@
         <di:waypoint x="158" y="157" />
         <di:waypoint x="225" y="157" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Start_di" bpmnElement="Start">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
         <dc:Bounds x="122" y="139" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="122" y="182" width="36" height="14" />
