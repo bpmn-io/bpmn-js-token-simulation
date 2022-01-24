@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1vt97he" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
   <bpmn:process id="Process_1" isExecutable="true">
-    <bpmn:startEvent id="START_S" name="START_S">
+    <bpmn:startEvent id="START" name="START">
       <bpmn:outgoing>Flow_2</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:endEvent id="END_S" name="END_S">
+    <bpmn:endEvent id="END" name="END">
       <bpmn:incoming>Flow_1</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:parallelGateway id="F_GATE" name="F_GATE">
@@ -19,8 +19,8 @@
       <bpmn:incoming>Flow_5</bpmn:incoming>
       <bpmn:outgoing>Flow_1</bpmn:outgoing>
     </bpmn:parallelGateway>
-    <bpmn:sequenceFlow id="Flow_2" sourceRef="START_S" targetRef="F_GATE" />
-    <bpmn:sequenceFlow id="Flow_1" sourceRef="J_GATE" targetRef="END_S" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="START" targetRef="F_GATE" />
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="J_GATE" targetRef="END" />
     <bpmn:sequenceFlow id="Flow_3" sourceRef="F_GATE" targetRef="J_GATE" />
     <bpmn:sequenceFlow id="Flow_4" sourceRef="F_GATE" targetRef="J_GATE" />
     <bpmn:sequenceFlow id="Flow_5" sourceRef="F_GATE" targetRef="J_GATE" />
@@ -65,13 +65,13 @@
         <di:waypoint x="198" y="190" />
         <di:waypoint x="257" y="190" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="START_S_di" bpmnElement="START_S">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
         <dc:Bounds x="162" y="172" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="156" y="146" width="49" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="END_S_di" bpmnElement="END_S">
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
         <dc:Bounds x="484" y="172" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="484" y="146" width="37" height="14" />

@@ -2,10 +2,10 @@
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.23.0">
   <bpmn:escalation id="Escalation_1" name="foo" />
   <bpmn:process id="Process_1" isExecutable="true">
-    <bpmn:startEvent id="Event_1c6zo15">
+    <bpmn:startEvent id="START" name="START">
       <bpmn:outgoing>Flow_0rept8v</bpmn:outgoing>
     </bpmn:startEvent>
-    <bpmn:sequenceFlow id="Flow_0rept8v" sourceRef="Event_1c6zo15" targetRef="Gateway_1xc6ap6" />
+    <bpmn:sequenceFlow id="Flow_0rept8v" sourceRef="START" targetRef="Gateway_1xc6ap6" />
     <bpmn:task id="Activity_116ufv1">
       <bpmn:incoming>Flow_1fbv0dg</bpmn:incoming>
     </bpmn:task>
@@ -86,7 +86,7 @@
         <di:waypoint x="188" y="0" />
         <di:waypoint x="245" y="0" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_1c6zo15_di" bpmnElement="Event_1c6zo15">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
         <dc:Bounds x="152" y="-18" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_116ufv1_di" bpmnElement="Activity_116ufv1">
