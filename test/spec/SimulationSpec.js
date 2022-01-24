@@ -573,49 +573,6 @@ describe('simulation', function() {
   });
 
 
-  describe('compensation', function() {
-
-    const diagram = require('./compensation.bpmn');
-
-    beforeEach(bootstrapModeler(diagram, {
-      additionalModules: [
-        ModelerModule,
-        TestModule
-      ]
-    }));
-
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
-
-      trace.start();
-    }));
-
-
-    it('should execute happy path', inject(
-      async function(simulator, elementRegistry) {
-
-        // when
-        triggerElement('START');
-
-        await scopeDestroyed();
-
-        // then
-        expectHistory([
-          'START',
-          'Flow_0i0rqg0',
-          'A',
-          'Flow_0xla1ox',
-          'COMPENSATE',
-          'Compensate_A',
-          'Flow_06me3st',
-          'END'
-        ]);
-      }
-    ));
-
-  });
-
-
   describe('transaction', function() {
 
     const diagram = require('./transaction.bpmn');
@@ -718,6 +675,223 @@ describe('simulation', function() {
       }
     ));
 
+  });
+
+
+  describe('compensation', function() {
+
+    describe('basic', function() {
+
+      const diagram = require('./compensation.bpmn');
+
+      beforeEach(bootstrapModeler(diagram, {
+        additionalModules: [
+          ModelerModule,
+          TestModule
+        ]
+      }));
+
+      beforeEach(inject(function(toggleMode, trace) {
+        toggleMode.toggleMode();
+
+        trace.start();
+      }));
+
+
+      it('should execute happy path', inject(
+        async function(simulator, elementRegistry) {
+
+          // when
+          triggerElement('START');
+
+          await scopeDestroyed();
+
+          // then
+          expectHistory([
+            'START',
+            'Flow_0i0rqg0',
+            'A',
+            'Flow_0xla1ox',
+            'TRIGGER_COMP_A',
+            'Compensate_A',
+            'Flow_06me3st',
+            'END'
+          ]);
+        }
+      ));
+
+    });
+
+
+    describe('keep-alive', function() {
+
+      const diagram = require('./compensation-keep-alive.bpmn');
+
+      beforeEach(bootstrapModeler(diagram, {
+        additionalModules: [
+          ModelerModule,
+          TestModule
+        ]
+      }));
+
+      beforeEach(inject(function(toggleMode, trace) {
+        toggleMode.toggleMode();
+
+        trace.start();
+      }));
+
+
+      it('should execute happy path', inject(
+        async function(simulator, elementRegistry) {
+
+          // when
+          triggerElement('START');
+
+          await elementExit('END');
+
+          // then
+          expectHistory([
+            'START',
+            'Flow_0od01ym',
+            'S',
+            'S_START',
+            'Flow_0i0rqg0',
+            'A',
+            'Flow_0xla1ox',
+            'S_END',
+            'Flow_09su6dp',
+            'COMPENSATE_S',
+            'E_START',
+            'Flow_1qtf3zb',
+            'E_COMPENSATE_A',
+            'Compensate_A',
+            'Flow_1p7mdhd',
+            'E_END',
+            'Flow_0xdj5kb',
+            'END'
+          ]);
+        }
+      ));
+
+    });
+
+
+    describe('errors', function() {
+
+      const diagram = require('./simulator/Simulator.compensation-error.bpmn');
+
+      beforeEach(bootstrapModeler(diagram, {
+        additionalModules: [
+          ModelerModule,
+          TestModule
+        ]
+      }));
+
+      beforeEach(inject(function(toggleMode, trace) {
+        toggleMode.toggleMode();
+
+        trace.start();
+      }));
+
+
+      it('should execute happy path', inject(
+        async function(simulator, elementRegistry) {
+
+          // when
+          triggerElement('START');
+
+          await elementExit('ERROR_END');
+
+          // then
+          expectHistory([
+            'START',
+            'Flow_1e0wso1',
+            'S',
+            'S_START',
+            'Flow_1aintfm',
+            'Flow_08m3i81',
+            'A',
+            'Flow_1w8hzat',
+            'B',
+            'Flow_03xyhan',
+            'S_ERROR_END',
+            'ERROR_BOUNDARY',
+            'Flow_1onzgy6',
+            'TRIGGER_COMPENSATE_S',
+            'Flow_0ysr4mv',
+            'ERROR_END'
+          ]);
+        }
+      ));
+
+    });
+
+
+    describe('nested', function() {
+
+      const diagram = require('./simulator/Simulator.compensation-nested.bpmn');
+
+      beforeEach(bootstrapModeler(diagram, {
+        additionalModules: [
+          ModelerModule,
+          TestModule
+        ]
+      }));
+
+      beforeEach(inject(function(toggleMode, trace) {
+        toggleMode.toggleMode();
+
+        trace.start();
+      }));
+
+
+      it('should execute happy path', inject(
+        async function(simulator, elementRegistry) {
+
+          // when
+          triggerElement('START');
+
+          await elementExit('Process_1');
+
+          // then
+          expectHistory([
+            'START',
+            'Flow_13n73ja',
+            'S',
+            'S_START',
+            'Flow_0v47rw5',
+            'SN',
+            'SN_START',
+            'Flow_1vylnqf',
+            'A',
+            'Flow_0qwivo3',
+            'SX',
+            'SX_START',
+            'Flow_1wwvx94',
+            'B',
+            'Flow_09kf045',
+            'SF',
+            'SF_START',
+            'Flow_0zlnrlu',
+            'SF_ERROR_END',
+            'SF_ERROR_BOUNDARY',
+            'Flow_013bc7o',
+            'S_END',
+            'Flow_09zuhsj',
+            'END_COMPENSATE',
+            'COMP_B',
+            'E_START',
+            'Flow_0my3iyg',
+            'E_COMP',
+            'Flow_1buo09l',
+            'E_COMP_END',
+            'COMP_A',
+            'COMP_S'
+          ]);
+        }
+      ));
+
+    });
   });
 
 
@@ -850,7 +1024,7 @@ describe('simulation', function() {
       async function(simulator, animation) {
 
         // given
-        animation.setAnimationSpeed(500);
+        animation.setAnimationSpeed(1000);
 
         // when
         triggerElement('ALL_START');

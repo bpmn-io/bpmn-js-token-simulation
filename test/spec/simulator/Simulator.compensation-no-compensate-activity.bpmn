@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0i5jwuh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:task id="A" name="A">
+      <bpmn:incoming>Flow_1aintfm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1w8hzat</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:boundaryEvent id="A_COMP_BOUNDARY" name="A_COMP_BOUNDARY" attachedToRef="A">
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_039r6cz" />
+    </bpmn:boundaryEvent>
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1aintfm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_0lsswgi</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateThrowEvent id="COMP_A" name="COMP_A">
+      <bpmn:incoming>Flow_1w8hzat</bpmn:incoming>
+      <bpmn:outgoing>Flow_0lsswgi</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_0qiqad1" activityRef="A" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1aintfm" sourceRef="START" targetRef="A" />
+    <bpmn:sequenceFlow id="Flow_1w8hzat" sourceRef="A" targetRef="COMP_A" />
+    <bpmn:sequenceFlow id="Flow_0lsswgi" sourceRef="COMP_A" targetRef="END" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1aintfm_di" bpmnElement="Flow_1aintfm">
+        <di:waypoint x="188" y="120" />
+        <di:waypoint x="310" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w8hzat_di" bpmnElement="Flow_1w8hzat">
+        <di:waypoint x="410" y="120" />
+        <di:waypoint x="472" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lsswgi_di" bpmnElement="Flow_0lsswgi">
+        <di:waypoint x="508" y="120" />
+        <di:waypoint x="612" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0htggaz_di" bpmnElement="A">
+        <dc:Bounds x="310" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tszza2_di" bpmnElement="START">
+        <dc:Bounds x="152" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="153" y="146" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0uqifea_di" bpmnElement="END">
+        <dc:Bounds x="612" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="619" y="145" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_00te6ej_di" bpmnElement="COMP_A">
+        <dc:Bounds x="472" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="467" y="145" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0njybo1_di" bpmnElement="A_COMP_BOUNDARY">
+        <dc:Bounds x="352" y="142" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="268" y="176" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
