@@ -540,6 +540,16 @@ describe('simulation', function() {
     }));
 
 
+    it('should not show wait toggle', inject(
+      async function(simulator) {
+
+        // assume
+        // not breakpoint toggling on event sub
+        expectNoElementTrigger('EVENT_SUB');
+      }
+    ));
+
+
     it('should cancel scope', inject(
       async function(simulator, elementRegistry) {
 
