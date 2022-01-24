@@ -1048,6 +1048,106 @@ describe('simulator', function() {
   });
 
 
+  describe('compensation', function() {
+
+    verify('compensation-booking', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-once', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-intermediate-throw', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-end', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-event-sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-error', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-no-compensate-activity', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-nested', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+  });
+
+
   describe('event sub-process', function() {
 
     verify('event-sub-process-interrupting', (fixture) => {

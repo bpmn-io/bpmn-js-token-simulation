@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0i5jwuh" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:task id="A" name="A">
+      <bpmn:incoming>Flow_1aintfm</bpmn:incoming>
+      <bpmn:outgoing>Flow_1w8hzat</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:boundaryEvent id="A_COMP_BOUNDARY" name="A_COMP_BOUNDARY" attachedToRef="A">
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_039r6cz" />
+    </bpmn:boundaryEvent>
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1aintfm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1aintfm" sourceRef="START" targetRef="A" />
+    <bpmn:sequenceFlow id="Flow_1w8hzat" sourceRef="A" targetRef="ESCALATE_END" />
+    <bpmn:task id="COMPENSATE_A" name="COMPENSATE_A" isForCompensation="true" />
+    <bpmn:endEvent id="ESCALATE_END" name="ESCALATE_END">
+      <bpmn:incoming>Flow_1w8hzat</bpmn:incoming>
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_125q6om" />
+    </bpmn:endEvent>
+    <bpmn:subProcess id="E" name="E" triggeredByEvent="true">
+      <bpmn:sequenceFlow id="Flow_1hfcj6z" sourceRef="E_START" targetRef="E_COMP_A_END" />
+      <bpmn:endEvent id="E_COMP_A_END" name="E_COMP_A_END">
+        <bpmn:incoming>Flow_1hfcj6z</bpmn:incoming>
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_0rtxf1d" activityRef="A" />
+      </bpmn:endEvent>
+      <bpmn:startEvent id="E_START" name="E_START">
+        <bpmn:outgoing>Flow_1hfcj6z</bpmn:outgoing>
+        <bpmn:escalationEventDefinition id="EscalationEventDefinition_0hnvyff" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:association id="Association_0mgjaj4" associationDirection="One" sourceRef="A_COMP_BOUNDARY" targetRef="COMPENSATE_A" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1aintfm_di" bpmnElement="Flow_1aintfm">
+        <di:waypoint x="188" y="400" />
+        <di:waypoint x="310" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1w8hzat_di" bpmnElement="Flow_1w8hzat">
+        <di:waypoint x="410" y="400" />
+        <di:waypoint x="542" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_0htggaz_di" bpmnElement="A">
+        <dc:Bounds x="310" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1tszza2_di" bpmnElement="START">
+        <dc:Bounds x="152" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="153" y="426" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0awkfy5_di" bpmnElement="COMPENSATE_A">
+        <dc:Bounds x="420" y="480" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_18l8v16_di" bpmnElement="ESCALATE_END">
+        <dc:Bounds x="542" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="518" y="425" width="86" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_18nnmpi_di" bpmnElement="E" isExpanded="true">
+        <dc:Bounds x="295" y="80" width="350" height="200" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1hfcj6z_di" bpmnElement="Flow_1hfcj6z">
+        <di:waypoint x="371" y="180" />
+        <di:waypoint x="552" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1fm6bpf_di" bpmnElement="E_COMP_A_END">
+        <dc:Bounds x="552" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="525" y="205" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_15ui4iz_di" bpmnElement="E_START">
+        <dc:Bounds x="335" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="329" y="205" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_0mgjaj4_di" bpmnElement="Association_0mgjaj4">
+        <di:waypoint x="370" y="458" />
+        <di:waypoint x="370" y="520" />
+        <di:waypoint x="420" y="520" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0njybo1_di" bpmnElement="A_COMP_BOUNDARY">
+        <dc:Bounds x="352" y="422" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="268" y="456" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
