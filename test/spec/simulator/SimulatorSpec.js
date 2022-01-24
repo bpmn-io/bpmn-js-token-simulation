@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-
 import SimulatorModule from 'lib/simulator';
 
 import {
@@ -909,6 +907,94 @@ describe('simulator', function() {
   describe('sub-process', function() {
 
     verify('sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+  });
+
+
+  describe('transaction', function() {
+
+    verify('transaction-cancel-trigger-cancel-boundary', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('transaction-compensation', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('transaction-no-compensate-activity', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('transaction-compensation-multiple', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('transaction-cancel-from-nested-scope', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('transaction-terminate', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('transaction-error', (fixture) => {
 
       // when
       trigger({

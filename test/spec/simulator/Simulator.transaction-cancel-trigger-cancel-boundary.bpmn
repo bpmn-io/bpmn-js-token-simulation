@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0avz3fy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:transaction id="T" name="T">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      <bpmn:startEvent id="START_T" name="START_T">
+        <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_3" sourceRef="START_T" targetRef="PARALLEL_GATE" />
+      <bpmn:endEvent id="CANCEL_T_END" name="CANCEL_T_END">
+        <bpmn:incoming>Flow_1s2x1rg</bpmn:incoming>
+        <bpmn:cancelEventDefinition id="CancelEventDefinition_0ctzw11" />
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1s2x1rg" sourceRef="PARALLEL_GATE" targetRef="CANCEL_T_END" />
+      <bpmn:sequenceFlow id="Flow_1qdkqr6" sourceRef="PARALLEL_GATE" targetRef="RECEIVE" />
+      <bpmn:receiveTask id="RECEIVE" name="RECEIVE">
+        <bpmn:incoming>Flow_1qdkqr6</bpmn:incoming>
+      </bpmn:receiveTask>
+      <bpmn:parallelGateway id="PARALLEL_GATE">
+        <bpmn:incoming>Flow_3</bpmn:incoming>
+        <bpmn:outgoing>Flow_1s2x1rg</bpmn:outgoing>
+        <bpmn:outgoing>Flow_1qdkqr6</bpmn:outgoing>
+      </bpmn:parallelGateway>
+    </bpmn:transaction>
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="T" />
+    <bpmn:boundaryEvent id="CANCELED_T_BOUNDARY" name="CANCELED_T_BOUNDARY" attachedToRef="T">
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+      <bpmn:cancelEventDefinition id="CancelEventDefinition_0l7uacx" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="CANCELED_T_BOUNDARY" targetRef="CANCELED_END" />
+    <bpmn:endEvent id="CANCELED_END" name="CANCELED_END">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="T" targetRef="END" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="168" y="195" />
+        <di:waypoint x="240" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="720" y="195" />
+        <di:waypoint x="792" y="195" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="453" y="338" />
+        <di:waypoint x="453" y="390" />
+        <di:waypoint x="542" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="132" y="177" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="132" y="220" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CANCELED_END_di" bpmnElement="CANCELED_END">
+        <dc:Bounds x="542" y="372" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="516" y="415" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="792" y="177" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="798" y="220" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Transaction_di" bpmnElement="T" isExpanded="true">
+        <dc:Bounds x="240" y="70" width="480" height="250" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1qdkqr6_di" bpmnElement="Flow_1qdkqr6">
+        <di:waypoint x="450" y="215" />
+        <di:waypoint x="450" y="140" />
+        <di:waypoint x="510" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1s2x1rg_di" bpmnElement="Flow_1s2x1rg">
+        <di:waypoint x="475" y="240" />
+        <di:waypoint x="612" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="338" y="240" />
+        <di:waypoint x="425" y="240" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_T_di" bpmnElement="START_T">
+        <dc:Bounds x="302" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="296" y="265" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CANCEL_T_END_di" bpmnElement="CANCEL_T_END">
+        <dc:Bounds x="612" y="222" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="587" y="265" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0bfi2y9_di" bpmnElement="RECEIVE">
+        <dc:Bounds x="510" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Gateway_1dz0lym_di" bpmnElement="PARALLEL_GATE">
+        <dc:Bounds x="425" y="215" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CANCELED_T_BOUNDARY_di" bpmnElement="CANCELED_T_BOUNDARY">
+        <dc:Bounds x="435" y="302" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="360" y="336" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

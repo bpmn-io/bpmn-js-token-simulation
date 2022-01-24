@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0avz3fy" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0-rc.1-form-semver-maj-mi-pa" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:transaction id="T" name="T">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      <bpmn:startEvent id="T_START" name="T_START">
+        <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:task id="Transactional_A" name="A">
+        <bpmn:incoming>Flow_3</bpmn:incoming>
+        <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="Flow_3" sourceRef="T_START" targetRef="Transactional_A" />
+      <bpmn:sequenceFlow id="Flow_4" sourceRef="Transactional_A" targetRef="T_CANCEL_END" />
+      <bpmn:boundaryEvent id="CompensationBoundary_A" attachedToRef="Transactional_A">
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_16jso6a" />
+      </bpmn:boundaryEvent>
+      <bpmn:endEvent id="T_CANCEL_END" name="T_CANCEL_END">
+        <bpmn:incoming>Flow_4</bpmn:incoming>
+        <bpmn:cancelEventDefinition id="CancelEventDefinition_0ctzw11" />
+      </bpmn:endEvent>
+    </bpmn:transaction>
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="T" />
+    <bpmn:boundaryEvent id="T_CANCEL_BOUNDARY" name="T_CANCEL_BOUNDARY" attachedToRef="T">
+      <bpmn:outgoing>Flow_8</bpmn:outgoing>
+      <bpmn:cancelEventDefinition id="CancelEventDefinition_0l7uacx" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_8" sourceRef="T_CANCEL_BOUNDARY" targetRef="T_CANCELED" />
+    <bpmn:endEvent id="T_CANCELED" name="T_CANCELED">
+      <bpmn:incoming>Flow_8</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="T" targetRef="END" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="688" y="225" />
+        <di:waypoint x="762" y="225" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+        <di:waypoint x="530" y="358" />
+        <di:waypoint x="530" y="420" />
+        <di:waypoint x="652" y="420" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="188" y="210" />
+        <di:waypoint x="250" y="210" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="T_CANCELED_di" bpmnElement="T_CANCELED">
+        <dc:Bounds x="652" y="402" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="634" y="445" width="73" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_di" bpmnElement="END">
+        <dc:Bounds x="762" y="207" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="768" y="250" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_di" bpmnElement="START">
+        <dc:Bounds x="152" y="192" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="152" y="235" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Transaction_di" bpmnElement="T" isExpanded="true">
+        <dc:Bounds x="250" y="60" width="438" height="280" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+        <di:waypoint x="510" y="200" />
+        <di:waypoint x="572" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="355" y="200" />
+        <di:waypoint x="410" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="T_START_di" bpmnElement="T_START">
+        <dc:Bounds x="319" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="313" y="218" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Transactional_A_di" bpmnElement="Transactional_A">
+        <dc:Bounds x="410" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1n9jspj_di" bpmnElement="T_CANCEL_END">
+        <dc:Bounds x="572" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="547" y="225" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1wb5ii0_di" bpmnElement="CompensationBoundary_A">
+        <dc:Bounds x="452" y="222" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1xzgcen_di" bpmnElement="T_CANCEL_BOUNDARY">
+        <dc:Bounds x="512" y="322" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="450" y="356" width="80" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
