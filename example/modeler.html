@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/diagram-js.css" />
   <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" />
   <link rel="stylesheet" href="./dist/vendor/bpmn-js-token-simulation/assets/css/bpmn-js-token-simulation.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js-properties-panel/assets/properties-panel.css" />
   <link rel="stylesheet" href="./style.css" />
 
   <link rel="icon" type="image/png" href="favicon.png">
@@ -13,14 +14,21 @@
   <title>Modeler Demo - bpmn-js-token-simulation</title>
 </head>
 <body>
-  <div id="canvas"></div>
 
-  <div class="drop-message"><strong>Hint:</strong> Drop your own BPMN file to simulate it.</div>
+  <div class="canvas-parent">
+    <div class="canvas" id="canvas">
+      <div class="drop-message"><strong>Hint:</strong> Drop a diagram to open</div>
 
-  <div class="links top-links">
-    <a href="https://github.com/bpmn-io/bpmn-js-token-simulation" class="link" target="_blank" rel="noopener">View on GitHub</a>
+      <div class="links top-links">
+        <a href="https://github.com/bpmn-io/bpmn-js-token-simulation" class="link" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
 
-    <a href="./viewer.html" class="link">Viewer <i class="fa fa-sign-out"></i></a>
+    <div class="properties-panel" id="properties-panel">
+      <div class="properties-panel-resizer" id="properties-panel-resizer" title="Toggle properties panel" draggable="true">
+         <div class="properties-panel-resize-handle"></div>
+      </div>
+    </div>
   </div>
 
   <div class="links bottom-links">

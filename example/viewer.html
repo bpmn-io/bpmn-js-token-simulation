@@ -13,14 +13,14 @@
   <title>Viewer Demo - bpmn-js-token-simulation</title>
 </head>
 <body>
-  <div id="canvas"></div>
+  <div class="canvas-parent">
+    <div class="canvas" id="canvas">
+      <div class="drop-message"><strong>Hint:</strong> Drop a diagram to open</div>
 
-  <div class="drop-message"><strong>Hint:</strong> Drop your own BPMN file to simulate it.</div>
-
-  <div class="links top-links">
-    <a href="https://github.com/bpmn-io/bpmn-js-token-simulation" class="link" target="_blank" rel="noopener">View on GitHub</a>
-
-    <a href="./modeler.html" class="link">Modeler <i class="fa fa-sign-out"></i></a>
+      <div class="links top-links">
+        <a href="https://github.com/bpmn-io/bpmn-js-token-simulation" class="link" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
   </div>
 
   <script src="./dist/viewer.js"></script>
