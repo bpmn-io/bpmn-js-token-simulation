@@ -16,6 +16,10 @@ body:not(.presentation-mode) .bts-notifications {
   bottom: 60px;
 }
 
+.links, .drop-message {
+  z-index: 1;
+}
+
 .top-links {
   position: absolute;
   top: 24px;
@@ -51,6 +55,85 @@ body:not(.presentation-mode) .bts-notifications {
 .presentation-mode .drop-message,
 .presentation-mode .links {
   display: none;
+}
+
+.canvas-parent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+
+  display: flex;
+}
+
+.canvas, .properties-panel {
+  justify-content: stretch;
+}
+
+.canvas {
+  flex: 1;
+  position: relative;
+}
+
+.properties-panel:not(.open) {
+  width: 0 !important;
+}
+
+.properties-panel.open {
+  width: 300px;
+  border-left: solid 1px #CCC;
+}
+
+.properties-panel {
+  position: relative;
+}
+
+.token-simulation-active .bio-properties-panel-container {
+  opacity: .75;
+}
+
+.token-simulation-active .properties-panel input,
+.token-simulation-active .properties-panel textarea,
+.token-simulation-active .properties-panel select,
+.token-simulation-active .properties-panel .bio-properties-panel-checkbox {
+  pointer-events: none;
+}
+
+.properties-panel-resizer {
+  position: absolute;
+  left: -12px;
+  top: 0;
+  bottom: 0;
+  width: 22px;
+  z-index: 3;
+
+  cursor:  e-resize;
+}
+
+.properties-panel-resize-handle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  bottom: 0;
+}
+
+.properties-panel:not(.open) .properties-panel-resizer {
+  width: 12px;
+  cursor: w-resize;
+}
+
+.properties-panel:not(.open) .properties-panel-resize-handle {
+  left: 10px;
+}
+
+.properties-panel-resizer:hover .properties-panel-resize-handle {
+  border-right: solid 3px hsl(205, 100%, 50%);;
+}
+
+.bio-properties-panel-container {
+  width: 100%;
 }
 
 
