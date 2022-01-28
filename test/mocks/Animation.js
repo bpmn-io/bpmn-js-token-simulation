@@ -15,5 +15,5 @@ function Animation() {
 
 export default {
   __init__: [ 'animation' ],
-  animation: [ 'type', Animation]
+  animation: [ 'type', Animation ]
 };

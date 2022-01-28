@@ -1294,7 +1294,7 @@ function triggerScope(scope) {
   triggerClick(domElement);
 }
 
-function scopeDestroyed(scope=null) {
+function scopeDestroyed(scope = null) {
 
   return new Promise(resolve => {
 
@@ -1326,7 +1326,7 @@ function scopeDestroyed(scope=null) {
   });
 }
 
-function elementEnter(id=null) {
+function elementEnter(id = null) {
 
   return new Promise(resolve => {
 
@@ -1346,7 +1346,7 @@ function elementEnter(id=null) {
 }
 
 
-function elementExit(id=null) {
+function elementExit(id = null) {
 
   return new Promise(resolve => {
 
@@ -1388,7 +1388,7 @@ function expectHistory(history) {
 }
 
 
-function triggerClick(element, options={}) {
+function triggerClick(element, options = {}) {
 
   const defaultOptions = {
     pointerX: 0,

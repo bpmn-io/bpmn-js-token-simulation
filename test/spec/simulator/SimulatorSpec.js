@@ -1436,11 +1436,11 @@ describe('simulator', function() {
 });
 
 
-function verify(name, test, iit=it) {
+function verify(name, test, iit = it) {
 
   const diagram = require(`./Simulator.${name}.bpmn`);
 
-  function fixture(fixtureName=name) {
+  function fixture(fixtureName = name) {
     const _fixture = require(`./Simulator.${fixtureName}.json`);
 
     _fixture.name = fixtureName;
