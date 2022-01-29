@@ -1,0 +1,22 @@
+[
+  "createScope:M_FLOW:null",
+  "signal:M_FLOW:C",
+  "exit:M_FLOW:C",
+  "createScope:Participant_A:null",
+  "destroyScope:M_FLOW:C",
+  "signal:Participant_A:D",
+  "createScope:START_2:D",
+  "signal:START_2:E",
+  "exit:START_2:E",
+  "createScope:Flow_1atsyoy:D",
+  "destroyScope:START_2:E",
+  "enter:Flow_1atsyoy:D",
+  "exit:Flow_1atsyoy:F",
+  "createScope:END:D",
+  "destroyScope:Flow_1atsyoy:F",
+  "enter:END:D",
+  "exit:END:G",
+  "destroyScope:END:G",
+  "exit:Participant_A:D",
+  "destroyScope:Participant_A:D"
+]

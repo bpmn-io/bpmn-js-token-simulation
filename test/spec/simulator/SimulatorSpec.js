@@ -509,23 +509,6 @@ describe('simulator', function() {
     });
 
 
-    verify('event-based-gateway', (fixture) => {
-
-      // given
-      trigger({
-        element: element('START')
-      });
-
-      // when
-      trigger({
-        element: element('M_CATCH')
-      });
-
-      // then
-      expectTrace(fixture());
-    });
-
-
     verify('loop', (fixture) => {
 
       // given
@@ -543,6 +526,44 @@ describe('simulator', function() {
 
       // then
       expectTrace(fixture('loop-1'));
+    });
+
+  });
+
+
+  describe('event-based-gateway', function() {
+
+    verify('event-based-gateway', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('M_CATCH')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('event-based-gateway-same-events', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('WAIT_B')
+      });
+
+      // then
+      expectTrace(fixture());
     });
 
   });
@@ -939,6 +960,30 @@ describe('simulator', function() {
 
       // then
       expectTrace(fixture());
+    });
+
+  });
+
+
+  describe('process', function() {
+
+    verify('process-multiple-starts', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START_1')
+      });
+
+      // then
+      expectTrace(fixture('process-multiple-starts-1'));
+
+      // but when
+      trigger({
+        element: element('START_2')
+      });
+
+      // then
+      expectTrace(fixture('process-multiple-starts-2'));
     });
 
   });
@@ -1392,7 +1437,36 @@ describe('simulator', function() {
     });
 
 
+    verify('message-flow-trigger-event-based-gateway-multiple-events', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      signal({
+        element: element('M_FLOW')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('message-flow-trigger-start-event', (fixture) => {
+
+      // when
+      signal({
+        element: element('M_FLOW')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('message-flow-trigger-start-multiple-events', (fixture) => {
 
       // when
       signal({
