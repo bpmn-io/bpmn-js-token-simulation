@@ -1,12 +1,12 @@
-> Looking for the Camunda Modeler Plugin? Get it [here](https://github.com/philippfromme/bpmn-js-token-simulation-plugin)!
-
 # bpmn-js Token Simulation
 
 [![CI](https://github.com/bpmn-io/bpmn-js-token-simulation/workflows/CI/badge.svg)](https://github.com/bpmn-io/bpmn-js-token-simulation/actions?query=workflow%3ACI)
 
-A BPMN 2.0 specification compliant token simulator, built as a [bpmn-js](https://github.com/bpmn-io/bpmn-js) extension. [__Try it out__](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1&pp=1).
+A BPMN 2.0 specification compliant token simulator, built as a [bpmn-js](https://github.com/bpmn-io/bpmn-js) extension.
 
 [![Screencast](docs/screenshot.png)](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1&pp=1)
+
+Try it on the [classic booking example](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1&pp=1&diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fbpmn-io%2Fbpmn-js-token-simulation%2Fmaster%2Ftest%2Fspec%2Fbooking.bpmn) or checkout the [full capability demo](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1&pp=1&diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fbpmn-io%2Fbpmn-js-token-simulation%2Fmaster%2Fexample%2Fresources%2Fall.bpmn).
 
 
 ## Installation
@@ -68,6 +68,12 @@ npm start
 # run the full development setup
 npm run dev
 ```
+
+
+## Related
+
+* [Making of token simulation](https://github.com/nikku/talks/blob/main/talks/2021-token-simulation#readme) and [token simulation internals](https://github.com/nikku/talks/blob/main/talks/2021-token-simulation-internals#readme) shed some light on the reasons for this library.
+* Token Simulation is available [as a Camunda Modeler plug-in](https://github.com/bpmn-io/bpmn-js-token-simulation-plugin)
 
 
 ## Licence
