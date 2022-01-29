@@ -23,14 +23,23 @@ const initialDiagram = (() => {
   }
 })();
 
-function hideDropMessage() {
+function hideMessage() {
   const dropMessage = document.querySelector('.drop-message');
 
   dropMessage.style.display = 'none';
 }
 
+function showMessage(cls, message) {
+  const messageEl = document.querySelector('.drop-message');
+
+  messageEl.textContent = message;
+  messageEl.className = `drop-message ${cls || ''}`;
+
+  messageEl.style.display = 'block';
+}
+
 if (persistent) {
-  hideDropMessage();
+  hideMessage();
 }
 
 const ExampleModule = {
@@ -76,8 +85,8 @@ const viewer = new BpmnViewer({
   }
 });
 
-viewer.openDiagram = function(diagram) {
-  return this.importXML(diagram)
+function openDiagram(diagram) {
+  return viewer.importXML(diagram)
     .then(({ warnings }) => {
       if (warnings.length) {
         console.warn(warnings);
@@ -87,12 +96,12 @@ viewer.openDiagram = function(diagram) {
         localStorage['diagram-xml'] = diagram;
       }
 
-      this.get('canvas').zoom('fit-viewport');
+      viewer.get('canvas').zoom('fit-viewport');
     })
     .catch(err => {
       console.error(err);
     });
-};
+}
 
 if (presentationMode) {
   document.body.classList.add('presentation-mode');
@@ -106,14 +115,12 @@ function openFile(files) {
     return;
   }
 
-  hideDropMessage();
+  hideMessage();
 
-  viewer.openDiagram(files[0].contents);
+  openDiagram(files[0].contents);
 }
 
 document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', openFile), false);
-
-viewer.openDiagram(initialDiagram);
 
 document.body.addEventListener('keydown', function(event) {
   if (event.code === 'KeyO' && (event.metaKey || event.ctrlKey)) {
@@ -122,3 +129,28 @@ document.body.addEventListener('keydown', function(event) {
     fileOpen().then(openFile);
   }
 });
+
+
+const remoteDiagram = url.searchParams.get('diagram');
+
+if (remoteDiagram) {
+  fetch(remoteDiagram).then(
+    r => {
+      if (r.ok) {
+        return r.text();
+      }
+
+      throw new Error(`Status ${r.status}`);
+    }
+  ).then(
+    text => openDiagram(text)
+  ).catch(
+    err => {
+      showMessage('error', `Failed to open remote diagram: ${err.message}`);
+
+      openDiagram(initialDiagram);
+    }
+  );
+} else {
+  openDiagram(initialDiagram);
+}
