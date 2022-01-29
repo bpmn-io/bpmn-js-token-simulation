@@ -6,12 +6,38 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.25.0
+
+* `FEAT`: rewrite simulator using event scopes and subscriptions ([#101](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/101))
+* `FEAT`: support event rethrow and "absorption" ([#100](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/100))
+* `FEAT`: trigger all startable elements inside `bpmn:SubProcess` ([#107](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/107), [`acdae242`](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/107/commits/acdae242d72e36a35e9e31d70c13fbcdd1c168b6))
+* `FEAT`: support transactions and cancel events ([#76](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/76), [#102](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/102), [`5026298b`](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/102/commits/5026298b21699f0110b4e9d530dfca555e26ab8a))
+* `FEAT`: support compensation ([#76](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/76), [#102](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/102), [`bcdad034`](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/102/commits/bcdad034d5b8e0fae0de2ad638136dd27b78c729))
+* `FEAT`: eagerly interrupt when entering event sub-process ([`452ce5ec`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/452ce5eca78aeca849514a6f0e8782ce1bdf8b41))
+* `FEAT`: add `Simulator` APIs for (BPMN) event triggering and subscriptions ([`5da21ed8`](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/101/commits/5da21ed8d66446b3e91090361086ab9b8d1000f9))
+* `FEAT`: add `Simulator#waitForScopes` API ([`e23e57f0`](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/102/commits/e23e57f0d7aadbda2fc2d8599e10a90d817f91e5))
+* `FIX`: don't allow pause on event sub-process ([`af04910b`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/af04910b60ede5fa2ab0dd43818940dca71ec364))
+* `FIX`: correct pause handling on receive tasks ([#99](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/99))
+* `FIX`: ensure technically _equal_ events can still be signaled individually ([#103](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/103), [#107](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/107) [`15d14062`](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/107/commits/15d140624b30835b6fff4bc1bbd93207f0afe226))
+* `CHORE`: implement termination as a behavior ([`e92e8ff8`](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/101/commits/e92e8ff830a00803702f80f4f04be966fc5999b5))
+* `CHORE`: remove destroyed scopes ([`b3662dc8`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/b3662dc8aeed8c5e34441e41c77ee7a6b06d0066))
+* `CHORE`: namespace CSS ([#30](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/30))
+* `CHORE`: add properties panel to example ([104](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/104))
+* `DEPS`: update to `bpmn-js@8.9.0`
+
+### Breaking Changes
+
+* Generated markup and used CSS classes changed; things are consistently prefixed with `bts` now to avoid foreign classes crashing ([#30](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/30))
+* Drop `destroyContext` in favor of dedicated scope state (failed/ended) ([#101](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/101))
+* Reworked way the outside interacts with the simulator: Rather than signaling the simulator with knowledge of internal working mechanisms you trigger an event on a particular scope, notifying all registered subscribers. ([#101](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/101))
+* Destroyed scopes are now longer kept around by simulator ([`b3662dc8`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/b3662dc8aeed8c5e34441e41c77ee7a6b06d0066))
+
 ## 0.24.0
 
 * `FEAT`: return `Simulator#signal` scope
 * `FEAT`: return `Simulator#enter` scope
 * `FEAT`: support token sinks other than end events ([#94](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/94))
-* `FEAT`: support error throw events ([`017aa885`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/017aa885822ad84368ed16730057dd8907407d53)
+* `FEAT`: support error throw events ([`017aa885`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/017aa885822ad84368ed16730057dd8907407d53))
 * `FIX`: read and restore colors in `bpmn-js >= 8.7` compatible manner ([#90](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/90))
 * `FIX`: correct context-pads interaction with scope filters ([`6dc14819`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/6dc14819384ae87df49ad058964185ef06216ea5))
 * `FIX`: make pause context-pad handler scope filter aware ([`7253969f`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/7253969f09c22e46ac4021eb2b2eedfd4bba2c59))
