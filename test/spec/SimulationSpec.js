@@ -1117,8 +1117,10 @@ describe('simulation', function() {
         expectElementTrigger('SIGNAL_RETHROW');
 
         // but when
+        // explicitly trigger rethrow signal
         triggerElement('SIGNAL_RETHROW');
 
+        // still invokes event sub-process
         await elementEnter('E_RECEIVE');
 
         // then
