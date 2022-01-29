@@ -957,6 +957,18 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('sub-process-multiple-starts', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
@@ -1211,6 +1223,18 @@ describe('simulator', function() {
 
 
     verify('event-sub-process-nested-cancelation-boundary-event', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('event-sub-process-multiple-starts', (fixture) => {
 
       // when
       trigger({

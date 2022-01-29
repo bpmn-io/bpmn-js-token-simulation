@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_13xvmd7" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.13.0-nightly.20220124" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1bso8dw</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="E" name="E" triggeredByEvent="true">
+      <bpmn:startEvent id="E_ESC_START" name="E_ESC_START" isInterrupting="false">
+        <bpmn:outgoing>Flow_1f3vl0r</bpmn:outgoing>
+        <bpmn:escalationEventDefinition id="EscalationEventDefinition_0b29eug" />
+      </bpmn:startEvent>
+      <bpmn:startEvent id="E_SIG_START" name="E_SIG_START" isInterrupting="false">
+        <bpmn:outgoing>Flow_1k4hlq1</bpmn:outgoing>
+        <bpmn:signalEventDefinition id="SignalEventDefinition_0fr6edf" />
+      </bpmn:startEvent>
+      <bpmn:endEvent id="E_ESC_END" name="E_ESC_END">
+        <bpmn:incoming>Flow_1f3vl0r</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1f3vl0r" sourceRef="E_ESC_START" targetRef="E_ESC_END" />
+      <bpmn:endEvent id="E_SIG_END" name="E_SIG_END">
+        <bpmn:incoming>Flow_1k4hlq1</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1k4hlq1" sourceRef="E_SIG_START" targetRef="E_SIG_END" />
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_1bso8dw" sourceRef="START" targetRef="THROW_ESC" />
+    <bpmn:intermediateThrowEvent id="THROW_ESC" name="THROW_ESC">
+      <bpmn:incoming>Flow_1bso8dw</bpmn:incoming>
+      <bpmn:outgoing>Flow_1iekx42</bpmn:outgoing>
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_01qfksy" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:sequenceFlow id="Flow_1iekx42" sourceRef="THROW_ESC" targetRef="THROW_SIG" />
+    <bpmn:intermediateThrowEvent id="THROW_SIG" name="THROW_SIG">
+      <bpmn:incoming>Flow_1iekx42</bpmn:incoming>
+      <bpmn:outgoing>Flow_052flus</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SignalEventDefinition_1sx3qvf" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_052flus</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_052flus" sourceRef="THROW_SIG" targetRef="END" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNEdge id="Flow_1bso8dw_di" bpmnElement="Flow_1bso8dw">
+        <di:waypoint x="190" y="370" />
+        <di:waypoint x="244" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1iekx42_di" bpmnElement="Flow_1iekx42">
+        <di:waypoint x="280" y="370" />
+        <di:waypoint x="334" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_052flus_di" bpmnElement="Flow_052flus">
+        <di:waypoint x="370" y="370" />
+        <di:waypoint x="424" y="370" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1it1lfm_di" bpmnElement="END">
+        <dc:Bounds x="424" y="352" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="430" y="395" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="START">
+        <dc:Bounds x="154" y="352" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="154" y="395" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_08ydyx1_di" bpmnElement="THROW_ESC">
+        <dc:Bounds x="244" y="352" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="227" y="395" width="71" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_12nvkmu_di" bpmnElement="THROW_SIG">
+        <dc:Bounds x="334" y="352" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="319" y="395" width="67" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xud648_di" bpmnElement="E" isExpanded="true">
+        <dc:Bounds x="192" y="80" width="220" height="220" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1f3vl0r_di" bpmnElement="Flow_1f3vl0r">
+        <di:waypoint x="268" y="140" />
+        <di:waypoint x="324" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1k4hlq1_di" bpmnElement="Flow_1k4hlq1">
+        <di:waypoint x="268" y="230" />
+        <di:waypoint x="324" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0a2eznx_di" bpmnElement="E_ESC_START">
+        <dc:Bounds x="232" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="212" y="165" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0jh291c_di" bpmnElement="E_SIG_START">
+        <dc:Bounds x="232" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="214" y="255" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0f6mx01_di" bpmnElement="E_ESC_END">
+        <dc:Bounds x="324" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="310" y="165" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0yszwez_di" bpmnElement="E_SIG_END">
+        <dc:Bounds x="324" y="212" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="312" y="255" width="62" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
