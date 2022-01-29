@@ -33,14 +33,23 @@ const initialDiagram = (() => {
   }
 })();
 
-function hideDropMessage() {
-  const dropMessage = document.querySelector('.drop-message');
+function showMessage(cls, message) {
+  const messageEl = document.querySelector('.drop-message');
 
-  dropMessage.style.display = 'none';
+  messageEl.textContent = message;
+  messageEl.className = `drop-message ${cls || ''}`;
+
+  messageEl.style.display = 'block';
+}
+
+function hideMessage() {
+  const messageEl = document.querySelector('.drop-message');
+
+  messageEl.style.display = 'none';
 }
 
 if (persistent) {
-  hideDropMessage();
+  hideMessage();
 }
 
 const ExampleModule = {
@@ -98,8 +107,8 @@ const modeler = new BpmnModeler({
   }
 });
 
-modeler.openDiagram = function(diagram) {
-  return this.importXML(diagram)
+function openDiagram(diagram) {
+  return modeler.importXML(diagram)
     .then(({ warnings }) => {
       if (warnings.length) {
         console.warn(warnings);
@@ -109,12 +118,12 @@ modeler.openDiagram = function(diagram) {
         localStorage['diagram-xml'] = diagram;
       }
 
-      this.get('canvas').zoom('fit-viewport');
+      modeler.get('canvas').zoom('fit-viewport');
     })
     .catch(err => {
       console.error(err);
     });
-};
+}
 
 if (presentationMode) {
   document.body.classList.add('presentation-mode');
@@ -128,11 +137,11 @@ function openFile(files) {
     return;
   }
 
-  hideDropMessage();
+  hideMessage();
 
   fileName = files[0].name;
 
-  modeler.openDiagram(files[0].contents);
+  openDiagram(files[0].contents);
 }
 
 document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', openFile), false);
@@ -213,7 +222,28 @@ propertiesPanelResizer.addEventListener('drag', function(event) {
   toggleProperties(open);
 });
 
+const remoteDiagram = url.searchParams.get('diagram');
 
-modeler.openDiagram(initialDiagram);
+if (remoteDiagram) {
+  fetch(remoteDiagram).then(
+    r => {
+      if (r.ok) {
+        return r.text();
+      }
+
+      throw new Error(`Status ${r.status}`);
+    }
+  ).then(
+    text => openDiagram(text)
+  ).catch(
+    err => {
+      showMessage('error', `Failed to open remote diagram: ${err.message}`);
+
+      openDiagram(initialDiagram);
+    }
+  );
+} else {
+  openDiagram(initialDiagram);
+}
 
 toggleProperties(url.searchParams.has('pp'));

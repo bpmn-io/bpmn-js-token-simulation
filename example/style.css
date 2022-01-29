@@ -152,6 +152,10 @@ body:not(.presentation-mode) .bts-notifications {
   user-select: none;
 }
 
+.drop-message.error {
+  background: #dd7373;
+}
+
 .drop-overlay {
   position: fixed;
   top: 0;
