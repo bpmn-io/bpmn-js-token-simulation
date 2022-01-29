@@ -1,0 +1,18 @@
+[
+  "createScope:Process_1:null",
+  "signal:Process_1:F",
+  "createScope:START_2:F",
+  "signal:START_2:G",
+  "exit:START_2:G",
+  "createScope:Flow_1atsyoy:F",
+  "destroyScope:START_2:G",
+  "enter:Flow_1atsyoy:F",
+  "exit:Flow_1atsyoy:H",
+  "createScope:END:F",
+  "destroyScope:Flow_1atsyoy:H",
+  "enter:END:F",
+  "exit:END:I",
+  "destroyScope:END:I",
+  "exit:Process_1:F",
+  "destroyScope:Process_1:F"
+]
