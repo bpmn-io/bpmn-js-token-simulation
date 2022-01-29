@@ -62,11 +62,11 @@ Then, depending on your use-case you may run any of the following commands:
 # build the library and run all tests
 npm run all
 
-# spin up the example
-npm start
-
 # run the full development setup
 npm run dev
+
+# spin up the example
+npm run start:example
 ```
 
 
