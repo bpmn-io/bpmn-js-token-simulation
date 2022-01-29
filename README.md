@@ -70,7 +70,7 @@ npm run start:example
 ```
 
 
-## Related
+## Additional Resources
 
 * [Making of token simulation](https://github.com/nikku/talks/blob/main/talks/2021-token-simulation#readme) and [token simulation internals](https://github.com/nikku/talks/blob/main/talks/2021-token-simulation-internals#readme) shed some light on the reasons for this library.
 * Token Simulation is available [as a Camunda Modeler plug-in](https://github.com/bpmn-io/bpmn-js-token-simulation-plugin)
