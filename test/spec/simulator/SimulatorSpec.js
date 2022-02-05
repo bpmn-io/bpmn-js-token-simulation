@@ -1490,6 +1490,18 @@ describe('simulator', function() {
     });
 
 
+    verify('message-flow-trigger-start-multiple-message-events', (fixture) => {
+
+      // when
+      signal({
+        element: element('M_FLOW')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('message-flow-throw-catch-events', (fixture) => {
 
       // when
