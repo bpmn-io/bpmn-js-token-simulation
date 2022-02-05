@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.31.1">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="INC_FORK" />
+    <bpmn:inclusiveGateway id="INC_FORK" name="INC_FORK">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="INC_FORK" targetRef="INC_FORK_JOIN" />
+    <bpmn:inclusiveGateway id="INC_FORK_JOIN" name="INC_FORK_JOIN">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="INC_FORK_JOIN" targetRef="INC_JOIN" />
+    <bpmn:inclusiveGateway id="INC_JOIN" name="INC_JOIN">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="INC_FORK_JOIN" targetRef="INC_JOIN" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="INC_FORK" targetRef="INC_FORK_JOIN" />
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="INC_JOIN" targetRef="END" />
+  </bpmn:process>
+  <bpmn:message id="Message_1dyo6g5" name="Message_message" />
+  <bpmn:error id="Error_0k93fd1" name="Error_1405ero" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="192" y="2" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="192" y="45" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="INC_FORK_di" bpmnElement="INC_FORK">
+        <dc:Bounds x="285" y="-5" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="282" y="55" width="56" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="INC_FORK_JOIN_di" bpmnElement="INC_FORK_JOIN">
+        <dc:Bounds x="395" y="-5" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="376" y="55" width="87" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="INC_JOIN_di" bpmnElement="INC_JOIN">
+        <dc:Bounds x="505" y="-5" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="505" y="-35" width="51" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="622" y="2" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="628" y="45" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="228" y="20" />
+        <di:waypoint x="285" y="20" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2" color:border-color="#212121">
+        <di:waypoint x="335" y="20" />
+        <di:waypoint x="395" y="20" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4" color:border-color="#212121">
+        <di:waypoint x="445" y="20" />
+        <di:waypoint x="505" y="20" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5" color:border-color="#212121">
+        <di:waypoint x="420" y="45" />
+        <di:waypoint x="420" y="90" />
+        <di:waypoint x="530" y="90" />
+        <di:waypoint x="530" y="45" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3" color:border-color="#212121">
+        <di:waypoint x="310" y="-5" />
+        <di:waypoint x="310" y="-100" />
+        <di:waypoint x="420" y="-100" />
+        <di:waypoint x="420" y="-5" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_6_di" bpmnElement="Flow_6">
+        <di:waypoint x="555" y="20" />
+        <di:waypoint x="622" y="20" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

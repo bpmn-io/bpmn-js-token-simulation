@@ -669,6 +669,181 @@ describe('simulator', function() {
   });
 
 
+  describe('inclusive gateway', function() {
+
+    verify('inclusive-gateway-sync', (fixture) => {
+
+      // given
+      setConfig(element('F_GATE'), {
+        activeOutgoing: [ element('Flow_3'), element('Flow_5') ]
+      });
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-single-token-pass-through', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-default-flow', (fixture) => {
+
+      // given
+      setConfig(element('F_GATE'), {
+        activeOutgoing: [ element('Flow_4') ]
+      });
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-fork-join', (fixture) => {
+
+      // given
+      setConfig(element('INC_FORK'), {
+        activeOutgoing: [ element('Flow_2'), element('Flow_3') ]
+      });
+
+      setConfig(element('INC_FORK_JOIN'), {
+        activeOutgoing: [ element('Flow_4'), element('Flow_5') ]
+      });
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-no-outgoings', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    // separate executions don't interfere with each other
+    verify('inclusive-gateway-multiple-starts', (fixture) => {
+
+      // given
+      setConfig(element('F_GATE'), {
+        activeOutgoing: [
+          element('Flow_3'),
+          element('Flow_4'),
+          element('Flow_5')
+        ]
+      });
+      waitAtElement(element('PausedActivity'));
+
+      // when
+      trigger({
+        element: element('START')
+      });
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    // inclusive gateway continues execution when
+    // token is consumed via boundary event
+    verify('inclusive-gateway-boundary-event', (fixture) => {
+
+      // given
+      setConfig(element('F_GATE'), {
+        activeOutgoing: [
+          element('Flow_3'),
+          element('Flow_4'),
+          element('Flow_5')
+        ]
+      });
+      waitAtElement(element('PausedActivity'));
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('TimerEvent'),
+        scope: findScope({
+          element: element('PausedActivity')
+        })
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    // inclusive gateway waits for all tokens to arrive
+    verify('inclusive-gateway-multiple-elements', (fixture) => {
+
+      // given
+      setConfig(element('F_GATE'), {
+        activeOutgoing: [
+          element('Flow_3'),
+          element('Flow_4'),
+          element('Flow_5')
+        ]
+      });
+
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('Timer_1'),
+        scope: findScope({
+          element: element('Timer_1')
+        })
+      });
+
+      trigger({
+        element: element('Timer_2'),
+        scope: findScope({
+          element: element('Timer_2')
+        })
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+  });
+
+
   describe('end event', function() {
 
     verify('end-event', (fixture) => {

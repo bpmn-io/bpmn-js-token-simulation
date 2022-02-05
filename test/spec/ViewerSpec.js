@@ -53,7 +53,7 @@ describe('viewer extension', function() {
       // then
       expect(
         elementSupport.getUnsupportedElements()
-      ).to.have.length(2);
+      ).to.have.length(1);
     }));
 
   });
