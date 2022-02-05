@@ -791,6 +791,18 @@ describe('simulator', function() {
     });
 
 
+    verify('signal-trigger-multiple-start-events', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('signal-trigger-event-based-gateway', (fixture) => {
 
       // when

@@ -1190,6 +1190,80 @@ describe('simulation', function() {
 
   });
 
+
+  describe('multiple-event-signaling', function() {
+
+    const diagram = require('./multiple-events-signaling.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(toggleMode, trace) {
+      toggleMode.toggleMode();
+
+      trace.start();
+    }));
+
+
+    it('should execute happy path', inject(
+      async function(simulator, elementRegistry) {
+
+        // when
+        triggerElement('START_A');
+
+        const [
+          { scope: scope_S1 },
+          { scope: scope_S2 },
+          { scope: scope_NONE }
+        ] = await Promise.all([
+          elementExit('END_S1'),
+          elementExit('END_S2'),
+          elementEnter('EVT_BASED_GATE')
+        ]);
+
+        const parentScopes = new Set([
+          scope_S1.parent,
+          scope_S2.parent,
+          scope_NONE.parent,
+        ]);
+
+        // then
+        // three unique parent scopes
+        expect(parentScopes).to.have.length(3);
+
+        // and when
+        // trigger first process message wait
+        triggerElement('CATCH_M1');
+
+        await elementExit('END_A');
+
+        // then
+        expectHistory([
+          'START_A',
+          'Flow_1',
+          'THROW_SIGNAL',
+          'Flow_3',
+          'START_S1',
+          'START_S2',
+          'Flow_11',
+          'Flow_12',
+          'EVT_BASED_GATE',
+          'END_S1',
+          'END_S2',
+          'Flow_7',
+          'GATEWAY_3',
+          'FLow_10',
+          'END_A'
+        ]);
+      }
+    ));
+
+  });
+
 });
 
 
