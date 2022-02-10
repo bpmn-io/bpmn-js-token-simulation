@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.25.1
+
+* `FIX`: correctly triggering of multiple signal start events ([#109](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/109))
+
 ## 0.25.0
 
 * `FEAT`: rewrite simulator using event scopes and subscriptions ([#101](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/101))
