@@ -1,8 +1,6 @@
 import ModelerModule from 'lib/modeler';
 
-import {
-  query as domQuery
-} from 'min-dom';
+import SimulationSupportModule from 'lib/simulation-support';
 
 import {
   bootstrapModeler,
@@ -10,43 +8,16 @@ import {
   getBpmnJS
 } from 'test/TestHelper';
 
-import * as AllEvents from 'lib/util/EventHelper';
-
-import {
-  TRACE_EVENT,
-  SCOPE_DESTROYED_EVENT
-} from 'lib/util/EventHelper';
-
-import { is } from 'lib/util/ElementHelper';
-
-import {
-  assign,
-  forEach
-} from 'min-dash';
-
-const VERY_HIGH_PRIORITY = 100000;
-
-const ENTER_EVENT = 'trace.elementEnter';
-const EXIT_EVENT = 'trace.elementExit';
 
 const TestModule = {
-  __init__: [
-    function(eventBus, animation) {
-      animation.setAnimationSpeed(100);
-
-      eventBus.on(TRACE_EVENT, function(event) {
-
-        if (event.action === 'enter') {
-          eventBus.fire(ENTER_EVENT, event);
-        }
-
-        if (event.action === 'exit') {
-          eventBus.fire(EXIT_EVENT, event);
-        }
-      });
-    }
+  __depends__: [
+    SimulationSupportModule
   ],
-  trace: [ 'type', Log ]
+  __init__: [
+    function(animation) {
+      animation.setAnimationSpeed(100);
+    }
+  ]
 };
 
 
@@ -63,10 +34,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation();
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -348,10 +319,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation();
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -405,10 +376,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -487,10 +458,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -533,10 +504,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -594,10 +565,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -701,10 +672,10 @@ describe('simulation', function() {
         ]
       }));
 
-      beforeEach(inject(function(toggleMode, trace) {
-        toggleMode.toggleMode();
+      beforeEach(inject(function(simulationSupport, simulationTrace) {
+        simulationSupport.toggleSimulation(true);
 
-        trace.start();
+        simulationTrace.start();
       }));
 
 
@@ -744,10 +715,10 @@ describe('simulation', function() {
         ]
       }));
 
-      beforeEach(inject(function(toggleMode, trace) {
-        toggleMode.toggleMode();
+      beforeEach(inject(function(simulationSupport, simulationTrace) {
+        simulationSupport.toggleSimulation(true);
 
-        trace.start();
+        simulationTrace.start();
       }));
 
 
@@ -797,10 +768,10 @@ describe('simulation', function() {
         ]
       }));
 
-      beforeEach(inject(function(toggleMode, trace) {
-        toggleMode.toggleMode();
+      beforeEach(inject(function(simulationSupport, simulationTrace) {
+        simulationSupport.toggleSimulation(true);
 
-        trace.start();
+        simulationTrace.start();
       }));
 
 
@@ -848,10 +819,10 @@ describe('simulation', function() {
         ]
       }));
 
-      beforeEach(inject(function(toggleMode, trace) {
-        toggleMode.toggleMode();
+      beforeEach(inject(function(simulationSupport, simulationTrace) {
+        simulationSupport.toggleSimulation(true);
 
-        trace.start();
+        simulationTrace.start();
       }));
 
 
@@ -916,10 +887,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -1058,10 +1029,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -1096,10 +1067,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -1167,10 +1138,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -1202,10 +1173,10 @@ describe('simulation', function() {
       ]
     }));
 
-    beforeEach(inject(function(toggleMode, trace) {
-      toggleMode.toggleMode();
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
 
-      trace.start();
+      simulationTrace.start();
     }));
 
 
@@ -1267,238 +1238,54 @@ describe('simulation', function() {
 });
 
 
-// helpers //////////
+// helpers ////////////////////
 
-function Log(eventBus) {
-  this.eventBus = eventBus;
-
-  this.events = [];
-
-  this._log = this._log.bind(this);
-}
-
-Log.prototype._log = function(event) {
-  this.events.push(assign({}, event));
-};
-
-Log.prototype.start = function() {
-  forEach(AllEvents, event => {
-    this.eventBus.on(event, VERY_HIGH_PRIORITY, this._log);
-  });
-};
-
-Log.prototype.stop = function() {
-  forEach(AllEvents, event => {
-    this.eventBus.on(event, this._log);
-  });
-};
-
-Log.prototype.clear = function() {
-  this.stop();
-
-  this.events = [];
-};
-
-Log.prototype.getAll = function() {
-  return this.events;
-};
-
-function ifElement(id, fn) {
-  return function(event) {
-    var element = event.element;
-
-    if (element.id === id) {
-      fn(event);
-    }
-  };
-}
-
-
-function getElementTrigger(id) {
-  return getBpmnJS().invoke(function(bpmnjs) {
-    return domQuery(
-      `.djs-overlays[data-container-id='${id}'] .bts-context-pad:not(.hidden)`,
-      bpmnjs._container
-    );
-  });
-}
-
-function getScopeTrigger(scope) {
-  return getBpmnJS().invoke(function(bpmnjs) {
-    return domQuery(
-      `.bts-scopes [data-scope-id='${scope.id}']`,
-      bpmnjs._container
-    );
-  });
+function getSimulationSupport() {
+  return getBpmnJS().get('simulationSupport');
 }
 
 function expectNoElementTrigger(id) {
-
-  const domElement = getElementTrigger(id);
+  const domElement = getSimulationSupport().getElementTrigger(id);
 
   expect(domElement, `element trigger exist for <${id}>`).not.to.exist;
 }
 
 function expectElementTrigger(id) {
-
-  const domElement = getElementTrigger(id);
+  const domElement = getSimulationSupport().getElementTrigger(id);
 
   expect(domElement, `no element trigger for <${id}>`).to.exist;
-
-  return domElement;
 }
 
+// eslint-disable-next-line
 function expectScopeTrigger(scope) {
-
-  const domElement = getScopeTrigger(scope);
+  const domElement = getSimulationSupport().getScopeTrigger(scope);
 
   expect(domElement, `no scope trigger for <${scope.id}>`).to.exist;
-
-  return domElement;
 }
 
-function triggerElement(id) {
-  const domElement = expectElementTrigger(id);
+function expectHistory(expectedHistory) {
 
-  triggerClick(domElement);
+  const history = getSimulationSupport().getHistory();
+
+  expect(history, 'history equals').to.eql(expectedHistory);
 }
 
-
-function triggerScope(scope) {
-  const domElement = expectScopeTrigger(scope);
-
-  triggerClick(domElement);
+function triggerElement(...args) {
+  return getSimulationSupport().triggerElement(...args);
 }
 
-function scopeDestroyed(scope = null) {
-
-  return new Promise(resolve => {
-
-    return getBpmnJS().invoke(function(eventBus) {
-
-      const listener = function(event) {
-
-        if (scope && event.scope !== scope) {
-          return;
-        }
-
-        const scopeElements = [
-          'bpmn:Participant',
-          'bpmn:Process',
-          'bpmn:SubProcess'
-        ];
-
-        if (scopeElements.every(t => !is(event.scope.element, t))) {
-          return;
-        }
-
-        eventBus.off(SCOPE_DESTROYED_EVENT, listener);
-
-        return resolve(event);
-      };
-
-      eventBus.on(SCOPE_DESTROYED_EVENT, listener);
-    });
-  });
+function elementEnter(...args) {
+  return getSimulationSupport().elementEnter(...args);
 }
 
-function elementEnter(id = null) {
-
-  return new Promise(resolve => {
-
-    return getBpmnJS().invoke(function(eventBus) {
-
-      const wrap = id ? (fn) => ifElement(id, fn) : fn => fn;
-
-      const listener = wrap(function(event) {
-        eventBus.off(ENTER_EVENT, listener);
-
-        return resolve(event);
-      });
-
-      eventBus.on(ENTER_EVENT, listener);
-    });
-  });
+function elementExit(...args) {
+  return getSimulationSupport().elementExit(...args);
 }
 
-
-function elementExit(id = null) {
-
-  return new Promise(resolve => {
-
-    return getBpmnJS().invoke(function(eventBus) {
-
-      const wrap = id ? (fn) => ifElement(id, fn) : fn => fn;
-
-      const listener = wrap(function(event) {
-        eventBus.off(EXIT_EVENT, listener);
-
-        return resolve(event);
-      });
-
-      eventBus.on(EXIT_EVENT, listener);
-    });
-  });
+function triggerScope(...args) {
+  return getSimulationSupport().triggerScope(...args);
 }
 
-function expectHistory(history) {
-
-  return getBpmnJS().invoke(function(trace) {
-    const events = trace.getAll()
-      .filter(function(event) {
-        return (
-          (event.action === 'exit' && (
-            is(event.element, 'bpmn:StartEvent') ||
-            is(event.element, 'bpmn:BoundaryEvent')
-          )) ||
-          (event.action === 'enter')
-        );
-      })
-      .map(function(event) {
-        return event.element.id;
-      });
-
-    expect(events).to.eql(history);
-  });
-
-}
-
-
-function triggerClick(element, options = {}) {
-
-  const defaultOptions = {
-    pointerX: 0,
-    pointerY: 0,
-    button: 0,
-    ctrlKey: false,
-    altKey: false,
-    shiftKey: false,
-    metaKey: false,
-    bubbles: true,
-    cancelable: true
-  };
-
-  options = Object.assign({}, defaultOptions, options);
-
-  const event = document.createEvent('MouseEvents');
-
-  event.initMouseEvent(
-    'click',
-    options.bubbles,
-    options.cancelable,
-    document.defaultView,
-    options.button,
-    options.pointerX,
-    options.pointerY,
-    options.pointerX,
-    options.pointerY,
-    options.ctrlKey,
-    options.altKey,
-    options.shiftKey,
-    options.metaKey,
-    options.button,
-    element
-  );
-
-  element.dispatchEvent(event);
+function scopeDestroyed(...args) {
+  return getSimulationSupport().scopeDestroyed(...args);
 }
