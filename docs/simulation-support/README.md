@@ -2,7 +2,7 @@
 
 [A module](../../lib/simulation-support) that adds (semi-) automatic testing capabilities and introspection to a [token simulation instance](https://github.com/bpmn-io/bpmn-js-token-simulation).
 
-![Simulation Screen Capture](./screencapture.gif)
+[![Simulation Screen Capture](./screencapture.gif)](https://codesandbox.io/s/amazing-christian-ry9yw)
 
 
 ## Features
