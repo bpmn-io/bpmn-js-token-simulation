@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.26.0
+
+* `FEAT`: add [simulation support](./docs/simulation-support) to programatically control the token simulation ([#112](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/112))
+
 ## 0.25.1
 
 * `FIX`: correctly triggering of multiple signal start events ([#109](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/109))
