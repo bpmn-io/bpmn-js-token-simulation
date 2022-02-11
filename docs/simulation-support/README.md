@@ -1,6 +1,6 @@
-# Simulation Support
+# Simulation Support / Scripting
 
-[A module](../../lib/simulation-support) that adds (semi-) automatic testing capabilities and introspection to a [token simulation instance](https://github.com/bpmn-io/bpmn-js-token-simulation).
+Use the [`simulation-support` module](../../lib/simulation-support) to drive and introspect a [token simulation instance](https://github.com/bpmn-io/bpmn-js-token-simulation) via API.
 
 [![Simulation Screen Capture](./screencapture.gif)](https://codesandbox.io/s/amazing-christian-ry9yw)
 
@@ -15,7 +15,7 @@
 
 ## Usage
 
-Testing and introspection capabiliies are hooked up via the [`simulation-support` module](../../lib/simulation-support):
+Driver and introspection capabilities are hooked up via the [`simulation-support` module](../../lib/simulation-support):
 
 ```javascript
 import SimulationSupportModule from 'bpmn-js-token-simulation/lib/simulation-support';
@@ -28,7 +28,7 @@ const modeler = new BpmnModeler({
 });
 ```
 
-The module provides the [`SimulationSupport`](../../lib/simulation-support/SimulationSupport.js) service to drive the simulation:
+The [`SimulationSupport`](../../lib/simulation-support/SimulationSupport.js) service exposed by the module provides all relevant APIs:
 
 ```javascript
 const simulationSupport = modeler.get('simulationSupport');
