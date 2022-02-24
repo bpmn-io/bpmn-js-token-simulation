@@ -48,7 +48,7 @@
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/properties-panel": "^0.10.2",
-    "bpmn-js": "^8.9.1",
+    "bpmn-js": "^9.0.2",
     "bpmn-js-properties-panel": "^1.0.0-alpha.2",
     "chai": "^4.3.6",
     "copy-webpack-plugin": "^10.2.2",
