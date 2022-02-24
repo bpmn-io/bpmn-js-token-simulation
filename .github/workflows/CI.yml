@@ -41,10 +41,10 @@ jobs:
       env:
         COVERAGE: 1
       run: npm run all
-    - name: Upload Coverage
+    - name: Upload coverage
+      uses: codecov/codecov-action@v2
       if: ${{ matrix.integration-deps == '' }}
-      run: npx codecov
-    - name: Update Example
+    - name: Update example
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
       env:
         GIT_USER_NAME: ${{secrets.BPMN_IO_USER_NAME}}
