@@ -8,6 +8,8 @@
   --token-simulation-silver-darken-94: #EFEFEF;
 
   --token-simulation-white: #FFFFFF;
+
+  --token-simulation-green-base-44: hsl(217,100%,65%);
 }
 
 .bjs-container {
@@ -17,8 +19,8 @@
 
 .bjs-breadcrumbs {
   /* ensure breadcrumbs don't overlap with token-simulation controls */
-  top: 60px;
-  left: 50px;
+  /* top: 60px;
+  left: 50px; */
 }
 
 .bjs-container.simulation {
@@ -35,23 +37,28 @@
 
 .bts-context-pad {
   cursor: pointer;
-  background-color: var(--token-simulation-grey-lighten-56, #909090);
+  background-color: var(--token-simulation-green-base-44, #909090);
   border-radius: 2px;
   margin: 0;
-  font-size: 16px;
-  color: var(--token-simulation-grey-darken-30, #212121);
-  opacity: 0.5;
+  font-size: 12px;
+  /* opacity: 0.75; */
+  color: white;
   transition: all 0.1s ease-in-out;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
 }
 
+.bts-context-pad svg,
+.bts-context-pad svg * {
+  color: white !important;
+}
+
 .bts-context-pad:not(.disabled):hover {
-  width: 40px;
+  /* width: 40px; */
   background-color: var(--token-simulation-green-base-44, #10D070);
   opacity: 1;
   color: var(--token-simulation-white, #FFFFFF);
@@ -234,6 +241,7 @@
   color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
   display: inline-flex;
+  display: none;
 }
 
 .bts-toggle-mode .bts-toggle {
@@ -248,7 +256,7 @@
 }
 
 .bjs-container .djs-palette {
-  top: 60px;
+  /* top: 60px; */
 }
 
 .bjs-container.simulation .djs-palette {
@@ -264,7 +272,7 @@
 
 .bts-palette {
   position: absolute;
-  top: 60px;
+  top: 20px;
   left: 20px;
 }
 
@@ -294,7 +302,7 @@
 }
 
 .bts-palette .bts-entry:not(.disabled):hover {
-  width: 40px;
+  /* width: 40px; */
   color: var(--token-simulation-white, #FFFFFF);
   background-color: var(--token-simulation-green-base-44, #10D070);
 }
