@@ -6,9 +6,14 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.28.0
+
+* `DEPS`: support `bpmn-js@10`
+* `DEPS`: bump utility dependencies
+
 ## 0.27.0
 
-* `CHORE`: support `bpmn-js@9`
+* `DEPS`: support `bpmn-js@9`
 
 ## 0.26.0
 
