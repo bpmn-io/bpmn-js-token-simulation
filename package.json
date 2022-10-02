@@ -48,17 +48,18 @@
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/properties-panel": "^0.22.0",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-istanbul": "^6.1.1",
     "bpmn-js": "^10.1.0",
     "bpmn-js-properties-panel": "^1.8.2",
     "chai": "^4.3.6",
-    "copy-webpack-plugin": "^10.2.2",
+    "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
     "downloadjs": "^1.4.7",
     "eslint": "^7.32.0",
     "eslint-plugin-bpmn-io": "^0.13.0",
     "file-drops": "^0.4.0",
     "file-open": "^0.1.1",
-    "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^6.3.12",
     "karma-chrome-launcher": "^3.1.0",
     "karma-coverage": "^2.1.0",
@@ -75,9 +76,9 @@
     "rollup-plugin-string": "^3.0.0",
     "sinon": "^10.0.0",
     "sinon-chai": "^3.7.0",
-    "webpack": "^5.67.0",
-    "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.7.3"
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.1"
   },
   "dependencies": {
     "min-dash": "^4.0.0",

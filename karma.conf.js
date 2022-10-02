@@ -77,8 +77,12 @@ module.exports = function(karma) {
           coverage ? {
             test: /\.js$/,
             use: {
-              loader: 'istanbul-instrumenter-loader',
-              options: { esModules: true }
+              loader: 'babel-loader',
+              options: {
+                plugins: [
+                  'babel-plugin-istanbul'
+                ]
+              }
             },
             include: /lib\.*/,
             exclude: /node_modules/
