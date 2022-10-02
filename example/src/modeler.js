@@ -1,3 +1,5 @@
+/* global process */
+
 import TokenSimulationModule from '../..';
 
 import BpmnModeler from 'bpmn-js/lib/Modeler';

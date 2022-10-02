@@ -1,3 +1,5 @@
+/* eslint-env node */
+
 'use strict';
 
 // configures browsers to run test against
