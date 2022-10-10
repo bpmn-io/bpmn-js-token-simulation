@@ -14,5 +14,20 @@
   "createScope:M_FLOW:null",
   "signal:M_FLOW:G",
   "exit:M_FLOW:G",
-  "destroyScope:M_FLOW:G"
+  "destroyScope:EVT_GATE:F",
+  "createScope:R_TASK:C",
+  "destroyScope:M_FLOW:G",
+  "signal:R_TASK:H",
+  "exit:R_TASK:H",
+  "createScope:Flow_2:C",
+  "destroyScope:R_TASK:H",
+  "enter:Flow_2:C",
+  "exit:Flow_2:I",
+  "createScope:END:C",
+  "destroyScope:Flow_2:I",
+  "enter:END:C",
+  "exit:END:J",
+  "destroyScope:END:J",
+  "exit:PART_EXP:C",
+  "destroyScope:PART_EXP:C"
 ]
