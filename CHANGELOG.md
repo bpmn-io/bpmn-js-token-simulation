@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.29.0
+
+* `FEAT`: align receive and send task behavior more closely with the BPMN spec ([#120](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/120))
+
 ## 0.28.0
 
 * `DEPS`: support `bpmn-js@10`
