@@ -356,7 +356,24 @@
   overflow-y: auto;
   box-sizing: border-box;
   flex: 1;
-  padding: 10px;
+  margin: 7px 3px 7px 12px;
+  padding: 5px 9px 5px 0;
+}
+
+.bts-log *::-webkit-scrollbar {
+  width: 6px;
+}
+
+.bts-log *::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.bts-log *::-webkit-scrollbar-track {
+  box-shadow: none;
+  background: transparent;
+  margin: 0;
+  padding: 5px;
 }
 
 .bts-log .bts-entry {
