@@ -51,7 +51,6 @@
 }
 
 .bts-context-pad:not(.disabled):hover {
-  width: 40px;
   background-color: var(--token-simulation-green-base-44, #10D070);
   opacity: 1;
   color: var(--token-simulation-white, #FFFFFF);
@@ -298,7 +297,6 @@
 }
 
 .bts-palette .bts-entry:not(.disabled):hover {
-  width: 40px;
   color: var(--token-simulation-white, #FFFFFF);
   background-color: var(--token-simulation-green-base-44, #10D070);
 }
