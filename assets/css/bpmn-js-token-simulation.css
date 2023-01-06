@@ -311,10 +311,10 @@
 
 .bts-log {
   position: absolute;
-  top: 128px;
-  bottom: 20px;
-  left: 20px;
+  top: 30%;
   right: 20px;
+  bottom: 50px;
+  width: 300px;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   border-radius: 2px;
   z-index: 10000;
