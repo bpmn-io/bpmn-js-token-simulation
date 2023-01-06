@@ -136,6 +136,7 @@
   user-select: none;
   margin-top: 4px;
   min-width: 300px;
+  max-width: 400px;
   display: flex;
   justify-content: center;
   align-items: stretch;
@@ -171,6 +172,9 @@
 
 .bts-notifications .bts-notification > .bts-text {
   flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .bts-notifications .bts-notification > .bts-scope {
@@ -409,6 +413,9 @@
 
 .bts-log .bts-entry > .bts-text {
   flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .bts-log .bts-entry.placeholder.hidden {
