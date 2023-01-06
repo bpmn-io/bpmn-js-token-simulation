@@ -377,11 +377,6 @@
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.bts-log .bts-date,
-.bts-log .bts-date {
- color: var(--token-simulation-silver-darken-94, #EFEFEF);
-}
-
 .bts-log .bts-entry.warning {
   background-color: var(--token-simulation-red-base-62, #FF3D3D);
   color: var(--token-simulation-white, #FFFFFF);
@@ -397,11 +392,6 @@
 
 .bts-log .bts-entry > :not(:last-child) {
   margin-right: 6px;
-}
-
-.bts-log .bts-entry > .bts-date {
-  min-width: 120px;
-  color: var(--token-simulation-grey-base-40, #666666);
 }
 
 .bts-log .bts-entry > .bts-icon {
