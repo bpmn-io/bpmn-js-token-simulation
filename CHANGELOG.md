@@ -9,6 +9,7 @@ ___Note:__ Yet to be released changes appear here._
 ## 0.29.0
 
 * `FEAT`: align receive and send task behavior more closely with the BPMN spec ([#120](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/120))
+* `FIX`: explicitly depend on `inherits-browser` utility ([`10b1d6e5`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/10b1d6e5c6f7ac9d6eada3f0452bf5104b8bb499))
 
 ## 0.28.0
 
