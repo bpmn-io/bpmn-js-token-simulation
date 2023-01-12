@@ -12,7 +12,7 @@ ___Note:__ Yet to be released changes appear here._
 * `FEAT`: make simulation log button toggle the log
 * `FEAT`: remove simulation log date
 * `FEAT`: truncate external text to reasonable width
-* `FEAT`: reposition simulation log
+* `FEAT`: reposition simulation log to the right
 * `FEAT`: add simulation log header
 * `CHORE`: remove button hover animation
 
