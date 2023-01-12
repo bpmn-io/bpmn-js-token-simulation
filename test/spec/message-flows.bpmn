@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_11u7ovo" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.4.0-rc.1" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_11u7ovo" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.28.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.16.0">
   <bpmn:collaboration id="Collaboration_1icbpnp">
     <bpmn:participant id="A" name="A" processRef="Process_A" />
     <bpmn:participant id="B" name="B" processRef="Process_B" />
@@ -45,122 +45,137 @@
       <bpmn:incoming>Flow_4</bpmn:incoming>
       <bpmn:outgoing>Flow_7</bpmn:outgoing>
     </bpmn:task>
-    <bpmn:sequenceFlow id="Flow_7" sourceRef="TB" targetRef="B_END" />
-    <bpmn:endEvent id="B_END" name="B_END">
-      <bpmn:incoming>Flow_7</bpmn:incoming>
-      <bpmn:messageEventDefinition id="MessageEventDefinition_06i1m3e" />
-    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="TB" targetRef="TC" />
     <bpmn:intermediateThrowEvent id="SB_1" name="SB_1">
       <bpmn:incoming>Flow_5</bpmn:incoming>
       <bpmn:outgoing>Flow_4</bpmn:outgoing>
       <bpmn:messageEventDefinition id="MessageEventDefinition_09r5h67" />
     </bpmn:intermediateThrowEvent>
     <bpmn:sequenceFlow id="Flow_4" sourceRef="SB_1" targetRef="TB" />
+    <bpmn:sequenceFlow id="Flow_0hc37w1" sourceRef="TC" targetRef="B_END" />
+    <bpmn:task id="TC" name="TC">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_0hc37w1</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="B_END" name="B_END">
+      <bpmn:incoming>Flow_0hc37w1</bpmn:incoming>
+      <bpmn:messageEventDefinition id="MessageEventDefinition_06i1m3e" />
+    </bpmn:endEvent>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
-    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1icbpnp">
-      <bpmndi:BPMNShape id="A_di" bpmnElement="A" isHorizontal="true">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1icbpnp" background-color="#fff" border-color="#000">
+      <bpmndi:BPMNShape id="A_di" bpmnElement="A" isHorizontal="true" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="120" y="90" width="730" height="250" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="A_START_di" bpmnElement="A_START">
+      <bpmndi:BPMNShape id="A_START_di" bpmnElement="A_START" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="192" y="192" width="36" height="36" />
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel color:color="#000">
           <dc:Bounds x="186" y="235" width="48" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="T_A_di" bpmnElement="T_A">
+      <bpmndi:BPMNShape id="T_A_di" bpmnElement="T_A" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="280" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="BLANK_RECEIVE_di" bpmnElement="BLANK_RECEIVE">
+      <bpmndi:BPMNShape id="BLANK_RECEIVE_di" bpmnElement="BLANK_RECEIVE" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="630" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="R_A_di" bpmnElement="R_A">
+      <bpmndi:BPMNShape id="R_A_di" bpmnElement="R_A" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="490" y="170" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="A_END_di" bpmnElement="A_END">
+      <bpmndi:BPMNShape id="A_END_di" bpmnElement="A_END" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="772" y="192" width="36" height="36" />
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel color:color="#000">
           <dc:Bounds x="772" y="235" width="37" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1" color:border-color="#000" background-color="#fff">
         <di:waypoint x="228" y="210" />
         <di:waypoint x="280" y="210" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2" color:border-color="#000" background-color="#fff">
         <di:waypoint x="380" y="210" />
         <di:waypoint x="490" y="210" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3" color:border-color="#000" background-color="#fff">
         <di:waypoint x="590" y="210" />
         <di:waypoint x="630" y="210" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8">
+      <bpmndi:BPMNEdge id="Flow_8_di" bpmnElement="Flow_8" color:border-color="#000" background-color="#fff">
         <di:waypoint x="730" y="210" />
         <di:waypoint x="772" y="210" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="B_di" bpmnElement="B" isHorizontal="true">
-        <dc:Bounds x="120" y="460" width="620" height="250" />
+      <bpmndi:BPMNShape id="B_di" bpmnElement="B" isHorizontal="true" color:background-color="#fff" color:border-color="#000">
+        <dc:Bounds x="120" y="460" width="730" height="250" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="B_START_di" bpmnElement="B_START">
+      <bpmndi:BPMNShape id="B_START_di" bpmnElement="B_START" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="192" y="602" width="36" height="36" />
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel color:color="#000">
           <dc:Bounds x="186" y="645" width="49" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TB_di" bpmnElement="TB">
+      <bpmndi:BPMNShape id="TB_di" bpmnElement="TB" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="490" y="580" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="B_END_di" bpmnElement="B_END">
-        <dc:Bounds x="662" y="602" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="662" y="645" width="37" height="14" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="SB_1_di" bpmnElement="SB_1">
+      <bpmndi:BPMNShape id="SB_1_di" bpmnElement="SB_1" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="312" y="602" width="36" height="36" />
-        <bpmndi:BPMNLabel>
+        <bpmndi:BPMNLabel color:color="#000">
           <dc:Bounds x="286" y="645" width="27" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+      <bpmndi:BPMNShape id="TC_di" bpmnElement="TC" color:background-color="#fff" color:border-color="#000">
+        <dc:Bounds x="630" y="580" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_END_di" bpmnElement="B_END" color:background-color="#fff" color:border-color="#000">
+        <dc:Bounds x="772" y="602" width="36" height="36" />
+        <bpmndi:BPMNLabel color:color="#000">
+          <dc:Bounds x="772" y="645" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5" color:border-color="#000" background-color="#fff">
         <di:waypoint x="228" y="620" />
         <di:waypoint x="312" y="620" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7">
+      <bpmndi:BPMNEdge id="Flow_7_di" bpmnElement="Flow_7" color:border-color="#000" background-color="#fff">
         <di:waypoint x="590" y="620" />
-        <di:waypoint x="662" y="620" />
+        <di:waypoint x="630" y="620" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4">
+      <bpmndi:BPMNEdge id="Flow_4_di" bpmnElement="Flow_4" color:border-color="#000" background-color="#fff">
         <di:waypoint x="348" y="620" />
         <di:waypoint x="490" y="620" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="EXTERNAL_di" bpmnElement="EXTERNAL" isHorizontal="true">
+      <bpmndi:BPMNEdge id="Flow_0hc37w1_di" bpmnElement="Flow_0hc37w1" color:border-color="#000" background-color="#fff">
+        <di:waypoint x="730" y="620" />
+        <di:waypoint x="772" y="620" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="EXTERNAL_di" bpmnElement="EXTERNAL" isHorizontal="true" color:background-color="#fff" color:border-color="#000">
         <dc:Bounds x="120" y="770" width="620" height="60" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="MsgFlow_1_di" bpmnElement="MsgFlow_1">
+      <bpmndi:BPMNEdge id="MsgFlow_1_di" bpmnElement="MsgFlow_1" color:border-color="#000" background-color="#fff">
         <di:waypoint x="300" y="250" />
         <di:waypoint x="300" y="406" />
         <di:waypoint x="210" y="406" />
         <di:waypoint x="210" y="602" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MsgFlow_2_di" bpmnElement="MsgFlow_2">
+      <bpmndi:BPMNEdge id="MsgFlow_2_di" bpmnElement="MsgFlow_2" color:border-color="#000" background-color="#fff">
         <di:waypoint x="330" y="602" />
         <di:waypoint x="330" y="250" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MsgFlow_5_di" bpmnElement="MsgFlow_5">
-        <di:waypoint x="680" y="602" />
+      <bpmndi:BPMNEdge id="MsgFlow_5_di" bpmnElement="MsgFlow_5" color:border-color="#000" background-color="#fff">
+        <di:waypoint x="790" y="602" />
+        <di:waypoint x="790" y="426" />
+        <di:waypoint x="680" y="426" />
         <di:waypoint x="680" y="250" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MsgFlow_6_di" bpmnElement="MsgFlow_6">
+      <bpmndi:BPMNEdge id="MsgFlow_6_di" bpmnElement="MsgFlow_6" color:border-color="#000" background-color="#fff">
         <di:waypoint x="330" y="638" />
         <di:waypoint x="330" y="770" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="MsgFlow_7_di" bpmnElement="MsgFlow_7">
+      <bpmndi:BPMNEdge id="MsgFlow_7_di" bpmnElement="MsgFlow_7" color:border-color="#000" background-color="#fff">
         <di:waypoint x="520" y="770" />
         <di:waypoint x="520" y="660" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9">
+      <bpmndi:BPMNEdge id="Flow_9_di" bpmnElement="Flow_9" color:border-color="#000" background-color="#fff">
         <di:waypoint x="540" y="580" />
         <di:waypoint x="540" y="250" />
       </bpmndi:BPMNEdge>
