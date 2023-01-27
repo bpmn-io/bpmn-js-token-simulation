@@ -75,8 +75,8 @@ npm run start:example
 
 ## Additional Resources
 
-* [Making of token simulation](https://nikku.github.io/talks/2021-token-simulation/presentation.html) - The case for token simulation and how it builds on top of [bpmn-js](https://github.com/bpmn-io/bpmn-js)
-* [Token simulation internals](https://nikku.github.io/talks/2021-token-simulation-internals/presentation.html) - Detailed walk through the simulators core
+* [Making of token simulation](https://nikku.github.io/talks/2021-token-simulation) - The case for token simulation and how it builds on top of [bpmn-js](https://github.com/bpmn-io/bpmn-js)
+* [Token simulation internals](https://nikku.github.io/talks/2021-token-simulation-internals) - Detailed walk through the simulators core
 * [Camunda Modeler Token Simulation plug-in](https://github.com/camunda/camunda-modeler-token-simulation-plugin) - Token simulation for [Camunda](https://camunda.com/) users
 
 
