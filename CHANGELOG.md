@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.30.1
+
+* `FIX`: don't trigger simulation editorActions when simulation is disabled ([#127](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/127))
+
 ## 0.30.0
 
 * `FEAT`: make simulation log auto-scrolling adaptive
