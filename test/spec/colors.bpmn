@@ -68,7 +68,7 @@
         <di:waypoint x="596" y="120" />
         <di:waypoint x="646" y="120" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="SequenceFlow_1x1ty9t_di" bpmnElement="SequenceFlow_2" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:border-color="#1e88e5">
+      <bpmndi:BPMNEdge id="SequenceFlow_2_di" bpmnElement="SequenceFlow_2" bioc:stroke="#1e88e5" bioc:fill="#bbdefb" color:border-color="#1e88e5">
         <di:waypoint x="421" y="211" />
         <di:waypoint x="421" y="120" />
         <di:waypoint x="496" y="120" />
