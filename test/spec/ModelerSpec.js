@@ -95,6 +95,20 @@ describe('modeler extension', function() {
       }
     ));
 
+
+    it('should not set colors on elements that do not support them', inject(async function(bpmnjs, toggleMode) {
+
+      // when
+      toggleMode.toggleMode();
+
+      // then
+      const definitions = bpmnjs.getDefinitions(),
+            diagrams = definitions.get('diagrams'),
+            plane = diagrams[ 0 ].get('plane');
+
+      expect(plane.$attrs).to.be.empty;
+    }));
+
   });
 
 
