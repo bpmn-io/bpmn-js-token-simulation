@@ -1289,6 +1289,188 @@ describe('simulation', function() {
 
   });
 
+
+  describe('boundary event', function() {
+
+    const diagram = require('./boundary-events.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule
+      ]
+    }));
+
+    beforeEach(inject(function(simulationSupport, simulationTrace) {
+      simulationSupport.toggleSimulation(true);
+
+      simulationTrace.start();
+    }));
+
+
+    it('should trigger none events independently (first)', async function() {
+
+      // given
+      triggerElement('START');
+
+      await elementEnter('ACTIVITY');
+
+      // when
+      triggerElement('NONE_A');
+      await scopeDestroyed();
+
+      // then
+      expectHistory([
+        'START',
+        'FLOW_A',
+        'ACTIVITY',
+        'S_START',
+        'S_FLOW_1',
+        'NONE_A',
+        'FLOW_1',
+        'MERGE',
+        'FLOW_7',
+        'END_B'
+      ]);
+    });
+
+
+    it('should trigger none events independently (second)', async function() {
+
+      // given
+      triggerElement('START');
+
+      await elementEnter('ACTIVITY');
+
+      // when
+      triggerElement('NONE_B');
+      await scopeDestroyed();
+
+      // then
+      expectHistory([
+        'START',
+        'FLOW_A',
+        'ACTIVITY',
+        'S_START',
+        'S_FLOW_1',
+        'NONE_B',
+        'FLOW_2',
+        'MERGE',
+        'FLOW_7',
+        'END_B'
+      ]);
+    });
+
+
+    it('should trigger timer events independently (non-interrupting)', async function() {
+
+      // given
+      triggerElement('START');
+
+      await elementEnter('ACTIVITY');
+
+      // when
+      triggerElement('TIMER_A');
+
+      // then
+      await scopeDestroyed();
+
+      expectHistory([
+        'START',
+        'FLOW_A',
+        'ACTIVITY',
+        'S_START',
+        'S_FLOW_1',
+        'TIMER_A',
+        'FLOW_3',
+        'S_END',
+        'FLOW_B'
+      ]);
+    });
+
+
+    it('should trigger timer events independently (interrupting)', async function() {
+
+      // given
+      triggerElement('START');
+
+      await elementEnter('ACTIVITY');
+
+      // when
+      triggerElement('TIMER_B');
+
+      // then
+      await scopeDestroyed();
+
+      expectHistory([
+        'START',
+        'FLOW_A',
+        'ACTIVITY',
+        'S_START',
+        'S_FLOW_1',
+        'TIMER_B',
+        'FLOW_4',
+        'MERGE',
+        'FLOW_7',
+        'END_B'
+      ]);
+    });
+
+
+    it('should trigger conditional events independently (non-interrupting)', async function() {
+
+      // given
+      triggerElement('START');
+
+      await elementEnter('ACTIVITY');
+
+      // when
+      triggerElement('COND_A');
+
+      // then
+      await scopeDestroyed();
+
+      expectHistory([
+        'START',
+        'FLOW_A',
+        'ACTIVITY',
+        'S_START',
+        'S_FLOW_1',
+        'COND_A',
+        'FLOW_5',
+        'S_END',
+        'FLOW_B'
+      ]);
+    });
+
+
+    it('should trigger conditional events independently (interrupting)', async function() {
+
+      // given
+      triggerElement('START');
+
+      await elementEnter('ACTIVITY');
+
+      // when
+      triggerElement('COND_B');
+      await scopeDestroyed();
+
+      // then
+      expectHistory([
+        'START',
+        'FLOW_A',
+        'ACTIVITY',
+        'S_START',
+        'S_FLOW_1',
+        'COND_B',
+        'FLOW_6',
+        'MERGE',
+        'FLOW_7',
+        'END_B'
+      ]);
+    });
+  });
+
 });
 
 
