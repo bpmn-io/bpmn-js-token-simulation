@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.30.2
+
+* `FIX`: reset colors before export ([#124](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/124))
+* `FIX`: do not set colors on elements that do not support them [`588415c`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/588415ccf25aa041e9a092ddcbcf426ab1a76a5e)
+
 ## 0.30.1
 
 * `FIX`: don't trigger simulation editorActions when simulation is disabled ([#127](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/127))
