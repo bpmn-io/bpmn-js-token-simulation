@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.31.0
+
+* `FEAT`: trigger none, condition, and timer boundary events independently ([#129](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/129))
+* `DEPS`: fix audit warnings
+
 ## 0.30.2
 
 * `FIX`: reset colors before export ([#124](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/124))
