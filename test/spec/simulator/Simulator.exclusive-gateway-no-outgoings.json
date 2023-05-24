@@ -12,7 +12,7 @@
   "destroyScope:Flow_1:D",
   "enter:G_A:B",
   "exit:G_A:E",
-  "destroyScope:G_A:E",
+  "destroyScope:EXCLUSIVE_GATEWAY:E",
   "exit:Process_1:B",
   "destroyScope:Process_1:B"
 ]
