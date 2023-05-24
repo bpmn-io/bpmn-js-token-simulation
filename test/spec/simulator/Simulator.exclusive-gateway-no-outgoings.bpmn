@@ -17,7 +17,7 @@
           <omgdc:Bounds x="172" y="148" width="36" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="G_A_di" bpmnElement="G_A" isMarkerVisible="true">
+      <bpmndi:BPMNShape id="EXCLUSIVE_GATEWAY_di" bpmnElement="EXCLUSIVE_GATEWAY" isMarkerVisible="true">
         <omgdc:Bounds x="265" y="165" width="50" height="50" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="324.5" y="183" width="23" height="14" />
