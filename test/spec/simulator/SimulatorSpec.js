@@ -447,6 +447,7 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
     verify('exclusive-gateway-no-outgoings', (fixture) => {
 
       // when

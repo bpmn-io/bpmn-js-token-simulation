@@ -5,7 +5,7 @@
       <outgoing>Flow_1</outgoing>
     </startEvent>
     <sequenceFlow id="Flow_1" sourceRef="START" targetRef="G_A" />
-    <exclusiveGateway id="G_A" name="G_A">
+    <exclusiveGateway id="EXCLUSIVE_GATEWAY" name="EXCLUSIVE_GATEWAY">
       <incoming>Flow_1</incoming>
     </exclusiveGateway>
   </process>
