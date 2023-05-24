@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.31.1
+
+* `FIX`: support exclusive gateway without outgoings ([#134](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/134))
+
 ## 0.31.0
 
 * `FEAT`: trigger none, condition, and timer boundary events independently ([#129](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/129))
