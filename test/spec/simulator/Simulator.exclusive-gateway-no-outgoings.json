@@ -8,7 +8,7 @@
   "destroyScope:START:C",
   "enter:Flow_1:B",
   "exit:Flow_1:D",
-  "createScope:G_A:B",
+  "createScope:EXCLUSIVE_GATEWAY:B",
   "destroyScope:Flow_1:D",
   "enter:EXCLUSIVE_GATEWAY:B",
   "exit:G_A:E",
