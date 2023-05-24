@@ -11,7 +11,7 @@
   "createScope:EXCLUSIVE_GATEWAY:B",
   "destroyScope:Flow_1:D",
   "enter:EXCLUSIVE_GATEWAY:B",
-  "exit:G_A:E",
+  "exit:EXCLUSIVE_GATEWAY:E",
   "destroyScope:EXCLUSIVE_GATEWAY:E",
   "exit:Process_1:B",
   "destroyScope:Process_1:B"
