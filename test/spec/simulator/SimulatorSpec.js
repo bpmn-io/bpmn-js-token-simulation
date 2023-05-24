@@ -448,6 +448,18 @@ describe('simulator', function() {
     });
 
 
+    verify('exclusive-gateway-no-outgoings', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('task-join', (fixture) => {
 
       // when
