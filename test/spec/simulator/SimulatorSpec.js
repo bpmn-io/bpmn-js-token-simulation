@@ -447,6 +447,17 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+    verify('exclusive-gateway-no-outgoings', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
 
     verify('task-join', (fixture) => {
 
