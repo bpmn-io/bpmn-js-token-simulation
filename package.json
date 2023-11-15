@@ -47,11 +47,11 @@
   ],
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
-    "@bpmn-io/properties-panel": "^1.1.1",
+    "@bpmn-io/properties-panel": "^3.13.0",
     "babel-loader": "^8.2.5",
     "babel-plugin-istanbul": "^6.1.1",
     "bpmn-js": "^11.1.0",
-    "bpmn-js-properties-panel": "^1.14.0",
+    "bpmn-js-properties-panel": "^5.6.1",
     "chai": "^4.3.6",
     "copy-webpack-plugin": "^11.0.0",
     "cross-env": "^7.0.3",
