@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "all": "run-s bundle:src lint test bundle",
-    "bundle:src": "rollup -c",
+    "bundle:src": "rollup -c --bundleConfigAsCjs",
     "bundle": "webpack --mode production",
     "bundle:watch": "webpack -w",
     "start": "cross-env SINGLE_START=modeler npm run dev",
@@ -72,7 +72,7 @@
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all": "^4.1.5",
     "puppeteer": "^21.5.1",
-    "rollup": "^2.79.1",
+    "rollup": "^4.4.1",
     "rollup-plugin-string": "^3.0.0",
     "sinon": "^17.0.1",
     "sinon-chai": "^3.7.0",
