@@ -76,9 +76,9 @@
     "rollup-plugin-string": "^3.0.0",
     "sinon": "^10.0.0",
     "sinon-chai": "^3.7.0",
-    "webpack": "^5.74.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.11.1"
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
   },
   "dependencies": {
     "inherits-browser": "^0.1.0",
