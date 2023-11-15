@@ -37,7 +37,7 @@ jobs:
       uses: codecov/codecov-action@v2
       if: ${{ matrix.integration-deps == '' }}
     - name: Update example
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       env:
         GIT_USER_NAME: ${{secrets.BPMN_IO_USER_NAME}}
         GIT_USER_EMAIL: ${{secrets.BPMN_IO_EMAIL}}
