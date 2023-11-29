@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js (https://demo.bpmn.io)" exporterVersion="8.3.1">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.31.1">
   <process id="Process_1" isExecutable="false">
     <startEvent id="START" name="START">
       <outgoing>Flow_1</outgoing>
@@ -20,7 +20,7 @@
       <bpmndi:BPMNShape id="EXCLUSIVE_GATEWAY_di" bpmnElement="EXCLUSIVE_GATEWAY" isMarkerVisible="true">
         <omgdc:Bounds x="265" y="165" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <omgdc:Bounds x="324.5" y="183" width="23" height="14" />
+          <omgdc:Bounds x="247" y="226" width="85" height="27" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
