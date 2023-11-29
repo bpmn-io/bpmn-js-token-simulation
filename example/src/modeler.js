@@ -149,10 +149,8 @@ function openFile(files) {
 document.body.addEventListener('dragover', fileDrop('Open BPMN diagram', openFile), false);
 
 function downloadDiagram() {
-  modeler.saveXML({ format: true }, function(err, xml) {
-    if (!err) {
-      download(xml, fileName, 'application/xml');
-    }
+  modeler.saveXML({ format: true }).then(({ xml }) => {
+    download(xml, fileName, 'application/xml');
   });
 }
 
