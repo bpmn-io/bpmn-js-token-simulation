@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.32.0
+
+* `FEAT`: support inclusive gateways ([#110](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/110), [#88](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/88))
+
 ## 0.31.1
 
 * `FIX`: support exclusive gateway without outgoings ([#134](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/134))
