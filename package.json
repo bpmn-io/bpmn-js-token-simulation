@@ -42,6 +42,9 @@
     "lib",
     "index.js"
   ],
+  "engines": {
+    "node": ">= 16"
+  },
   "sideEffects": [
     "*.css"
   ],

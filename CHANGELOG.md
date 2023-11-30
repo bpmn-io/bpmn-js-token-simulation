@@ -9,6 +9,7 @@ ___Note:__ Yet to be released changes appear here._
 ## 0.32.0
 
 * `FEAT`: support inclusive gateways ([#110](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/110), [#88](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/88))
+* `CHORE`: require `node >= 16`
 
 ## 0.31.1
 
