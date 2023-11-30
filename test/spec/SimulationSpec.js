@@ -3,7 +3,7 @@ import ModelerModule from 'lib/modeler';
 import SimulationSupportModule from 'lib/simulation-support';
 
 import {
-  bootstrapModeler,
+  bootstrapModeler as _bootstrapModeler,
   inject,
   getBpmnJS,
   withBpmnJs
@@ -21,6 +21,20 @@ const TestModule = {
   ]
 };
 
+function bootstrapModeler(diagram, config) {
+  const {
+    animation = {},
+    ...restConfig
+  } = config;
+
+  return _bootstrapModeler(diagram, {
+    ...restConfig,
+    animation: {
+      randomize: false,
+      ...animation
+    }
+  });
+}
 
 describe('simulation', function() {
 
