@@ -7,7 +7,6 @@ jobs:
         os: [ ubuntu-latest ]
         node-version: [ 20 ]
         integration-deps:
-        - diagram-js@7.x bpmn-js@8.x
         - "" # as defined in package.json
 
     runs-on: ${{ matrix.os }}
