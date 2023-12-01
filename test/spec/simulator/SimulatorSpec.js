@@ -841,6 +841,22 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verifyOnly('inclusive-gateway-no-sync', (fixture) => {
+
+      // given
+      setConfig(element('ThorbensExclusiveGateway'), {
+        activeOutgoing: element('FLOW_4a')
+      });
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
   });
 
 
