@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" id="Definitions_19vl35g" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:subProcess id="EVENT_SUB" triggeredByEvent="true">
+      <bpmn:endEvent id="END">
+        <bpmn:incoming>Flow_1</bpmn:incoming>
+        <bpmn:incoming>Flow_2</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_1" sourceRef="ESCALATION_START" targetRef="END" />
+      <bpmn:startEvent id="ESCALATION_START">
+        <bpmn:outgoing>Flow_1</bpmn:outgoing>
+        <bpmn:escalationEventDefinition id="EscalationEventDefinition_0dgl5z6" />
+      </bpmn:startEvent>
+      <bpmn:task id="TASK">
+        <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:sequenceFlow id="Flow_2" sourceRef="TASK" targetRef="END" />
+    </bpmn:subProcess>
+    <bpmn:intermediateThrowEvent id="START">
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1yngzm4" />
+    </bpmn:intermediateThrowEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="102" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EVENT_SUB_di" bpmnElement="EVENT_SUB" isExpanded="true">
+        <dc:Bounds x="290" y="110" width="400" height="240" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="592" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jx06ig_di" bpmnElement="ESCALATION_START">
+        <dc:Bounds x="380" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_di" bpmnElement="TASK">
+        <dc:Bounds x="348" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="416" y="180" />
+        <di:waypoint x="592" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="448" y="270" />
+        <di:waypoint x="510" y="270" />
+        <di:waypoint x="510" y="180" />
+        <di:waypoint x="592" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
