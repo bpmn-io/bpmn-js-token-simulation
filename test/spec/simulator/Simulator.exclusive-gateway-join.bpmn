@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="4.7.0">
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.32.0">
   <process id="Process_1" isExecutable="false">
     <startEvent id="START" name="START">
       <outgoing>Flow_2</outgoing>
     </startEvent>
     <exclusiveGateway id="GATE" name="GATE">
       <incoming>Flow_2</incoming>
-      <incoming>Flow_3</incoming>
+      <incoming>Flow_5</incoming>
       <outgoing>Flow_1</outgoing>
     </exclusiveGateway>
     <sequenceFlow id="Flow_2" sourceRef="START" targetRef="GATE" />
-    <task id="TASK" name="TASK">
-      <outgoing>Flow_3</outgoing>
-    </task>
-    <sequenceFlow id="Flow_3" sourceRef="TASK" targetRef="GATE" />
     <endEvent id="END" name="END">
       <incoming>Flow_1</incoming>
     </endEvent>
     <sequenceFlow id="Flow_1" sourceRef="GATE" targetRef="END" />
+    <sequenceFlow id="Flow_5" sourceRef="MESSAGE_START" targetRef="GATE" />
+    <startEvent id="MESSAGE_START" name="MESSAGE_START">
+      <outgoing>Flow_5</outgoing>
+      <messageEventDefinition id="MessageEventDefinition_0ehl98m" />
+    </startEvent>
     <textAnnotation id="TextAnnotation_11xjiul">
       <text>FAKE</text>
     </textAnnotation>
@@ -25,22 +26,6 @@
   </process>
   <bpmndi:BPMNDiagram id="BpmnDiagram_1">
     <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
-      <bpmndi:BPMNShape id="TextAnnotation_11xjiul_di" bpmnElement="TextAnnotation_11xjiul">
-        <omgdc:Bounds x="480" y="220" width="60" height="30" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
-        <omgdi:waypoint x="445" y="140" />
-        <omgdi:waypoint x="502" y="140" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
-        <omgdi:waypoint x="260" y="280" />
-        <omgdi:waypoint x="420" y="280" />
-        <omgdi:waypoint x="420" y="165" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
-        <omgdi:waypoint x="228" y="140" />
-        <omgdi:waypoint x="395" y="140" />
-      </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="START_di" bpmnElement="START">
         <omgdc:Bounds x="192" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
@@ -53,18 +38,37 @@
           <omgdc:Bounds x="405" y="85" width="30" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TASK_di" bpmnElement="TASK">
-        <omgdc:Bounds x="160" y="240" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="END_di" bpmnElement="END">
         <omgdc:Bounds x="502" y="122" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <omgdc:Bounds x="508" y="165" width="24" height="14" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_11xjiul_di" bpmnElement="TextAnnotation_11xjiul">
+        <omgdc:Bounds x="480" y="220" width="60" height="30" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0583f9w_di" bpmnElement="MESSAGE_START">
+        <omgdc:Bounds x="192" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="169" y="305" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <omgdi:waypoint x="228" y="140" />
+        <omgdi:waypoint x="395" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <omgdi:waypoint x="445" y="140" />
+        <omgdi:waypoint x="502" y="140" />
+      </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="Association_16j5keh_di" bpmnElement="Association_16j5keh">
         <omgdi:waypoint x="431" y="154" />
         <omgdi:waypoint x="484" y="220" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_5_di" bpmnElement="Flow_5">
+        <omgdi:waypoint x="228" y="280" />
+        <omgdi:waypoint x="420" y="280" />
+        <omgdi:waypoint x="420" y="165" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

@@ -1,0 +1,10 @@
+[
+  "createScope:Process_1:null",
+  "signal:Process_1:B",
+  "createScope:TASK:B",
+  "enter:TASK:B",
+  "exit:TASK:C",
+  "destroyScope:TASK:C",
+  "exit:Process_1:B",
+  "destroyScope:Process_1:B"
+]

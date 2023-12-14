@@ -1,0 +1,22 @@
+[
+  "createScope:PARTICIPANT_2:null",
+  "signal:PARTICIPANT_2:F",
+  "createScope:MESSAGE_THROW:F",
+  "enter:MESSAGE_THROW:F",
+  "createScope:MESSAGE_FLOW_1:null",
+  "signal:MESSAGE_FLOW_1:H",
+  "exit:MESSAGE_THROW:G",
+  "destroyScope:MESSAGE_THROW:G",
+  "exit:MESSAGE_FLOW_1:H",
+  "createScope:PARTICIPANT_1:null",
+  "destroyScope:MESSAGE_FLOW_1:H",
+  "exit:PARTICIPANT_2:F",
+  "destroyScope:PARTICIPANT_2:F",
+  "signal:PARTICIPANT_1:I",
+  "createScope:TASK:I",
+  "createScope:START:I",
+  "enter:TASK:I",
+  "signal:START:K",
+  "exit:START:K",
+  "destroyScope:START:K"
+]

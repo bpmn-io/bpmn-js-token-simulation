@@ -1,0 +1,10 @@
+[
+  "createScope:PARTICIPANT_1:null",
+  "signal:PARTICIPANT_1:C",
+  "createScope:TASK:C",
+  "createScope:START:C",
+  "enter:TASK:C",
+  "signal:START:E",
+  "exit:START:E",
+  "destroyScope:START:E"
+]

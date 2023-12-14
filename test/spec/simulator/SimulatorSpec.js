@@ -1185,6 +1185,65 @@ describe('simulator', function() {
       expectTrace(fixture('process-multiple-starts-2'));
     });
 
+
+    verify('process-implicit-start-no-start-events', (fixture) => {
+
+      // when
+      trigger({
+        element: element('TASK')
+      });
+
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('process-implicit-start-none-event', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('process-implicit-start-trigger', (fixture) => {
+
+      // when
+      trigger({
+        element: element('MESSAGE_START')
+      });
+
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('process-implicit-start-collaboration', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+
+      // but when
+      trigger({
+        element: element('MESSAGE_THROW')
+      });
+
+      // then
+      expectTrace(fixture('process-implicit-start-collaboration-message-trigger'));
+    });
+
   });
 
 
@@ -1479,6 +1538,18 @@ describe('simulator', function() {
 
 
     verify('event-sub-process-multiple-starts', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('event-sub-process-implicit-start', (fixture) => {
 
       // when
       trigger({

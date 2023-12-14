@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.18.0">
+  <bpmn:collaboration id="Collaboration_0bklw55">
+    <bpmn:participant id="PARTICIPANT_1" name="PARTICIPANT_1" processRef="Process_1" />
+    <bpmn:participant id="PARTICIPANT_2" name="PARTICIPANT_2" processRef="Process_2" />
+    <bpmn:messageFlow id="MESSAGE_FLOW_1" sourceRef="MESSAGE_THROW" targetRef="START" />
+    <bpmn:messageFlow id="MESSAGE_FLOW_2" sourceRef="PARTICIPANT_2" targetRef="TASK" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:task id="TASK" name="TASK" />
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_15czmhe" />
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmn:process id="Process_2" isExecutable="false">
+    <bpmn:intermediateThrowEvent id="MESSAGE_THROW" name="MESSAGE_THROW">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_11kffar" />
+    </bpmn:intermediateThrowEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0bklw55">
+      <bpmndi:BPMNShape id="PARTICIPANT_1_di" bpmnElement="PARTICIPANT_1" isHorizontal="true">
+        <dc:Bounds x="120" y="80" width="600" height="250" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_di" bpmnElement="TASK">
+        <dc:Bounds x="400" y="160" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_11a1jkq_di" bpmnElement="START">
+        <dc:Bounds x="212" y="182" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="212" y="152" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Participant_08doola_di" bpmnElement="PARTICIPANT_2" isHorizontal="true">
+        <dc:Bounds x="120" y="400" width="600" height="170" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0mewbbs_di" bpmnElement="MESSAGE_THROW">
+        <dc:Bounds x="212" y="452" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="192" y="495" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="MESSAGE_FLOW_1_di" bpmnElement="MESSAGE_FLOW_1">
+        <di:waypoint x="230" y="452" />
+        <di:waypoint x="230" y="218" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MESSAGE_FLOW_2_di" bpmnElement="MESSAGE_FLOW_2">
+        <di:waypoint x="450" y="400" />
+        <di:waypoint x="450" y="240" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
