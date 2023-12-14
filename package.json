@@ -2,7 +2,7 @@
   "name": "bpmn-js-token-simulation",
   "version": "0.32.0",
   "description": "bpmn-js token simulation extension",
-  "main": "index.js",
+  "module": "index.js",
   "scripts": {
     "all": "run-s bundle:src lint test bundle",
     "bundle:src": "rollup -c --bundleConfigAsCjs",
