@@ -1485,6 +1485,94 @@ describe('simulation', function() {
     });
   });
 
+
+  describe('process', function() {
+
+    describe('implicit-start', function() {
+
+      const diagram = require('./implicit-start.bpmn');
+
+      beforeEach(bootstrapModeler(diagram, {
+        additionalModules: [
+          ModelerModule,
+          TestModule
+        ]
+      }));
+
+      beforeEach(inject(function(simulationSupport, simulationTrace) {
+        simulationSupport.toggleSimulation(true);
+
+        simulationTrace.start();
+      }));
+
+
+      it('should trigger typed event', async function() {
+
+        // when
+        triggerElement('MESSAGE_START');
+
+        // then
+        expectHistory([
+          'GATEWAY',
+          'TASK',
+          'END',
+          'ESCALATION_THROW',
+          'MESSAGE_START'
+        ]);
+      });
+
+
+      it('should trigger none event independently', async function() {
+
+        // when
+        triggerElement('NONE_START');
+
+        // then
+        expectHistory([
+          'GATEWAY',
+          'TASK',
+          'END',
+          'ESCALATION_THROW',
+          'NONE_START'
+        ]);
+      });
+
+    });
+
+
+    describe('implicit-start-no-event', function() {
+
+      const diagram = require('./implicit-start-no-event.bpmn');
+
+      beforeEach(bootstrapModeler(diagram, {
+        additionalModules: [
+          ModelerModule,
+          TestModule
+        ]
+      }));
+
+      beforeEach(inject(function(simulationSupport, simulationTrace) {
+        simulationSupport.toggleSimulation(true);
+
+        simulationTrace.start();
+      }));
+
+
+      it('should trigger task', async function() {
+
+        // when
+        triggerElement('TASK');
+
+        // then
+        expectHistory([
+          'TASK',
+          'OTHER_TASK'
+        ]);
+      });
+    });
+
+  });
+
 });
 
 
