@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.18.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="OTHER_NONE_START" name="OTHER_NONE_START" />
+    <bpmn:startEvent id="MESSAGE_START" name="MESSAGE_START">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_14fvqpn" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="GATEWAY" name="GATEWAY" />
+    <bpmn:task id="TASK" name="TASK" />
+    <bpmn:endEvent id="END" name="END" />
+    <bpmn:startEvent id="NONE_START" name="NONE_START" />
+    <bpmn:dataObjectReference id="DATA_OBJECT" name="DATA_OBJECT" dataObjectRef="DataObject_1ctuzy5" />
+    <bpmn:dataObject id="DataObject_1ctuzy5" />
+    <bpmn:dataStoreReference id="DATA_STORE" name="DATA_STORE" />
+    <bpmn:intermediateCatchEvent id="LINK_CATCH" name="LINK_CATCH">
+      <bpmn:linkEventDefinition id="LinkEventDefinition_0klzcqk" name="" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateThrowEvent id="ESCALATION_THROW" name="ESCALATION_THROW">
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_0azvpsn" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:boundaryEvent id="BOUNDARY_EVENT" name="BOUNDARY_EVENT" attachedToRef="TASK">
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_0in260r" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="COMPENSATE_TASK" name="COMPENSATE_TASK" isForCompensation="true" />
+    <bpmn:subProcess id="EVENT_SUB_PROCESS" name="EVENT_SUB_PROCESS" triggeredByEvent="true" />
+    <bpmn:association id="Association_1" associationDirection="One" sourceRef="BOUNDARY_EVENT" targetRef="COMPENSATE_TASK" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="OTHER_NONE_START_di" bpmnElement="OTHER_NONE_START">
+        <dc:Bounds x="312" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="288" y="125" width="84" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="MESSAGE_START_di" bpmnElement="MESSAGE_START">
+        <dc:Bounds x="192" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="169" y="245" width="82" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GATEWAY_di" bpmnElement="GATEWAY" isMarkerVisible="true">
+        <dc:Bounds x="305" y="445" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="303" y="502" width="54" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_di" bpmnElement="TASK">
+        <dc:Bounds x="160" y="430" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="312" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="318" y="245" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="NONE_START_di" bpmnElement="NONE_START">
+        <dc:Bounds x="192" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="173" y="125" width="74" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DATA_OBJECT_di" bpmnElement="DATA_OBJECT">
+        <dc:Bounds x="402" y="445" width="36" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="381" y="502" width="78" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="DATA_STORE_di" bpmnElement="DATA_STORE">
+        <dc:Bounds x="495" y="445" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="484" y="502" width="72" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="LINK_CATCH_di" bpmnElement="LINK_CATCH">
+        <dc:Bounds x="432" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="416" y="125" width="68" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ESCALATION_THROW_di" bpmnElement="ESCALATION_THROW">
+        <dc:Bounds x="432" y="202" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="412" y="245" width="76" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="COMPENSATE_TASK_di" bpmnElement="COMPENSATE_TASK">
+        <dc:Bounds x="290" y="550" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_1_di" bpmnElement="Association_1">
+        <di:waypoint x="220" y="528" />
+        <di:waypoint x="220" y="590" />
+        <di:waypoint x="290" y="590" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Activity_11a204z_di" bpmnElement="EVENT_SUB_PROCESS" isExpanded="true">
+        <dc:Bounds x="610" y="70" width="350" height="200" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0yqkkgm_di" bpmnElement="BOUNDARY_EVENT">
+        <dc:Bounds x="202" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="179" y="535" width="83" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
