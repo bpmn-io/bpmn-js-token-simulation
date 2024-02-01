@@ -33,7 +33,7 @@ jobs:
         COVERAGE: 1
       run: npm run all
     - name: Upload coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@v4
       if: ${{ matrix.integration-deps == '' }}
     - name: Update example
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
