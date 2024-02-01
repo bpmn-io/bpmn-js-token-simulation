@@ -33,8 +33,12 @@ jobs:
         COVERAGE: 1
       run: npm run all
     - name: Upload coverage
-      uses: codecov/codecov-action@v3
       if: ${{ matrix.integration-deps == '' }}
+      uses: codecov/codecov-action@v4
+      with:
+        fail_ci_if_error: true
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     - name: Update example
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       env:
