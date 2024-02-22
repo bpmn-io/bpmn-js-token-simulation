@@ -10,11 +10,12 @@ import {
 
 import { matchPattern } from 'min-dash';
 
+import { queryAll as domQueryAll } from 'min-dom';
+
 
 injectStyles();
 
 var singleStart = window.__env__ && window.__env__.SINGLE_START === 'modeler';
-
 
 describe('modeler extension', function() {
 
@@ -195,6 +196,57 @@ describe('modeler extension', function() {
       expect(
         elementSupport.getUnsupportedElements()
       ).to.have.length(1);
+    }));
+
+  });
+
+
+  describe('overlays', function() {
+
+    class FoobarOverlays {
+      constructor(eventBus, overlays) {
+        eventBus.on('shape.added', ({ element }) => {
+          overlays.add(element, 'foobar', {
+            html: '<h1>Foobar</h1>',
+            position: {
+              bottom: 0,
+              left: 0
+            }
+          });
+        });
+      }
+    }
+
+    FoobarOverlays.$inject = [ 'eventBus', 'overlays' ];
+
+    const FoobarOverlaysModule = {
+      __init__: [ 'foobarOverlays' ],
+      foobarOverlays: [ 'type', FoobarOverlays ]
+    };
+
+    const diagram = require('./simple.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        TokenSimulationModelerModules,
+        FoobarOverlaysModule
+      ]
+    }));
+
+
+    it('should hide overlays', inject(function(toggleMode) {
+
+      // given
+      const overlays = Array.from(domQueryAll('.djs-overlay-foobar'));
+
+      expect(overlays).to.have.length.greaterThan(0);
+      expect(overlays.every(element => window.getComputedStyle(element).display !== 'none')).to.be.true;
+
+      // when
+      toggleMode.toggleMode();
+
+      // then
+      expect(overlays.every(element => window.getComputedStyle(element).display === 'none')).to.be.true;
     }));
 
   });
