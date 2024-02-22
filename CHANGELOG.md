@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.33.1
+
+* `FIX`: hide all other overlays when token simulation active ([#160](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/160), [#162](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/162))
+
 ## 0.33.0
 
 * `FEAT`: support implicit start events ([#144](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/144))
