@@ -254,16 +254,17 @@
   top: 60px;
 }
 
-.bjs-container.simulation .djs-palette {
-  display: none;
-}
-
-.bjs-container.simulation .djs-outline,
 .bjs-container.simulation .djs-bendpoint,
-.bjs-container.simulation .djs-segment-dragger,
-.bjs-container.simulation .djs-resizer {
+.bjs-container.simulation .djs-outline,
+.bjs-container.simulation .djs-palette,
+.bjs-container.simulation .djs-resizer,
+.bjs-container.simulation .djs-segment-dragger {
   display: none !important;
 }
+
+.bjs-container.simulation .djs-overlay:not(.djs-overlay-bts-context-menu, .djs-overlay-bts-element-notification, .djs-overlay-bts-token-count) {
+  display: none !important;
+} 
 
 .bts-palette {
   position: absolute;
