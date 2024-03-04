@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.33.2
+
+* `FIX`: use inset box shadow instead of border to add border ([#164](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/164))
+
 ## 0.33.1
 
 * `FIX`: hide all other overlays when token simulation active ([#160](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/160), [#162](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/162))
