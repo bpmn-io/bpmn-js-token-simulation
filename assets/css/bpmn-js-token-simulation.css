@@ -10,27 +10,22 @@
   --token-simulation-white: #FFFFFF;
 }
 
-.bjs-container {
-  border: solid 4px transparent;
-  box-sizing: border-box;
-}
-
 .bjs-breadcrumbs {
   /* ensure breadcrumbs don't overlap with token-simulation controls */
   top: 60px;
   left: 50px;
 }
 
-.bjs-container.simulation {
-  border-color: var(--token-simulation-green-base-44, #10D070);
+.bjs-container.simulation .djs-container {
+  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-green-base-44, #10D070);
 }
 
-.bjs-container.simulation.paused {
-  border-color: var(--token-simulation-grey-base-40, #666666);
+.bjs-container.simulation.paused .djs-container {
+  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-grey-base-40, #666666);
 }
 
-.bjs-container.simulation.warning {
-  border-color: var(--token-simulation-red-base-62, #FF3D3D) !important;
+.bjs-container.simulation.warning .djs-container {
+  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-red-base-62, #FF3D3D) !important;
 }
 
 .bts-context-pad {
