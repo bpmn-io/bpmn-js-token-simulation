@@ -338,6 +338,57 @@ describe('log', function() {
       }
     ));
   });
+
+  describe('icons', function() {
+
+    const diagram = require('./gateways.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule,
+        {
+          log: [ 'type', LogCollector ]
+        },
+      ]
+    }));
+
+    beforeEach(inject(function(simulationSupport) {
+      simulationSupport.toggleSimulation();
+    }));
+    it('gateways', inject(
+      async function() {
+
+        // when
+        triggerElement('start');
+        await scopeDestroyed();
+
+        // then
+        expectLog([
+          {
+            'icon': 'bpmn-icon-start-event-none',
+            'text': 'start'
+          },
+          {
+            'icon': 'bpmn-icon-gateway-xor',
+            'text': 'Exclusive'
+          },
+          {
+            'icon': 'bpmn-icon-gateway-parallel',
+            'text': 'Parallel'
+          },
+          {
+            'icon': 'bpmn-icon-gateway-or',
+            'text': 'Inclusive'
+          },
+          {
+            'icon': 'bpmn-icon-end-event-none',
+            'text': 'End Event'
+          }
+        ]);
+      }
+    ));
+  });
 });
 
 // helpers ////////////////////
