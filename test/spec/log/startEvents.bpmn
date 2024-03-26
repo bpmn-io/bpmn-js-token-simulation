@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" camunda:diagramRelationId="a6b753b8-0c0b-4c84-9078-f1689b75e715">
+  <bpmn:process id="Process_1386938f-6e7a-433a-ba36-14048e9f6a46" isExecutable="true">
+    <bpmn:startEvent id="start" name="start" />
+    <bpmn:startEvent id="messageStart" name="messageStart">
+      <bpmn:messageEventDefinition id="MessageEventDefinition_03i797o" />
+    </bpmn:startEvent>
+    <bpmn:startEvent id="signalStart" name="signalStart">
+      <bpmn:signalEventDefinition id="SignalEventDefinition_1earpki" signalRef="Signal_0yf8nh1" />
+    </bpmn:startEvent>
+    <bpmn:startEvent id="conditionalStart" name="conditionalStart">
+      <bpmn:conditionalEventDefinition id="ConditionalEventDefinition_1rpdtm6">
+        <bpmn:condition xsi:type="bpmn:tFormalExpression" />
+      </bpmn:conditionalEventDefinition>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="timerStart" name="timerStart">
+      <bpmn:timerEventDefinition id="TimerEventDefinition_1bxv1ih" />
+    </bpmn:startEvent>
+  </bpmn:process>
+  <bpmn:signal id="Signal_0yf8nh1" name="Signal_113rm6n" />
+  <bpmn:signal id="Signal_0i5emnl" name="Signal_1ni52ju" />
+  <bpmn:error id="Error_1bgc8tc" name="Error_38ul392" errorCode="Secret" />
+  <bpmn:escalation id="Escalation_241b720" name="Escalation_241b720" escalationCode="Nobody reads this" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1386938f-6e7a-433a-ba36-14048e9f6a46">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
+        <dc:Bounds x="170" y="82" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="177" y="125" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lrsg3b_di" bpmnElement="messageStart">
+        <dc:Bounds x="170" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="205" width="69" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0wirpcs_di" bpmnElement="signalStart">
+        <dc:Bounds x="170" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="164" y="285" width="53" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1hscndh_di" bpmnElement="conditionalStart">
+        <dc:Bounds x="170" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="152" y="355" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1qtgjiw_di" bpmnElement="timerStart">
+        <dc:Bounds x="170" y="392" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="167" y="435" width="48" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

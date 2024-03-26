@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.20.0" camunda:diagramRelationId="74b42d09-a16d-4b99-939e-1a0b0582f6df">
+  <bpmn:process id="Process_9576dc4c-9ca8-4fa0-9682-a4297fa004fd" isExecutable="true">
+    <bpmn:startEvent id="start" name="start">
+      <bpmn:outgoing>Flow_08k9gv1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="task" name="task">
+      <bpmn:incoming>Flow_08k9gv1</bpmn:incoming>
+      <bpmn:outgoing>Flow_1a1i07n</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_08k9gv1" sourceRef="start" targetRef="task" />
+    <bpmn:sequenceFlow id="Flow_1a1i07n" sourceRef="task" targetRef="sendTask" />
+    <bpmn:sendTask id="sendTask" name="sendTask">
+      <bpmn:incoming>Flow_1a1i07n</bpmn:incoming>
+      <bpmn:outgoing>Flow_0zbc6ny</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:sequenceFlow id="Flow_0zbc6ny" sourceRef="sendTask" targetRef="receiveTask" />
+    <bpmn:sequenceFlow id="Flow_1p412ok" sourceRef="receiveTask" targetRef="userTask" />
+    <bpmn:userTask id="userTask" name="userTask">
+      <bpmn:incoming>Flow_1p412ok</bpmn:incoming>
+      <bpmn:outgoing>Flow_0u1hqoj</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="Flow_0u1hqoj" sourceRef="userTask" targetRef="manualTask" />
+    <bpmn:manualTask id="manualTask" name="manualTask">
+      <bpmn:incoming>Flow_0u1hqoj</bpmn:incoming>
+      <bpmn:outgoing>Flow_1my2hks</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:sequenceFlow id="Flow_1my2hks" sourceRef="manualTask" targetRef="businessRTask" />
+    <bpmn:sequenceFlow id="Flow_1favftk" sourceRef="businessRTask" targetRef="serviceTask" />
+    <bpmn:sequenceFlow id="Flow_1d05hhp" sourceRef="serviceTask" targetRef="scriptTask" />
+    <bpmn:sequenceFlow id="Flow_16xvne2" sourceRef="scriptTask" targetRef="call_activity" />
+    <bpmn:businessRuleTask id="businessRTask" name="businessRTask">
+      <bpmn:incoming>Flow_1my2hks</bpmn:incoming>
+      <bpmn:outgoing>Flow_1favftk</bpmn:outgoing>
+    </bpmn:businessRuleTask>
+    <bpmn:serviceTask id="serviceTask" name="serviceTask">
+      <bpmn:incoming>Flow_1favftk</bpmn:incoming>
+      <bpmn:outgoing>Flow_1d05hhp</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:scriptTask id="scriptTask" name="scriptTask">
+      <bpmn:incoming>Flow_1d05hhp</bpmn:incoming>
+      <bpmn:outgoing>Flow_16xvne2</bpmn:outgoing>
+    </bpmn:scriptTask>
+    <bpmn:callActivity id="call_activity" name="call_activity">
+      <bpmn:incoming>Flow_16xvne2</bpmn:incoming>
+      <bpmn:outgoing>Flow_11jd60u</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="end" name="end">
+      <bpmn:incoming>Flow_11jd60u</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_11jd60u" sourceRef="call_activity" targetRef="end" />
+    <bpmn:receiveTask id="receiveTask" name="receiveTask">
+      <bpmn:extensionElements>
+        <camunda:properties>
+          <camunda:property name="instantiate" value="true" />
+        </camunda:properties>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0zbc6ny</bpmn:incoming>
+      <bpmn:outgoing>Flow_1p412ok</bpmn:outgoing>
+    </bpmn:receiveTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_9576dc4c-9ca8-4fa0-9682-a4297fa004fd">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start">
+        <dc:Bounds x="150" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="157" y="143" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1rlzb58_di" bpmnElement="task">
+        <dc:Bounds x="240" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u56ilg_di" bpmnElement="sendTask">
+        <dc:Bounds x="400" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0yz0b3j_di" bpmnElement="userTask">
+        <dc:Bounds x="720" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_17nkfpz_di" bpmnElement="manualTask">
+        <dc:Bounds x="880" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_00veaj6_di" bpmnElement="businessRTask">
+        <dc:Bounds x="1030" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1n7dkxg_di" bpmnElement="serviceTask">
+        <dc:Bounds x="1180" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01xizko_di" bpmnElement="scriptTask">
+        <dc:Bounds x="1330" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03dmmzx_di" bpmnElement="call_activity">
+        <dc:Bounds x="1490" y="78" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1dj2a3d_di" bpmnElement="end">
+        <dc:Bounds x="1642" y="100" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1651" y="143" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_03wwa63_di" bpmnElement="receiveTask">
+        <dc:Bounds x="560" y="78" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_08k9gv1_di" bpmnElement="Flow_08k9gv1">
+        <di:waypoint x="186" y="118" />
+        <di:waypoint x="240" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1a1i07n_di" bpmnElement="Flow_1a1i07n">
+        <di:waypoint x="340" y="118" />
+        <di:waypoint x="400" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0zbc6ny_di" bpmnElement="Flow_0zbc6ny">
+        <di:waypoint x="500" y="118" />
+        <di:waypoint x="560" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1p412ok_di" bpmnElement="Flow_1p412ok">
+        <di:waypoint x="660" y="118" />
+        <di:waypoint x="720" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0u1hqoj_di" bpmnElement="Flow_0u1hqoj">
+        <di:waypoint x="820" y="118" />
+        <di:waypoint x="880" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1my2hks_di" bpmnElement="Flow_1my2hks">
+        <di:waypoint x="980" y="118" />
+        <di:waypoint x="1030" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1favftk_di" bpmnElement="Flow_1favftk">
+        <di:waypoint x="1130" y="118" />
+        <di:waypoint x="1180" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1d05hhp_di" bpmnElement="Flow_1d05hhp">
+        <di:waypoint x="1280" y="118" />
+        <di:waypoint x="1330" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_16xvne2_di" bpmnElement="Flow_16xvne2">
+        <di:waypoint x="1430" y="118" />
+        <di:waypoint x="1490" y="118" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11jd60u_di" bpmnElement="Flow_11jd60u">
+        <di:waypoint x="1590" y="118" />
+        <di:waypoint x="1642" y="118" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
