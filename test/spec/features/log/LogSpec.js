@@ -7,7 +7,8 @@ import {
   inject,
   getBpmnJS,
 } from 'test/TestHelper';
-import Log from '../../../lib/features/log/Log';
+
+import Log from 'lib/features/log/Log';
 
 const TestModule = {
   __depends__: [
@@ -36,20 +37,26 @@ function bootstrapModeler(diagram, config) {
 }
 
 class LogCollector extends Log {
-  constructor(eventBus, notifications,
+
+  constructor(
+      eventBus, notifications,
       tokenSimulationPalette, canvas,
-      scopeFilter) {
-    super(eventBus, notifications,
+      scopeFilter
+  ) {
+
+    super(
+      eventBus, notifications,
       tokenSimulationPalette, canvas,
       scopeFilter);
+
     this._elementLog = [];
     this.log = (args) => {
 
-      // Only interested in logs related to elements.
-      if (args.text === 'Process started' || args.text === 'Process finished'
-        || args.text === 'Process canceled') {
+      // only interested in logs related to elements.
+      if (/^Process /.test(args.text)) {
         return;
       }
+
       this._elementLog.push({
         text: args.text,
         icon: args.icon
@@ -58,7 +65,8 @@ class LogCollector extends Log {
   }
 }
 
-describe('log', function() {
+
+describe('features/log', function() {
 
   describe('icons', function() {
 
@@ -78,7 +86,8 @@ describe('log', function() {
       simulationSupport.toggleSimulation();
     }));
 
-    it('tasks', inject(
+
+    it('should render tasks', inject(
       async function() {
 
         // when
@@ -138,7 +147,10 @@ describe('log', function() {
         ]);
       }
     ));
+
   });
+
+
   describe('icons', function() {
 
     const diagram = require('./start-events.bpmn');
@@ -156,7 +168,9 @@ describe('log', function() {
     beforeEach(inject(function(simulationSupport) {
       simulationSupport.toggleSimulation();
     }));
-    it('start events', inject(
+
+
+    it('should render start events', inject(
       async function() {
 
         // when
@@ -191,7 +205,9 @@ describe('log', function() {
         ]);
       }
     ));
+
   });
+
 
   describe('icons', function() {
 
@@ -210,7 +226,9 @@ describe('log', function() {
     beforeEach(inject(function(simulationSupport) {
       simulationSupport.toggleSimulation();
     }));
-    it('end events', inject(
+
+
+    it('should render end events', inject(
       async function() {
 
         // when
@@ -226,6 +244,10 @@ describe('log', function() {
           {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'start1'
+          },
+          {
+            'icon': 'bpmn-icon-gateway-parallel',
+            'text': 'Gateway',
           },
           {
             'icon': 'bpmn-icon-end-event-none',
@@ -258,7 +280,9 @@ describe('log', function() {
         ]);
       }
     ));
+
   });
+
 
   describe('icons', function() {
 
@@ -277,7 +301,9 @@ describe('log', function() {
     beforeEach(inject(function(simulationSupport) {
       simulationSupport.toggleSimulation();
     }));
-    it('intermediate events', inject(
+
+
+    it('should render intermediate events', inject(
       async function() {
 
         // when
@@ -337,7 +363,9 @@ describe('log', function() {
         ]);
       }
     ));
+
   });
+
 
   describe('icons', function() {
 
@@ -356,7 +384,9 @@ describe('log', function() {
     beforeEach(inject(function(simulationSupport) {
       simulationSupport.toggleSimulation();
     }));
-    it('gateways', inject(
+
+
+    it('should render gateways', inject(
       async function() {
 
         // when
@@ -388,8 +418,11 @@ describe('log', function() {
         ]);
       }
     ));
+
   });
+
 });
+
 
 // helpers ////////////////////
 

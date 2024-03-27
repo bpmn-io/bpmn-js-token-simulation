@@ -9,7 +9,7 @@
       <bpmn:incoming>Flow_1w20zup</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_1w20zup" sourceRef="e1" targetRef="Event_0qoud73" />
-    <bpmn:parallelGateway id="e1" name="p1">
+    <bpmn:parallelGateway id="e1" name="Gateway">
       <bpmn:incoming>Flow_0xvlhi9</bpmn:incoming>
       <bpmn:outgoing>Flow_1w20zup</bpmn:outgoing>
       <bpmn:outgoing>Flow_1ke578l</bpmn:outgoing>
