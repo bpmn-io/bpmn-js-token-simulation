@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.34.0
+
+* `FEAT`: make log icons more precise ([#167](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/167))
+
 ## 0.33.2
 
 * `FIX`: use inset box shadow instead of border to add border ([#164](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/164))
