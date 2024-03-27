@@ -141,7 +141,7 @@ describe('log', function() {
   });
   describe('icons', function() {
 
-    const diagram = require('./startEvents.bpmn');
+    const diagram = require('./start-events.bpmn');
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -195,7 +195,7 @@ describe('log', function() {
 
   describe('icons', function() {
 
-    const diagram = require('./endEvents.bpmn');
+    const diagram = require('./end-events.bpmn');
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
@@ -262,7 +262,7 @@ describe('log', function() {
 
   describe('icons', function() {
 
-    const diagram = require('./intermediateEvents.bpmn');
+    const diagram = require('./intermediate-events.bpmn');
 
     beforeEach(bootstrapModeler(diagram, {
       additionalModules: [
