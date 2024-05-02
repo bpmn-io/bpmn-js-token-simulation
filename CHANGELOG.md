@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.34.1
+
+* `FIX`: gracefully handle missing event definitions ([#171](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/171))
+
 ## 0.34.0
 
 * `FEAT`: make log icons more precise ([#167](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/167))
