@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.34.2
+
+* `FIX`: add aria-label to log close button ([#177](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/177))
+
 ## 0.34.1
 
 * `FIX`: gracefully handle missing event definitions ([#171](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/171))
