@@ -666,6 +666,85 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('parallel-gateway-join', (fixture) => {
+
+      // given
+      const task = element('Activity_1');
+
+      waitAtElement(task);
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('Timer_1')
+      });
+
+      trigger({
+        element: element('Activity_1')
+      });
+
+      // then
+      expectTrace(fixture('parallel-gateway-join-1'));
+    });
+
+
+    verify('parallel-gateway-join', (fixture) => {
+
+      // given
+      const task = element('Activity_1');
+
+      waitAtElement(task);
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('Timer_1')
+      });
+
+      trigger({
+        element: element('Timer_1')
+      });
+
+      // then
+      expectTrace(fixture('parallel-gateway-join-2'));
+    });
+
+
+    verify('parallel-gateway-join', (fixture) => {
+
+      // given
+      const task = element('Activity_1');
+
+      waitAtElement(task);
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('Activity_1')
+      });
+
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('Timer_1')
+      });
+
+      // then
+      expectTrace(fixture('parallel-gateway-join-3'));
+    });
+
   });
 
 
