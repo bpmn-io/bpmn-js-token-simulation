@@ -84,7 +84,6 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "diagram-js": "^14.8.0",
     "inherits-browser": "^0.1.0",
     "min-dash": "^4.0.0",
     "min-dom": "^5.0.0",
