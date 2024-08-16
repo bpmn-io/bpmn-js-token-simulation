@@ -201,6 +201,45 @@ describe('modeler extension', function() {
   });
 
 
+  describe('UI', function() {
+
+    const diagram = require('./simple.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        TokenSimulationModelerModules
+      ]
+    }));
+
+
+    it('should hide UI', inject(function(canvas, toggleMode) {
+
+      // given
+      const ui = domQueryAll(`
+        .djs-bendpoint,
+        .djs-context-pad,
+        .djs-outline,
+        .djs-palette,
+        .djs-resizer,
+        .djs-segment-dragger
+      `, canvas.getContainer());
+
+      Array.from(ui).forEach(element => {
+        expect(window.getComputedStyle(element).display !== 'none').to.be.true;
+      });
+
+      // when
+      toggleMode.toggleMode();
+
+      // then
+      Array.from(ui).forEach(element => {
+        expect(window.getComputedStyle(element).display === 'none').to.be.true;
+      });
+    }));
+
+  });
+
+
   describe('overlays', function() {
 
     class FoobarOverlays {
