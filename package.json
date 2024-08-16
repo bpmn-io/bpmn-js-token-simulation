@@ -50,11 +50,11 @@
   ],
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
-    "@bpmn-io/properties-panel": "^3.18.2",
+    "@bpmn-io/properties-panel": "^3.23.0",
     "babel-loader": "^9.0.0",
     "babel-plugin-istanbul": "^7.0.0",
-    "bpmn-js": "^17.2.1",
-    "bpmn-js-properties-panel": "^5.14.0",
+    "bpmn-js": "^17.9.2",
+    "bpmn-js-properties-panel": "^5.22.0",
     "chai": "^4.4.1",
     "copy-webpack-plugin": "^12.0.2",
     "cross-env": "^7.0.3",
@@ -84,6 +84,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
+    "diagram-js": "^14.8.0",
     "inherits-browser": "^0.1.0",
     "min-dash": "^4.0.0",
     "min-dom": "^5.0.0",
