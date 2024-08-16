@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.34.4
+
+* `DEPS`: do not mark `diagram-js` as explicit dependency
+
 ## 0.34.3
 
 * `FIX`: explicitly hide context pad when token simulation is enabled ([#185](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/185))
