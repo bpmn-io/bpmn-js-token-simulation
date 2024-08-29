@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.34.5
+
+* `FIX`: make parallel join BPMN spec compliant ([#130](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/130))
+* `DEPS`: use `min-dom@4.2.1`
+
 ## 0.34.4
 
 * `DEPS`: do not mark `diagram-js` as explicit dependency
