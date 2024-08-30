@@ -1040,6 +1040,54 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('error-catch-all-inner-event-sub-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('error-catch-all-inner-event-sub-none', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('error-catch-all-boundary-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('error-catch-all-boundary-none', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
@@ -1234,6 +1282,78 @@ describe('simulator', function() {
       // when
       trigger({
         element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-catch-all-inner-event-sub-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-catch-all-inner-event-sub-none', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-catch-all-boundary-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-catch-all-boundary-none', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-catch-all-outer-event-sub-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-catch-all-outer-event-sub-none', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
       });
 
       // then
