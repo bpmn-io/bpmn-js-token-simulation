@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.35.1
+
+* `FIX`: allow errors to propagate upwards ([#187](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/187))
+
 ## 0.35.0
 
 * `FEAT`: support catch-all error and escalation events ([#184](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/184))
