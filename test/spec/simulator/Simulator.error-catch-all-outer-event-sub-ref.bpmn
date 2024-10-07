@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_0e0nrgo" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.26.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.5.0">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="SubProcess">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+      <bpmn:startEvent id="StartEvent_2">
+        <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="Flow_2" sourceRef="StartEvent_2" targetRef="ErrorEvent_1" />
+      <bpmn:endEvent id="ErrorEvent_1" name="123">
+        <bpmn:incoming>Flow_2</bpmn:incoming>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_1ppkev3" errorRef="Error_1d74h2e" />
+      </bpmn:endEvent>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="SubProcess" />
+    <bpmn:endEvent id="EndEvent_2">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="SubProcess" targetRef="EndEvent_2" />
+    <bpmn:subProcess id="EventSubProcess_3" triggeredByEvent="true">
+      <bpmn:endEvent id="EndEvent_5">
+        <bpmn:incoming>Flow_7</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_7" sourceRef="OuterErrorStart_none" targetRef="EndEvent_5" />
+      <bpmn:startEvent id="OuterErrorStart_none" name="&#60;none&#62;">
+        <bpmn:outgoing>Flow_7</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_0eqytem" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+    <bpmn:subProcess id="EventSubProcess_4" triggeredByEvent="true">
+      <bpmn:endEvent id="EndEvent_6">
+        <bpmn:incoming>Flow_8</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_8" sourceRef="OuterErrorStart_123" targetRef="EndEvent_6" />
+      <bpmn:startEvent id="OuterErrorStart_123" name="123">
+        <bpmn:outgoing>Flow_8</bpmn:outgoing>
+        <bpmn:errorEventDefinition id="ErrorEventDefinition_0wfxm7i" errorRef="Error_1d74h2e" />
+      </bpmn:startEvent>
+    </bpmn:subProcess>
+  </bpmn:process>
+  <bpmn:error id="Error_1d74h2e" name="Error_123" errorCode="123" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0nq6a1j_di" bpmnElement="SubProcess" isExpanded="true">
+        <dc:Bounds x="275" y="80" width="520" height="390" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1r800jx_di" bpmnElement="StartEvent_2">
+        <dc:Bounds x="302" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1lby0f4_di" bpmnElement="ErrorEvent_1">
+        <dc:Bounds x="392" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="401" y="205" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0o271ah_di" bpmnElement="Flow_2">
+        <di:waypoint x="338" y="180" />
+        <di:waypoint x="392" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0odig2x_di" bpmnElement="EndEvent_2">
+        <dc:Bounds x="852" y="162" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_06xdd3c" bpmnElement="EventSubProcess_3" isExpanded="true">
+        <dc:Bounds x="850" y="280" width="190" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0u1gner" bpmnElement="EndEvent_5">
+        <dc:Bounds x="972" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_03ii2yw_di" bpmnElement="OuterErrorStart_none">
+        <dc:Bounds x="880" y="322" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="879" y="365" width="38" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_075k5pd" bpmnElement="Flow_7">
+        <di:waypoint x="916" y="340" />
+        <di:waypoint x="972" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="BPMNShape_19s3z3r" bpmnElement="EventSubProcess_4" isExpanded="true">
+        <dc:Bounds x="1080" y="280" width="190" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1ubj6u9" bpmnElement="EndEvent_6">
+        <dc:Bounds x="1202" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0eu7tni_di" bpmnElement="OuterErrorStart_123">
+        <dc:Bounds x="1110" y="322" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1119" y="365" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_0770paz" bpmnElement="Flow_8">
+        <di:waypoint x="1146" y="340" />
+        <di:waypoint x="1202" y="340" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1an8gzo_di" bpmnElement="Flow_1">
+        <di:waypoint x="218" y="180" />
+        <di:waypoint x="275" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1ddz4nu_di" bpmnElement="Flow_4">
+        <di:waypoint x="795" y="180" />
+        <di:waypoint x="852" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
