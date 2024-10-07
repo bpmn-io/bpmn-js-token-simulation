@@ -1088,6 +1088,30 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('escalation-catch-all-outer-event-sub-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('escalation-catch-all-outer-event-sub-none', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
