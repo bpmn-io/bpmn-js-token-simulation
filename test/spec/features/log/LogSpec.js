@@ -151,7 +151,7 @@ describe('features/log', function() {
   });
 
 
-  describe('icons', function() {
+  describe('icons - start events', function() {
 
     const diagram = require('./start-events.bpmn');
 
@@ -209,7 +209,7 @@ describe('features/log', function() {
   });
 
 
-  describe('icons', function() {
+  describe('icons - end events', function() {
 
     const diagram = require('./end-events.bpmn');
 
@@ -284,7 +284,7 @@ describe('features/log', function() {
   });
 
 
-  describe('icons', function() {
+  describe('icons - intermediate events', function() {
 
     const diagram = require('./intermediate-events.bpmn');
 
@@ -367,7 +367,7 @@ describe('features/log', function() {
   });
 
 
-  describe('icons', function() {
+  describe('icons - gateways', function() {
 
     const diagram = require('./gateways.bpmn');
 

@@ -1251,7 +1251,7 @@ describe('simulator', function() {
   });
 
 
-  describe('escalation', () => {
+  describe('escalation', function() {
 
     verify('escalation-no-catch', (fixture) => {
 
@@ -2111,7 +2111,7 @@ function verifyOnly(name, test) {
   return verify(name, test, it.only);
 }
 
-// eslint-disable-next-line
+
 function verifySkip(name, test) {
   return verify(name, test, it.skip);
 }
