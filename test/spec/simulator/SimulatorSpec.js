@@ -1,3 +1,5 @@
+/* eslint no-bitwise: off */
+
 import SimulatorModule from 'lib/simulator';
 
 import {

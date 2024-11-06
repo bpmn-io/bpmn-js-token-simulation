@@ -1,51 +1,74 @@
 import bpmnIoPlugin from 'eslint-plugin-bpmn-io';
 
+const files = {
+  ignored: [
+    'example/dist',
+    'lib/icons/index.js',
+    'tmp'
+  ],
+  build: [
+    '*.js',
+    '*.mjs',
+    'tasks',
+    'test/reporters/fixture-reporter.js'
+  ],
+  test: [
+    '**/test/**/*.js'
+  ]
+};
+
 export default [
   {
-    ignores: [
-      'example/dist',
-      'lib/icons/index.js',
-      'tmp'
-    ]
+    ignores: files.ignored
   },
-  ...bpmnIoPlugin.configs.browser,
+
+  // build
+  ...bpmnIoPlugin.configs.browser.map(config => {
+    return {
+      ...config,
+      ignores: files.build
+    };
+  }),
+
+  // lib + test
   ...bpmnIoPlugin.configs.node.map(config => {
     return {
       ...config,
-      files: [
-        'karma.conf.js',
-        'webpack.config.js',
-        '**/test/**/*.js'
-      ]
+      files: files.build
     };
   }),
+
+  // lib
+  // test
   ...bpmnIoPlugin.configs.mocha.map(config => {
     return {
       ...config,
       files: [
         '**/test/**/*.js'
-      ]
+      ],
+      ignores: files.build
     };
   }),
   {
     languageOptions: {
       globals: {
-        sinon: true
-      },
+        sinon: true,
+        require: true
+      }
     },
-    files: [
-      '**/test/**/*.js'
-    ]
+    files: files.test
   },
+
+  // misc
+  // ignore first level indent in template literals
   {
-    'rules': {
-      'indent': [ 2, 2, {
-        'VariableDeclarator': { 'var': 2, 'let': 2, 'const': 3 },
-        'FunctionDeclaration': { 'body': 1, 'parameters': 2 },
-        'FunctionExpression': { 'body': 1, 'parameters': 2 },
-        'ignoredNodes': [ 'TemplateLiteral > *' ]
-      } ],
-      'no-bitwise': 0
+    rules: {
+      indent: [ 2, 2, {
+        VariableDeclarator: { 'var': 2, 'let': 2, 'const': 3 },
+        FunctionDeclaration: { 'body': 1, 'parameters': 2 },
+        FunctionExpression: { 'body': 1, 'parameters': 2 },
+        ignoredNodes: [ 'TemplateLiteral > *' ]
+      } ]
     }
   }
 ];
