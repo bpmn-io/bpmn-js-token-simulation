@@ -38,7 +38,6 @@ export default [
     };
   }),
 
-  // lib
   // test
   ...bpmnIoPlugin.configs.mocha.map(config => {
     return {
