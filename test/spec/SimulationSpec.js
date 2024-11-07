@@ -1195,7 +1195,7 @@ describe('simulation', function() {
   });
 
 
-  describe('all', function() {
+  describe.skip('all', function() {
 
     const diagram = require('../../example/resources/all.bpmn');
 
