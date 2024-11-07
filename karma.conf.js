@@ -1,5 +1,8 @@
 'use strict';
 
+var path = require('path');
+var fs = require('fs');
+
 // configures browsers to run test against
 // any of [ 'ChromeHeadless', 'Chrome', 'Firefox', 'IE', 'PhantomJS' ]
 var browsers = (process.env.TEST_BROWSERS || 'ChromeHeadless').split(',');
@@ -13,12 +16,15 @@ process.env.CHROME_BIN = require('puppeteer').executablePath();
 
 var coverage = process.env.COVERAGE;
 
-var path = require('path');
-
 var absoluteBasePath = path.resolve(__dirname);
 
 var suite = coverage ? 'test/all.js' : 'test/suite.js';
 
+var tmpDir = path.join(__dirname, 'tmp');
+
+fs.mkdirSync(tmpDir, { recursive: true });
+
+var firefoxProfile = fs.mkdtempSync(path.join(tmpDir, 'firefox-profile'));
 
 module.exports = function(karma) {
 
@@ -56,6 +62,14 @@ module.exports = function(karma) {
       reporters: [
         { type: 'lcov', subdir: '.' }
       ]
+    },
+
+    customLaunchers: {
+      'FirefoxHeadless': {
+        base: 'Firefox',
+        flags: [ '-headless' ],
+        profile: firefoxProfile
+      }
     },
 
     autoWatch: false,
