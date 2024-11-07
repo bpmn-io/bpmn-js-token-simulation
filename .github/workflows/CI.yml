@@ -8,6 +8,7 @@ jobs:
         node-version: [ 20 ]
         integration-deps:
         - "" # as defined in package.json
+        - "bpmn-js@17"
 
     runs-on: ${{ matrix.os }}
 
