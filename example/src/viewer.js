@@ -79,10 +79,7 @@ const viewer = new BpmnViewer({
   additionalModules: [
     ExampleModule,
     TokenSimulationModule
-  ],
-  keyboard: {
-    bindTo: document
-  }
+  ]
 });
 
 function openDiagram(diagram) {

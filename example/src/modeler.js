@@ -103,9 +103,6 @@ const modeler = new BpmnModeler({
   exporter: {
     name: 'bpmn-js-token-simulation',
     version: process.env.TOKEN_SIMULATION_VERSION
-  },
-  keyboard: {
-    bindTo: document
   }
 });
 
