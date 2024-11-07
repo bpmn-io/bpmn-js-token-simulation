@@ -23,14 +23,6 @@ export default [
   },
 
   // build
-  ...bpmnIoPlugin.configs.browser.map(config => {
-    return {
-      ...config,
-      ignores: files.build
-    };
-  }),
-
-  // lib + test
   ...bpmnIoPlugin.configs.node.map(config => {
     return {
       ...config,
@@ -38,13 +30,19 @@ export default [
     };
   }),
 
+  // lib + test
+  ...bpmnIoPlugin.configs.browser.map(config => {
+    return {
+      ...config,
+      ignores: files.build
+    };
+  }),
+
   // test
   ...bpmnIoPlugin.configs.mocha.map(config => {
     return {
       ...config,
-      files: [
-        '**/test/**/*.js'
-      ],
+      files: files.test,
       ignores: files.build
     };
   }),
