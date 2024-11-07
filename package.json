@@ -52,7 +52,7 @@
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/properties-panel": "^3.23.0",
-    "babel-loader": "^9.0.0",
+    "babel-loader": "^9.2.1",
     "babel-plugin-istanbul": "^7.0.0",
     "bpmn-js": "^18.0.0",
     "bpmn-js-properties-panel": "^5.23.0",
@@ -72,17 +72,17 @@
     "karma-mocha": "^2.0.1",
     "karma-sinon-chai": "^2.0.2",
     "karma-webpack": "^5.0.1",
-    "mocha": "^10.7.3",
+    "mocha": "^10.8.2",
     "mocha-test-container-support": "^0.2.0",
     "npm-run-all2": "^7.0.0",
-    "puppeteer": "^23.2.1",
+    "puppeteer": "^23.7.0",
     "rollup": "^4.21.1",
     "rollup-plugin-string": "^3.0.0",
     "sinon": "^17.0.1",
     "sinon-chai": "^3.7.0",
-    "webpack": "^5.94.0",
+    "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
     "inherits-browser": "^0.1.0",
