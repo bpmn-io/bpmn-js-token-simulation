@@ -19,6 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/bpmn-io/bpmn-js-token-simulation.git"
   },
+  "author": "bpmn.io contributors",
   "contributors": [
     {
       "name": "Patrick Dehn",
