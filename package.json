@@ -54,7 +54,7 @@
     "@bpmn-io/properties-panel": "^3.23.0",
     "babel-loader": "^9.0.0",
     "babel-plugin-istanbul": "^7.0.0",
-    "bpmn-js": "^17.9.2",
+    "bpmn-js": "^18.0.0",
     "bpmn-js-properties-panel": "^5.23.0",
     "chai": "^4.5.0",
     "copy-webpack-plugin": "^12.0.2",
