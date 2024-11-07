@@ -6,6 +6,12 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.36.0
+
+* `FEAT`: support `bpmn-js@18` ([#196](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/196))
+* `FIX`: clear animation when destroying diagram ([#196](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/196))
+* `FIX`: do not complete animation when clearing it ([#196](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/196))
+
 ## 0.35.1
 
 * `FIX`: allow errors to propagate upwards ([#187](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/187))
