@@ -76,7 +76,7 @@
     "karma-webpack": "^5.0.1",
     "mocha": "^10.8.2",
     "mocha-test-container-support": "^0.2.0",
-    "npm-run-all2": "^7.0.1",
+    "npm-run-all2": "^7.0.2",
     "puppeteer": "^24.0.0",
     "rollup": "^4.32.0",
     "rollup-plugin-string": "^3.0.0",
