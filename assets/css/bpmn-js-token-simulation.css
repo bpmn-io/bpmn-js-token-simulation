@@ -258,7 +258,7 @@
   display: none !important;
 }
 
-.bjs-container.simulation .djs-overlay:not(.djs-overlay-bts-context-menu, .djs-overlay-bts-element-notification, .djs-overlay-bts-token-count) {
+.bjs-container.simulation .djs-overlay:not(.djs-overlay-bts-context-menu, .djs-overlay-bts-element-notification, .djs-overlay-bts-token-count, .djs-overlay-drilldown) {
   display: none !important;
 } 
 

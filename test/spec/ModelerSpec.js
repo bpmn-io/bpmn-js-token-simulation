@@ -288,6 +288,25 @@ describe('modeler extension', function() {
       expect(overlays.every(element => window.getComputedStyle(element).display === 'none')).to.be.true;
     }));
 
+
+    it('should not hide drilldown', inject(function(bpmnReplace, elementRegistry, toggleMode) {
+
+      // given
+      const task = elementRegistry.get('Task_3');
+      bpmnReplace.replaceElement(task, { type: 'bpmn:SubProcess', isExpanded: false });
+
+      const overlays = Array.from(domQueryAll('.djs-overlay-drilldown'));
+
+      expect(overlays).to.have.length.greaterThan(0);
+      expect(overlays.every(element => window.getComputedStyle(element).display !== 'none')).to.be.true;
+
+      // when
+      toggleMode.toggleMode();
+
+      // then
+      expect(overlays.every(element => window.getComputedStyle(element).display !== 'none')).to.be.true;
+    }));
+
   });
 
 });
