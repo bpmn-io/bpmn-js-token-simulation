@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.36.1
+
+* `FIX`: do not hide drilldown button in simulation mode ([#188](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/188), [#200](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/200))
+
 ## 0.36.0
 
 * `FEAT`: support `bpmn-js@18` ([#196](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/196))
