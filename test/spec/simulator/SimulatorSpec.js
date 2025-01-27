@@ -1497,6 +1497,66 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('collapsed-sub-process-event-sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('collapsed-sub-process-compensation-event-sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('collapsed-event-sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('collapsed-compensation-event-sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('collapsed-sub-process-link-events', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
