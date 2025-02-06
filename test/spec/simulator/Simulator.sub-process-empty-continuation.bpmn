@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_18b3zn3" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.31.0" modeler:executionPlatform="Camunda Cloud" modeler:executionPlatformVersion="8.6.0">
+  <bpmn:process id="Process_186nk6c" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_6" sourceRef="TransactionExpanded" targetRef="AdHocExpanded" />
+    <bpmn:transaction id="TransactionExpanded">
+      <bpmn:incoming>Flow_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_6</bpmn:outgoing>
+    </bpmn:transaction>
+    <bpmn:adHocSubProcess id="AdHocExpanded">
+      <bpmn:incoming>Flow_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_7</bpmn:outgoing>
+    </bpmn:adHocSubProcess>
+    <bpmn:endEvent id="EndEvent_1">
+      <bpmn:incoming>Flow_7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_7" sourceRef="AdHocExpanded" targetRef="EndEvent_1" />
+    <bpmn:subProcess id="EmbeddedExpanded">
+      <bpmn:incoming>Flow_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_5</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_5" sourceRef="EmbeddedExpanded" targetRef="TransactionExpanded" />
+    <bpmn:adHocSubProcess id="AdHocCollapsed">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_4</bpmn:outgoing>
+    </bpmn:adHocSubProcess>
+    <bpmn:transaction id="TransactionCollapsed">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+    </bpmn:transaction>
+    <bpmn:subProcess id="EmbeddedCollapsed">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="StartEvent_1" targetRef="EmbeddedCollapsed" />
+    <bpmn:sequenceFlow id="Flow_4" sourceRef="AdHocCollapsed" targetRef="EmbeddedExpanded" />
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="TransactionCollapsed" targetRef="AdHocCollapsed" />
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="EmbeddedCollapsed" targetRef="TransactionCollapsed" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_186nk6c">
+      <bpmndi:BPMNShape id="StartEvent_1_di" bpmnElement="StartEvent_1">
+        <dc:Bounds x="182" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1wwmphf_di" bpmnElement="TransactionExpanded" isExpanded="true">
+        <dc:Bounds x="1035" y="80" width="210" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0xiyzrh_di" bpmnElement="AdHocExpanded" isExpanded="true">
+        <dc:Bounds x="1315" y="80" width="210" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0b2kj71_di" bpmnElement="EndEvent_1">
+        <dc:Bounds x="1602" y="122" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0cfson9_di" bpmnElement="EmbeddedExpanded" isExpanded="true">
+        <dc:Bounds x="755" y="80" width="210" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_05c7g2z_di" bpmnElement="AdHocCollapsed">
+        <dc:Bounds x="590" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1luh2vj_di" bpmnElement="TransactionCollapsed">
+        <dc:Bounds x="430" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_128e41e_di" bpmnElement="EmbeddedCollapsed">
+        <dc:Bounds x="270" y="100" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_16gcolc_di" bpmnElement="Flow_6">
+        <di:waypoint x="1245" y="140" />
+        <di:waypoint x="1315" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0lnm1jn_di" bpmnElement="Flow_7">
+        <di:waypoint x="1525" y="140" />
+        <di:waypoint x="1602" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0al35a1_di" bpmnElement="Flow_5">
+        <di:waypoint x="965" y="140" />
+        <di:waypoint x="1035" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0cam5k2_di" bpmnElement="Flow_1">
+        <di:waypoint x="218" y="140" />
+        <di:waypoint x="270" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0uqme02_di" bpmnElement="Flow_4">
+        <di:waypoint x="690" y="140" />
+        <di:waypoint x="755" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_17e700o_di" bpmnElement="Flow_3">
+        <di:waypoint x="530" y="140" />
+        <di:waypoint x="590" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0dwgr2t_di" bpmnElement="Flow_2">
+        <di:waypoint x="370" y="140" />
+        <di:waypoint x="430" y="140" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_17dzbkj">
+    <bpmndi:BPMNPlane id="BPMNPlane_0981uw6" bpmnElement="AdHocCollapsed" />
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1nx4oqz">
+    <bpmndi:BPMNPlane id="BPMNPlane_1ykqzyh" bpmnElement="TransactionCollapsed" />
+  </bpmndi:BPMNDiagram>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1cngnkb">
+    <bpmndi:BPMNPlane id="BPMNPlane_0y4chy5" bpmnElement="EmbeddedCollapsed" />
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
