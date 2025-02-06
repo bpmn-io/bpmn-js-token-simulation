@@ -1557,6 +1557,18 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('sub-process-empty-continuation', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
