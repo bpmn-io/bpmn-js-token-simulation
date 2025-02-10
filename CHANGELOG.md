@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.36.3
+
+* `FIX`: continue simulation after empty collapsed sub-process ([#135](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/135))
+
 ## 0.36.2
 
 * `FIX`: register events within collapsed sub-processes ([#118](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/118))
