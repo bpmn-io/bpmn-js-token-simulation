@@ -8,6 +8,10 @@ import {
   getBpmnJS,
 } from 'test/TestHelper';
 
+import {
+  CheckCircleIcon
+} from 'lib/icons';
+
 import Log from 'lib/features/log/Log';
 
 const TestModule = {
@@ -410,6 +414,73 @@ describe('features/log', function() {
           {
             'icon': 'bpmn-icon-gateway-or',
             'text': 'Inclusive'
+          },
+          {
+            'icon': 'bpmn-icon-end-event-none',
+            'text': 'End Event'
+          }
+        ]);
+      }
+    ));
+
+  });
+
+
+  describe('items - sub processes', function() {
+
+    const diagram = require('./sub-processes.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule,
+        {
+          log: [ 'type', LogCollector ]
+        },
+      ]
+    }));
+
+    beforeEach(inject(function(simulationSupport) {
+      simulationSupport.toggleSimulation();
+    }));
+
+
+    it('should be logged', inject(
+      async function() {
+
+        // when
+        triggerElement('StartEvent_1');
+        await elementEnter('EndEvent_1');
+
+        // then
+        expectLog([
+          {
+            'icon': 'bpmn-icon-start-event-none',
+            'text': 'Start Event'
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'SubProcess started'
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'SubProcess finished'
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'SubProcess started'
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'SubProcess finished'
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'SubProcess started'
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'SubProcess finished'
           },
           {
             'icon': 'bpmn-icon-end-event-none',
