@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.36.3">
+  <bpmn:process id="PROCESS" isExecutable="true">
+    <bpmn:subProcess id="SUB_PROCESS" name="SUB_PROCESS">
+      <bpmn:incoming>Flow_1etbflx</bpmn:incoming>
+      <bpmn:task id="NESTED_TASK" name="NESTED_TASK" />
+    </bpmn:subProcess>
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1etbflx</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_1etbflx" sourceRef="START" targetRef="SUB_PROCESS" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PROCESS">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="-28" y="-38" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="-28" y="5" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_PROCESS_di" bpmnElement="SUB_PROCESS" isExpanded="true">
+        <dc:Bounds x="70" y="-120" width="350" height="200" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="NESTED_TASK_di" bpmnElement="NESTED_TASK">
+        <dc:Bounds x="180" y="-60" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1etbflx_di" bpmnElement="Flow_1etbflx">
+        <di:waypoint x="8" y="-20" />
+        <di:waypoint x="70" y="-20" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
