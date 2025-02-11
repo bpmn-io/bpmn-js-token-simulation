@@ -456,6 +456,7 @@
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
   margin-right: 10px;
   cursor: pointer;
+  outline: none;
 }
 
 .bts-scopes .bts-scope.inactive:hover {
@@ -464,6 +465,12 @@
 
 .bts-scopes .bts-scope.inactive {
   opacity: .25;
+}
+
+.bts-scopes .bts-scope.focussed {
+  outline-offset: 2px;
+  outline-width: 2px;
+  outline-style: solid;
 }
 
 .djs-container.highlight {
