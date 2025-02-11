@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="DEFINITIONS" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.36.3">
+  <bpmn:process id="PROCESS" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>FLOW_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="SUB" name="SUB">
+      <bpmn:incoming>FLOW_1</bpmn:incoming>
+      <bpmn:outgoing>FLOW_2</bpmn:outgoing>
+      <bpmn:startEvent id="SUB_START" name="SUB_START">
+        <bpmn:outgoing>FLOW_3</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:sequenceFlow id="FLOW_3" sourceRef="SUB_START" targetRef="SUB_END" />
+      <bpmn:endEvent id="SUB_END" name="SUB_END">
+        <bpmn:incoming>FLOW_3</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:subProcess id="COMP_SUB" name="COMP_SUB" triggeredByEvent="true">
+        <bpmn:startEvent id="COMP_START" name="COMP_START">
+          <bpmn:outgoing>FLOW_5</bpmn:outgoing>
+          <bpmn:compensateEventDefinition id="CompensateEventDefinition_0z36eug" />
+        </bpmn:startEvent>
+        <bpmn:sequenceFlow id="FLOW_5" sourceRef="COMP_START" targetRef="COMP_END" />
+        <bpmn:endEvent id="COMP_END" name="COMP_END">
+          <bpmn:incoming>FLOW_5</bpmn:incoming>
+        </bpmn:endEvent>
+      </bpmn:subProcess>
+    </bpmn:subProcess>
+    <bpmn:sequenceFlow id="FLOW_1" sourceRef="START" targetRef="SUB" />
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>FLOW_10</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="FLOW_2" sourceRef="SUB" targetRef="COMP_TRIGGER" />
+    <bpmn:sequenceFlow id="FLOW_10" sourceRef="COMP_TRIGGER" targetRef="END" />
+    <bpmn:intermediateThrowEvent id="COMP_TRIGGER" name="COMP_TRIGGER">
+      <bpmn:incoming>FLOW_2</bpmn:incoming>
+      <bpmn:outgoing>FLOW_10</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_1b0lfh6" activityRef="SUB" />
+    </bpmn:intermediateThrowEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PROCESS">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="182" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="182" y="205" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_di" bpmnElement="SUB" isExpanded="true">
+        <dc:Bounds x="275" y="80" width="430" height="370" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_START_di" bpmnElement="SUB_START">
+        <dc:Bounds x="352" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="338" y="205" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SUB_END_di" bpmnElement="SUB_END">
+        <dc:Bounds x="432" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="424" y="205" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_02vhwc2_di" bpmnElement="COMP_SUB" isExpanded="true">
+        <dc:Bounds x="320" y="250" width="340" height="160" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="COMP_START_di" bpmnElement="COMP_START">
+        <dc:Bounds x="382" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="363" y="355" width="75" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="COMP_END_di" bpmnElement="COMP_END">
+        <dc:Bounds x="542" y="312" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="529" y="355" width="63" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="FLOW_5_di" bpmnElement="FLOW_5">
+        <di:waypoint x="418" y="330" />
+        <di:waypoint x="542" y="330" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_3_di" bpmnElement="FLOW_3">
+        <di:waypoint x="388" y="180" />
+        <di:waypoint x="432" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="942" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="948" y="205" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ethwqd_di" bpmnElement="COMP_TRIGGER">
+        <dc:Bounds x="862" y="162" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="835" y="205" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="FLOW_1_di" bpmnElement="FLOW_1">
+        <di:waypoint x="218" y="180" />
+        <di:waypoint x="275" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_2_di" bpmnElement="FLOW_2">
+        <di:waypoint x="705" y="180" />
+        <di:waypoint x="862" y="180" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_10_di" bpmnElement="FLOW_10">
+        <di:waypoint x="898" y="180" />
+        <di:waypoint x="942" y="180" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

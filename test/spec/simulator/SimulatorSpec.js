@@ -1722,6 +1722,18 @@ describe('simulator', function() {
     });
 
 
+    verify('compensation-nested-event-sub-process', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('compensation-error', (fixture) => {
 
       // when
