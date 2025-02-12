@@ -6,6 +6,18 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.37.0
+
+* `FEAT`: improve collapsed sub-process support ([#114](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/114))
+* `FEAT`: always display parent scope token ([#209](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/209), [#204](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/204))
+* `FEAT`: indicate selected root scope ([#214](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/214))
+* `FEAT`: improve robustness of disabled modeling feature ([#211](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/211), [#203](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/203))
+* `FIX`: prevent `r` from opening replace menu ([#211](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/211), [#203](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/203))
+* `FIX`: show all sub-process scopes ([#210](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/210), [#205](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/205))
+* `FIX`: hide context pads based on active scope filters ([#213](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/213))
+* `FIX`: correct activation of compensation event sub-process once parent completes ([#215](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/215), [#206](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/206))
+* `CHORE`: use bpmn-js exported utilities ([#212](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/212))
+
 ## 0.36.3
 
 * `FIX`: continue simulation after empty collapsed sub-process ([#135](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/135))
