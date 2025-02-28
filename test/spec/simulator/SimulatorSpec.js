@@ -1918,6 +1918,31 @@ describe('simulator', function() {
     });
 
 
+    verify('event-sub-process-nested-cancelation-throws-error', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+
+    verify('event-sub-process-nested-cancelation-throws-escalation', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('event-sub-process-multiple-starts', (fixture) => {
 
       // when
