@@ -1894,7 +1894,7 @@ describe('simulator', function() {
     });
 
 
-    verify('event-sub-process-nested-cancelation', (fixture) => {
+    verify('event-sub-process-nested-cancelation-absorb-event', (fixture) => {
 
       // when
       trigger({
@@ -1906,7 +1906,7 @@ describe('simulator', function() {
     });
 
 
-    verify('event-sub-process-nested-cancelation-boundary-event', (fixture) => {
+    verify('event-sub-process-nested-cancelation-rethrow', (fixture) => {
 
       // when
       trigger({
