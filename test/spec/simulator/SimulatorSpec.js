@@ -1943,6 +1943,18 @@ describe('simulator', function() {
     });
 
 
+    verify('event-sub-process-nested-interrupting-non-interrupting-boundary', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('event-sub-process-multiple-starts', (fixture) => {
 
       // when
