@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="sid-38422fae-e03e-43a3-bef4-bd33b32041b2" targetNamespace="http://bpmn.io/bpmn" exporter="Camunda Modeler" exporterVersion="5.33.0-rc.1">
+  <process id="Process_1" isExecutable="false">
+    <subProcess id="SUB" name="SUB">
+      <incoming>Flow_196os62</incoming>
+      <outgoing>Flow_1reo6m2</outgoing>
+      <startEvent id="SUB_START" name="SUB_START">
+        <outgoing>Flow_1811uor</outgoing>
+      </startEvent>
+      <subProcess id="EVENT_SUB" name="EVENT_SUB" triggeredByEvent="true">
+        <startEvent id="EVENT_SUB_START" name="EVENT_SUB_START">
+          <outgoing>Flow_0fsg0ht</outgoing>
+          <escalationEventDefinition id="EscalationEventDefinition_08o4t4v" />
+        </startEvent>
+        <sequenceFlow id="Flow_0fsg0ht" sourceRef="EVENT_SUB_START" targetRef="EVENT_SUB_ESCALATION_THROW" />
+        <intermediateThrowEvent id="EVENT_SUB_ESCALATION_THROW" name="EVENT_SUB_ESCALATION_THROW">
+          <incoming>Flow_0fsg0ht</incoming>
+          <outgoing>Flow_09iz6v4</outgoing>
+          <escalationEventDefinition id="EscalationEventDefinition_0bjodwm" />
+        </intermediateThrowEvent>
+        <endEvent id="EVENT_SUB_END" name="EVENT_SUB_END">
+          <incoming>Flow_09iz6v4</incoming>
+        </endEvent>
+        <sequenceFlow id="Flow_09iz6v4" sourceRef="EVENT_SUB_ESCALATION_THROW" targetRef="EVENT_SUB_END" />
+      </subProcess>
+      <sequenceFlow id="Flow_1811uor" sourceRef="SUB_START" targetRef="SUB_END" />
+      <endEvent id="SUB_END" name="SUB_END">
+        <incoming>Flow_1811uor</incoming>
+        <escalationEventDefinition id="EscalationEventDefinition_106wtep" />
+      </endEvent>
+    </subProcess>
+    <endEvent id="END_EXPECTED" name="END_EXPECTED">
+      <incoming>Flow_1reo6m2</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_1reo6m2" sourceRef="SUB" targetRef="END_EXPECTED" />
+    <startEvent id="START" name="START">
+      <outgoing>Flow_196os62</outgoing>
+    </startEvent>
+    <sequenceFlow id="Flow_196os62" sourceRef="START" targetRef="SUB" />
+    <boundaryEvent id="ESCALATION_BOUNDARY_NON_INT" name="ESCALATION_BOUNDARY_NON_INT" cancelActivity="false" attachedToRef="SUB">
+      <outgoing>Flow_11qt9p0</outgoing>
+      <escalationEventDefinition id="EscalationEventDefinition_1x2jmnb" />
+    </boundaryEvent>
+    <endEvent id="END_EXPECTED_NON_INT" name="END_EXPECTED_NON_INT">
+      <incoming>Flow_11qt9p0</incoming>
+    </endEvent>
+    <sequenceFlow id="Flow_11qt9p0" sourceRef="ESCALATION_BOUNDARY_NON_INT" targetRef="END_EXPECTED_NON_INT" />
+  </process>
+  <bpmndi:BPMNDiagram id="BpmnDiagram_1">
+    <bpmndi:BPMNPlane id="BpmnPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="Event_1rda5bo_di" bpmnElement="END_EXPECTED">
+        <omgdc:Bounds x="982" y="237" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="956" y="280" width="89" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_01zhxzk_di" bpmnElement="SUB" isExpanded="true">
+        <omgdc:Bounds x="250" y="80" width="680" height="350" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1sk6tre_di" bpmnElement="SUB_START">
+        <omgdc:Bounds x="312" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="298" y="175" width="64" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_07y1gb6_di" bpmnElement="EVENT_SUB" isExpanded="true">
+        <omgdc:Bounds x="400" y="220" width="380" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0slecpz_di" bpmnElement="EVENT_SUB_START">
+        <omgdc:Bounds x="452" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="427" y="305" width="86" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0tot8oa_di" bpmnElement="EVENT_SUB_ESCALATION_THROW">
+        <omgdc:Bounds x="562" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="541" y="305" width="79" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1pryxzd_di" bpmnElement="EVENT_SUB_END">
+        <omgdc:Bounds x="672" y="262" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="651" y="305" width="79" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_0fsg0ht_di" bpmnElement="Flow_0fsg0ht">
+        <omgdi:waypoint x="488" y="280" />
+        <omgdi:waypoint x="562" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_09iz6v4_di" bpmnElement="Flow_09iz6v4">
+        <omgdi:waypoint x="598" y="280" />
+        <omgdi:waypoint x="672" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1ekoykd_di" bpmnElement="SUB_END">
+        <omgdc:Bounds x="402" y="132" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="394" y="175" width="52" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1811uor_di" bpmnElement="Flow_1811uor">
+        <omgdi:waypoint x="348" y="150" />
+        <omgdi:waypoint x="402" y="150" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0tnbd1j_di" bpmnElement="START">
+        <omgdc:Bounds x="152" y="237" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="152" y="280" width="36" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17yfaev_di" bpmnElement="END_EXPECTED_NON_INT">
+        <omgdc:Bounds x="732" y="492" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="706" y="535" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0e4thxc_di" bpmnElement="ESCALATION_BOUNDARY_NON_INT">
+        <omgdc:Bounds x="642" y="412" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <omgdc:Bounds x="620" y="455" width="86" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1reo6m2_di" bpmnElement="Flow_1reo6m2">
+        <omgdi:waypoint x="930" y="255" />
+        <omgdi:waypoint x="982" y="255" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_196os62_di" bpmnElement="Flow_196os62">
+        <omgdi:waypoint x="188" y="255" />
+        <omgdi:waypoint x="250" y="255" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_11qt9p0_di" bpmnElement="Flow_11qt9p0">
+        <omgdi:waypoint x="660" y="448" />
+        <omgdi:waypoint x="660" y="510" />
+        <omgdi:waypoint x="732" y="510" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>
