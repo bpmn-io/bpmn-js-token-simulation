@@ -922,6 +922,54 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('inclusive-gateway-link-event', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('TimerEvent')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-link-collapsed-subprocess', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_0')
+      });
+
+      trigger({
+        element: element('TimerEvent')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-link-missing', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('TimerEvent')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
