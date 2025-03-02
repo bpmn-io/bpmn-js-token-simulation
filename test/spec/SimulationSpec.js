@@ -825,6 +825,148 @@ describe('simulation', function() {
     });
 
 
+    describe('manual trigger', function() {
+
+      const diagram = require('./compensation-manual.bpmn');
+
+      beforeEach(bootstrapModeler(diagram, {
+        additionalModules: [
+          ModelerModule,
+          TestModule
+        ]
+      }));
+
+      beforeEach(inject(function(simulationSupport, simulationTrace) {
+        simulationSupport.toggleSimulation(true);
+
+        simulationTrace.start();
+      }));
+
+
+      it('should execute happy path', inject(
+        async function(simulator) {
+
+          // when
+          triggerElement('START');
+
+          await scopeDestroyed('PROCESS');
+
+          // then
+          expectHistory([
+            'START',
+            'FLOW_1',
+            'S',
+            'S_START',
+            'FLOW_2',
+            'A',
+            'FLOW_3',
+            'B',
+            'FLOW_4',
+            'S_END',
+            'FLOW_5',
+            'C',
+            'FLOW_6',
+            'COMPENSATE_S',
+            'Compensate_A',
+            'FLOW_7',
+            'END'
+          ]);
+        }
+      ));
+
+
+      it('should trigger in scope', inject(
+        async function(simulator, elementRegistry) {
+
+          // given
+          // toggle pause at <B>
+          triggerElement('B');
+
+          triggerElement('START');
+
+          // when
+          // wait for element <B> enter
+          await elementEnter('B');
+
+          // then trigger compensation for <A>
+          triggerElement('A_COMP_BOUNDARY');
+
+          // and resume flow
+          triggerElement('B');
+
+          await scopeDestroyed('PROCESS');
+
+          // then
+          expectHistory([
+            'START',
+            'FLOW_1',
+            'S',
+            'S_START',
+            'FLOW_2',
+            'A',
+            'FLOW_3',
+            'B',
+            'Compensate_A',
+            'FLOW_4',
+            'S_END',
+            'FLOW_5',
+            'C',
+            'FLOW_6',
+            'COMPENSATE_S',
+            'FLOW_7',
+            'END'
+          ]);
+        }
+      ));
+
+
+      it('should trigger outside of scope', inject(
+        async function(simulator, elementRegistry) {
+
+          // given
+          // toggle pause at <C>
+          triggerElement('C');
+
+          triggerElement('START');
+
+          // when
+          // wait for element <C> enter
+          await elementEnter('C');
+
+          // then trigger compensation for <A>
+          triggerElement('A_COMP_BOUNDARY');
+
+          // and resume flow
+          triggerElement('C');
+
+          await scopeDestroyed('PROCESS');
+
+          // then
+          expectHistory([
+            'START',
+            'FLOW_1',
+            'S',
+            'S_START',
+            'FLOW_2',
+            'A',
+            'FLOW_3',
+            'B',
+            'FLOW_4',
+            'S_END',
+            'FLOW_5',
+            'C',
+            'Compensate_A',
+            'FLOW_6',
+            'COMPENSATE_S',
+            'FLOW_7',
+            'END'
+          ]);
+        }
+      ));
+
+    });
+
+
     describe('errors', function() {
 
       const diagram = require('./simulator/Simulator.compensation-error.bpmn');
