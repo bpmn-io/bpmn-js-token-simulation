@@ -1769,6 +1769,30 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('compensation-after-error-recovery', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-after-escalation-recovery', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
