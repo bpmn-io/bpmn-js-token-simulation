@@ -574,6 +574,62 @@ describe('features/log', function() {
 
   });
 
+
+  describe('termination', function() {
+
+    const diagram = require('./termination.bpmn');
+
+    beforeEach(bootstrapModeler(diagram, {
+      additionalModules: [
+        ModelerModule,
+        TestModule,
+        {
+          log: [ 'type', LogCollector ]
+        },
+      ]
+    }));
+
+    beforeEach(inject(function(simulationSupport) {
+      simulationSupport.toggleSimulation();
+    }));
+
+
+    it('should be logged', inject(
+      async function() {
+
+        // when
+        triggerElement('START');
+
+        await scopeDestroyed();
+
+        // then
+        expectLog([
+          {
+            'text': 'Process started',
+            'icon': CheckCircleIcon()
+          },
+          {
+            'text': 'START',
+            'icon': 'bpmn-icon-start-event-none'
+          },
+          {
+            'text': 'Parallel Gateway',
+            'icon': 'bpmn-icon-gateway-parallel'
+          },
+          {
+            'text': 'TASK',
+            'icon': 'bpmn-icon-task'
+          },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          }
+        ]);
+      }
+    ));
+
+  });
+
 });
 
 
