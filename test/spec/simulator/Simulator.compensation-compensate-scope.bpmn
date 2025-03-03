@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="bpmn-js-token-simulation" exporterVersion="0.37.0">
+  <bpmn:process id="PROCESS" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>FLOW_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="A" name="A">
+      <bpmn:incoming>FLOW_1</bpmn:incoming>
+      <bpmn:outgoing>FLOW_2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="FLOW_1" sourceRef="START" targetRef="A" />
+    <bpmn:task id="B" name="B">
+      <bpmn:incoming>FLOW_2</bpmn:incoming>
+      <bpmn:outgoing>FLOW_3</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="FLOW_2" sourceRef="A" targetRef="B" />
+    <bpmn:sequenceFlow id="FLOW_3" sourceRef="B" targetRef="COMPENSATE_ALL" />
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>FLOW_4</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="FLOW_4" sourceRef="COMPENSATE_ALL" targetRef="END" />
+    <bpmn:boundaryEvent id="COMP_A_BOUNDARY" attachedToRef="A">
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_1lonsu7" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="COMP_A" name="COMP_A" isForCompensation="true" />
+    <bpmn:intermediateThrowEvent id="COMPENSATE_ALL" name="Compensate A by C">
+      <bpmn:incoming>FLOW_3</bpmn:incoming>
+      <bpmn:outgoing>FLOW_4</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_1yyu599" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:subProcess id="S" name="S" triggeredByEvent="true">
+      <bpmn:startEvent id="Event_0s6jeza" name="S_COMP">
+        <bpmn:outgoing>Flow_16004gh</bpmn:outgoing>
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_1qa7hl1" />
+      </bpmn:startEvent>
+      <bpmn:endEvent id="S_END" name="S_END">
+        <bpmn:incoming>Flow_16004gh</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_16004gh" sourceRef="Event_0s6jeza" targetRef="S_END" />
+    </bpmn:subProcess>
+    <bpmn:association id="Association_00wspsu" associationDirection="One" sourceRef="COMP_A_BOUNDARY" targetRef="COMP_A" />
+  </bpmn:process>
+  <bpmn:message id="MESSAGE" name="MESSAGE" />
+  <bpmn:error id="ERROR" name="ERROR" />
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="PROCESS">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="392" y="52" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A_di" bpmnElement="A">
+        <dc:Bounds x="480" y="30" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_di" bpmnElement="B">
+        <dc:Bounds x="640" y="30" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="902" y="52" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="COMP_A_di" bpmnElement="COMP_A">
+        <dc:Bounds x="610" y="150" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="COMPENSATE_ALL_di" bpmnElement="COMPENSATE_ALL">
+        <dc:Bounds x="802" y="52" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="777" y="95" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0snfbhb_di" bpmnElement="S" isExpanded="true">
+        <dc:Bounds x="612" y="-180" width="220" height="140" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_09ibwvf_di" bpmnElement="Event_0s6jeza">
+        <dc:Bounds x="652" y="-128" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="647" y="-85" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_1jm3s0j_di" bpmnElement="S_END">
+        <dc:Bounds x="744" y="-128" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="744" y="-85" width="37" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_16004gh_di" bpmnElement="Flow_16004gh">
+        <di:waypoint x="688" y="-110" />
+        <di:waypoint x="744" y="-110" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="COMP_A_BOUNDARY_di" bpmnElement="COMP_A_BOUNDARY">
+        <dc:Bounds x="522" y="92" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="FLOW_1_di" bpmnElement="FLOW_1">
+        <di:waypoint x="428" y="70" />
+        <di:waypoint x="480" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_2_di" bpmnElement="FLOW_2">
+        <di:waypoint x="580" y="70" />
+        <di:waypoint x="640" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_3_di" bpmnElement="FLOW_3">
+        <di:waypoint x="740" y="70" />
+        <di:waypoint x="802" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_4_di" bpmnElement="FLOW_4">
+        <di:waypoint x="838" y="70" />
+        <di:waypoint x="902" y="70" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_00wspsu_di" bpmnElement="Association_00wspsu">
+        <di:waypoint x="540" y="128" />
+        <di:waypoint x="540" y="190" />
+        <di:waypoint x="610" y="190" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
