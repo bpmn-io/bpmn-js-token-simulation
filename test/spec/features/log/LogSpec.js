@@ -55,12 +55,6 @@ class LogCollector extends Log {
 
     this._elementLog = [];
     this.log = (args) => {
-
-      // only interested in logs related to elements.
-      if (/^Process /.test(args.text)) {
-        return;
-      }
-
       this._elementLog.push({
         text: args.text,
         icon: args.icon
@@ -105,6 +99,10 @@ describe('features/log', function() {
         // then
         expectLog([
           {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'start'
           },
@@ -147,6 +145,10 @@ describe('features/log', function() {
           {
             'icon': 'bpmn-icon-end-event-none',
             'text': 'end'
+          },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
           }
         ]);
       }
@@ -187,25 +189,65 @@ describe('features/log', function() {
         // then
         expectLog([
           {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'start'
+          },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
           },
           {
             'icon': 'bpmn-icon-start-event-message',
             'text': 'messageStart'
           },
           {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-signal',
             'text': 'signalStart'
+          },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
           },
           {
             'icon': 'bpmn-icon-start-event-condition',
             'text': 'conditionalStart'
           },
           {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-timer',
             'text': 'timerStart'
           },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          }
         ]);
       }
     ));
@@ -246,6 +288,10 @@ describe('features/log', function() {
         // then
         expectLog([
           {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'start1'
           },
@@ -278,9 +324,21 @@ describe('features/log', function() {
             'text': 'Signal'
           },
           {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          },
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'start2'
           },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
+          }
         ]);
       }
     ));
@@ -325,6 +383,10 @@ describe('features/log', function() {
         // then
         expectLog([
           {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'start'
           },
@@ -363,6 +425,10 @@ describe('features/log', function() {
           {
             'icon': 'bpmn-icon-end-event-none',
             'text': 'end'
+          },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
           }
         ]);
       }
@@ -400,6 +466,10 @@ describe('features/log', function() {
         // then
         expectLog([
           {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
+          {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'start'
           },
@@ -418,6 +488,10 @@ describe('features/log', function() {
           {
             'icon': 'bpmn-icon-end-event-none',
             'text': 'End Event'
+          },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
           }
         ]);
       }
@@ -426,7 +500,7 @@ describe('features/log', function() {
   });
 
 
-  describe('items - sub processes', function() {
+  describe('icons - sub processes', function() {
 
     const diagram = require('./sub-processes.bpmn');
 
@@ -454,6 +528,10 @@ describe('features/log', function() {
 
         // then
         expectLog([
+          {
+            'icon': CheckCircleIcon(),
+            'text': 'Process started'
+          },
           {
             'icon': 'bpmn-icon-start-event-none',
             'text': 'Start Event'
@@ -485,6 +563,10 @@ describe('features/log', function() {
           {
             'icon': 'bpmn-icon-end-event-none',
             'text': 'End Event'
+          },
+          {
+            'text': 'Process finished',
+            'icon': CheckCircleIcon()
           }
         ]);
       }
@@ -503,6 +585,7 @@ function getSimulationSupport() {
 
 function expectLog(expectedLog) {
   const log = getBpmnJS().get('log');
+
   expect(log._elementLog, 'log equals').to.eql(expectedLog);
 }
 
