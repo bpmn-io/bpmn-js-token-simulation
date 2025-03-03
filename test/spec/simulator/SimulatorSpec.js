@@ -1894,7 +1894,7 @@ describe('simulator', function() {
     });
 
 
-    verify('event-sub-process-nested-cancelation', (fixture) => {
+    verify('event-sub-process-nested-cancelation-absorb-event', (fixture) => {
 
       // when
       trigger({
@@ -1906,7 +1906,44 @@ describe('simulator', function() {
     });
 
 
-    verify('event-sub-process-nested-cancelation-boundary-event', (fixture) => {
+    verify('event-sub-process-nested-cancelation-rethrow', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('event-sub-process-nested-cancelation-throws-error', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+
+    verify('event-sub-process-nested-cancelation-throws-escalation', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('event-sub-process-nested-interrupting-non-interrupting-boundary', (fixture) => {
 
       // when
       trigger({

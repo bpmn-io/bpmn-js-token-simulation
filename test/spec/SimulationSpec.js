@@ -1295,6 +1295,7 @@ describe('simulation', function() {
         // then
         expectElementTrigger('E_START');
         expectElementTrigger('TIMEOUT');
+        expectElementTrigger('TIMER_NON_INT');
         expectElementTrigger('SIGNAL_RETHROW');
 
         // but when
@@ -1306,8 +1307,9 @@ describe('simulation', function() {
 
         // then
         expectNoElementTrigger('E_START');
-        expectNoElementTrigger('TIMEOUT');
 
+        expectElementTrigger('TIMEOUT');
+        expectElementTrigger('TIMER_NON_INT');
         expectElementTrigger('SIGNAL_RETHROW');
         expectElementTrigger('E_RECEIVE');
 
