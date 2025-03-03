@@ -887,6 +887,29 @@ describe('simulator', function() {
     });
 
 
+    // inclusive gateway continues execution when
+    // token gets out of reach via an exclusive gateway
+    verify('inclusive-gateway-exclusive-gateway', (fixture) => {
+
+      // given
+      setConfig(element('ExclusiveGateway'), {
+        activeOutgoing: element('Flow_7')
+      });
+
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // when
+      trigger({
+        element: element('TimerEvent')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     // inclusive gateway waits for all tokens to arrive
     verify('inclusive-gateway-multiple-elements', (fixture) => {
 
@@ -916,6 +939,118 @@ describe('simulator', function() {
         scope: findScope({
           element: element('Timer_2')
         })
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    // inclusive gateway doesn't wait for tokens
+    // on flows that have already been activated
+    verify('inclusive-gateway-incoming-flow-taken', (fixture) => {
+
+      // given
+      setConfig(element('ExclusiveGateway'), {
+        activeOutgoing: element('Flow_4')
+      });
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('MessageEvent')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    // single incoming flow should always activate
+    verify('inclusive-gateway-single-incoming', (fixture) => {
+
+      // given
+      setConfig(element('InclusiveGateway'), {
+        activeOutgoing: [
+          element('Flow_7')
+        ]
+      });
+
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // when
+      trigger({
+        element: element('TimerEvent')
+      });
+
+      trigger({
+        element: element('TimerEvent')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    // a single token can result in multiple activations
+    verify('inclusive-gateway-multiple-activation', (fixture) => {
+
+      // given
+      waitAtElement(element('Task_A'));
+
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // when
+      trigger({
+        element: element('BoundaryMessage')
+      });
+
+      trigger({
+        element: element('BoundaryMessage')
+      });
+
+      trigger({
+        element: element('Task_A')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    // only consider token that do not visit the gateway
+    verify('inclusive-gateway-visiting-token', (fixture) => {
+
+      // given
+      setConfig(element('ExclusiveGateway'), {
+        activeOutgoing: element('Flow_2')
+      });
+
+      setConfig(element('InclusiveGateway_Split'), {
+        activeOutgoing: [
+          element('Flow_3'),
+          element('Flow_4')
+        ]
+      });
+
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      // when
+      setConfig(element('ExclusiveGateway'), {
+        activeOutgoing: element('Flow_7')
+      });
+
+      trigger({
+        element: element('TimerEvent_1')
       });
 
       // then
@@ -964,6 +1099,26 @@ describe('simulator', function() {
 
       trigger({
         element: element('TimerEvent')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('inclusive-gateway-multiple-link-events', (fixture) => {
+
+      // when
+      trigger({
+        element: element('StartEvent_1')
+      });
+
+      trigger({
+        element: element('TimerEvent_1')
+      });
+
+      trigger({
+        element: element('TimerEvent_2')
       });
 
       // then
