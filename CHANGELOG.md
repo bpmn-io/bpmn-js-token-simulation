@@ -6,6 +6,16 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.38.0
+
+* `FEAT`: be able to match `SimulationSupport#scopeDestroyed` by element ID ([`799c63b`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/799c63b094ac93dbdf200ad6b73fba121237292b))
+* `FEAT`: ensure completed scopes don't yield tokens ([#207](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/207))
+* `FIX`: make inclusive join spec compliant ([#143](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/143))
+* `FIX`: do not report termination as process cancelation ([#169](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/169))
+* `FIX`: events can always be caught by boundary events ([#217](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/217))
+* `FIX`: preserve compensation triggers when recovering from sub-process failure ([#223](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/223))
+* `FIX`: consider link events before inclusive joins ([#153](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/fe3ecf9602027de34cc58a41ee759acd3a841c4b))
+
 ## 0.37.0
 
 * `FEAT`: improve collapsed sub-process support ([#114](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/114))
