@@ -122,6 +122,30 @@ describe('features/context-pads - collapsed subprocess', function() {
   }));
 
 
+  it('should allow to pause subprocess', inject(
+    async function() {
+
+      // then
+      expect(canTriggerElement('CollapsedSubprocess')).to.be.true;
+    }
+  ));
+
+
+  it('should not allow to pause subprocess plane', inject(
+    async function(canvas) {
+
+      // given
+      const subprocess = canvas.findRoot('CollapsedSubprocess_plane');
+
+      // when
+      canvas.setRootElement(subprocess);
+
+      // then
+      expect(canTriggerElement('CollapsedSubprocess_plane')).to.be.false;
+    }
+  ));
+
+
   it('should allow to pause visible activities', inject(
     async function(canvas) {
 
