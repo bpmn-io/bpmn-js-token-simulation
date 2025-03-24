@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.38.1
+
+* `FIX`: don't show context pad overlays on sub-process plane ([#228](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/228))
+* `FIX`: correct context pad overlays not updating when changing root element ([#216](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/216), [#228](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/228))
+
 ## 0.38.0
 
 * `FEAT`: be able to match `SimulationSupport#scopeDestroyed` by element ID ([`799c63b`](https://github.com/bpmn-io/bpmn-js-token-simulation/commit/799c63b094ac93dbdf200ad6b73fba121237292b))
