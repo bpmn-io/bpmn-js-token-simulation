@@ -91,6 +91,57 @@ describe('features/context-pads', function() {
     }
   ));
 
+
+  it('should allow trigger in simulation mode only', inject(
+    async function(simulationSupport) {
+
+      // when
+      simulationSupport.toggleSimulation();
+
+      // then
+      expect(canTriggerElement('START')).to.be.false;
+    }
+  ));
+
+});
+
+
+describe('features/context-pads - collapsed subprocess', function() {
+
+  const diagram = require('./ContextPads.collapsed.subprocess.bpmn');
+
+  beforeEach(bootstrapModeler(diagram, {
+    additionalModules: [
+      ModelerModule,
+      TestModule
+    ]
+  }));
+
+  beforeEach(inject(function(simulationSupport) {
+    simulationSupport.toggleSimulation();
+  }));
+
+
+  it('should allow to pause visible activities', inject(
+    async function(canvas) {
+
+      // given
+      const process = canvas.findRoot('MainProcess');
+      const subprocess = canvas.findRoot('CollapsedSubprocess_plane');
+
+      // then
+      expect(process).to.exist;
+      expect(subprocess).to.exist;
+      expect(canTriggerElement('Inner_Task')).to.be.false;
+
+      // but when
+      canvas.setRootElement(subprocess);
+
+      // then
+      expect(canTriggerElement('Inner_Task')).to.be.true;
+    }
+  ));
+
 });
 
 
