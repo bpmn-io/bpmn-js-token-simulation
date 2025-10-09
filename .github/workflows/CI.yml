@@ -43,7 +43,7 @@ jobs:
       env:
         CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     - name: Update example
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      if: ${{ matrix.integration-deps == '' && github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       env:
         GIT_USER_NAME: ${{secrets.BPMN_IO_USER_NAME}}
         GIT_USER_EMAIL: ${{secrets.BPMN_IO_EMAIL}}
