@@ -8,11 +8,14 @@ import {
   getBpmnJS,
 } from 'test/TestHelper';
 
+import { expect } from 'chai';
+
 import {
   CheckCircleIcon
 } from 'lib/icons';
 
 import Log from 'lib/features/log/Log';
+
 
 const TestModule = {
   __depends__: [

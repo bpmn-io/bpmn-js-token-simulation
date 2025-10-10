@@ -6,6 +6,8 @@ import {
   inject
 } from 'test/TestHelper';
 
+import { expect } from 'chai';
+
 
 describe('viewer extension', function() {
 

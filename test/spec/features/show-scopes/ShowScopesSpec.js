@@ -10,6 +10,9 @@ import {
 
 import { queryAll as domQueryAll } from 'min-dom';
 
+import { expect } from 'chai';
+
+
 const TestModule = {
   __depends__: [
     SimulationSupportModule

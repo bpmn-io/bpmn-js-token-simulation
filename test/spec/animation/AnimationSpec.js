@@ -12,6 +12,8 @@ import {
   inject
 } from 'test/TestHelper';
 
+import { expect } from 'chai';
+
 
 const TestModule = {
   __depends__: [
