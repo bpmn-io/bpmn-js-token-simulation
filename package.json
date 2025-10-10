@@ -59,7 +59,7 @@
     "bpmn-js-properties-panel": "^5.42.1",
     "chai": "^4.5.0",
     "copy-webpack-plugin": "^13.0.1",
-    "cross-env": "^10.0.0",
+    "cross-env": "^10.1.0",
     "downloadjs": "^1.4.7",
     "eslint": "^9.20.0",
     "eslint-plugin-bpmn-io": "^2.1.0",
