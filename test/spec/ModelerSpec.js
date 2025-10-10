@@ -10,6 +10,9 @@ import {
 
 import { matchPattern } from 'min-dash';
 
+import { spy } from 'sinon';
+import { expect } from 'chai';
+
 import { queryAll as domQueryAll } from 'min-dom';
 
 
@@ -102,7 +105,7 @@ describe('modeler extension', function() {
       expectColors('StartEvent_1', { fill: '#fff', stroke: '#212121' });
       expectColors('StartEvent_1_label', { stroke: '#212121' });
 
-      const saveXMLSpy = sinon.spy(({ definitions }) => {
+      const saveXMLSpy = spy(({ definitions }) => {
 
         // then
         const diagrams = definitions.get('diagrams'),
@@ -136,7 +139,7 @@ describe('modeler extension', function() {
       expectColors('StartEvent_1', { fill: '#fff', stroke: '#212121' });
       expectColors('StartEvent_1_label', { stroke: '#212121' });
 
-      const saveXMLSpy = sinon.spy(({ definitions }) => {
+      const saveXMLSpy = spy(({ definitions }) => {
 
         // assume
         const diagrams = definitions.get('diagrams'),

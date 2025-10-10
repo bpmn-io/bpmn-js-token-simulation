@@ -1,6 +1,8 @@
 import { ScopeStates } from 'lib/simulator/ScopeStates';
 import { ScopeTraits } from 'lib/simulator/ScopeTraits';
 
+import { expect } from 'chai';
+
 
 describe('simulator - ScopeStates', function() {
 

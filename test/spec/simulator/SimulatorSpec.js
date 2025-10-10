@@ -11,6 +11,9 @@ import {
   ScopeTraits
 } from 'lib/simulator/ScopeTraits';
 
+import { expect } from 'chai';
+import { spy } from 'sinon';
+
 
 describe('simulator', function() {
 
@@ -19,9 +22,9 @@ describe('simulator', function() {
     verify('sub-process', (simulator) => {
 
       // when
-      const spy = sinon.spy();
+      const createSpy = spy();
 
-      simulator.on('createScope', spy);
+      simulator.on('createScope', createSpy);
 
       const scope = simulator.createScope({
         element: element('Process_1')
@@ -31,7 +34,7 @@ describe('simulator', function() {
       expect(scope).to.exist;
       expect(scope.element).to.equal(element('Process_1'));
 
-      expect(spy).to.have.been.calledOnce;
+      expect(createSpy).to.have.been.calledOnce;
 
       // but when
       simulator.off('createScope');
@@ -41,21 +44,21 @@ describe('simulator', function() {
       });
 
       // then
-      expect(spy).to.have.been.calledOnce;
+      expect(createSpy).to.have.been.calledOnce;
     });
 
 
     verify('sub-process', (simulator) => {
 
       // when
-      const spy = sinon.spy();
+      const tickSpy = spy();
 
-      simulator.on('tick', spy);
+      simulator.on('tick', tickSpy);
 
       simulator.waitAtElement(element('SUB'));
 
       // then
-      expect(spy).to.have.been.calledOnce;
+      expect(tickSpy).to.have.been.calledOnce;
     });
 
 
@@ -234,7 +237,7 @@ describe('simulator', function() {
       verify('sub-process', (simulator) => {
 
         // given
-        const subscribeSpy = sinon.spy();
+        const subscribeSpy = spy();
 
         const scope = simulator.createScope({
           element: element('Process_1')
