@@ -63,7 +63,7 @@
     "downloadjs": "^1.4.7",
     "eslint": "^9.37.0",
     "eslint-plugin-bpmn-io": "^2.2.0",
-    "file-drops": "^0.6.1",
+    "file-drops": "^0.7.0",
     "file-open": "^0.2.0",
     "karma": "^6.4.4",
     "karma-chrome-launcher-2": "^3.3.0",
