@@ -14,10 +14,11 @@
   <style>
     .controls {
       position: absolute;
-      top: 10px;
-      left: 10px;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: max-content;
       background: white;
-      padding: 15px;
       border: 1px solid #ccc;
       border-radius: 4px;
       z-index: 100;
@@ -25,7 +26,7 @@
 
     .controls button {
       margin: 5px;
-      padding: 8px 16px;
+      padding: 5px;
       cursor: pointer;
     }
 
@@ -39,17 +40,12 @@
 <body>
   <div class="canvas-parent">
     <div class="controls">
-      <h3>Execution Visualizer Demo</h3>
       <button id="toggleMode">Toggle Visualization Mode</button>
-      <button id="step1">Step 1: StartEvent</button>
-      <button id="step2">Step 2: Task1</button>
-      <button id="step3">Step 3: Task2</button>
-      <button id="step4">Step 4: EndEvent</button>
+      <button id="step1">Step 1: Start Event</button>
+      <button id="step2">Step 2: Parallel Gateway (Split)</button>
+      <button id="step3">Step 3: Prepare Cash</button>
+      <button id="step4">Step 4: Parallel Gateway (Join)</button>
       <button id="clear">Clear</button>
-      <div class="info">
-        <strong>Instructions:</strong> Toggle mode on, then use step buttons to visualize execution.
-        Blue = executed, Red = active
-      </div>
     </div>
     
     <div class="canvas" id="canvas"></div>
