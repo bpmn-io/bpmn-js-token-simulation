@@ -12,7 +12,8 @@ module.exports = (env, argv) => {
     mode,
     entry: {
       viewer: './example/src/viewer.js',
-      modeler: './example/src/modeler.js'
+      modeler: './example/src/modeler.js',
+      visualizer: './example/src/visualizer.js'
     },
     output: {
       filename: 'dist/[name].js',

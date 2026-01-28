@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Execution Visualizer | BPMN Token Simulation Demo</title>
+
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/diagram-js.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-js.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js-token-simulation/assets/css/bpmn-js-token-simulation.css" />
+  <link rel="stylesheet" href="./style.css" />
+
+  <style>
+    .controls {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: white;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      z-index: 100;
+    }
+
+    .controls button {
+      margin: 5px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+
+    .controls .info {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas-parent">
+    <div class="controls">
+      <h3>Execution Visualizer Demo</h3>
+      <button id="toggleMode">Toggle Visualization Mode</button>
+      <button id="step1">Step 1: StartEvent</button>
+      <button id="step2">Step 2: Task1</button>
+      <button id="step3">Step 3: Task2</button>
+      <button id="step4">Step 4: EndEvent</button>
+      <button id="clear">Clear</button>
+      <div class="info">
+        <strong>Instructions:</strong> Toggle mode on, then use step buttons to visualize execution.
+        Blue = executed, Red = active
+      </div>
+    </div>
+    
+    <div class="canvas" id="canvas"></div>
+  </div>
+
+  <script src="./dist/visualizer.js"></script>
+</body>
+</html>

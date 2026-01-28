@@ -17,7 +17,7 @@
 }
 
 .bjs-container.simulation .djs-container {
-  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-green-base-44, #10D070);
+  box-shadow: inset 0px 0px 0px 4px #0f62fe;
 }
 
 .bjs-container.simulation.paused .djs-container {
@@ -113,6 +113,27 @@
 
 @keyframes bts-jump {
   50% { top: 5px; }
+}
+
+@keyframes bts-pulsate {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.7;
+  }
+}
+
+.bts-active-indicator {
+  background-color: #0f62fe;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  box-shadow: 0 0 4px #0f62fe;
+  animation: bts-pulsate 1.5s ease-in-out infinite;
 }
 
 .bts-notifications {
@@ -258,7 +279,7 @@
   display: none !important;
 }
 
-.bjs-container.simulation .djs-overlay:not(.djs-overlay-bts-context-menu, .djs-overlay-bts-element-notification, .djs-overlay-bts-token-count, .djs-overlay-drilldown) {
+.bjs-container.simulation .djs-overlay:not(.djs-overlay-bts-context-menu, .djs-overlay-bts-element-notification, .djs-overlay-bts-token-count, .djs-overlay-bts-active-indicator, .djs-overlay-drilldown) {
   display: none !important;
 } 
 
