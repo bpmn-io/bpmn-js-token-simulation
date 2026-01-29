@@ -256,6 +256,31 @@
   color: var(--token-simulation-white, #FFFFFF);
 }
 
+.bts-close-button {
+  display: none;
+  position: absolute;
+  top: 10px;
+  right: 50%;
+  transform: translate(50%, 0);
+  background-color: #0f62fe;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: var(--token-simulation-white, #FFFFFF);
+  z-index: 100;
+  padding:  6px 6px 6px 12px;
+  font-size: 14px;
+}
+
+.bts-close-button:hover {
+  background-color: #0043ce;
+}
+
+.bjs-container.simulation .bts-close-button {
+  display: flex;
+}
+
 .bjs-container .djs-palette {
   top: 60px;
 }
@@ -537,4 +562,8 @@
 
 .bts-icon > svg {
   height: 1em;
+}
+
+.simulation .djs-create-pad {
+  display: none !important;
 }
