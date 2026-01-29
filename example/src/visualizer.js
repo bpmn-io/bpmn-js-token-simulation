@@ -81,8 +81,8 @@ function setupControls(toggleMode, executionVisualizer, eventBus) {
       toggleBtn.textContent = 'Mode: ON';
     }
     executionVisualizer.setExecutionState({
-      executedElements: [],
-      activeElement: 'StartEvent_0j9yk1o'
+      completed: [],
+      active: 'StartEvent_0j9yk1o'
     });
   });
 
@@ -93,8 +93,8 @@ function setupControls(toggleMode, executionVisualizer, eventBus) {
       toggleBtn.textContent = 'Mode: ON';
     }
     executionVisualizer.setExecutionState({
-      executedElements: ['StartEvent_0j9yk1o', 'SequenceFlow_1bpznq3'],
-      activeElement: 'ParallelGateway_0s75uad'
+      completed: ['StartEvent_0j9yk1o', 'SequenceFlow_1bpznq3'],
+      active: 'ParallelGateway_0s75uad'
     });
   });
 
@@ -105,8 +105,8 @@ function setupControls(toggleMode, executionVisualizer, eventBus) {
       toggleBtn.textContent = 'Mode: ON';
     }
     executionVisualizer.setExecutionState({
-      executedElements: ['StartEvent_0j9yk1o', 'SequenceFlow_1bpznq3', 'ParallelGateway_0s75uad', 'SequenceFlow_10d6h3a'],
-      activeElement: 'Task_1upmjgh'
+      completed: ['StartEvent_0j9yk1o', 'SequenceFlow_1bpznq3', 'ParallelGateway_0s75uad', 'SequenceFlow_10d6h3a'],
+      active: 'Task_1upmjgh'
     });
   });
 
@@ -117,8 +117,8 @@ function setupControls(toggleMode, executionVisualizer, eventBus) {
       toggleBtn.textContent = 'Mode: ON';
     }
     executionVisualizer.setExecutionState({
-      executedElements: ['StartEvent_0j9yk1o', 'SequenceFlow_1bpznq3', 'ParallelGateway_0s75uad', 'SequenceFlow_10d6h3a', 'Task_1upmjgh', 'SequenceFlow_1dzm18n'],
-      activeElement: 'ParallelGateway_158jo5x'
+      completed: ['StartEvent_0j9yk1o', 'SequenceFlow_1bpznq3', 'ParallelGateway_0s75uad', 'SequenceFlow_10d6h3a', 'Task_1upmjgh', 'SequenceFlow_1dzm18n'],
+      active: ['ParallelGateway_158jo5x']
     });
   });
 

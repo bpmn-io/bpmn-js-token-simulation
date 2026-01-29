@@ -50,13 +50,29 @@ toggleMode.toggleMode(false);
 
 ```javascript
 executionVisualizer.setExecutionState({
-  executedElements: ['StartEvent_1', 'Flow_1', 'Task_1', 'Flow_2', 'Task_2', 'Flow_3'],  // IDs of executed elements and flows
-  activeElement: 'Task_3'                                                                  // ID of currently active element
+  completed: ['StartEvent_1', 'Flow_1', 'Task_1', 'Flow_2', 'Task_2', 'Flow_3'],  // IDs of completed elements and flows
+  active: 'Task_3'                                                                 // ID(s) of currently active element(s)
 });
 ```
 
-- **executedElements**: Array of element IDs that have been executed, including both shapes and sequence flows (styled in gray)
-- **activeElement**: ID of the currently active element (styled in green)
+- **completed**: Array of element IDs that have been completed, including both shapes and sequence flows (styled in blue)
+- **active**: ID or array of IDs of the currently active element(s) (styled in blue with higher priority)
+
+**Note**: `active` can be either a single string ID or an array of string IDs to support multiple active elements:
+
+```javascript
+// Single active element
+executionVisualizer.setExecutionState({
+  completed: ['StartEvent_1', 'Flow_1'],
+  active: 'Task_1'
+});
+
+// Multiple active elements (e.g., parallel execution)
+executionVisualizer.setExecutionState({
+  completed: ['StartEvent_1', 'Flow_1', 'ParallelGateway_1'],
+  active: ['Task_1', 'Task_2', 'Task_3']
+});
+```
 
 #### Clear Visualization
 
@@ -69,7 +85,7 @@ executionVisualizer.clear();
 
 ```javascript
 const state = executionVisualizer.getExecutionState();
-// Returns: { executedElements: [...], activeElement: '...' }
+// Returns: { completed: [...], active: [...] }
 ```
 
 ## Visual Styling
@@ -87,8 +103,8 @@ const eventBus = viewer.get('eventBus');
 
 // Fired when execution state changes
 eventBus.on('executionVisualizer.stateChanged', (event) => {
-  console.log('Executed elements:', event.executedElements);
-  console.log('Active element:', event.activeElement);
+  console.log('Completed elements:', event.completed);
+  console.log('Active elements:', event.active);
 });
 
 // Fired when visualization is cleared
