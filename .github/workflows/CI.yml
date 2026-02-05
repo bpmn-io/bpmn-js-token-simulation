@@ -5,7 +5,7 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest ]
-        node-version: [ 20 ]
+        node-version: [ 24 ]
         integration-deps:
         - "" # as defined in package.json
         - "bpmn-js@17"
