@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.39.1
+
+* `DEPS`: depend on `ids@3.0.0`
+
 ## 0.39.0
 
 * `DEPS`: update to `min-dom@5.2.0`
