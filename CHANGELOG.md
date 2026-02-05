@@ -6,6 +6,11 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.39.0
+
+* `DEPS`: update to `min-dom@5.2.0`
+* `DEPS`: update to `min-dash@5.0.0`
+
 ## 0.38.2
 
 * `FIX`: correct resetting of flow colors changed by inclusive gateway toggling ([#242](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/242), [#243](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/243))
