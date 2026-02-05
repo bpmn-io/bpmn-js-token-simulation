@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>Modeler | BPMN Token Simulation Demo</title>
+
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/diagram-js.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-js.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js/assets/bpmn-font/css/bpmn-embedded.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js-token-simulation/assets/css/bpmn-js-token-simulation.css" />
+  <link rel="stylesheet" href="./dist/vendor/bpmn-js-properties-panel/assets/properties-panel.css" />
+  <link rel="stylesheet" href="./style.css" />
+
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="bpmn-js-token-simulation demo" />
+  <meta property="og:title" content="Modeler | BPMN Token Simulation Demo" />
+  <meta property="og:url" content="https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html" />
+  <meta property="og:description" content="Simulate your BPMN diagrams with bpmn-js-token-simulation. Understand and learn BPMN execution semantics one token at a time." />
+  <meta property="og:image" content="https://bpmn-io.github.io/bpmn-js-token-simulation/screenshot.png" />
+</head>
+<body>
+
+  <div class="canvas-parent">
+    <div class="canvas" id="canvas">
+      <div class="drop-message"><strong>Hint:</strong> Drop a diagram to open</div>
+
+      <div class="links top-links">
+        <a href="https://github.com/bpmn-io/bpmn-js-token-simulation" class="link" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="properties-panel" id="properties-panel">
+      <div class="properties-panel-resizer" id="properties-panel-resizer" title="Toggle properties panel" draggable="true">
+         <div class="properties-panel-resize-handle"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="links bottom-links">
+    <button class="link" id="download-button">Download Diagram</button>
+  </div>
+
+  <script src="./dist/modeler.js"></script>
+</body>
+</html>
