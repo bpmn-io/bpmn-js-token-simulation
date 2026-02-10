@@ -1,86 +1,156 @@
-# bpmn-js Token Simulation
+# Execution Visualizer
 
-[![CI](https://github.com/bpmn-io/bpmn-js-token-simulation/workflows/CI/badge.svg)](https://github.com/bpmn-io/bpmn-js-token-simulation/actions?query=workflow%3ACI)
+This module provides a way to visualize actual BPMN execution without running autonomous simulation. Instead of simulating token flow, you can drive the visualization programmatically from external execution data.
 
-A BPMN 2.0 specification compliant token simulator, built as a [bpmn-js](https://github.com/bpmn-io/bpmn-js) extension.
+![](docs/screenshot.png)
 
-[![Screencast](docs/screenshot.png)](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1&pp=1)
+## Key Features
 
-Try it on the [classic booking example](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1&pp=1&diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fbpmn-io%2Fbpmn-js-token-simulation%2Fmaster%2Ftest%2Fspec%2Fbooking.bpmn) or checkout the [full capability demo](https://bpmn-io.github.io/bpmn-js-token-simulation/modeler.html?e=1&pp=1&diagram=https%3A%2F%2Fraw.githubusercontent.com%2Fbpmn-io%2Fbpmn-js-token-simulation%2Fmaster%2Fexample%2Fresources%2Fall.bpmn).
-
-
-## Installation
-
-Install via [npm](http://npmjs.com/).
-
-```
-npm install bpmn-js-token-simulation
-```
-
+- **No Token Animation**: Elements are styled instantly without animated token movement
+- **Hidden Controls**: No log panel, play/pause buttons, or reset controls
+- **Programmatic Control**: Mode switching and execution state controlled via API
+- **Simple API**: Set executed elements, executed flows, and active element via single method call
 
 ## Usage
 
-Add as additional module to [bpmn-js](https://github.com/bpmn-io/bpmn-js).
-
-### Modeler
-
-```javascript
-import BpmnModeler from 'bpmn-js/lib/Modeler';
-import TokenSimulationModule from 'bpmn-js-token-simulation';
-
-const modeler = new BpmnModeler({
-  container: '#canvas',
-  additionalModules: [
-    TokenSimulationModule
-  ]
-});
-```
-
-### Viewer
+### Basic Setup
 
 ```javascript
 import BpmnViewer from 'bpmn-js/lib/NavigatedViewer';
-import TokenSimulationModule from 'bpmn-js-token-simulation/lib/viewer';
+import TokenSimulationVisualizerModule from 'bpmn-js-token-simulation/lib/visualizer';
 
 const viewer = new BpmnViewer({
   container: '#canvas',
   additionalModules: [
-    TokenSimulationModule
+    TokenSimulationVisualizerModule
   ]
+});
+
+await viewer.importXML(bpmnXML);
+```
+
+### Accessing Services
+
+```javascript
+const toggleMode = viewer.get('toggleMode');
+const executionVisualizer = viewer.get('executionVisualizer');
+```
+
+### API Methods
+
+#### Enable Visualization Mode
+
+```javascript
+// Turn on visualization mode (activates visual styling)
+toggleMode.toggleMode(true);
+
+// Turn off visualization mode (restores original diagram)
+toggleMode.toggleMode(false);
+```
+
+#### Set Execution State
+
+```javascript
+executionVisualizer.setExecutionState({
+  completed: ['StartEvent_1', 'Flow_1', 'Task_1', 'Flow_2', 'Task_2', 'Flow_3'],  // IDs of completed elements and flows
+  active: 'Task_3'                                                                 // ID(s) of currently active element(s)
 });
 ```
 
+- **completed**: Array of element IDs that have been completed, including both shapes and sequence flows (styled in blue)
+- **active**: ID or array of IDs of the currently active element(s) (styled in blue with higher priority)
 
-## Build and Run
+**Note**: `active` can be either a single string ID or an array of string IDs to support multiple active elements:
 
-Prepare the project by installing all dependencies:
+```javascript
+// Single active element
+executionVisualizer.setExecutionState({
+  completed: ['StartEvent_1', 'Flow_1'],
+  active: 'Task_1'
+});
 
-```sh
-npm install
+// Multiple active elements (e.g., parallel execution)
+executionVisualizer.setExecutionState({
+  completed: ['StartEvent_1', 'Flow_1', 'ParallelGateway_1'],
+  active: ['Task_1', 'Task_2', 'Task_3']
+});
 ```
 
-Then, depending on your use-case you may run any of the following commands:
+#### Clear Visualization
 
-```sh
-# build the library and run all tests
-npm run all
-
-# run the full development setup
-npm run dev
-
-# spin up the example
-npm run start:example
+```javascript
+// Remove all execution visualization styling
+executionVisualizer.clear();
 ```
 
+#### Get Current State
 
-## Additional Resources
+```javascript
+const state = executionVisualizer.getExecutionState();
+// Returns: { completed: [...], active: [...] }
+```
 
-* [Talk: Making of token simulation](https://nikku.github.io/talks/2021-token-simulation) - The case for token simulation and how it builds on top of [bpmn-js](https://github.com/bpmn-io/bpmn-js)
-* [Talk: Token simulation internals](https://nikku.github.io/talks/2021-token-simulation-internals) - Detailed walk through the simulators core
-* [Talk: Your next BPMN engine](https://page.camunda.com/ccs2022-bpmn-js-token-simulation) - How we turned this project into a BPMN 2.0 spec compliant simulator
-* [Camunda Modeler Token Simulation plug-in](https://github.com/camunda/camunda-modeler-token-simulation-plugin) - Token simulation for [Camunda](https://camunda.com/) users
+## Visual Styling
 
+- **Executed Elements**: Blue stroke, no background fill
+- **Active Element**: Red stroke, no background fill
+- **Priority**: Active element styling (priority 2000) overrides executed styling (priority 1000)
 
-## Licence
+## Events
 
-MIT
+The execution visualizer fires custom events on the event bus:
+
+```javascript
+const eventBus = viewer.get('eventBus');
+
+// Fired when execution state changes
+eventBus.on('executionVisualizer.stateChanged', (event) => {
+  console.log('Completed elements:', event.completed);
+  console.log('Active elements:', event.active);
+});
+
+// Fired when visualization is cleared
+eventBus.on('executionVisualizer.cleared', () => {
+  console.log('Visualization cleared');
+});
+```
+
+## Differences from Simulation Mode
+
+| Feature | Simulation Mode | Visualizer Mode |
+|---------|----------------|-----------------|
+| Token Animation | ✅ Animated tokens | ❌ No animation |
+| Log Panel | ✅ Visible | ❌ Hidden |
+| Play/Pause Controls | ✅ Visible | ❌ Hidden |
+| Reset Button | ✅ Visible | ❌ Hidden |
+| Context Pads | ✅ Visible | ❌ Hidden |
+| Mode Toggle | ✅ UI Button | ✅ Programmatic only |
+| Token Count | ✅ Visible | ✅ Visible |
+| Execution Control | ⚙️ Autonomous simulation | ⚙️ External control |
+
+## Example
+
+See [example/visualizer.html](../example/visualizer.html) and [example/src/visualizer.js](../example/src/visualizer.js) for a complete working example.
+
+## Module Structure
+
+The visualizer mode includes these modules (from [lib/visualizer-base.js](../lib/visualizer-base.js)):
+
+- **SimulatorModule**: Core scope and state management (behaviors disabled)
+- **ColoredScopesModule**: Scope coloring for multi-instance scenarios
+- **SimulationStateModule**: State tracking
+- **ShowScopesModule**: Scope visualization
+- **ElementSupportModule**: BPMN element type support
+- **TokenCountModule**: Token count overlays
+- **ExclusiveGatewaySettingsModule**: Gateway configuration
+- **InclusiveGatewaySettingsModule**: Gateway configuration  
+- **NeutralElementColors**: Base element coloring
+- **ExecutionVisualizerModule**: External execution visualization (new)
+
+Excluded modules (compared to full simulation):
+- AnimationModule
+- LogModule
+- PauseSimulationModule
+- ResetSimulationModule
+- TokenSimulationPaletteModule
+- ContextPadsModule
