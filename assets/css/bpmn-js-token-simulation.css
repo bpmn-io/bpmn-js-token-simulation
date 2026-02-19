@@ -275,6 +275,7 @@
 .bts-palette .bts-entry {
   cursor: pointer;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  border: none;
   border-radius: 2px;
   padding: 6px 0;
   margin-bottom: 6px;
