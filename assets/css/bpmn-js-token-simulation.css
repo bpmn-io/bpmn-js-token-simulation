@@ -31,6 +31,7 @@
 .bts-context-pad {
   cursor: pointer;
   background-color: var(--token-simulation-grey-lighten-56, #909090);
+  border: none;
   border-radius: 2px;
   margin: 0;
   font-size: 16px;
