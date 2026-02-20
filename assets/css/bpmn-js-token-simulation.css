@@ -52,9 +52,15 @@
   color: var(--token-simulation-white, #FFFFFF);
 }
 
-.djs-overlays:not(.hover) .bts-context-pad:not(:hover).show-hover,
-.bts-context-pad:not(:hover) .show-hover,
-.bts-context-pad:hover .hide-hover {
+/* button hidden until hovered or keyboard-focused; kept in accessibility tree via opacity */
+.djs-overlays:not(.hover) .bts-context-pad:not(:hover):not(:focus).show-hover {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bts-context-pad:not(:hover):not(:focus) .show-hover,
+.bts-context-pad:hover .hide-hover,
+.bts-context-pad:focus .hide-hover {
   display: none;
 }
 
