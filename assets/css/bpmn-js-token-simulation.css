@@ -261,7 +261,7 @@
 
 .bjs-container.simulation .djs-overlay:not(.djs-overlay-bts-context-menu, .djs-overlay-bts-element-notification, .djs-overlay-bts-token-count, .djs-overlay-drilldown) {
   display: none !important;
-} 
+}
 
 .bts-palette {
   position: absolute;
@@ -306,8 +306,8 @@
 }
 
 .bts-palette .bts-entry.disabled {
-  pointer-events: none;
   color: var(--token-simulation-grey-base-40, #666666);
+  cursor: not-allowed;
 }
 
 .bts-log {
