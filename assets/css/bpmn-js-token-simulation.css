@@ -46,7 +46,8 @@
   box-sizing: border-box;
 }
 
-.bts-context-pad:not(.disabled):hover {
+.bts-context-pad:not(.disabled):hover,
+.bts-context-pad:not(.disabled):focus-visible {
   background-color: var(--token-simulation-green-base-44, #10D070);
   opacity: 1;
   color: var(--token-simulation-white, #FFFFFF);
@@ -467,7 +468,8 @@
   cursor: pointer;
 }
 
-.bts-scopes .bts-scope.inactive:hover {
+.bts-scopes .bts-scope.inactive:hover,
+.bts-scopes .bts-scope.inactive:focus-visible {
   opacity: 1
 }
 
@@ -476,9 +478,7 @@
 }
 
 .bts-scopes .bts-scope.focussed {
-  outline-offset: 2px;
-  outline-width: 2px;
-  outline-style: solid;
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--scope-color);
 }
 
 .djs-container.highlight {
