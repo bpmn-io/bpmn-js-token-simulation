@@ -462,9 +462,9 @@
   line-height: 25px;
   text-align: center;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  border: none;
   margin-right: 10px;
   cursor: pointer;
-  outline: none;
 }
 
 .bts-scopes .bts-scope.inactive:hover {
