@@ -470,7 +470,7 @@
 
 .bts-scopes .bts-scope.inactive:hover,
 .bts-scopes .bts-scope.inactive:focus-visible {
-  opacity: 1
+  opacity: 1;
 }
 
 .bts-scopes .bts-scope.inactive {
