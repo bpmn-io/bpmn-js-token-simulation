@@ -1,10 +1,16 @@
-# Changelog
+git# Changelog
 
 All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io/bpmn-js-token-simulation) are documented here. We use [semantic versioning](http://semver.org/) for releases.
 
 ## Unreleased
 
 ___Note:__ Yet to be released changes appear here._
+
+## 0.39.2
+
+* `FIX`: improve accessibility for keyboard users ([#252](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/252))
+* `DEPS`: update to ids@3.0.1
+* `DEPS`: update to min-dom@5.3.0
 
 ## 0.39.1
 
