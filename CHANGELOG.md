@@ -6,6 +6,8 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FIX`: allow pause/play via space key after clicking on context pad button ([#253](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/253))
+
 ## 0.39.2
 
 * `FIX`: improve accessibility for keyboard users ([#252](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/252))
