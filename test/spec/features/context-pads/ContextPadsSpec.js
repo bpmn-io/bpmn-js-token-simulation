@@ -171,6 +171,82 @@ describe('features/context-pads - collapsed subprocess', function() {
 });
 
 
+describe('features/context-pads - keyboard and focus', function() {
+
+  const diagram = require('./ContextPads.scope-filter.bpmn');
+
+  beforeEach(bootstrapModeler(diagram, {
+    additionalModules: [
+      ModelerModule,
+      TestModule
+    ]
+  }));
+
+  beforeEach(inject(function(simulationSupport) {
+    simulationSupport.toggleSimulation();
+  }));
+
+
+  it('should focus canvas after click on context pad button', inject(
+    function(canvas, simulationSupport) {
+
+      // given
+      const trigger = simulationSupport.getElementTrigger('START');
+      expect(trigger).to.exist;
+
+      // when
+      simulationSupport.triggerElement('START');
+
+      // then
+      expect(canvas.isFocused()).to.be.true;
+    }
+  ));
+
+
+  it('should keep button focused when activated via Space key', inject(
+    function(canvas, simulationSupport) {
+
+      // given
+      const trigger = simulationSupport.getElementTrigger('START');
+      trigger.focus();
+
+      // when
+      trigger.dispatchEvent(new KeyboardEvent('keydown', {
+        key: ' ',
+        bubbles: true,
+        cancelable: true
+      }));
+
+      // then
+      expect(document.activeElement).to.equal(trigger);
+      expect(canvas.isFocused()).to.be.false;
+    }
+  ));
+
+
+  it('should keep button focused when activated via Enter key', inject(
+    function(canvas, simulationSupport) {
+
+      // given
+      const trigger = simulationSupport.getElementTrigger('START');
+      trigger.focus();
+
+      // when
+      trigger.dispatchEvent(new KeyboardEvent('keydown', {
+        key: 'Enter',
+        bubbles: true,
+        cancelable: true
+      }));
+
+      // then
+      expect(document.activeElement).to.equal(trigger);
+      expect(canvas.isFocused()).to.be.false;
+    }
+  ));
+
+});
+
+
 // helpers ////////////////////
 
 function getSimulationSupport() {
