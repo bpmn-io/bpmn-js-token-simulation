@@ -5,7 +5,7 @@ import SimulationSupportModule from 'lib/simulation-support';
 import {
   bootstrapModeler as _bootstrapModeler,
   inject,
-  getBpmnJS,
+  getBpmnJS, withBpmnJs,
 } from 'test/TestHelper';
 
 import { expect } from 'chai';
@@ -187,7 +187,7 @@ describe('features/context-pads - keyboard and focus', function() {
   }));
 
 
-  it('should focus canvas after click on context pad button', inject(
+  withBpmnJs('>= 18')('should focus canvas after click on context pad button', inject(
     function(canvas, simulationSupport) {
 
       // given
@@ -203,7 +203,7 @@ describe('features/context-pads - keyboard and focus', function() {
   ));
 
 
-  it('should keep button focused when activated via Space key', inject(
+  withBpmnJs('>= 18')('should keep button focused when activated via Space key', inject(
     function(canvas, simulationSupport) {
 
       // given
@@ -224,7 +224,7 @@ describe('features/context-pads - keyboard and focus', function() {
   ));
 
 
-  it('should keep button focused when activated via Enter key', inject(
+  withBpmnJs('>= 18')('should keep button focused when activated via Enter key', inject(
     function(canvas, simulationSupport) {
 
       // given
