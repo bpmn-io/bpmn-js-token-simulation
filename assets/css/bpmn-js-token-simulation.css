@@ -234,12 +234,14 @@
   top: 20px;
   left: 20px;
   background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  border: none;
   border-radius: 2px;
   padding: 6px;
   font-size: 16px;
   color: var(--token-simulation-grey-darken-30, #212121);
   user-select: none;
   display: inline-flex;
+  font-family: inherit;
 }
 
 .bts-toggle-mode .bts-toggle {

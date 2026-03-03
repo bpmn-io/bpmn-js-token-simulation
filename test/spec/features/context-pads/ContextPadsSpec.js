@@ -3,6 +3,10 @@ import ModelerModule from 'lib/modeler';
 import SimulationSupportModule from 'lib/simulation-support';
 
 import {
+  query as domQuery
+} from 'min-dom';
+
+import {
   bootstrapModeler as _bootstrapModeler,
   inject,
   getBpmnJS,
@@ -171,6 +175,84 @@ describe('features/context-pads - collapsed subprocess', function() {
 });
 
 
+describe('features/context-pads - accessible labels', function() {
+
+  const diagram = require('./ContextPads.scope-filter.bpmn');
+
+  beforeEach(bootstrapModeler(diagram, {
+    additionalModules: [
+      ModelerModule,
+      TestModule
+    ]
+  }));
+
+  beforeEach(inject(function(simulationSupport) {
+    simulationSupport.toggleSimulation();
+  }));
+
+
+  describe('trigger button (bpmn:StartEvent)', function() {
+
+    it('should have aria-label with element name', inject(function() {
+
+      // given
+      const btn = getContextPadButton('START');
+
+      // then
+      expect(btn.getAttribute('aria-label')).to.equal('Trigger Event to: START');
+    }));
+
+
+    it('should have title without element name', inject(function() {
+
+      // given
+      const btn = getContextPadButton('START');
+
+      // then
+      expect(btn.title).to.equal('Trigger Event');
+    }));
+
+  });
+
+
+  describe('pause button (bpmn:Task)', function() {
+
+    it('should have aria-label with element name', inject(function() {
+
+      // given
+      const btn = getContextPadButton('NESTED_TASK');
+
+      // then
+      expect(btn.getAttribute('aria-label')).to.equal('Add pause point to: NESTED_TASK');
+    }));
+
+
+    it('should have title without element name', inject(function() {
+
+      // given
+      const btn = getContextPadButton('NESTED_TASK');
+
+      // then
+      expect(btn.title).to.equal('Add pause point');
+    }));
+
+
+    it('should update aria-label after toggle, title stays short', inject(function() {
+
+      // when - toggle pause on
+      triggerElement('NESTED_TASK');
+
+      // then
+      const btn = getContextPadButton('NESTED_TASK');
+      expect(btn.getAttribute('aria-label')).to.equal('Remove pause point to: NESTED_TASK');
+      expect(btn.title).to.equal('Remove pause point');
+    }));
+
+  });
+
+});
+
+
 // helpers ////////////////////
 
 function getSimulationSupport() {
@@ -187,4 +269,12 @@ function triggerElement(...args) {
 
 function elementEnter(...args) {
   return getSimulationSupport().elementEnter(...args);
+}
+
+function getContextPadButton(id) {
+  const container = getBpmnJS()._container;
+  return domQuery(
+    `.djs-overlays[data-container-id='${ id }'] .bts-context-pad:not(.hidden)`,
+    container
+  );
 }

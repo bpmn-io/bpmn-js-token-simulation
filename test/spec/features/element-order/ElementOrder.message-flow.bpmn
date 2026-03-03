@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:message id="Message_1" name="Trigger" />
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="POOL_A" name="Pool A" processRef="Process_A" />
+    <bpmn:participant id="POOL_B" name="Pool B" processRef="Process_B" />
+    <!-- Message flow: TASK_A sends message to start Pool B -->
+    <bpmn:messageFlow id="MSG_FLOW" sourceRef="TASK_A" targetRef="RECEIVE_B" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_A" isExecutable="false">
+    <bpmn:startEvent id="START_A" name="Start A">
+      <bpmn:outgoing>Flow_A1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_A1" sourceRef="START_A" targetRef="TASK_A" />
+    <bpmn:task id="TASK_A" name="Task A">
+      <bpmn:incoming>Flow_A1</bpmn:incoming>
+      <bpmn:outgoing>Flow_A2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_A2" sourceRef="TASK_A" targetRef="END_A" />
+    <bpmn:endEvent id="END_A" name="End A">
+      <bpmn:incoming>Flow_A2</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:process id="Process_B" isExecutable="false">
+    <bpmn:startEvent id="RECEIVE_B" name="Receive B">
+      <bpmn:outgoing>Flow_B1</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="MsgDef_1" messageRef="Message_1" />
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_B1" sourceRef="RECEIVE_B" targetRef="TASK_B" />
+    <bpmn:task id="TASK_B" name="Task B">
+      <bpmn:incoming>Flow_B1</bpmn:incoming>
+      <bpmn:outgoing>Flow_B2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_B2" sourceRef="TASK_B" targetRef="END_B" />
+    <bpmn:endEvent id="END_B" name="End B">
+      <bpmn:incoming>Flow_B2</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="POOL_A_di" bpmnElement="POOL_A" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="500" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="START_A_di" bpmnElement="START_A">
+        <dc:Bounds x="222" y="137" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_A_di" bpmnElement="TASK_A">
+        <dc:Bounds x="320" y="115" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_A_di" bpmnElement="END_A">
+        <dc:Bounds x="502" y="137" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_A1_di" bpmnElement="Flow_A1">
+        <di:waypoint x="258" y="155" />
+        <di:waypoint x="320" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_A2_di" bpmnElement="Flow_A2">
+        <di:waypoint x="420" y="155" />
+        <di:waypoint x="502" y="155" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="POOL_B_di" bpmnElement="POOL_B" isHorizontal="true">
+        <dc:Bounds x="160" y="280" width="500" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="RECEIVE_B_di" bpmnElement="RECEIVE_B">
+        <dc:Bounds x="222" y="337" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_B_di" bpmnElement="TASK_B">
+        <dc:Bounds x="320" y="315" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_B_di" bpmnElement="END_B">
+        <dc:Bounds x="502" y="337" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_B1_di" bpmnElement="Flow_B1">
+        <di:waypoint x="258" y="355" />
+        <di:waypoint x="320" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_B2_di" bpmnElement="Flow_B2">
+        <di:waypoint x="420" y="355" />
+        <di:waypoint x="502" y="355" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="MSG_FLOW_di" bpmnElement="MSG_FLOW">
+        <di:waypoint x="370" y="195" />
+        <di:waypoint x="370" y="337" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
