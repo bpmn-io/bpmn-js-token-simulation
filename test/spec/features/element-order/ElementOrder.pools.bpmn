@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:collaboration id="Collaboration_1">
+    <bpmn:participant id="POOL_A" name="Pool A" processRef="Process_A" />
+    <bpmn:participant id="POOL_B" name="Pool B" processRef="Process_B" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_A" isExecutable="true">
+    <bpmn:startEvent id="POOL_A_START" name="Start A">
+      <bpmn:outgoing>Flow_A1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_A1" sourceRef="POOL_A_START" targetRef="POOL_A_TASK" />
+    <bpmn:task id="POOL_A_TASK" name="Task A">
+      <bpmn:incoming>Flow_A1</bpmn:incoming>
+      <bpmn:outgoing>Flow_A2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_A2" sourceRef="POOL_A_TASK" targetRef="POOL_A_END" />
+    <bpmn:endEvent id="POOL_A_END" name="End A">
+      <bpmn:incoming>Flow_A2</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmn:process id="Process_B" isExecutable="true">
+    <bpmn:startEvent id="POOL_B_START" name="Start B">
+      <bpmn:outgoing>Flow_B1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sequenceFlow id="Flow_B1" sourceRef="POOL_B_START" targetRef="POOL_B_TASK" />
+    <bpmn:task id="POOL_B_TASK" name="Task B">
+      <bpmn:incoming>Flow_B1</bpmn:incoming>
+      <bpmn:outgoing>Flow_B2</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="Flow_B2" sourceRef="POOL_B_TASK" targetRef="POOL_B_END" />
+    <bpmn:endEvent id="POOL_B_END" name="End B">
+      <bpmn:incoming>Flow_B2</bpmn:incoming>
+    </bpmn:endEvent>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1">
+      <bpmndi:BPMNShape id="POOL_A_di" bpmnElement="POOL_A" isHorizontal="true">
+        <dc:Bounds x="100" y="60" width="500" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="POOL_A_START_di" bpmnElement="POOL_A_START">
+        <dc:Bounds x="180" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="POOL_A_TASK_di" bpmnElement="POOL_A_TASK">
+        <dc:Bounds x="280" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="POOL_A_END_di" bpmnElement="POOL_A_END">
+        <dc:Bounds x="452" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_A1_di" bpmnElement="Flow_A1">
+        <di:waypoint x="216" y="120" />
+        <di:waypoint x="280" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_A2_di" bpmnElement="Flow_A2">
+        <di:waypoint x="380" y="120" />
+        <di:waypoint x="452" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="POOL_B_di" bpmnElement="POOL_B" isHorizontal="true">
+        <dc:Bounds x="100" y="220" width="500" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="POOL_B_START_di" bpmnElement="POOL_B_START">
+        <dc:Bounds x="180" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="POOL_B_TASK_di" bpmnElement="POOL_B_TASK">
+        <dc:Bounds x="280" y="240" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="POOL_B_END_di" bpmnElement="POOL_B_END">
+        <dc:Bounds x="452" y="262" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_B1_di" bpmnElement="Flow_B1">
+        <di:waypoint x="216" y="280" />
+        <di:waypoint x="280" y="280" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_B2_di" bpmnElement="Flow_B2">
+        <di:waypoint x="380" y="280" />
+        <di:waypoint x="452" y="280" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
