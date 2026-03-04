@@ -5,7 +5,7 @@ import SimulationSupportModule from 'lib/simulation-support';
 import {
   bootstrapModeler as _bootstrapModeler,
   inject,
-  getBpmnJS,
+  getBpmnJS, withBpmnJs,
 } from 'test/TestHelper';
 
 import { expect } from 'chai';
@@ -165,6 +165,82 @@ describe('features/context-pads - collapsed subprocess', function() {
 
       // then
       expect(canTriggerElement('Inner_Task')).to.be.true;
+    }
+  ));
+
+});
+
+
+describe('features/context-pads - keyboard and focus', function() {
+
+  const diagram = require('./ContextPads.scope-filter.bpmn');
+
+  beforeEach(bootstrapModeler(diagram, {
+    additionalModules: [
+      ModelerModule,
+      TestModule
+    ]
+  }));
+
+  beforeEach(inject(function(simulationSupport) {
+    simulationSupport.toggleSimulation();
+  }));
+
+
+  withBpmnJs('>= 18')('should focus canvas after click on context pad button', inject(
+    function(canvas, simulationSupport) {
+
+      // given
+      const trigger = simulationSupport.getElementTrigger('START');
+      expect(trigger).to.exist;
+
+      // when
+      simulationSupport.triggerElement('START');
+
+      // then
+      expect(canvas.isFocused()).to.be.true;
+    }
+  ));
+
+
+  withBpmnJs('>= 18')('should keep button focused when activated via Space key', inject(
+    function(canvas, simulationSupport) {
+
+      // given
+      const trigger = simulationSupport.getElementTrigger('START');
+      trigger.focus();
+
+      // when
+      trigger.dispatchEvent(new KeyboardEvent('keydown', {
+        key: ' ',
+        bubbles: true,
+        cancelable: true
+      }));
+
+      // then
+      expect(document.activeElement).to.equal(trigger);
+      expect(canvas.isFocused()).to.be.false;
+    }
+  ));
+
+
+  withBpmnJs('>= 18')('should keep button focused when activated via Enter key', inject(
+    function(canvas, simulationSupport) {
+
+      // given
+      const trigger = simulationSupport.getElementTrigger('START');
+      trigger.focus();
+
+      // when
+      trigger.dispatchEvent(new KeyboardEvent('keydown', {
+        key: 'Enter',
+        bubbles: true,
+        cancelable: true
+      }));
+
+      // then
+      expect(document.activeElement).to.equal(trigger);
+      expect(canvas.isFocused()).to.be.false;
     }
   ));
 
