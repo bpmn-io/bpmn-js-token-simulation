@@ -1,4 +1,4 @@
-git# Changelog
+# Changelog
 
 All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io/bpmn-js-token-simulation) are documented here. We use [semantic versioning](http://semver.org/) for releases.
 
