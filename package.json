@@ -54,7 +54,7 @@
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/properties-panel": "^3.40.5",
     "babel-loader": "^10.1.1",
-    "babel-plugin-istanbul": "^7.0.1",
+    "babel-plugin-istanbul": "^8.0.0",
     "bpmn-js": "^18.13.2",
     "bpmn-js-properties-panel": "^5.53.0",
     "chai": "^6.2.2",
