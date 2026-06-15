@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.39.4
+
+* `FIX`: make simulation support init safe for aggressive minification ([#266](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/266))
+
 ## 0.39.3
 
 * `FIX`: allow pause/play via space key after clicking on context pad button ([#253](https://github.com/bpmn-io/bpmn-js-token-simulation/issues/253))
