@@ -11,8 +11,6 @@ var fixtureReporter = require('./test/reporters/fixture-reporter');
 
 var singleStart = process.env.SINGLE_START;
 
-// use puppeteer provided Chrome for testing
-
 var coverage = process.env.COVERAGE;
 
 var absoluteBasePath = path.resolve(__dirname);
@@ -25,9 +23,7 @@ fs.mkdirSync(tmpDir, { recursive: true });
 
 var firefoxProfile = fs.mkdtempSync(path.join(tmpDir, 'firefox-profile'));
 
-module.exports = async function(karma) {
-  process.env.CHROME_BIN = await require('puppeteer').executablePath();
-
+module.exports = function(karma) {
   karma.set({
 
     plugins: [
