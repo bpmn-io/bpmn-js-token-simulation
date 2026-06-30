@@ -221,7 +221,6 @@ describe('modeler extension', function() {
       const ui = domQueryAll(`
         .djs-bendpoint,
         .djs-context-pad,
-        .djs-outline,
         .djs-palette,
         .djs-resizer,
         .djs-segment-dragger

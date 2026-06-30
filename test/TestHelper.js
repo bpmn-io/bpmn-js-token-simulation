@@ -15,6 +15,8 @@ export function injectStyles() {
 
   bpmnJsSatisfies('>= 9') && insertCSS('bpmn-js.css', require('bpmn-js/dist/assets/bpmn-js.css'));
 
+  insertCSS('canvas-lock.css', require('@bpmn-io/diagram-js-canvas-lock/assets/canvas-lock.css'));
+
   insertCSS('bpmn-js-token-simulation.css', require('../assets/css/bpmn-js-token-simulation.css'));
 
   insertCSS('diagram-js-testing.css',
