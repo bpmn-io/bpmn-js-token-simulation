@@ -76,7 +76,7 @@
     "karma-webpack": "^5.0.1",
     "mocha": "^11.7.6",
     "mocha-test-container-support": "^0.2.0",
-    "npm-run-all2": "^9.0.0",
+    "npm-run-all2": "^9.0.2",
     "rollup": "^4.62.2",
     "rollup-plugin-string": "^3.0.0",
     "sinon": "^22.0.0",
