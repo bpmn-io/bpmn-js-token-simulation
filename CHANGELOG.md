@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 0.40.0
+
+* `FEAT`: lock canvas using `@bpmn-io/diagram-js-canvas-lock` ([#272](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/272))
+
 ## 0.39.4
 
 * `FIX`: make simulation support init safe for aggressive minification ([#266](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/266))
