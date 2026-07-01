@@ -31,7 +31,8 @@ module.exports = (env, argv) => {
         patterns: [
           { from: './assets', to: 'dist/vendor/bpmn-js-token-simulation/assets' },
           { from: 'bpmn-js/dist/assets', context: 'node_modules', to: 'dist/vendor/bpmn-js/assets' },
-          { from: '@bpmn-io/properties-panel/dist/assets', context: 'node_modules', to: 'dist/vendor/bpmn-js-properties-panel/assets' }
+          { from: '@bpmn-io/properties-panel/dist/assets', context: 'node_modules', to: 'dist/vendor/bpmn-js-properties-panel/assets' },
+          { from: '@bpmn-io/diagram-js-canvas-lock/assets', context: 'node_modules', to: 'dist/vendor/diagram-js-canvas-lock/assets' }
         ]
       }),
       new DefinePlugin({
