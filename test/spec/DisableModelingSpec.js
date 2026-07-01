@@ -82,4 +82,19 @@ describe('disable modeling', function() {
     }
   ));
 
+
+  it('should block the context pad while locked', inject(
+    function(toggleMode, eventBus) {
+
+      // given
+      toggleMode.toggleMode();
+
+      // when
+      const allowed = eventBus.fire('contextPad.open.allowed');
+
+      // then
+      expect(allowed).to.be.false;
+    }
+  ));
+
 });
