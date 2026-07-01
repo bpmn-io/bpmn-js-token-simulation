@@ -62,7 +62,7 @@
     "cross-env": "^10.1.0",
     "downloadjs": "^1.4.7",
     "eslint": "^9.39.4",
-    "eslint-plugin-bpmn-io": "^2.2.0",
+    "eslint-plugin-bpmn-io": "^2.3.1",
     "file-drops": "^0.7.0",
     "file-open": "^0.2.0",
     "karma": "^6.4.4",
