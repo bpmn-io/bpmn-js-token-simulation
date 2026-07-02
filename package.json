@@ -45,7 +45,7 @@
     "index.js"
   ],
   "engines": {
-    "node": ">= 16"
+    "node": ">= 22"
   },
   "sideEffects": [
     "*.css"
