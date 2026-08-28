@@ -1,0 +1,31 @@
+.djs-canvas-locked {
+  user-select: none;
+}
+
+.djs-canvas-locked .djs-connection.selected .djs-outline {
+  display: initial;
+}
+
+.djs-canvas-locked .djs-palette .entry {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.djs-canvas-locked .djs-palette .djs-palette-toggle {
+  pointer-events: none;
+}
+
+.djs-canvas-locked .djs-element .djs-hit-stroke,
+.djs-canvas-locked .djs-element .djs-hit-click-stroke,
+.djs-canvas-locked .djs-element .djs-hit-all {
+  cursor: unset;
+}
+
+.djs-canvas-locked .djs-resizer {
+  display: none;
+}
+
+.djs-canvas-locked .djs-segment-dragger,
+.djs-canvas-locked .djs-bendpoint {
+  display: none !important;
+}
