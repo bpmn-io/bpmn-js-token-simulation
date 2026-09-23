@@ -6,6 +6,16 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+* `FEAT`: source colors from `@bpmn-io/theme` ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
+* `FEAT`: expose the colors written into the BPMN DI as `--token-simulation-element-*`, `--token-simulation-*-outgoing-flow-*` and `--token-simulation-highlighted-scope-*` ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
+* `FEAT`: use more accessible colors for the simulation controls ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
+* `DEPS`: add `diagram-js@>= 15.27.0` peer dependency, which scopes the theme via `bio-theme-parent` ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
+
+### Breaking Changes
+
+* The `--token-simulation-*` variables are renamed after what they style rather than after a color: `green-base-44` is `active`, `red-base-62` is `warning`, `grey-base-40` is `paused` and `disabled-color`, `grey-darken-30` is `control-color`, `grey-lighten-56` is `control-color-subtle`, `silver-darken-94` is `control-background`, `silver-base-97` is `highlight-background`, and `white` is `control-surface`.
+* They also moved from `:root` to `.bts-container`, so overriding them on `:root` no longer wins. Override them there, or override the `--bio-*` tokens.
+
 ## 0.40.0
 
 * `FEAT`: lock canvas using `@bpmn-io/diagram-js-canvas-lock` ([#272](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/272))
