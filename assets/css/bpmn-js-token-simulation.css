@@ -1,13 +1,54 @@
-:root {
-  --token-simulation-green-base-44: #10D070;
-  --token-simulation-grey-base-40: #666666;
-  --token-simulation-grey-darken-30: #212121;
-  --token-simulation-grey-lighten-56: #909090;
-  --token-simulation-red-base-62: #FF3D3D;
-  --token-simulation-silver-base-97: #F8F8F8;
-  --token-simulation-silver-darken-94: #EFEFEF;
+/**
+ * Semantic tokens, copied from `@bpmn-io/theme` to style the components
+ * according to this theme.
+ *
+ * Names and values of the tokens should stay intact with the `@bpmn-io/theme`
+ * source of truth, to ensure matching styles and allow overrides with an
+ * alternative theme.
+ */
+.bio-theme-parent {
+  --bio-surface: hsl(0, 0%, 100%);
+  --bio-surface-subtle: hsl(225, 10%, 97%);
+  --bio-surface-medium: hsl(225, 10%, 95%);
+  --bio-text: hsl(225, 10%, 15%);
+  --bio-text-subtle: hsl(225, 10%, 35%);
+  --bio-text-subtlest: hsl(225, 10%, 55%);
+  --bio-danger: hsl(360, 100%, 45%);
+  --bio-danger-marker: var(--bio-danger);
+  --bio-success-marker: hsl(150, 86%, 30%);
+  --bio-radius-md: 3px;
+  --bio-radius-lg: 4px;
+}
 
-  --token-simulation-white: #FFFFFF;
+.bts-container {
+  --token-simulation-active: var(--bio-success-marker);
+  --token-simulation-paused: var(--bio-text-subtle);
+  --token-simulation-warning: var(--bio-danger-marker);
+
+  --token-simulation-control-color: var(--bio-text);
+  --token-simulation-control-color-subtle: var(--bio-text-subtlest);
+  --token-simulation-control-background: var(--bio-surface-medium);
+  --token-simulation-control-surface: var(--bio-surface);
+  --token-simulation-disabled-color: var(--bio-text-subtle);
+
+  --token-simulation-highlight-background: var(--bio-surface-subtle);
+
+  /*
+   * Element colors: every element is neutralized while simulating, a gateway
+   * marks the outgoing flow it will take, and hovering a scope highlights its
+   * element. Unlike the variables above these are written into the BPMN DI,
+   * which BPMN in Color requires to be hex — so they are literals rather than
+   * tokens. Override them with a hex color of your own.
+   */
+  --token-simulation-element-stroke-color: #212121;
+  --token-simulation-element-fill-color: #fff;
+  --token-simulation-active-outgoing-flow-stroke-color: #212121;
+  --token-simulation-inactive-outgoing-flow-stroke-color: #909090;
+  --token-simulation-highlighted-scope-stroke-color: #10D070;
+  --token-simulation-highlighted-scope-fill-color: #F8F8F8;
+
+  --button-border-radius: var(--bio-radius-md);
+  --surface-border-radius: var(--bio-radius-lg);
 }
 
 .bjs-breadcrumbs {
@@ -17,25 +58,25 @@
 }
 
 .bjs-container.simulation .djs-container {
-  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-green-base-44, #10D070);
+  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-active);
 }
 
 .bjs-container.simulation.paused .djs-container {
-  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-grey-base-40, #666666);
+  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-paused);
 }
 
 .bjs-container.simulation.warning .djs-container {
-  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-red-base-62, #FF3D3D) !important;
+  box-shadow: inset 0px 0px 0px 4px var(--token-simulation-warning) !important;
 }
 
 .bts-context-pad {
   cursor: pointer;
-  background-color: var(--token-simulation-grey-lighten-56, #909090);
+  background-color: var(--token-simulation-control-color-subtle);
   border: none;
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   margin: 0;
   font-size: 16px;
-  color: var(--token-simulation-grey-darken-30, #212121);
+  color: var(--token-simulation-control-color);
   opacity: 0.5;
   transition: all 0.1s ease-in-out;
   width: 30px;
@@ -48,9 +89,9 @@
 
 .bts-context-pad:not(.disabled):hover,
 .bts-context-pad:not(.disabled):focus-visible {
-  background-color: var(--token-simulation-green-base-44, #10D070);
+  background-color: var(--token-simulation-active);
   opacity: 1;
-  color: var(--token-simulation-white, #FFFFFF);
+  color: var(--token-simulation-control-surface);
 }
 
 /* button hidden until hovered or keyboard-focused; kept in accessibility tree via opacity */
@@ -66,8 +107,8 @@
 }
 
 .bts-context-pad.disabled {
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  color: var(--token-simulation-grey-base-40, #666666);
+  background-color: var(--token-simulation-control-background);
+  color: var(--token-simulation-disabled-color);
   pointer-events: none;
 }
 
@@ -96,7 +137,7 @@
   line-height: 25px;
   text-align: center;
   font-size: 14px;
-  color: var(--token-simulation-grey-darken-30, #212121);
+  color: var(--token-simulation-control-color);
   user-select: none;
   animation: bts-jump 1s infinite;
   animation-timing-function: ease;
@@ -114,9 +155,9 @@
 }
 
 .bts-token-count.waiting {
-  color: var(--token-simulation-white, #FFFFFF);
+  color: var(--token-simulation-control-surface);
   font-family: 'Arial', sans-serif;
-  background-color: var(--token-simulation-green-base-44, #10D070);
+  background-color: var(--token-simulation-active);
 }
 
 @keyframes bts-jump {
@@ -130,11 +171,11 @@
 }
 
 .bts-notifications .bts-notification {
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  border-radius: 2px;
+  background-color: var(--token-simulation-control-background);
+  border-radius: var(--surface-border-radius);
   padding: 5px 8px;
   font-size: 16px;
-  color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  color: var(--token-simulation-control-background);
   user-select: none;
   margin-top: 4px;
   min-width: 300px;
@@ -145,18 +186,18 @@
 }
 
 .bts-notifications .bts-notification.info {
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  background-color: var(--token-simulation-control-background);
   color: #000;
 }
 
 .bts-notifications .bts-notification.success {
-  background-color: var(--token-simulation-green-base-44, #10D070);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-active);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-notifications .bts-notification.warning {
-  background-color: var(--token-simulation-red-base-62, #FF3D3D);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-warning);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-notifications .bts-notification > * {
@@ -183,7 +224,7 @@
   font-family: monospace;
   font-size: .8em;
   padding: 2px 3px;
-  border-radius: 3px;
+  border-radius: var(--button-border-radius);
   cursor: default;
 }
 
@@ -193,14 +234,14 @@
 }
 
 .bjs-container.paused .bts-play-pause.active {
-  color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  color: var(--token-simulation-control-background);
+  background-color: var(--token-simulation-control-background);
 }
 
 .bts-element-notification {
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  border-radius: 2px;
+  background-color: var(--token-simulation-control-background);
+  color: var(--token-simulation-control-background);
+  border-radius: var(--surface-border-radius);
   height: 30px;
   box-sizing: border-box;
   display: flex;
@@ -219,13 +260,13 @@
 }
 
 .bts-element-notification.success {
-  background-color: var(--token-simulation-green-base-44, #10D070);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-active);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-element-notification.warning {
-  background-color: var(--token-simulation-red-base-62, #FF3D3D);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-warning);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-toggle-mode {
@@ -233,11 +274,11 @@
   position: absolute;
   top: 20px;
   left: 20px;
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  border-radius: 2px;
+  background-color: var(--token-simulation-control-background);
+  border-radius: var(--button-border-radius);
   padding: 6px;
   font-size: 16px;
-  color: var(--token-simulation-grey-darken-30, #212121);
+  color: var(--token-simulation-control-color);
   user-select: none;
   display: inline-flex;
 }
@@ -249,8 +290,8 @@
 
 .bjs-container.simulation .bts-toggle-mode,
 .bts-toggle-mode:hover {
-  background-color: var(--token-simulation-green-base-44, #10D070);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-active);
+  color: var(--token-simulation-control-surface);
 }
 
 .bjs-container .djs-palette {
@@ -277,13 +318,13 @@
 
 .bts-palette .bts-entry {
   cursor: pointer;
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  background-color: var(--token-simulation-control-background);
   border: none;
-  border-radius: 2px;
+  border-radius: var(--button-border-radius);
   padding: 6px 0;
   margin-bottom: 6px;
   font-size: 16px;
-  color: var(--token-simulation-grey-darken-30, #212121);
+  color: var(--token-simulation-control-color);
   user-select: none;
   display: flex;
   justify-content: center;
@@ -298,17 +339,17 @@
 }
 
 .bts-palette .bts-entry:not(.disabled):hover {
-  color: var(--token-simulation-white, #FFFFFF);
-  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-control-surface);
+  background-color: var(--token-simulation-active);
 }
 
 .bts-palette .bts-entry.active {
-  color: var(--token-simulation-white, #FFFFFF);
-  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-control-surface);
+  background-color: var(--token-simulation-active);
 }
 
 .bts-palette .bts-entry.disabled {
-  color: var(--token-simulation-grey-base-40, #666666);
+  color: var(--token-simulation-disabled-color);
   cursor: not-allowed;
 }
 
@@ -318,8 +359,8 @@
   right: 20px;
   bottom: 50px;
   width: 300px;
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  border-radius: 2px;
+  background-color: var(--token-simulation-control-background);
+  border-radius: var(--surface-border-radius);
   z-index: 10000;
   overflow: hidden;
   display: flex;
@@ -331,9 +372,9 @@
 }
 
 .bts-log .bts-header {
-  background-color: var(--token-simulation-green-base-44, #10D070);
+  background-color: var(--token-simulation-active);
   padding: 6px 8px;
-  color: var(--token-simulation-white, #FFFFFF);
+  color: var(--token-simulation-control-surface);
   height: 30px;
   box-sizing: border-box;
   font-size: 16px;
@@ -346,7 +387,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--token-simulation-white, #FFFFFF);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-log .bts-log-icon {
@@ -381,8 +422,8 @@
   font-size: 16px;
   margin: 0 0 6px 0;
   padding: 6px;
-  background: var(--token-simulation-white, #FFFFFF);
-  border-radius: 2px;
+  background: var(--token-simulation-control-surface);
+  border-radius: var(--surface-border-radius);
   display: flex;
   align-items: stretch;
   justify-content: center;
@@ -393,13 +434,13 @@
 }
 
 .bts-log .bts-entry.success {
-  background-color: var(--token-simulation-green-base-44, #10D070);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-active);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-log .bts-entry.warning {
-  background-color: var(--token-simulation-red-base-62, #FF3D3D);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-warning);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-log .bts-entry:last-child {
@@ -423,7 +464,7 @@
   font-family: monospace;
   font-size: .8em;
   padding: 2px 3px;
-  border-radius: 3px;
+  border-radius: var(--button-border-radius);
   cursor: default;
 }
 
@@ -457,7 +498,7 @@
   font-size: 14px;
   line-height: 25px;
   text-align: center;
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  background-color: var(--token-simulation-control-background);
   border: none;
   margin-right: 10px;
   cursor: pointer;
@@ -477,7 +518,7 @@
 }
 
 .djs-container.highlight {
-  background-color: var(--token-simulation-silver-base-97, #F8F8F8);
+  background-color: var(--token-simulation-highlight-background);
 }
 
 .bts-set-animation-speed {
@@ -487,8 +528,8 @@
   transform: translate(-50%, 0);
   font-size: 16px;
   text-align: center;
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
-  border-radius: 2px;
+  background-color: var(--token-simulation-control-background);
+  border-radius: var(--surface-border-radius);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -517,8 +558,8 @@
 
 .bts-set-animation-speed .bts-animation-speed-button.active,
 .bts-set-animation-speed .bts-animation-speed-button:hover {
-  background-color: var(--token-simulation-green-base-44, #10D070);
-  color: var(--token-simulation-white, #FFFFFF);
+  background-color: var(--token-simulation-active);
+  color: var(--token-simulation-control-surface);
 }
 
 .bts-icon {

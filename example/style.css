@@ -9,7 +9,7 @@ html, body, #canvas {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
 
-  color: var(--token-simulation-grey-darken-30, #212121);
+  color: var(--token-simulation-control-color, #212121);
 }
 
 body:not(.presentation-mode) .bts-notifications {
@@ -33,19 +33,19 @@ body:not(.presentation-mode) .bts-notifications {
 }
 
 .link {
-  color: var(--token-simulation-grey-darken-30, #212121);
+  color: var(--token-simulation-control-color, #212121);
   display: inline-block;
   padding: 6px;
   font-size: 16px;
   border-radius: 2px;
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  background-color: var(--token-simulation-control-background, #EFEFEF);
   text-decoration: none;
   border: none;
 }
 
 .link:hover {
-  color: var(--token-simulation-white, #FFFFFF);
-  background-color: var(--token-simulation-green-base-44, #10D070);
+  color: var(--token-simulation-control-surface, #FFFFFF);
+  background-color: var(--token-simulation-active, #10D070);
 }
 
 .links .link + .link {
@@ -144,11 +144,11 @@ body:not(.presentation-mode) .bts-notifications {
   top: 24px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: var(--token-simulation-silver-darken-94, #EFEFEF);
+  background-color: var(--token-simulation-control-background, #EFEFEF);
   border-radius: 2px;
   padding: 6px 12px;
   font-size: 16px;
-  color: var(--token-simulation-grey-darken-30, #212121);
+  color: var(--token-simulation-control-color, #212121);
   user-select: none;
 }
 

@@ -5,7 +5,8 @@
   "module": "lib/index.js",
   "main": "lib/index.js",
   "scripts": {
-    "all": "run-s bundle:src lint test bundle",
+    "all": "run-s bundle:src lint lint:theme test bundle",
+    "prepare": "run-s bundle:src",
     "bundle:src": "rollup -c --bundleConfigAsCjs",
     "bundle": "webpack --mode production",
     "bundle:watch": "webpack -w",
@@ -13,7 +14,8 @@
     "start:example": "webpack serve --static ./example --open",
     "lint": "eslint .",
     "test": "karma start",
-    "dev": "npm test -- --auto-watch --no-single-run"
+    "dev": "npm test -- --auto-watch --no-single-run",
+    "lint:theme": "bpmn-io-theme-validate assets/css/bpmn-js-token-simulation.css"
   },
   "repository": {
     "type": "git",
@@ -47,16 +49,21 @@
   "sideEffects": [
     "*.css"
   ],
+  "peerDependencies": {
+    "diagram-js": ">= 15.27.0"
+  },
   "devDependencies": {
     "@bpmn-io/add-exporter": "^0.2.0",
     "@bpmn-io/properties-panel": "^3.47.0",
+    "@bpmn-io/theme": "^0.3.0",
     "babel-loader": "^10.1.1",
     "babel-plugin-istanbul": "^8.0.0",
-    "bpmn-js": "^18.19.0",
+    "bpmn-js": "^18.30.0",
     "bpmn-js-properties-panel": "^5.60.0",
     "chai": "^6.2.2",
     "copy-webpack-plugin": "^14.0.0",
     "cross-env": "^10.1.0",
+    "diagram-js": "^15.27.0",
     "downloadjs": "^1.4.7",
     "eslint": "^9.39.4",
     "eslint-plugin-bpmn-io": "^2.3.1",
