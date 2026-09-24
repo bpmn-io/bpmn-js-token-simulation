@@ -6,6 +6,7 @@
   "main": "lib/index.js",
   "scripts": {
     "all": "run-s bundle:src lint lint:theme test bundle",
+    "prepare": "run-s bundle:src",
     "bundle:src": "rollup -c --bundleConfigAsCjs",
     "bundle": "webpack --mode production",
     "bundle:watch": "webpack -w",
