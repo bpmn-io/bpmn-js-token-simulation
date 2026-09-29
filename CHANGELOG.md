@@ -6,6 +6,8 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.0.0
+
 * `FEAT`: source colors from `@bpmn-io/theme` ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
 * `FEAT`: expose the colors written into the BPMN DI as `--token-simulation-element-*`, `--token-simulation-*-outgoing-flow-*` and `--token-simulation-highlighted-scope-*` ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
 * `FEAT`: style the simulation controls with the primary color ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
