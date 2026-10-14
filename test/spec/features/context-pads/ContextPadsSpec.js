@@ -11,6 +11,8 @@ import {
 
 import { expect } from 'chai';
 
+import { getBBox } from 'diagram-js/lib/util/Elements';
+
 
 const TestModule = {
   __depends__: [
@@ -270,7 +272,77 @@ describe('features/context-pads - keyboard and focus', function() {
 });
 
 
+describe('features/context-pads - inclusive gateway', function() {
+
+  const diagram = require('./ContextPads.inclusive-gateway.bpmn');
+
+  beforeEach(bootstrapModeler(diagram, {
+    additionalModules: [
+      ModelerModule,
+      TestModule
+    ]
+  }));
+
+  beforeEach(inject(function(simulationSupport) {
+    simulationSupport.toggleSimulation();
+  }));
+
+
+  it('should not stack toggle pads of flows sharing a trunk', inject(
+    function() {
+
+      // when
+      const pads = [ 'FLOW_A', 'FLOW_B', 'FLOW_C' ].map(getPadCenter);
+
+      // then
+      expectApart(pads);
+    }
+  ));
+
+
+  it('should place toggle pads where flows leave the trunk', inject(
+    function() {
+
+      // when
+      const padA = getPadCenter('FLOW_A');
+      const padB = getPadCenter('FLOW_B');
+      const padC = getPadCenter('FLOW_C');
+
+      // then
+      // FLOW_A and FLOW_B branch off the trunk (x = 275) to the right ...
+      expect(padA.y).to.eql(200);
+      expect(padA.x).to.be.above(275);
+
+      expect(padB.y).to.eql(320);
+      expect(padB.x).to.be.above(275);
+
+      // ... while FLOW_C has the trunk to itself below the turn of FLOW_B
+      expect(padC.x).to.eql(275);
+      expect(padC.y).to.be.above(320);
+    }
+  ));
+
+
+  it('should stagger toggle pads of overlapping flows', inject(
+    function() {
+
+      // when
+      const pads = [ 'FLOW_D', 'FLOW_E' ].map(getPadCenter);
+
+      // then
+      expectApart(pads);
+
+      pads.forEach(pad => expect(pad.y).to.eql(625));
+    }
+  ));
+
+});
+
+
 // helpers ////////////////////
+
+// context pads are buttons of this size, centered on their anchor
+const PAD_SIZE = 30;
 
 function getSimulationSupport() {
   return getBpmnJS().get('simulationSupport');
@@ -286,4 +358,39 @@ function triggerElement(...args) {
 
 function elementEnter(...args) {
   return getSimulationSupport().elementEnter(...args);
+}
+
+function getPadCenter(flowId) {
+  const bpmnjs = getBpmnJS();
+
+  const flow = bpmnjs.get('elementRegistry').get(flowId);
+
+  const pads = bpmnjs.get('overlays').get({
+    element: flow,
+    type: 'bts-context-menu'
+  });
+
+  expect(pads).to.have.length(1);
+
+  const bbox = getBBox(flow);
+
+  const {
+    left,
+    top
+  } = pads[0].position;
+
+  return {
+    x: Math.round(bbox.x + left + PAD_SIZE / 2),
+    y: Math.round(bbox.y + top + PAD_SIZE / 2)
+  };
+}
+
+function expectApart(pads) {
+  pads.forEach((pad, index) => {
+    pads.slice(index + 1).forEach(other => {
+      const distance = Math.hypot(pad.x - other.x, pad.y - other.y);
+
+      expect(distance).to.be.at.least(PAD_SIZE);
+    });
+  });
 }

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START">
+      <bpmn:outgoing>FLOW_START</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:inclusiveGateway id="GATEWAY">
+      <bpmn:incoming>FLOW_START</bpmn:incoming>
+      <bpmn:outgoing>FLOW_A</bpmn:outgoing>
+      <bpmn:outgoing>FLOW_B</bpmn:outgoing>
+      <bpmn:outgoing>FLOW_C</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:task id="TASK_A">
+      <bpmn:incoming>FLOW_A</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="TASK_B">
+      <bpmn:incoming>FLOW_B</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:task id="TASK_C">
+      <bpmn:incoming>FLOW_C</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="FLOW_START" sourceRef="START" targetRef="GATEWAY" />
+    <bpmn:sequenceFlow id="FLOW_A" sourceRef="GATEWAY" targetRef="TASK_A" />
+    <bpmn:sequenceFlow id="FLOW_B" sourceRef="GATEWAY" targetRef="TASK_B" />
+    <bpmn:sequenceFlow id="FLOW_C" sourceRef="GATEWAY" targetRef="TASK_C" />
+    <bpmn:startEvent id="START_OVERLAP">
+      <bpmn:outgoing>FLOW_START_OVERLAP</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:inclusiveGateway id="GATEWAY_OVERLAP">
+      <bpmn:incoming>FLOW_START_OVERLAP</bpmn:incoming>
+      <bpmn:outgoing>FLOW_D</bpmn:outgoing>
+      <bpmn:outgoing>FLOW_E</bpmn:outgoing>
+    </bpmn:inclusiveGateway>
+    <bpmn:task id="TASK_D">
+      <bpmn:incoming>FLOW_D</bpmn:incoming>
+      <bpmn:incoming>FLOW_E</bpmn:incoming>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="FLOW_START_OVERLAP" sourceRef="START_OVERLAP" targetRef="GATEWAY_OVERLAP" />
+    <bpmn:sequenceFlow id="FLOW_D" sourceRef="GATEWAY_OVERLAP" targetRef="TASK_D" />
+    <bpmn:sequenceFlow id="FLOW_E" sourceRef="GATEWAY_OVERLAP" targetRef="TASK_D" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="152" y="107" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GATEWAY_di" bpmnElement="GATEWAY">
+        <dc:Bounds x="250" y="100" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_A_di" bpmnElement="TASK_A">
+        <dc:Bounds x="400" y="160" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_B_di" bpmnElement="TASK_B">
+        <dc:Bounds x="400" y="280" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_C_di" bpmnElement="TASK_C">
+        <dc:Bounds x="400" y="400" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="FLOW_START_di" bpmnElement="FLOW_START">
+        <di:waypoint x="188" y="125" />
+        <di:waypoint x="250" y="125" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_A_di" bpmnElement="FLOW_A">
+        <di:waypoint x="275" y="150" />
+        <di:waypoint x="275" y="200" />
+        <di:waypoint x="400" y="200" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_B_di" bpmnElement="FLOW_B">
+        <di:waypoint x="275" y="150" />
+        <di:waypoint x="275" y="320" />
+        <di:waypoint x="400" y="320" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_C_di" bpmnElement="FLOW_C">
+        <di:waypoint x="275" y="150" />
+        <di:waypoint x="275" y="440" />
+        <di:waypoint x="400" y="440" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="START_OVERLAP_di" bpmnElement="START_OVERLAP">
+        <dc:Bounds x="152" y="607" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GATEWAY_OVERLAP_di" bpmnElement="GATEWAY_OVERLAP">
+        <dc:Bounds x="250" y="600" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TASK_D_di" bpmnElement="TASK_D">
+        <dc:Bounds x="450" y="585" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="FLOW_START_OVERLAP_di" bpmnElement="FLOW_START_OVERLAP">
+        <di:waypoint x="188" y="625" />
+        <di:waypoint x="250" y="625" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_D_di" bpmnElement="FLOW_D">
+        <di:waypoint x="300" y="625" />
+        <di:waypoint x="450" y="625" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="FLOW_E_di" bpmnElement="FLOW_E">
+        <di:waypoint x="300" y="625" />
+        <di:waypoint x="450" y="625" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
