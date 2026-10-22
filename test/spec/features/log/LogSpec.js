@@ -48,13 +48,13 @@ class LogCollector extends Log {
   constructor(
       eventBus, notifications,
       tokenSimulationPalette, canvas,
-      scopeFilter
+      scopeFilter, translate
   ) {
 
     super(
       eventBus, notifications,
       tokenSimulationPalette, canvas,
-      scopeFilter);
+      scopeFilter, translate);
 
     this._elementLog = [];
     this.log = (args) => {
