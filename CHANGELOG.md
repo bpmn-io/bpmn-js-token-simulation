@@ -6,6 +6,10 @@ All notable changes to the [bpmn-js-token-simulation](https://github.com/bpmn-io
 
 ___Note:__ Yet to be released changes appear here._
 
+## 1.1.0
+
+* `FEAT`: translate user-facing strings via the `diagram-js` `translate` service ([#282](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/282))
+
 ## 1.0.0
 
 * `FEAT`: source colors from `@bpmn-io/theme` ([#281](https://github.com/bpmn-io/bpmn-js-token-simulation/pull/281))
