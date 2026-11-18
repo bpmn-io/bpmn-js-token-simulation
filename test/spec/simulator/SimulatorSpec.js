@@ -1999,6 +1999,80 @@ describe('simulator', function() {
       expectTrace(fixture());
     });
 
+
+    verify('compensation-completed-sub-process-instances', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('WAIT')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-sub-process-skips-running-instance', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('C1')
+      });
+
+      trigger({
+        element: element('C2')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-completed-sub-process-keeps-event-based-gateway', (fixture) => {
+
+      // given
+      const [ scope ] = trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('C1'),
+        scope
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-completed-sub-process-keeps-subscriptions', (fixture) => {
+
+      // given
+      const [ scope ] = trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('EVENT_SUB_START'),
+        scope
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
   });
 
 
