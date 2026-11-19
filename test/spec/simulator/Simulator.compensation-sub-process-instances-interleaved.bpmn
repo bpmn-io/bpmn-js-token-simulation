@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+  <bpmn:process id="Process_1" isExecutable="true">
+    <bpmn:startEvent id="START" name="START">
+      <bpmn:outgoing>Flow_1</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:subProcess id="P" name="P">
+      <bpmn:incoming>Flow_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_2</bpmn:outgoing>
+      <bpmn:startEvent id="P_START" name="P_START">
+        <bpmn:outgoing>Flow_P1</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:parallelGateway id="FORK" name="FORK">
+        <bpmn:incoming>Flow_P1</bpmn:incoming>
+        <bpmn:outgoing>Flow_P2</bpmn:outgoing>
+        <bpmn:outgoing>Flow_P3</bpmn:outgoing>
+        <bpmn:outgoing>Flow_P4</bpmn:outgoing>
+      </bpmn:parallelGateway>
+      <bpmn:intermediateCatchEvent id="WAIT_B" name="WAIT_B">
+        <bpmn:incoming>Flow_P3</bpmn:incoming>
+        <bpmn:outgoing>Flow_P5</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_WAIT_B" messageRef="Message_WAIT_B"/>
+      </bpmn:intermediateCatchEvent>
+      <bpmn:task id="B" name="B">
+        <bpmn:incoming>Flow_P5</bpmn:incoming>
+        <bpmn:outgoing>Flow_P6</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:boundaryEvent id="B_COMP_BOUNDARY" name="B_COMP_BOUNDARY" attachedToRef="B">
+        <bpmn:compensateEventDefinition id="CompensateEventDefinition_B"/>
+      </bpmn:boundaryEvent>
+      <bpmn:task id="UNDO_B" name="UNDO_B" isForCompensation="true"/>
+      <bpmn:endEvent id="B_END" name="B_END">
+        <bpmn:incoming>Flow_P6</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:intermediateCatchEvent id="WAIT_S" name="WAIT_S">
+        <bpmn:incoming>Flow_P4</bpmn:incoming>
+        <bpmn:outgoing>Flow_P7</bpmn:outgoing>
+        <bpmn:messageEventDefinition id="MessageEventDefinition_WAIT_S" messageRef="Message_WAIT_S"/>
+      </bpmn:intermediateCatchEvent>
+      <bpmn:subProcess id="S" name="S">
+        <bpmn:incoming>Flow_P2</bpmn:incoming>
+        <bpmn:incoming>Flow_P7</bpmn:incoming>
+        <bpmn:outgoing>Flow_P8</bpmn:outgoing>
+        <bpmn:startEvent id="S_START" name="S_START">
+          <bpmn:outgoing>Flow_S1</bpmn:outgoing>
+        </bpmn:startEvent>
+        <bpmn:task id="A" name="A">
+          <bpmn:incoming>Flow_S1</bpmn:incoming>
+          <bpmn:outgoing>Flow_S2</bpmn:outgoing>
+        </bpmn:task>
+        <bpmn:boundaryEvent id="A_COMP_BOUNDARY" name="A_COMP_BOUNDARY" attachedToRef="A">
+          <bpmn:compensateEventDefinition id="CompensateEventDefinition_A"/>
+        </bpmn:boundaryEvent>
+        <bpmn:task id="UNDO_A" name="UNDO_A" isForCompensation="true"/>
+        <bpmn:endEvent id="S_END" name="S_END">
+          <bpmn:incoming>Flow_S2</bpmn:incoming>
+        </bpmn:endEvent>
+        <bpmn:sequenceFlow id="Flow_S1" sourceRef="S_START" targetRef="A"/>
+        <bpmn:sequenceFlow id="Flow_S2" sourceRef="A" targetRef="S_END"/>
+        <bpmn:association id="Association_A" associationDirection="One" sourceRef="A_COMP_BOUNDARY" targetRef="UNDO_A"/>
+      </bpmn:subProcess>
+      <bpmn:endEvent id="S_DONE" name="S_DONE">
+        <bpmn:incoming>Flow_P8</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="Flow_P1" sourceRef="P_START" targetRef="FORK"/>
+      <bpmn:sequenceFlow id="Flow_P2" sourceRef="FORK" targetRef="S"/>
+      <bpmn:sequenceFlow id="Flow_P3" sourceRef="FORK" targetRef="WAIT_B"/>
+      <bpmn:sequenceFlow id="Flow_P4" sourceRef="FORK" targetRef="WAIT_S"/>
+      <bpmn:sequenceFlow id="Flow_P5" sourceRef="WAIT_B" targetRef="B"/>
+      <bpmn:sequenceFlow id="Flow_P6" sourceRef="B" targetRef="B_END"/>
+      <bpmn:sequenceFlow id="Flow_P7" sourceRef="WAIT_S" targetRef="S"/>
+      <bpmn:sequenceFlow id="Flow_P8" sourceRef="S" targetRef="S_DONE"/>
+      <bpmn:association id="Association_B" associationDirection="One" sourceRef="B_COMP_BOUNDARY" targetRef="UNDO_B"/>
+    </bpmn:subProcess>
+    <bpmn:intermediateThrowEvent id="COMP_P" name="COMP_P">
+      <bpmn:incoming>Flow_2</bpmn:incoming>
+      <bpmn:outgoing>Flow_3</bpmn:outgoing>
+      <bpmn:compensateEventDefinition id="CompensateEventDefinition_P" activityRef="P"/>
+    </bpmn:intermediateThrowEvent>
+    <bpmn:endEvent id="END" name="END">
+      <bpmn:incoming>Flow_3</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_1" sourceRef="START" targetRef="P"/>
+    <bpmn:sequenceFlow id="Flow_2" sourceRef="P" targetRef="COMP_P"/>
+    <bpmn:sequenceFlow id="Flow_3" sourceRef="COMP_P" targetRef="END"/>
+  </bpmn:process>
+  <bpmn:message id="Message_WAIT_B" name="WAIT_B"/>
+  <bpmn:message id="Message_WAIT_S" name="WAIT_S"/>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+      <bpmndi:BPMNShape id="START_di" bpmnElement="START">
+        <dc:Bounds x="100" y="312" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_di" bpmnElement="P" isExpanded="true">
+        <dc:Bounds x="200" y="20" width="1000" height="620"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P_START_di" bpmnElement="P_START">
+        <dc:Bounds x="230" y="312" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="FORK_di" bpmnElement="FORK">
+        <dc:Bounds x="300" y="305" width="50" height="50"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WAIT_B_di" bpmnElement="WAIT_B">
+        <dc:Bounds x="400" y="72" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_di" bpmnElement="B">
+        <dc:Bounds x="480" y="50" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_COMP_BOUNDARY_di" bpmnElement="B_COMP_BOUNDARY">
+        <dc:Bounds x="512" y="112" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UNDO_B_di" bpmnElement="UNDO_B">
+        <dc:Bounds x="600" y="140" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="B_END_di" bpmnElement="B_END">
+        <dc:Bounds x="760" y="72" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="WAIT_S_di" bpmnElement="WAIT_S">
+        <dc:Bounds x="400" y="452" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_di" bpmnElement="S" isExpanded="true">
+        <dc:Bounds x="520" y="260" width="420" height="300"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_START_di" bpmnElement="S_START">
+        <dc:Bounds x="550" y="392" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A_di" bpmnElement="A">
+        <dc:Bounds x="620" y="370" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="A_COMP_BOUNDARY_di" bpmnElement="A_COMP_BOUNDARY">
+        <dc:Bounds x="652" y="432" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UNDO_A_di" bpmnElement="UNDO_A">
+        <dc:Bounds x="740" y="460" width="100" height="80"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_END_di" bpmnElement="S_END">
+        <dc:Bounds x="860" y="392" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="S_DONE_di" bpmnElement="S_DONE">
+        <dc:Bounds x="1000" y="392" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="COMP_P_di" bpmnElement="COMP_P">
+        <dc:Bounds x="1260" y="312" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="END_di" bpmnElement="END">
+        <dc:Bounds x="1340" y="312" width="36" height="36"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_1_di" bpmnElement="Flow_1">
+        <di:waypoint x="118" y="330"/>
+        <di:waypoint x="700" y="330"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_2_di" bpmnElement="Flow_2">
+        <di:waypoint x="700" y="330"/>
+        <di:waypoint x="1278" y="330"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_3_di" bpmnElement="Flow_3">
+        <di:waypoint x="1278" y="330"/>
+        <di:waypoint x="1358" y="330"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P1_di" bpmnElement="Flow_P1">
+        <di:waypoint x="248" y="330"/>
+        <di:waypoint x="325" y="330"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P2_di" bpmnElement="Flow_P2">
+        <di:waypoint x="325" y="330"/>
+        <di:waypoint x="730" y="410"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_di" bpmnElement="Flow_P3">
+        <di:waypoint x="325" y="330"/>
+        <di:waypoint x="418" y="90"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P4_di" bpmnElement="Flow_P4">
+        <di:waypoint x="325" y="330"/>
+        <di:waypoint x="418" y="470"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P5_di" bpmnElement="Flow_P5">
+        <di:waypoint x="418" y="90"/>
+        <di:waypoint x="530" y="90"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P6_di" bpmnElement="Flow_P6">
+        <di:waypoint x="530" y="90"/>
+        <di:waypoint x="778" y="90"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P7_di" bpmnElement="Flow_P7">
+        <di:waypoint x="418" y="470"/>
+        <di:waypoint x="730" y="410"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P8_di" bpmnElement="Flow_P8">
+        <di:waypoint x="730" y="410"/>
+        <di:waypoint x="1018" y="410"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S1_di" bpmnElement="Flow_S1">
+        <di:waypoint x="568" y="410"/>
+        <di:waypoint x="670" y="410"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_S2_di" bpmnElement="Flow_S2">
+        <di:waypoint x="670" y="410"/>
+        <di:waypoint x="878" y="410"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_B_di" bpmnElement="Association_B">
+        <di:waypoint x="530" y="130"/>
+        <di:waypoint x="650" y="180"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_A_di" bpmnElement="Association_A">
+        <di:waypoint x="670" y="450"/>
+        <di:waypoint x="790" y="500"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
