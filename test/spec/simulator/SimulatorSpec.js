@@ -2038,6 +2038,27 @@ describe('simulator', function() {
     });
 
 
+    verify('compensation-sub-process-instances-interleaved', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      trigger({
+        element: element('WAIT_B')
+      });
+
+      // when
+      trigger({
+        element: element('WAIT_S')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('compensation-completed-sub-process-keeps-event-based-gateway', (fixture) => {
 
       // given
