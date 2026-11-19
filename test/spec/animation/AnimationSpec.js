@@ -130,6 +130,26 @@ describe('lib/animation', function() {
     ));
 
 
+    it('should show neutral token on association to compensation activity', inject(
+      async function(animation, elementRegistry) {
+
+        // given
+        const association = elementRegistry.get('Association_B');
+
+        // when
+        triggerElement('START');
+
+        await elementEnter('COMPENSATE_B');
+
+        // then
+        const associationAnimation = [ ...animation._animations ].find(a => a.element === association);
+        const tokenCircle = associationAnimation.gfx.querySelector('.bts-circle');
+
+        expect(tokenCircle.getAttribute('fill')).to.eql('#999');
+      }
+    ));
+
+
     it('should not count token while it travels to compensation activity', inject(
       async function(overlays) {
 
