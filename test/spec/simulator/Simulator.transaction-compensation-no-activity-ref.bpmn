@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:process id="Process_1" isExecutable="true">
+<bpmn:startEvent id="START" name="START"></bpmn:startEvent>
+<bpmn:transaction id="T" name="T"><bpmn:startEvent id="T_START" name="T_START"></bpmn:startEvent>
+<bpmn:task id="A" name="A"></bpmn:task>
+<bpmn:boundaryEvent id="A_COMP_BOUNDARY" name="A_COMP_BOUNDARY" attachedToRef="A"><bpmn:compensateEventDefinition id="CED_A_COMP_BOUNDARY" /></bpmn:boundaryEvent>
+<bpmn:task id="UNDO_A" name="UNDO_A" isForCompensation="true"></bpmn:task>
+<bpmn:intermediateThrowEvent id="COMP_ALL" name="COMP_ALL"><bpmn:compensateEventDefinition id="CED_COMP_ALL" /></bpmn:intermediateThrowEvent>
+<bpmn:endEvent id="T_END" name="T_END"></bpmn:endEvent>
+<bpmn:sequenceFlow id="Flow_T_START_A" sourceRef="T_START" targetRef="A" />
+<bpmn:sequenceFlow id="Flow_A_COMP_ALL" sourceRef="A" targetRef="COMP_ALL" />
+<bpmn:sequenceFlow id="Flow_COMP_ALL_T_END" sourceRef="COMP_ALL" targetRef="T_END" />
+<bpmn:association id="Assoc_A_COMP_BOUNDARY" associationDirection="One" sourceRef="A_COMP_BOUNDARY" targetRef="UNDO_A" /></bpmn:transaction>
+<bpmn:boundaryEvent id="CANCEL_BOUNDARY" name="CANCEL_BOUNDARY" attachedToRef="T"><bpmn:cancelEventDefinition id="CancelED_1" /></bpmn:boundaryEvent>
+<bpmn:endEvent id="CANCELED" name="CANCELED"></bpmn:endEvent>
+<bpmn:endEvent id="GOOD_END" name="GOOD_END"></bpmn:endEvent>
+<bpmn:sequenceFlow id="Flow_START_T" sourceRef="START" targetRef="T" />
+<bpmn:sequenceFlow id="Flow_T_GOOD_END" sourceRef="T" targetRef="GOOD_END" />
+<bpmn:sequenceFlow id="Flow_CANCEL_BOUNDARY_CANCELED" sourceRef="CANCEL_BOUNDARY" targetRef="CANCELED" />
+</bpmn:process>
+
+<bpmndi:BPMNDiagram id="BPMNDiagram_1">
+<bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+<bpmndi:BPMNShape id="START_di" bpmnElement="START"><dc:Bounds x="100" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="T_di" bpmnElement="T" isExpanded="true"><dc:Bounds x="180" y="80" width="440" height="300" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="T_START_di" bpmnElement="T_START"><dc:Bounds x="210" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="A_di" bpmnElement="A"><dc:Bounds x="290" y="160" width="100" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="A_COMP_BOUNDARY_di" bpmnElement="A_COMP_BOUNDARY"><dc:Bounds x="322" y="222" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="UNDO_A_di" bpmnElement="UNDO_A"><dc:Bounds x="290" y="290" width="100" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="COMP_ALL_di" bpmnElement="COMP_ALL"><dc:Bounds x="450" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="T_END_di" bpmnElement="T_END"><dc:Bounds x="540" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="CANCEL_BOUNDARY_di" bpmnElement="CANCEL_BOUNDARY"><dc:Bounds x="582" y="362" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="CANCELED_di" bpmnElement="CANCELED"><dc:Bounds x="582" y="440" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="GOOD_END_di" bpmnElement="GOOD_END"><dc:Bounds x="680" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="Flow_T_START_A_di" bpmnElement="Flow_T_START_A"><di:waypoint x="228" y="200" /><di:waypoint x="340" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_A_COMP_ALL_di" bpmnElement="Flow_A_COMP_ALL"><di:waypoint x="340" y="200" /><di:waypoint x="468" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_COMP_ALL_T_END_di" bpmnElement="Flow_COMP_ALL_T_END"><di:waypoint x="468" y="200" /><di:waypoint x="558" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_START_T_di" bpmnElement="Flow_START_T"><di:waypoint x="118" y="200" /><di:waypoint x="400" y="230" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_T_GOOD_END_di" bpmnElement="Flow_T_GOOD_END"><di:waypoint x="400" y="230" /><di:waypoint x="698" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_CANCEL_BOUNDARY_CANCELED_di" bpmnElement="Flow_CANCEL_BOUNDARY_CANCELED"><di:waypoint x="600" y="380" /><di:waypoint x="600" y="458" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Assoc_A_COMP_BOUNDARY_di" bpmnElement="Assoc_A_COMP_BOUNDARY"><di:waypoint x="340" y="240" /><di:waypoint x="340" y="330" /></bpmndi:BPMNEdge>
+</bpmndi:BPMNPlane>
+</bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:process id="Process_1" isExecutable="true">
+<bpmn:startEvent id="START" name="START"></bpmn:startEvent>
+<bpmn:exclusiveGateway id="JOIN" name="JOIN"></bpmn:exclusiveGateway>
+<bpmn:subProcess id="SUB" name="SUB"><bpmn:startEvent id="SUB_START" name="SUB_START"></bpmn:startEvent>
+<bpmn:task id="A" name="A"></bpmn:task>
+<bpmn:boundaryEvent id="A_COMP_BOUNDARY" name="A_COMP_BOUNDARY" attachedToRef="A"><bpmn:compensateEventDefinition id="CED_A_COMP_BOUNDARY" /></bpmn:boundaryEvent>
+<bpmn:task id="UNDO_A" name="UNDO_A" isForCompensation="true"></bpmn:task>
+<bpmn:endEvent id="SUB_END" name="SUB_END"></bpmn:endEvent>
+<bpmn:sequenceFlow id="Flow_SUB_START_A" sourceRef="SUB_START" targetRef="A" />
+<bpmn:sequenceFlow id="Flow_A_SUB_END" sourceRef="A" targetRef="SUB_END" />
+<bpmn:association id="Assoc_A_COMP_BOUNDARY" associationDirection="One" sourceRef="A_COMP_BOUNDARY" targetRef="UNDO_A" /></bpmn:subProcess>
+<bpmn:eventBasedGateway id="EBG" name="EBG"></bpmn:eventBasedGateway>
+<bpmn:intermediateCatchEvent id="LOOP" name="LOOP"><bpmn:messageEventDefinition id="MED_LOOP_1" messageRef="Message_LOOP" /></bpmn:intermediateCatchEvent>
+<bpmn:intermediateCatchEvent id="GO" name="GO"><bpmn:messageEventDefinition id="MED_GO_2" messageRef="Message_GO" /></bpmn:intermediateCatchEvent>
+<bpmn:intermediateThrowEvent id="COMP_SUB" name="COMP_SUB"><bpmn:compensateEventDefinition id="CED_COMP_SUB" activityRef="SUB" /></bpmn:intermediateThrowEvent>
+<bpmn:endEvent id="END" name="END"></bpmn:endEvent>
+<bpmn:sequenceFlow id="Flow_START_JOIN" sourceRef="START" targetRef="JOIN" />
+<bpmn:sequenceFlow id="Flow_JOIN_SUB" sourceRef="JOIN" targetRef="SUB" />
+<bpmn:sequenceFlow id="Flow_SUB_EBG" sourceRef="SUB" targetRef="EBG" />
+<bpmn:sequenceFlow id="Flow_EBG_LOOP" sourceRef="EBG" targetRef="LOOP" />
+<bpmn:sequenceFlow id="Flow_LOOP_JOIN" sourceRef="LOOP" targetRef="JOIN" />
+<bpmn:sequenceFlow id="Flow_EBG_GO" sourceRef="EBG" targetRef="GO" />
+<bpmn:sequenceFlow id="Flow_GO_COMP_SUB" sourceRef="GO" targetRef="COMP_SUB" />
+<bpmn:sequenceFlow id="Flow_COMP_SUB_END" sourceRef="COMP_SUB" targetRef="END" />
+</bpmn:process>
+<bpmn:message id="Message_LOOP" name="LOOP" />
+<bpmn:message id="Message_GO" name="GO" />
+<bpmndi:BPMNDiagram id="BPMNDiagram_1">
+<bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+<bpmndi:BPMNShape id="START_di" bpmnElement="START"><dc:Bounds x="100" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="JOIN_di" bpmnElement="JOIN"><dc:Bounds x="180" y="175" width="50" height="50" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="SUB_di" bpmnElement="SUB" isExpanded="true"><dc:Bounds x="270" y="80" width="350" height="300" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="SUB_START_di" bpmnElement="SUB_START"><dc:Bounds x="300" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="A_di" bpmnElement="A"><dc:Bounds x="380" y="160" width="100" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="A_COMP_BOUNDARY_di" bpmnElement="A_COMP_BOUNDARY"><dc:Bounds x="412" y="222" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="UNDO_A_di" bpmnElement="UNDO_A"><dc:Bounds x="380" y="290" width="100" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="SUB_END_di" bpmnElement="SUB_END"><dc:Bounds x="540" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="EBG_di" bpmnElement="EBG"><dc:Bounds x="680" y="175" width="50" height="50" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="LOOP_di" bpmnElement="LOOP"><dc:Bounds x="687" y="40" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="GO_di" bpmnElement="GO"><dc:Bounds x="780" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="COMP_SUB_di" bpmnElement="COMP_SUB"><dc:Bounds x="870" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="END_di" bpmnElement="END"><dc:Bounds x="960" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="Flow_SUB_START_A_di" bpmnElement="Flow_SUB_START_A"><di:waypoint x="318" y="200" /><di:waypoint x="430" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_A_SUB_END_di" bpmnElement="Flow_A_SUB_END"><di:waypoint x="430" y="200" /><di:waypoint x="558" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_START_JOIN_di" bpmnElement="Flow_START_JOIN"><di:waypoint x="118" y="200" /><di:waypoint x="205" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_JOIN_SUB_di" bpmnElement="Flow_JOIN_SUB"><di:waypoint x="205" y="200" /><di:waypoint x="445" y="230" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_SUB_EBG_di" bpmnElement="Flow_SUB_EBG"><di:waypoint x="445" y="230" /><di:waypoint x="705" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_EBG_LOOP_di" bpmnElement="Flow_EBG_LOOP"><di:waypoint x="705" y="200" /><di:waypoint x="705" y="58" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_LOOP_JOIN_di" bpmnElement="Flow_LOOP_JOIN"><di:waypoint x="705" y="58" /><di:waypoint x="205" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_EBG_GO_di" bpmnElement="Flow_EBG_GO"><di:waypoint x="705" y="200" /><di:waypoint x="798" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_GO_COMP_SUB_di" bpmnElement="Flow_GO_COMP_SUB"><di:waypoint x="798" y="200" /><di:waypoint x="888" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_COMP_SUB_END_di" bpmnElement="Flow_COMP_SUB_END"><di:waypoint x="888" y="200" /><di:waypoint x="978" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Assoc_A_COMP_BOUNDARY_di" bpmnElement="Assoc_A_COMP_BOUNDARY"><di:waypoint x="430" y="240" /><di:waypoint x="430" y="330" /></bpmndi:BPMNEdge>
+</bpmndi:BPMNPlane>
+</bpmndi:BPMNDiagram>
+</bpmn:definitions>
