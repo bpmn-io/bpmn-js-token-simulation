@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn">
+<bpmn:process id="Process_1" isExecutable="true">
+<bpmn:startEvent id="START" name="START"></bpmn:startEvent>
+<bpmn:subProcess id="SUB" name="SUB"><bpmn:startEvent id="SUB_START" name="SUB_START"></bpmn:startEvent>
+<bpmn:task id="A" name="A"></bpmn:task>
+<bpmn:boundaryEvent id="A_COMP_BOUNDARY" name="A_COMP_BOUNDARY" attachedToRef="A"><bpmn:compensateEventDefinition id="CED_A_COMP_BOUNDARY" /></bpmn:boundaryEvent>
+<bpmn:task id="UNDO_A" name="UNDO_A" isForCompensation="true"></bpmn:task>
+<bpmn:endEvent id="SUB_END" name="SUB_END"></bpmn:endEvent>
+<bpmn:sequenceFlow id="Flow_SUB_START_A" sourceRef="SUB_START" targetRef="A" />
+<bpmn:sequenceFlow id="Flow_A_SUB_END" sourceRef="A" targetRef="SUB_END" />
+<bpmn:association id="Assoc_A_COMP_BOUNDARY" associationDirection="One" sourceRef="A_COMP_BOUNDARY" targetRef="UNDO_A" /></bpmn:subProcess>
+<bpmn:intermediateThrowEvent id="COMP_SUB" name="COMP_SUB"><bpmn:compensateEventDefinition id="CED_COMP_SUB" activityRef="SUB" /></bpmn:intermediateThrowEvent>
+<bpmn:intermediateCatchEvent id="WAIT" name="WAIT"><bpmn:messageEventDefinition id="MED_WAIT_1" messageRef="Message_WAIT" /></bpmn:intermediateCatchEvent>
+<bpmn:endEvent id="END" name="END"></bpmn:endEvent>
+<bpmn:subProcess id="NOTE_SUB" name="NOTE_SUB" triggeredByEvent="true"><bpmn:startEvent id="NOTE_START" name="NOTE_START" isInterrupting="false"><bpmn:messageEventDefinition id="MED_NOTE_2" messageRef="Message_NOTE" /></bpmn:startEvent>
+<bpmn:endEvent id="NOTE_END" name="NOTE_END"></bpmn:endEvent>
+<bpmn:sequenceFlow id="Flow_NOTE_START_NOTE_END" sourceRef="NOTE_START" targetRef="NOTE_END" /></bpmn:subProcess>
+<bpmn:sequenceFlow id="Flow_START_SUB" sourceRef="START" targetRef="SUB" />
+<bpmn:sequenceFlow id="Flow_SUB_COMP_SUB" sourceRef="SUB" targetRef="COMP_SUB" />
+<bpmn:sequenceFlow id="Flow_COMP_SUB_WAIT" sourceRef="COMP_SUB" targetRef="WAIT" />
+<bpmn:sequenceFlow id="Flow_WAIT_END" sourceRef="WAIT" targetRef="END" />
+</bpmn:process>
+<bpmn:message id="Message_WAIT" name="WAIT" />
+<bpmn:message id="Message_NOTE" name="NOTE" />
+<bpmndi:BPMNDiagram id="BPMNDiagram_1">
+<bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Process_1">
+<bpmndi:BPMNShape id="START_di" bpmnElement="START"><dc:Bounds x="100" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="SUB_di" bpmnElement="SUB" isExpanded="true"><dc:Bounds x="180" y="80" width="350" height="300" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="SUB_START_di" bpmnElement="SUB_START"><dc:Bounds x="210" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="A_di" bpmnElement="A"><dc:Bounds x="290" y="160" width="100" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="A_COMP_BOUNDARY_di" bpmnElement="A_COMP_BOUNDARY"><dc:Bounds x="322" y="222" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="UNDO_A_di" bpmnElement="UNDO_A"><dc:Bounds x="290" y="290" width="100" height="80" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="SUB_END_di" bpmnElement="SUB_END"><dc:Bounds x="450" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="COMP_SUB_di" bpmnElement="COMP_SUB"><dc:Bounds x="580" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="WAIT_di" bpmnElement="WAIT"><dc:Bounds x="670" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="END_di" bpmnElement="END"><dc:Bounds x="760" y="182" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="NOTE_SUB_di" bpmnElement="NOTE_SUB" isExpanded="true"><dc:Bounds x="180" y="440" width="300" height="140" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="NOTE_START_di" bpmnElement="NOTE_START"><dc:Bounds x="220" y="492" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNShape id="NOTE_END_di" bpmnElement="NOTE_END"><dc:Bounds x="400" y="492" width="36" height="36" /></bpmndi:BPMNShape>
+<bpmndi:BPMNEdge id="Flow_SUB_START_A_di" bpmnElement="Flow_SUB_START_A"><di:waypoint x="228" y="200" /><di:waypoint x="340" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_A_SUB_END_di" bpmnElement="Flow_A_SUB_END"><di:waypoint x="340" y="200" /><di:waypoint x="468" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_NOTE_START_NOTE_END_di" bpmnElement="Flow_NOTE_START_NOTE_END"><di:waypoint x="238" y="510" /><di:waypoint x="418" y="510" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_START_SUB_di" bpmnElement="Flow_START_SUB"><di:waypoint x="118" y="200" /><di:waypoint x="355" y="230" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_SUB_COMP_SUB_di" bpmnElement="Flow_SUB_COMP_SUB"><di:waypoint x="355" y="230" /><di:waypoint x="598" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_COMP_SUB_WAIT_di" bpmnElement="Flow_COMP_SUB_WAIT"><di:waypoint x="598" y="200" /><di:waypoint x="688" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Flow_WAIT_END_di" bpmnElement="Flow_WAIT_END"><di:waypoint x="688" y="200" /><di:waypoint x="778" y="200" /></bpmndi:BPMNEdge>
+<bpmndi:BPMNEdge id="Assoc_A_COMP_BOUNDARY_di" bpmnElement="Assoc_A_COMP_BOUNDARY"><di:waypoint x="340" y="240" /><di:waypoint x="340" y="330" /></bpmndi:BPMNEdge>
+</bpmndi:BPMNPlane>
+</bpmndi:BPMNDiagram>
+</bpmn:definitions>

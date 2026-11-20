@@ -1964,6 +1964,27 @@ describe('simulator', function() {
     });
 
 
+    verify('compensation-sub-process-keeps-parent-subscriptions', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('NOTE_START')
+      });
+
+      trigger({
+        element: element('WAIT')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('compensation-nested', (fixture) => {
 
       // when
