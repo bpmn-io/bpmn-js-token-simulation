@@ -1804,6 +1804,18 @@ describe('simulator', function() {
     });
 
 
+    verify('transaction-compensation-no-activity-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('transaction-no-compensate-activity', (fixture) => {
 
       // when
@@ -1964,6 +1976,27 @@ describe('simulator', function() {
     });
 
 
+    verify('compensation-sub-process-keeps-parent-subscriptions', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('NOTE_START')
+      });
+
+      trigger({
+        element: element('WAIT')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
     verify('compensation-nested', (fixture) => {
 
       // when
@@ -1993,6 +2026,135 @@ describe('simulator', function() {
       // when
       trigger({
         element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-intermediate-throw-no-activity-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-end-no-activity-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-sub-process-throw-no-activity-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-no-activity-ref-repeated-activities', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      trigger({
+        element: element('LOOP')
+      });
+
+      // when
+      trigger({
+        element: element('GO')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-no-activity-ref-running-sub-process', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('GO')
+      });
+
+      trigger({
+        element: element('WAIT')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-repeated-sub-process', (fixture) => {
+
+      // given
+      trigger({
+        element: element('START')
+      });
+
+      trigger({
+        element: element('LOOP')
+      });
+
+      // when
+      trigger({
+        element: element('GO')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-completed-sub-process-no-activity-ref', (fixture) => {
+
+      // when
+      trigger({
+        element: element('START')
+      });
+
+      // then
+      expectTrace(fixture());
+    });
+
+
+    verify('compensation-event-sub-process-throw-no-activity-ref', (fixture) => {
+
+      // given
+      const [ scope ] = trigger({
+        element: element('START')
+      });
+
+      // when
+      trigger({
+        element: element('EVENT_SUB_START'),
+        scope
       });
 
       // then
